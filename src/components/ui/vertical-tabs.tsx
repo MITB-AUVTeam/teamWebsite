@@ -26,7 +26,7 @@ const SERVICES = [
     id: "03",
     title: "What",
     description:
-      "We design and develop autonomous underwater vehicles by integrating in-house mechanical systems, embedded electronics, and intelligent software, tested extensively for real-world underwater operations." 
+      "We design and develop autonomous underwater vehicles by integrating in-house mechanical systems, embedded electronics, and intelligent software, tested extensively for real-world underwater operations.",
     image:
       "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1200&auto=format&fit=crop",
   },
