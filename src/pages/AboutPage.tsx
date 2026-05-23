@@ -19,7 +19,15 @@ export function AboutPage() {
             About Us
           </h1>
           <p className="text-slate-300 max-w-md md:text-right text-sm md:text-base leading-relaxed">
-            Exploring the depths of innovation. Learn about our commitment to engineering excellence and the curiosity that drives our underwater explorations.
+           We are Team AUV MIT-B — a group of nine passionate students working towards building innovative autonomous underwater systems. United by curiosity, engineering, and teamwork, we aim to design technology capable of solving real-world underwater challenges.
+
+Our project, Deuterium, is an Autonomous Underwater Vehicle (AUV) developed to perform underwater operations with precision, stability, and autonomy. From navigation and sensing to control and system integration, every aspect of the vehicle is designed and developed in-house by our team.
+
+The team is divided into four core subsystems — Electrical, Mechanical, Software, and Management & Design — each playing a vital role in transforming concepts into a fully functional autonomous platform. Through collaboration across disciplines, we strive to create efficient, reliable, and intelligent underwater systems.
+
+At AUV MIT-B, we are driven by innovation, continuous learning, and the ambition to push the boundaries of student-led engineering.
+
+
           </p>
         </motion.div>
       </section>
