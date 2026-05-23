@@ -7,13 +7,14 @@ import Floating, {
 import { FlipReveal, FlipRevealItem } from "@/components/ui/flip-reveal";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Footer } from "@/components/Footer";
+import azadLockedIn from "@/assets/Gallery/azad_lockedin.jpg";
 
 const exampleImages = [
   {
-    url: "https://images.unsplash.com/photo-1727341554370-80e0fe9ad082?q=80&w=2276&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    author: "Branislav Rodman",
-    link: "https://unsplash.com/photos/a-black-and-white-photo-of-a-woman-brushing-her-teeth-r1SjnJL5tf0",
-    title: "A Black and White Photo of a Woman Brushing Her Teeth",
+    url: azadLockedIn,
+    author: "Azad Roy",
+    link: "#",
+    title: "Azad Locked In",
   },
   {
     url: "https://images.unsplash.com/photo-1640680608781-2e4199dd1579?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
