@@ -20,8 +20,6 @@ export function AboutPage() {
           </h1>
           <p className="text-slate-300 max-w-md md:text-right text-sm md:text-base leading-relaxed">
             Exploring the depths of innovation. Learn about our commitment to engineering excellence and the curiosity that drives our underwater explorations.
-
-
           </p>
         </motion.div>
       </section>

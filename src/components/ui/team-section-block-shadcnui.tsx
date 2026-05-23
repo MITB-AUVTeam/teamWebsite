@@ -344,7 +344,7 @@ const teamCategories = [
       {
         "name": "Farha P K",
         "role": "Software and Automation Subsystem Member",
-        "bio": "",
+        "bio": "Do it scared",
         "image": "https://api.dicebear.com/7.x/identicon/svg?seed=FarhaPK",
         "location": "1st Year",
         "skills": ["Software"],
