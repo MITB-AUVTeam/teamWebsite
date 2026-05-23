@@ -150,7 +150,7 @@ export default function VerticalTabs() {
                             animate={{ opacity: 1, height: "auto" }}
                             exit={{ opacity: 0, height: 0 }}
                             transition={{
-                              duration: 0.4,
+                              duration: 2,
                               ease: [0.23, 1, 0.32, 1],
                             }}
                             className="overflow-hidden"
