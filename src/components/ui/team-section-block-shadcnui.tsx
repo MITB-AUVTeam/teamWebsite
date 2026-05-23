@@ -274,7 +274,7 @@ const teamCategories = [
       {
         "name": "Kopal Agrawal",
         "role": "Electrical Subsystem Member",
-        "bio": "",
+        "bio": "It's not that deep",
         "image": "https://api.dicebear.com/7.x/identicon/svg?seed=KopalAgrawal",
         "location": "1st Year",
         "skills": ["Electrical"],
