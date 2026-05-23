@@ -13,8 +13,8 @@ import {
   Waves 
 } from "lucide-react";
 import { Footer } from "@/components/Footer";
-import proto1Img from "@/assets/Gallery/IMG_4024_2.jpeg";
-import proto2Img from "@/assets/Gallery/deuterium2.jpeg";
+import proto1Img from "@/assets/Gallery/IMG_4024_2.webp";
+import proto2Img from "@/assets/Gallery/deuterium.webp";
 
 export function VehiclesPage() {
   const vehicles = [
