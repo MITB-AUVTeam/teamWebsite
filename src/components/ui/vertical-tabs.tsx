@@ -9,24 +9,24 @@ import { HugeiconsIcon } from "@hugeicons/react";
 const SERVICES = [
   {
     id: "01",
-    title: "What",
+    title: "Why",
     description:
-      "We aim to design and develop autonomous underwater vehicles for applications such as defense surveillance, acoustic signal detection, and search-and-rescue operations, focusing on modular and scalable AUV platforms.",
+      "We believe that innovation happens when students are given the freedom to design, experiment, and fail forward. Our mission is to cultivate engineers capable of solving complex underwater challenges through practical learning.",
     image:
       "https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?q=80&w=1200&auto=format&fit=crop",
   },
   {
     id: "02",
-    title: "Why",
-    description: "India's maritime security and underwater operations demand indigenous, reliable AUV technologies. Our vision is to contribute to self-reliant defense systems while giving students hands on experience in solving real engineering challenges.",
+    title: "How",
+    description: "We in MIT-B achieve this by bringing together students from diverse engineering disciplines to collaboratively design and develop autonomous underwater vehicles. Through hands-on problem solving, iterative development, research, and participation in competitions, we create an environment where innovation, technical excellence, and teamwork thrive.",
     image:
       "https://images.unsplash.com/photo-1584483766114-2cea6facdf57?q=80&w=1200&auto=format&fit=crop",
   },
   {
     id: "03",
-    title: "How",
+    title: "What",
     description:
-      "By integrating in house mechanical design, embedded electronics, and real time signal processing, validated through extensive field testing, we build cost effective and mission ready AUV systems aligned with defense and industry needs.",
+      "We design and develop autonomous underwater vehicles by integrating in-house mechanical systems, embedded electronics, and intelligent software, tested extensively for real-world underwater operations." 
     image:
       "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1200&auto=format&fit=crop",
   },
@@ -150,7 +150,7 @@ export default function VerticalTabs() {
                             animate={{ opacity: 1, height: "auto" }}
                             exit={{ opacity: 0, height: 0 }}
                             transition={{
-                              duration: 2,
+                              duration: 4,
                               ease: [0.23, 1, 0.32, 1],
                             }}
                             className="overflow-hidden"
