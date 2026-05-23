@@ -71,10 +71,10 @@ export function AboutPage() {
             <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight mb-8">Who We Are</h2>
             <div className="space-y-6 text-slate-300 text-sm md:text-base leading-relaxed">
               <p>
-                We believe in the power of interdisciplinary collaboration. By merging mechanical robustness with intelligent software, we gain a deep understanding of the unique challenges of the marine environment.
+                We are Team AUV MIT-B, a student-led team passionate about underwater robotics, innovation, and hands-on engineering. Bringing together students from mechanical, electrical, and software domains, we collaboratively design and build autonomous underwater vehicles completely in-house.
               </p>
               <p>
-                Our holistic approach integrates acoustic systems, computer vision, and hydrodynamics to create seamless autonomous behaviors. By staying ahead of the curve and embracing the latest sensors and processors, we ensure our AUVs are cutting-edge solutions capable of complex tasks like object manipulation and path following.
+                Through continuous development, testing, and competition-driven learning, we turn theoretical knowledge into practical engineering experience. By participating in competitions such as RoboSub Competition, we aim to strengthen our technical skills while pushing the boundaries of student-led underwater robotics.
               </p>
             </div>
           </motion.div>
