@@ -1,0 +1,157 @@
+import { motion } from "framer-motion";
+import { 
+  Ruler, 
+  Weight, 
+  Move3d, 
+  Compass, 
+  Cpu, 
+  Battery, 
+  Fan, 
+  Code2, 
+  Eye, 
+  Grab, 
+  Waves 
+} from "lucide-react";
+import { Footer } from "@/components/Footer";
+
+export function VehiclesPage() {
+  const vehicles = [
+    {
+      name: "Hydrogen",
+      tagline: "Prototype 1",
+      description: "Our first prototype, designed to test core navigation and control systems in a compact form factor.",
+      image: "https://images.unsplash.com/photo-1544377193-33dcf4d68fb5?q=80&w=2000&auto=format&fit=crop",
+      specs: [
+        { icon: Ruler, label: "Dimensions", value: "330mm (L) × 340mm (W) × 230mm (H)" },
+        { icon: Weight, label: "Mass", value: "5 kg" },
+        { icon: Move3d, label: "Degrees of Freedom", value: "5 (Surge, Heave, Roll, Pitch, Yaw)" },
+        { icon: Compass, label: "Navigation", value: "BNO055 IMU" },
+        { icon: Cpu, label: "Compute", value: "Raspberry Pi5 8GB" },
+        { icon: Battery, label: "Power", value: "External DC Power Supply" },
+        { icon: Fan, label: "Propulsion", value: "5× T200 Thrusters, 5× BlueRobotics Basic ESCs" },
+        { icon: Code2, label: "Software", value: "ROS on Ubuntu 22.04 LTS" },
+      ]
+    },
+    {
+      name: "Deuterium",
+      tagline: "Prototype 2",
+      description: "Our advanced prototype featuring onboard vision, manipulation, and custom SONAR capabilities for complex underwater tasks.",
+      image: "https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?q=80&w=2000&auto=format&fit=crop",
+      specs: [
+        { icon: Ruler, label: "Dimensions", value: "620mm (L) × 400mm (W) × 250mm (H)" },
+        { icon: Weight, label: "Mass", value: "12 kg" },
+        { icon: Move3d, label: "Degrees of Freedom", value: "5 (Surge, Heave, Roll, Pitch, Yaw)" },
+        { icon: Compass, label: "Navigation", value: "BNO055 IMU, BlueRobotics Pressure/Depth Sensor" },
+        { icon: Cpu, label: "Compute", value: "Raspberry Pi5 8GB, Nvidia Jetson Orin Nano 8GB" },
+        { icon: Battery, label: "Power", value: "Lithium-ion Battery (14.8V, 18Ah)" },
+        { icon: Eye, label: "Vision System", value: "Zed 2i Depth Camera (x2)" },
+        { icon: Fan, label: "Propulsion", value: "5× T200 Thrusters, 5× BlueRobotics Basic ESCs" },
+        { icon: Grab, label: "Manipulator", value: "Custom-designed soft robotics based arm" },
+        { icon: Waves, label: "SONAR", value: "In-house custom-built SONAR" },
+        { icon: Code2, label: "Software", value: "ROS on Ubuntu 22.04 LTS" },
+      ]
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-[#020617] text-slate-50 pb-0 font-sans">
+      
+      <section className="max-w-7xl mx-auto px-6 pt-12 md:pt-20 mb-20">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6"
+        >
+          <div className="space-y-4">
+            <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-black uppercase tracking-tighter leading-none">
+              Our Vehicles
+            </h1>
+            <p className="text-slate-400 text-sm md:text-base tracking-[0.2em] uppercase font-medium ml-1">
+              Engineering the Deep
+            </p>
+          </div>
+          <p className="text-slate-300 max-w-md md:text-right text-sm md:text-base leading-relaxed">
+            Discover the engineering marvels that power our underwater exploration. From our initial proof-of-concept to our advanced autonomous systems.
+          </p>
+        </motion.div>
+      </section>
+
+      <div className="max-w-7xl mx-auto px-6 space-y-32 pb-24 md:pb-32">
+        {vehicles.map((vehicle, index) => (
+          <section key={vehicle.name} className="relative">
+            <div className={`flex flex-col ${index % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-12 lg:gap-20 items-center`}>
+
+              <motion.div 
+                initial={{ opacity: 0, x: index % 2 === 1 ? 30 : -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8 }}
+                className="w-full lg:w-1/2"
+              >
+                <div className="relative aspect-[4/3] rounded-[2rem] overflow-hidden group">
+                  <div className="absolute inset-0 bg-blue-500/10 mix-blend-overlay z-10" />
+                  <img 
+                    src={vehicle.image} 
+                    alt={vehicle.name} 
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent z-20" />
+                  
+                  <div className="absolute bottom-8 left-8 z-30">
+                    <span className="px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-bold tracking-widest uppercase text-white mb-4 inline-block">
+                      {vehicle.tagline}
+                    </span>
+                    <h2 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tight">
+                      {vehicle.name}
+                    </h2>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div 
+                initial={{ opacity: 0, x: index % 2 === 1 ? -30 : 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="w-full lg:w-1/2 flex flex-col justify-center"
+              >
+                <p className="text-slate-300 text-lg leading-relaxed mb-10">
+                  {vehicle.description}
+                </p>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                  {vehicle.specs.map((spec, i) => (
+                    <motion.div 
+                      key={spec.label}
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: 0.3 + (i * 0.05) }}
+                      className="flex items-start gap-4"
+                    >
+                      <div className="w-10 h-10 rounded-xl bg-slate-800/50 border border-slate-700/50 flex items-center justify-center shrink-0 mt-1">
+                        <spec.icon className="w-5 h-5 text-blue-400" />
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">
+                          {spec.label}
+                        </h4>
+                        <p className="text-sm text-slate-200 font-medium leading-snug">
+                          {spec.value}
+                        </p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+
+            </div>
+          </section>
+        ))}
+      </div>
+
+      <Footer />
+    </div>
+  );
+}
