@@ -28,7 +28,7 @@ export function AboutPage() {
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 2, delay: 0.2 }}
           className="relative w-full h-[300px] md:h-[450px] lg:h-[550px] rounded-[2rem] overflow-hidden"
         >
           <img 

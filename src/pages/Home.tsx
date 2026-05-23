@@ -15,7 +15,6 @@ import logoWisdom from "../assets/Backgroud - less sponsors logos/Wisdom Technol
 import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
 import { LogoSlider } from "@/components/ui/logo-slider";
 import { StaggerTestimonials } from "@/components/ui/stagger-testimonials";
-import { Feature108 } from "@/components/ui/feature108";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import {
@@ -25,7 +24,7 @@ import {
   CalendarIcon,
   BellIcon,
 } from "@radix-ui/react-icons";
-import { ArrowRight, Cpu, Zap, Code, LayoutDashboard, Shield, Pointer, Navigation } from "lucide-react";
+import { ArrowRight, Cpu, Zap, Code, LayoutDashboard } from "lucide-react";
 
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { PhotoGallery } from "@/components/ui/gallery";
@@ -93,50 +92,6 @@ const logos = [
   ...baseLogos.map((logo) => <img key={`13-${logo.key}`} src={logo.props.src} alt={logo.props.alt} />),
 ];
 
-const technicalDetailsTabs = [
-  {
-    value: "hull",
-    icon: <Shield className="h-auto w-4 shrink-0" />,
-    label: "Hydrodynamic Hull",
-    content: {
-      badge: "Structural Integrity",
-      title: "Minimized drag, maximized stability.",
-      description:
-        "Our custom-designed hull minimizes drag and maximizes stability. Constructed from lightweight, high-strength composites, it protects internal components from extreme pressure while maintaining a sleek profile for efficient navigation.",
-      buttonText: "Learn More",
-      imageSrc: "https://picsum.photos/seed/hull/600/400",
-      imageAlt: "Hull Design",
-    },
-  },
-  {
-    value: "propulsion",
-    icon: <Zap className="h-auto w-4 shrink-0" />,
-    label: "Advanced Propulsion",
-    content: {
-      badge: "Maneuverability",
-      title: "Unparalleled control in turbulent currents.",
-      description:
-        "Equipped with a highly responsive vectored thruster configuration, our vehicle achieves unparalleled maneuverability. The propulsion system is optimized for both high-speed transit and precise station-keeping in turbulent currents.",
-      buttonText: "Learn More",
-      imageSrc: "https://picsum.photos/seed/propulsion/600/400",
-      imageAlt: "Propulsion System",
-    },
-  },
-  {
-    value: "sensors",
-    icon: <Navigation className="h-auto w-4 shrink-0" />,
-    label: "Sensor Suite",
-    content: {
-      badge: "Autonomy",
-      title: "Real-time environmental awareness.",
-      description:
-        "A comprehensive array of sensors, including high-resolution sonar, DVL, and stereo cameras, provides real-time environmental awareness. Our sensor fusion algorithms ensure accurate mapping and obstacle avoidance in zero-visibility conditions.",
-      buttonText: "Learn More",
-      imageSrc: "https://picsum.photos/seed/sensors/600/400",
-      imageAlt: "Sensor Suite",
-    },
-  },
-];
 
 export function Home() {
   const [scrollY, setScrollY] = useState(0);
@@ -289,28 +244,28 @@ export function Home() {
                 {/* Stat 1 */}
                 <div className="flex flex-col p-5 bg-slate-950/40 backdrop-blur-md border border-slate-900 rounded-2xl relative overflow-hidden group/cell transition-all duration-300 hover:border-blue-500/20 hover:bg-slate-950/60 shadow-inner">
                   <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-blue-500 to-cyan-400 group-hover/cell:w-full transition-all duration-300" />
-                  <span className="text-3xl font-black text-white tracking-tight mb-1 drop-shadow-[0_0_10px_rgba(59,130,246,0.2)]">5+</span>
+                  <span className="text-3xl font-black text-white tracking-tight mb-1 drop-shadow-[0_0_10px_rgba(59,130,246,0.2)]">2</span>
                   <span className="text-[9px] text-slate-500 font-bold uppercase tracking-wider font-mono">Vehicles Built</span>
                 </div>
                 
                 {/* Stat 2 */}
                 <div className="flex flex-col p-5 bg-slate-950/40 backdrop-blur-md border border-slate-900 rounded-2xl relative overflow-hidden group/cell transition-all duration-300 hover:border-blue-500/20 hover:bg-slate-950/60 shadow-inner">
                   <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-blue-500 to-cyan-400 group-hover/cell:w-full transition-all duration-300" />
-                  <span className="text-3xl font-black text-white tracking-tight mb-1 drop-shadow-[0_0_10px_rgba(59,130,246,0.2)]">40+</span>
+                  <span className="text-3xl font-black text-white tracking-tight mb-1 drop-shadow-[0_0_10px_rgba(59,130,246,0.2)]">20+</span>
                   <span className="text-[9px] text-slate-500 font-bold uppercase tracking-wider font-mono">Team Members</span>
                 </div>
 
                 {/* Stat 3 */}
                 <div className="flex flex-col p-5 bg-slate-950/40 backdrop-blur-md border border-slate-900 rounded-2xl relative overflow-hidden group/cell transition-all duration-300 hover:border-blue-500/20 hover:bg-slate-950/60 shadow-inner">
                   <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-blue-500 to-cyan-400 group-hover/cell:w-full transition-all duration-300" />
-                  <span className="text-3xl font-black text-white tracking-tight mb-1 drop-shadow-[0_0_10px_rgba(59,130,246,0.2)]">10+</span>
+                  <span className="text-3xl font-black text-white tracking-tight mb-1 drop-shadow-[0_0_10px_rgba(59,130,246,0.2)]">1+</span>
                   <span className="text-[9px] text-slate-500 font-bold uppercase tracking-wider font-mono">Awards Won</span>
                 </div>
 
                 {/* Stat 4 */}
                 <div className="flex flex-col p-5 bg-slate-950/40 backdrop-blur-md border border-slate-900 rounded-2xl relative overflow-hidden group/cell transition-all duration-300 hover:border-blue-500/20 hover:bg-slate-950/60 shadow-inner">
                   <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-blue-500 to-cyan-400 group-hover/cell:w-full transition-all duration-300" />
-                  <span className="text-3xl font-black text-white tracking-tight mb-1 drop-shadow-[0_0_10px_rgba(59,130,246,0.2)]">2018</span>
+                  <span className="text-3xl font-black text-white tracking-tight mb-1 drop-shadow-[0_0_10px_rgba(59,130,246,0.2)]">2025</span>
                   <span className="text-[9px] text-slate-500 font-bold uppercase tracking-wider font-mono">Established</span>
                 </div>
               </div>
@@ -362,14 +317,6 @@ export function Home() {
         </BentoGrid>
       </section>
 
-      <div className="order-3 md:order-4">
-        <Feature108 
-          badge="Technical Details"
-          heading="Engineered for performance"
-          description="Discover the cutting-edge technology that powers our autonomous underwater vehicle."
-          tabs={technicalDetailsTabs}
-        />
-      </div>
 
       <section className="py-24 overflow-hidden border-t border-slate-800/50 order-6 md:order-5">
         <div className="flex flex-col items-center justify-center text-center mb-16 px-6 max-w-7xl mx-auto">
