@@ -69,7 +69,7 @@ const teamCategories = [
       {
         "name": "Arunava Maiti",
         "role": "Team Co-Lead / Electrical and Mechanical Subsystem",
-        "bio": "GGs",
+        "bio": "Balling  🏀",
         "image": "https://api.dicebear.com/7.x/identicon/svg?seed=ArunavaMaiti",
         "location": "3rd Year",
         "skills": ["Electrical", "Mechanical", "Leadership"],
