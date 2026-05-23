@@ -100,7 +100,7 @@ const teamCategories = [
       {
         "name": "Chatur Vasireddy",
         "role": "Mechanical Subsystem Member",
-        "bio": "meow",
+        "bio": "Turn right to go left",
         "image": "https://api.dicebear.com/7.x/identicon/svg?seed=ChaturVasireddy",
         "location": "2nd Year",
         "skills": ["Mechanical"],
@@ -362,14 +362,14 @@ const teamCategories = [
       {
         "name": "Siddharth P S",
         "role": "Management Team Member",
-        "bio": "i am a fumbler.",
+        "bio": "Float like cadillac, sting like a beamer",
         "image": "https://api.dicebear.com/7.x/identicon/svg?seed=SiddharthPS",
         "location": "2nd Year",
         "skills": ["Management"],
         "gradient": "from-cyan-500/20 via-cyan-500/5 to-transparent",
         "social": {
           "linkedin": null,
-          "github": null
+          "github": "https://github.com/siddharthps2005"
         }
       },
       {
