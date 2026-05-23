@@ -8,6 +8,60 @@ import { FlipReveal, FlipRevealItem } from "@/components/ui/flip-reveal";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Footer } from "@/components/Footer";
 import azadLockedIn from "@/assets/Gallery/azad_lockedin.jpg";
+import img_1184 from "@/assets/Gallery/IMG_1184.jpeg";
+import img_1187 from "@/assets/Gallery/IMG_1187.jpeg";
+import img_1325 from "@/assets/Gallery/IMG_1325.jpeg";
+import img_1328 from "@/assets/Gallery/IMG_1328.jpeg";
+import img_2551 from "@/assets/Gallery/IMG_2551.jpeg";
+import img_2811 from "@/assets/Gallery/IMG_2811.jpeg";
+import img_2812 from "@/assets/Gallery/IMG_2812.jpeg";
+import img_2816 from "@/assets/Gallery/IMG_2816.jpeg";
+import img_3106 from "@/assets/Gallery/IMG_3106.jpeg";
+import img_3145 from "@/assets/Gallery/IMG_3145.jpeg";
+import img_3146 from "@/assets/Gallery/IMG_3146.jpeg";
+import img_3556 from "@/assets/Gallery/IMG_3556.jpeg";
+import img_3559 from "@/assets/Gallery/IMG_3559.jpeg";
+import img_3566 from "@/assets/Gallery/IMG_3566.jpeg";
+import img_3568 from "@/assets/Gallery/IMG_3568.jpeg";
+import img_3845 from "@/assets/Gallery/IMG_3845.jpeg";
+import img_3849 from "@/assets/Gallery/IMG_3849.jpeg";
+import img_3923 from "@/assets/Gallery/IMG_3923.jpeg";
+import img_3933 from "@/assets/Gallery/IMG_3933.jpeg";
+import img_3977 from "@/assets/Gallery/IMG_3977.jpeg";
+import img_3980 from "@/assets/Gallery/IMG_3980.jpeg";
+import img_4006 from "@/assets/Gallery/IMG_4006.jpeg";
+import img_4017 from "@/assets/Gallery/IMG_4017.jpeg";
+import img_4024 from "@/assets/Gallery/IMG_4024.jpeg";
+import img_4026 from "@/assets/Gallery/IMG_4026.jpeg";
+
+const archiveImages = [
+  { src: img_1184, category: "team", alt: "Team" },
+  { src: img_1187, category: "team", alt: "Team" },
+  { src: img_1325, category: "testing", alt: "Testing" },
+  { src: img_1328, category: "testing", alt: "Testing" },
+  { src: img_2551, category: "vehicles", alt: "Vehicles" },
+  { src: img_2811, category: "vehicles", alt: "Vehicles" },
+  { src: img_2812, category: "vehicles", alt: "Vehicles" },
+  { src: img_2816, category: "vehicles", alt: "Vehicles" },
+  { src: img_3106, category: "team", alt: "Team" },
+  { src: img_3145, category: "testing", alt: "Testing" },
+  { src: img_3146, category: "testing", alt: "Testing" },
+  { src: img_3556, category: "vehicles", alt: "Vehicles" },
+  { src: img_3559, category: "vehicles", alt: "Vehicles" },
+  { src: img_3566, category: "team", alt: "Team" },
+  { src: img_3568, category: "team", alt: "Team" },
+  { src: img_3845, category: "testing", alt: "Testing" },
+  { src: img_3849, category: "testing", alt: "Testing" },
+  { src: img_3923, category: "vehicles", alt: "Vehicles" },
+  { src: img_3933, category: "vehicles", alt: "Vehicles" },
+  { src: img_3977, category: "team", alt: "Team" },
+  { src: img_3980, category: "team", alt: "Team" },
+  { src: img_4006, category: "testing", alt: "Testing" },
+  { src: img_4017, category: "testing", alt: "Testing" },
+  { src: img_4024, category: "vehicles", alt: "Vehicles" },
+  { src: img_4026, category: "vehicles", alt: "Vehicles" },
+  { src: azadLockedIn, category: "team", alt: "Azad Roy" },
+];
 
 const exampleImages = [
   {
@@ -17,48 +71,48 @@ const exampleImages = [
     title: "Azad Locked In",
   },
   {
-    url: "https://images.unsplash.com/photo-1640680608781-2e4199dd1579?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://unsplash.com/photos/a-painting-of-a-palm-leaf-on-a-multicolored-background-AaNPwrSNOFE",
-    title: "Neon Palm",
-    author: "Tim Mossholder",
+    url: img_1184,
+    link: "#",
+    title: "Team photo 1",
+    author: "Team",
   },
   {
-    url: "https://images.unsplash.com/photo-1726083085160-feeb4e1e5b00?q=80&w=3024&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://unsplash.com/photos/a-blurry-photo-of-a-crowd-of-people-UgbxzloNGsc",
-    author: "ANDRII SOLOK",
-    title: "A blurry photo of a crowd of people",
+    url: img_1187,
+    link: "#",
+    author: "Team",
+    title: "Team photo 2",
   },
   {
-    url: "https://images.unsplash.com/photo-1562016600-ece13e8ba570?q=80&w=2838&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://unsplash.com/photos/rippling-crystal-blue-water-9-OCsKoyQlk",
-    author: "Wesley Tingey",
-    title: "Rippling Crystal Blue Water",
+    url: img_1325,
+    link: "#",
+    author: "Testing",
+    title: "Testing photo 1",
   },
   {
-    url: "https://images.unsplash.com/photo-1624344965199-ed40391d20f2?q=80&w=2960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://unsplash.com/de/fotos/mann-im-schwarzen-hemd-unter-blauem-himmel-m8RDNiuEXro",
-    author: "Serhii Tyaglovsky",
-    title: "Mann im schwarzen Hemd unter blauem Himmel",
+    url: img_1328,
+    link: "#",
+    author: "Testing",
+    title: "Testing photo 2",
   },
   {
-    url: "https://images.unsplash.com/photo-1689553079282-45df1b35741b?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://unsplash.com/photos/a-woman-with-a-flower-crown-on-her-head-0S3muIttbsY",
-    author: "Vladimir Yelizarov",
-    title: "A women with a flower crown on her head",
+    url: img_2551,
+    link: "#",
+    author: "Vehicles",
+    title: "Vehicle photo 1",
   },
   {
-    url: "https://images.unsplash.com/photo-1721968317938-cf8c60fccd1a?q=80&w=2728&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    title: "A blurry photo of white flowers in a field",
-    author: "Eugene Golovesov",
-    link: "https://unsplash.com/photos/a-blurry-photo-of-white-flowers-in-a-field-6qbx0lzGPyc",
+    url: img_2811,
+    title: "Vehicle photo 2",
+    author: "Vehicles",
+    link: "#",
   },
   {
-    url: "https://images.unsplash.com/photo-1677338354108-223e807fb1bd?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    author: "Mathilde Langevin",
-    link: "https://unsplash.com/photos/a-table-topped-with-two-wine-glasses-and-plates-Ig0gRAHspV0",
-    title: "A table topped with two wine glasses and plates",
+    url: img_2812,
+    author: "Vehicles",
+    link: "#",
+    title: "Vehicle photo 3",
   },
-]
+];
 
 export function GalleryPage() {
   const [scope, animate] = useAnimate()
@@ -186,72 +240,21 @@ export function GalleryPage() {
                 <ToggleGroupItem value="testing" className="sm:px-6 rounded-full data-[state=on]:bg-blue-500 data-[state=on]:text-white text-slate-300 hover:text-white hover:bg-white/10 transition-all">
                     Testing
                 </ToggleGroupItem>
+                <ToggleGroupItem value="goofy" className="sm:px-6 rounded-full data-[state=on]:bg-blue-500 data-[state=on]:text-white text-slate-300 hover:text-white hover:bg-white/10 transition-all">
+                    Goofy stuff
+                </ToggleGroupItem>
             </ToggleGroup>
 
             <FlipReveal className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 w-full mt-8" keys={[key]} showClass="flex" hideClass="hidden">
-                <FlipRevealItem flipKey="vehicles" className="w-full aspect-square">
-                    <img
-                        src="https://images.unsplash.com/photo-1544377193-33dcf4d68fb5?q=80&w=800&auto=format&fit=crop"
-                        alt="Hydrogen Prototype"
-                        className="w-full h-full object-cover rounded-2xl hover:scale-[1.02] transition-transform duration-300 shadow-xl border border-white/5"
-                    />
-                </FlipRevealItem>
-                <FlipRevealItem flipKey="team" className="w-full aspect-square">
-                    <img
-                        src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800&auto=format&fit=crop"
-                        alt="Team Meeting"
-                        className="w-full h-full object-cover rounded-2xl hover:scale-[1.02] transition-transform duration-300 shadow-xl border border-white/5"
-                    />
-                </FlipRevealItem>
-                <FlipRevealItem flipKey="testing" className="w-full aspect-square">
-                    <img
-                        src="https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?q=80&w=800&auto=format&fit=crop"
-                        alt="Underwater Testing"
-                        className="w-full h-full object-cover rounded-2xl hover:scale-[1.02] transition-transform duration-300 shadow-xl border border-white/5"
-                    />
-                </FlipRevealItem>
-                <FlipRevealItem flipKey="vehicles" className="w-full aspect-square">
-                    <img
-                        src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&auto=format&fit=crop"
-                        alt="Deuterium Engineering"
-                        className="w-full h-full object-cover rounded-2xl hover:scale-[1.02] transition-transform duration-300 shadow-xl border border-white/5"
-                    />
-                </FlipRevealItem>
-                <FlipRevealItem flipKey="team" className="w-full aspect-square">
-                    <img
-                        src="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?q=80&w=800&auto=format&fit=crop"
-                        alt="Team Collaboration"
-                        className="w-full h-full object-cover rounded-2xl hover:scale-[1.02] transition-transform duration-300 shadow-xl border border-white/5"
-                    />
-                </FlipRevealItem>
-                <FlipRevealItem flipKey="testing" className="w-full aspect-square">
-                    <img
-                        src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=800&auto=format&fit=crop"
-                        alt="Ocean Testing"
-                        className="w-full h-full object-cover rounded-2xl hover:scale-[1.02] transition-transform duration-300 shadow-xl border border-white/5"
-                    />
-                </FlipRevealItem>
-                <FlipRevealItem flipKey="vehicles" className="w-full aspect-square">
-                    <img
-                        src="https://images.unsplash.com/photo-1580828369019-181321e2e4a4?q=80&w=800&auto=format&fit=crop"
-                        alt="AUV Components"
-                        className="w-full h-full object-cover rounded-2xl hover:scale-[1.02] transition-transform duration-300 shadow-xl border border-white/5"
-                    />
-                </FlipRevealItem>
-                <FlipRevealItem flipKey="testing" className="w-full aspect-square">
-                    <img
-                        src="https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?q=80&w=800&auto=format&fit=crop"
-                        alt="Pool Testing"
-                        className="w-full h-full object-cover rounded-2xl hover:scale-[1.02] transition-transform duration-300 shadow-xl border border-white/5"
-                    />
-                </FlipRevealItem>
-                <FlipRevealItem flipKey="team" className="w-full aspect-square">
-                    <img
-                        src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=800&auto=format&fit=crop"
-                        alt="Team Planning"
-                        className="w-full h-full object-cover rounded-2xl hover:scale-[1.02] transition-transform duration-300 shadow-xl border border-white/5"
-                    />
-                </FlipRevealItem>
+                {archiveImages.map((img, idx) => (
+                    <FlipRevealItem key={idx} flipKey={img.category} className="w-full aspect-square">
+                        <img
+                            src={img.src}
+                            alt={img.alt}
+                            className="w-full h-full object-cover rounded-2xl hover:scale-[1.02] transition-transform duration-300 shadow-xl border border-white/5"
+                        />
+                    </FlipRevealItem>
+                ))}
             </FlipReveal>
         </div>
       </div>
