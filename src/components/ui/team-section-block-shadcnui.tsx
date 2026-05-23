@@ -564,31 +564,6 @@ function TeamMemberCard({ member }: { member: any }) {
                 {member.bio}
               </p>
 
-              {/* Skills */}
-              <motion.div
-                className="mb-4 flex flex-wrap justify-center gap-1.5"
-                initial={{ opacity: 0, y: 10 }}
-                animate={
-                  isHovered ? { opacity: 1, y: 0 } : { opacity: 0.7, y: 0 }
-                }
-                transition={{ duration: 0.3 }}
-              >
-                {member.skills.map((skill: string, idx: number) => (
-                  <motion.div
-                    key={skill}
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ delay: 0.1 * idx, type: "spring" }}
-                  >
-                    <Badge
-                      variant="outline"
-                      className="border-white/10 bg-white/5 text-xs text-slate-300 transition-colors hover:bg-white/10"
-                    >
-                      {skill}
-                    </Badge>
-                  </motion.div>
-                ))}
-              </motion.div>
 
               {/* Social Links */}
               <motion.div
