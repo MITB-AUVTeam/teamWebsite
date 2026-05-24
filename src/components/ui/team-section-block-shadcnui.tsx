@@ -92,7 +92,7 @@ const teamCategories = [
         "gradient": "from-indigo-500/20 via-indigo-500/5 to-transparent",
         "social": {
           "linkedin": null,
-          "github": null
+          "github": "https://github.com/arunavamaiti19"
         }
       },
       {
@@ -367,7 +367,7 @@ const teamCategories = [
         "gradient": "from-teal-500/20 via-teal-500/5 to-transparent",
         "social": {
           "linkedin": null,
-          "github": null
+          "github": "https://github.com/farha215"
         }
       }
     ]
@@ -465,6 +465,7 @@ function TeamMemberCard({ member }: { member: any }) {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const shouldReduceMotion = useReducedMotion();
+  const hasBio = Boolean(member.bio?.trim());
 
   const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [5, -5]), {
     stiffness: 300,
@@ -520,7 +521,7 @@ function TeamMemberCard({ member }: { member: any }) {
 
 
 
-          <div className="relative z-10 p-6 flex flex-col h-full">
+          <div className="relative z-10 px-6 pt-6 pb-4 flex flex-col h-full">
             {/* Avatar Section */}
             <div className="mb-4 flex justify-center">
               <motion.div
@@ -560,15 +561,15 @@ function TeamMemberCard({ member }: { member: any }) {
             </div>
 
             {/* Info Section */}
-            <div className="text-center flex-grow flex flex-col">
+            <div className="text-center flex-grow flex flex-col gap-3">
               <motion.h3
-                className="mb-1 text-xl font-semibold tracking-tight text-white"
+                className="text-xl font-semibold tracking-tight text-white"
                 animate={isHovered ? { scale: 1.05 } : { scale: 1 }}
                 transition={{ duration: 0.2 }}
               >
                 {member.name}
               </motion.h3>
-              <div className="mb-2">
+              <div>
                 <Badge
                   variant="secondary"
                   className="bg-blue-500/10 text-xs uppercase tracking-[0.2em] text-blue-200 border border-blue-500/20 backdrop-blur"
@@ -579,14 +580,16 @@ function TeamMemberCard({ member }: { member: any }) {
 
               {/* Location removed */}
 
-              <p className="mb-4 text-sm text-slate-300 flex-grow">
-                {member.bio}
-              </p>
+              {hasBio ? (
+                <p className="text-sm text-slate-300 flex-grow">
+                  {member.bio}
+                </p>
+              ) : null}
 
 
               {/* Social Links */}
               <motion.div
-                className="flex justify-center gap-2 mt-auto"
+                className={`flex justify-center gap-2 ${hasBio ? "mt-auto" : "mt-0"}`}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
