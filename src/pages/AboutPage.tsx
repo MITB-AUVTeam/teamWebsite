@@ -18,9 +18,6 @@ export function AboutPage() {
           <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-black uppercase tracking-tighter leading-none">
             About Us
           </h1>
-          <p className="text-slate-300 max-w-md md:text-right text-sm md:text-base leading-relaxed">
-            Exploring the depths of innovation. Learn about our commitment to engineering excellence and the curiosity that drives our underwater explorations.
-          </p>
         </motion.div>
       </section>
 
@@ -28,7 +25,7 @@ export function AboutPage() {
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 2, delay: 0.2 }}
           className="relative w-full h-[300px] md:h-[450px] lg:h-[550px] rounded-[2rem] overflow-hidden"
         >
           <img 
@@ -46,29 +43,14 @@ export function AboutPage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-6 mt-16 md:mt-32 order-2 md:order-3">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className="grid grid-cols-1">
           <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-5 relative h-[400px] md:h-[500px] rounded-[2rem] overflow-hidden group"
+            className="bg-[#0f172a] rounded-[2rem] p-8 md:p-12 lg:p-16 flex flex-col justify-center"
           >
-            <img 
-              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop" 
-              alt="Group photo" 
-              className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
-            />
-          </motion.div>
-          
-          <motion.div 
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-7 bg-[#0f172a] rounded-[2rem] p-8 md:p-12 lg:p-16 flex flex-col justify-center"
-          >
-            <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight mb-8">Who We Are</h2>
             <div className="space-y-6 text-slate-300 text-sm md:text-base leading-relaxed">
               <p>
                 We are Team AUV MIT-B, a student-led team passionate about underwater robotics, innovation, and hands-on engineering. Bringing together students from mechanical, electrical, and software domains, we collaboratively design and build autonomous underwater vehicles completely in-house.
