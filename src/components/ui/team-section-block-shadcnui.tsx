@@ -18,6 +18,22 @@ import {
 import * as React from "react";
 import { useState } from "react";
 
+const personalPhotoModules = import.meta.glob("../../assets/Personal_photo/*", {
+  eager: true,
+  import: "default",
+}) as Record<string, string>;
+
+function resolveTeamImage(image: string) {
+  const personalPhotoPrefix = "/src/assets/Personal_photo/";
+
+  if (!image.startsWith(personalPhotoPrefix)) {
+    return image;
+  }
+
+  const filename = image.slice(personalPhotoPrefix.length);
+  return personalPhotoModules[`../../assets/Personal_photo/${filename}`] ?? image;
+}
+
 const teamCategories = [
   {
     "title": "Faculty Advisors",
@@ -436,6 +452,14 @@ const teamCategories = [
   }
 ];
 
+const resolvedTeamCategories = teamCategories.map((category) => ({
+  ...category,
+  members: category.members.map((member) => ({
+    ...member,
+    image: resolveTeamImage(member.image),
+  })),
+}));
+
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -709,7 +733,7 @@ export function TeamSectionBlock() {
 
           {/* Team Categories */}
           <div className="space-y-24">
-            {teamCategories.map((category, catIdx) => (
+            {resolvedTeamCategories.map((category, catIdx) => (
               <div key={category.title}>
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
