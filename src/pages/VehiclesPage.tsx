@@ -13,6 +13,8 @@ import {
   Waves 
 } from "lucide-react";
 import { Footer } from "@/components/Footer";
+import proto1Img from "@/assets/Gallery/IMG_4024_2.webp";
+import proto2Img from "@/assets/Gallery/deuterium.webp";
 
 export function VehiclesPage() {
   const vehicles = [
@@ -20,7 +22,7 @@ export function VehiclesPage() {
       name: "Hydrogen",
       tagline: "Prototype 1",
       description: "Our first prototype, designed to test core navigation and control systems in a compact form factor.",
-      image: "https://images.unsplash.com/photo-1544377193-33dcf4d68fb5?q=80&w=2000&auto=format&fit=crop",
+      image: proto1Img,
       specs: [
         { icon: Ruler, label: "Dimensions", value: "330mm (L) × 340mm (W) × 230mm (H)" },
         { icon: Weight, label: "Mass", value: "5 kg" },
@@ -36,19 +38,19 @@ export function VehiclesPage() {
       name: "Deuterium",
       tagline: "Prototype 2",
       description: "Our advanced prototype featuring onboard vision, manipulation, and custom SONAR capabilities for complex underwater tasks.",
-      image: "https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?q=80&w=2000&auto=format&fit=crop",
+      image: proto2Img,
       specs: [
         { icon: Ruler, label: "Dimensions", value: "620mm (L) × 400mm (W) × 250mm (H)" },
-        { icon: Weight, label: "Mass", value: "12 kg" },
+        { icon: Weight, label: "Mass", value: "20 kg" },
         { icon: Move3d, label: "Degrees of Freedom", value: "5 (Surge, Heave, Roll, Pitch, Yaw)" },
         { icon: Compass, label: "Navigation", value: "BNO055 IMU, BlueRobotics Pressure/Depth Sensor" },
         { icon: Cpu, label: "Compute", value: "Raspberry Pi5 8GB, Nvidia Jetson Orin Nano 8GB" },
-        { icon: Battery, label: "Power", value: "Lithium-ion Battery (14.8V, 18Ah)" },
+        { icon: Battery, label: "Power", value: "Lithium-ion Battery (14.8V, 18Ah) " },
         { icon: Eye, label: "Vision System", value: "Zed 2i Depth Camera (x2)" },
         { icon: Fan, label: "Propulsion", value: "5× T200 Thrusters, 5× BlueRobotics Basic ESCs" },
-        { icon: Grab, label: "Manipulator", value: "Custom-designed soft robotics based arm" },
-        { icon: Waves, label: "SONAR", value: "In-house custom-built SONAR" },
-        { icon: Code2, label: "Software", value: "ROS on Ubuntu 22.04 LTS" },
+        { icon: Grab, label: "Dropper", value: "Custom-designed 3D printed dropper" },
+        { icon: Waves, label: "Hydrophones", value: "In-house custom-built Hydrophones" },
+        { icon: Code2, label: "Software", value: "ROS2 on Ubuntu 22.04 LTS" },
       ]
     }
   ];

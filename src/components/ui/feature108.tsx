@@ -34,7 +34,7 @@ const Feature108 = ({
   tabs = [],
 }: Feature108Props) => {
   if (!tabs.length) return null;
-  
+
   return (
     <section className="py-24 px-6 max-w-7xl mx-auto">
       <div className="container mx-auto">

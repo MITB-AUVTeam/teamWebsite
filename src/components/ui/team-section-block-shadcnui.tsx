@@ -24,26 +24,42 @@ const teamCategories = [
     "members": [
       {
         "name": "Dr. Ujjwal Verma",
-        "role": "Faculty advisor / ECE Dept(MIT-Manipal)",
+        "role": "ECE Dept. (MIT-Manipal)",
         "bio": "",
         "image": "https://api.dicebear.com/7.x/identicon/svg?seed=UjjwalVerma",
         "location": "MIT-Manipal",
         "skills": ["Faculty Advisor"],
         "gradient": "from-indigo-500/20 via-indigo-500/5 to-transparent",
         "social": {
+          "email": "mailto:ujjwal.verma@manipal.edu",
           "linkedin": null,
           "github": null
         }
       },
       {
-        "name": "Dr. Adithya G.S.S",
-        "role": "Faculty advisor / Mechanical Dept.(MIT-BLR)",
+        "name": "Dr. Manasa Kongot",
+        "role": "Development Dept. (MIT-BLR)",
         "bio": "",
         "image": "https://api.dicebear.com/7.x/identicon/svg?seed=AdithyaGSS",
         "location": "MIT-BLR",
         "skills": ["Faculty Advisor"],
         "gradient": "from-indigo-500/20 via-indigo-500/5 to-transparent",
         "social": {
+          "email": "mailto:manasakongot@gmail.com",
+          "linkedin": null,
+          "github": null
+        }
+      },
+      {
+        "name": "Dr. Adithya G.S.S",
+        "role": "Mechanical Dept. (MIT-BLR)",
+        "bio": "",
+        "image": "https://api.dicebear.com/7.x/identicon/svg?seed=AdithyaGSS",
+        "location": "MIT-BLR",
+        "skills": ["Faculty Advisor"],
+        "gradient": "from-indigo-500/20 via-indigo-500/5 to-transparent",
+        "social": {
+          "email": "mailto:srinivas.adithya@manipal.edu",
           "linkedin": null,
           "github": null
         }
@@ -70,13 +86,13 @@ const teamCategories = [
         "name": "Arunava Maiti",
         "role": "Team Co-Lead / Electrical and Mechanical Subsystem",
         "bio": "Balling  🏀",
-        "image": "https://api.dicebear.com/7.x/identicon/svg?seed=ArunavaMaiti",
+        "image": "/src/assets/Personal_photo/arunava.webp",
         "location": "3rd Year",
         "skills": ["Electrical", "Mechanical", "Leadership"],
         "gradient": "from-indigo-500/20 via-indigo-500/5 to-transparent",
         "social": {
           "linkedin": null,
-          "github": null
+          "github": "https://github.com/arunavamaiti19"
         }
       },
       {
@@ -140,7 +156,7 @@ const teamCategories = [
         "name": "Kshithij Jaitly",
         "role": "Mechanical Subsystem Member",
         "bio": "Fusion pls dont crash !!!",
-        "image": "https://api.dicebear.com/7.x/identicon/svg?seed=KshithijJaitly",
+        "image": "/src/assets/Personal_photo/kshitij.webp",
         "location": "1st Year",
         "skills": ["Mechanical"],
         "gradient": "from-teal-500/20 via-teal-500/5 to-transparent",
@@ -153,7 +169,7 @@ const teamCategories = [
         "name": "Kanishk Thoguluva Ramesh Babu",
         "role": "Mechanical Subsystem Member",
         "bio": "Monkey See Monkey Do",
-        "image": "https://api.dicebear.com/7.x/identicon/svg?seed=KanishkThoguluvaRameshBabu",
+        "image": "/src/assets/Personal_photo/kanishk.webp",
         "location": "1st Year",
         "skills": ["Mechanical"],
         "gradient": "from-teal-500/20 via-teal-500/5 to-transparent",
@@ -166,7 +182,7 @@ const teamCategories = [
         "name": "Shaurya Veer Singh",
         "role": "Mechanical Subsystem Member",
         "bio": "Peace",
-        "image": "https://api.dicebear.com/7.x/identicon/svg?seed=ShauryaVeerSingh",
+        "image": "/src/assets/Personal_photo/shaurya.webp",
         "location": "1st Year",
         "skills": ["Mechanical"],
         "gradient": "from-teal-500/20 via-teal-500/5 to-transparent",
@@ -249,7 +265,7 @@ const teamCategories = [
         "name": "Aryan Sharma",
         "role": "Electrical Subsystem Member",
         "bio": "Plugged in.",
-        "image": "https://api.dicebear.com/7.x/identicon/svg?seed=AryanSharma",
+        "image": "/src/assets/Personal_photo/aryan.webp",
         "location": "1st Year",
         "skills": ["Electrical"],
         "gradient": "from-teal-500/20 via-teal-500/5 to-transparent",
@@ -262,7 +278,7 @@ const teamCategories = [
         "name": "Gayatri. B",
         "role": "Electrical Subsystem Member",
         "bio": "Yesterday is history, tomorrow is a mystery, but today is a gift.",
-        "image": "https://api.dicebear.com/7.x/identicon/svg?seed=Gayatri.B",
+        "image": "/src/assets/Personal_photo/gayatri.webp",
         "location": "1st Year",
         "skills": ["Electrical"],
         "gradient": "from-teal-500/20 via-teal-500/5 to-transparent",
@@ -275,7 +291,7 @@ const teamCategories = [
         "name": "Kopal Agrawal",
         "role": "Electrical Subsystem Member",
         "bio": "It's not that deep",
-        "image": "https://api.dicebear.com/7.x/identicon/svg?seed=KopalAgrawal",
+        "image": "/src/assets/Personal_photo/kopal.webp",
         "location": "1st Year",
         "skills": ["Electrical"],
         "gradient": "from-teal-500/20 via-teal-500/5 to-transparent",
@@ -293,7 +309,7 @@ const teamCategories = [
         "name": "Aditya R Jemshetty",
         "role": "Software and Automation Subsystem Member",
         "bio": "Life is short— skip DFS, do BFS :)",
-        "image": "https://api.dicebear.com/7.x/identicon/svg?seed=AdityaRJemshetty",
+        "image": "/src/assets/Personal_photo/aditya.webp",
         "location": "2nd Year",
         "skills": ["Software"],
         "gradient": "from-cyan-500/20 via-cyan-500/5 to-transparent",
@@ -306,7 +322,7 @@ const teamCategories = [
         "name": "Advithiya Duddu",
         "role": "Software and Automation Subsystem Member",
         "bio": "you miss 100% of the shots you don't take",
-        "image": "https://api.dicebear.com/7.x/identicon/svg?seed=AdvithiyaDuddu",
+        "image": "/src/assets/Personal_photo/advithiya.webp",
         "location": "2nd Year",
         "skills": ["Software"],
         "gradient": "from-cyan-500/20 via-cyan-500/5 to-transparent",
@@ -319,7 +335,7 @@ const teamCategories = [
         "name": "Piyush Sahoo",
         "role": "Software and Automation Subsystem Member",
         "bio": "Remember to source install/setup.bash ;)",
-        "image": "https://api.dicebear.com/7.x/identicon/svg?seed=PiyushSahoo",
+        "image": "/src/assets/Personal_photo/piyush.webp",
         "location": "1st Year",
         "skills": ["Software"],
         "gradient": "from-teal-500/20 via-teal-500/5 to-transparent",
@@ -332,7 +348,7 @@ const teamCategories = [
         "name": "Aaishi Gupta",
         "role": "Software and Automation Subsystem Member",
         "bio": "",
-        "image": "https://api.dicebear.com/7.x/identicon/svg?seed=AaishiGupta",
+        "image": "/src/assets/Personal_photo/aaishi.webp",
         "location": "1st Year",
         "skills": ["Software"],
         "gradient": "from-teal-500/20 via-teal-500/5 to-transparent",
@@ -345,13 +361,13 @@ const teamCategories = [
         "name": "Farha P K",
         "role": "Software and Automation Subsystem Member",
         "bio": "Do it scared",
-        "image": "https://api.dicebear.com/7.x/identicon/svg?seed=FarhaPK",
+        "image": "/src/assets/Personal_photo/farha.webp",
         "location": "1st Year",
         "skills": ["Software"],
         "gradient": "from-teal-500/20 via-teal-500/5 to-transparent",
         "social": {
           "linkedin": null,
-          "github": null
+          "github": "https://github.com/farha215"
         }
       }
     ]
@@ -363,7 +379,7 @@ const teamCategories = [
         "name": "Siddharth P S",
         "role": "Management Team Member",
         "bio": "Float like cadillac, sting like a beamer",
-        "image": "https://api.dicebear.com/7.x/identicon/svg?seed=SiddharthPS",
+        "image": "/src/assets/Personal_photo/siddarth.webp",
         "location": "2nd Year",
         "skills": ["Management"],
         "gradient": "from-cyan-500/20 via-cyan-500/5 to-transparent",
@@ -394,7 +410,7 @@ const teamCategories = [
         "name": "Sourish Sri Vignesh S",
         "role": "Design Team Member",
         "bio": "NAH, I'D WIN.",
-        "image": "https://api.dicebear.com/7.x/identicon/svg?seed=SourishSriVigneshS",
+        "image": "/src/assets/Personal_photo/sourish.webp",
         "location": "2nd Year",
         "skills": ["Design"],
         "gradient": "from-indigo-500/20 via-indigo-500/5 to-transparent",
@@ -407,7 +423,7 @@ const teamCategories = [
         "name": "Pritisha Kakati",
         "role": "Design Team Member",
         "bio": "Professional pixel perfectionist.",
-        "image": "https://api.dicebear.com/7.x/identicon/svg?seed=PritishaKakati",
+        "image": "/src/assets/Personal_photo/prithisha.webp",
         "location": "2nd Year",
         "skills": ["Design"],
         "gradient": "from-indigo-500/20 via-indigo-500/5 to-transparent",
@@ -449,6 +465,7 @@ function TeamMemberCard({ member }: { member: any }) {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const shouldReduceMotion = useReducedMotion();
+  const hasBio = Boolean(member.bio?.trim());
 
   const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [5, -5]), {
     stiffness: 300,
@@ -476,7 +493,10 @@ function TeamMemberCard({ member }: { member: any }) {
   };
 
   return (
-    <motion.div variants={itemVariants} className="perspective-1000">
+    <motion.div
+      variants={itemVariants}
+      className="perspective-1000 w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)]"
+    >
       <motion.div
         style={{
           rotateX,
@@ -501,7 +521,7 @@ function TeamMemberCard({ member }: { member: any }) {
 
 
 
-          <div className="relative z-10 p-6 flex flex-col h-full">
+          <div className="relative z-10 px-6 pt-6 pb-4 flex flex-col h-full">
             {/* Avatar Section */}
             <div className="mb-4 flex justify-center">
               <motion.div
@@ -541,15 +561,15 @@ function TeamMemberCard({ member }: { member: any }) {
             </div>
 
             {/* Info Section */}
-            <div className="text-center flex-grow flex flex-col">
+            <div className="text-center flex-grow flex flex-col gap-3">
               <motion.h3
-                className="mb-1 text-xl font-semibold tracking-tight text-white"
+                className="text-xl font-semibold tracking-tight text-white"
                 animate={isHovered ? { scale: 1.05 } : { scale: 1 }}
                 transition={{ duration: 0.2 }}
               >
                 {member.name}
               </motion.h3>
-              <div className="mb-2">
+              <div>
                 <Badge
                   variant="secondary"
                   className="bg-blue-500/10 text-xs uppercase tracking-[0.2em] text-blue-200 border border-blue-500/20 backdrop-blur"
@@ -560,39 +580,16 @@ function TeamMemberCard({ member }: { member: any }) {
 
               {/* Location removed */}
 
-              <p className="mb-4 text-sm text-slate-300 flex-grow">
-                {member.bio}
-              </p>
+              {hasBio ? (
+                <p className="text-sm text-slate-300 flex-grow">
+                  {member.bio}
+                </p>
+              ) : null}
 
-              {/* Skills */}
-              <motion.div
-                className="mb-4 flex flex-wrap justify-center gap-1.5"
-                initial={{ opacity: 0, y: 10 }}
-                animate={
-                  isHovered ? { opacity: 1, y: 0 } : { opacity: 0.7, y: 0 }
-                }
-                transition={{ duration: 0.3 }}
-              >
-                {member.skills.map((skill: string, idx: number) => (
-                  <motion.div
-                    key={skill}
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ delay: 0.1 * idx, type: "spring" }}
-                  >
-                    <Badge
-                      variant="outline"
-                      className="border-white/10 bg-white/5 text-xs text-slate-300 transition-colors hover:bg-white/10"
-                    >
-                      {skill}
-                    </Badge>
-                  </motion.div>
-                ))}
-              </motion.div>
 
               {/* Social Links */}
               <motion.div
-                className="flex justify-center gap-2 mt-auto"
+                className={`flex justify-center gap-2 ${hasBio ? "mt-auto" : "mt-0"}`}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
@@ -661,91 +658,119 @@ export function TeamSectionBlock() {
         aria-labelledby="team-section-heading"
         className="relative w-full overflow-hidden px-4 py-20 sm:px-6 lg:px-10"
       >
-      {/* Background decorative elements */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <motion.div
-          animate={{
-            scale: shouldReduceMotion ? 1 : [1, 1.18, 1],
-            rotate: shouldReduceMotion ? 0 : [0, 90, 0],
-            opacity: [0.12, 0.3, 0.12],
-          }}
-          transition={{
-            duration: shouldReduceMotion ? 0.6 : 18,
-            repeat: shouldReduceMotion ? 0 : Infinity,
-            ease: "linear",
-          }}
-          className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-blue-600/20 blur-[150px]"
-        />
-        <motion.div
-          animate={{
-            scale: shouldReduceMotion ? 1 : [1.1, 1, 1.1],
-            rotate: shouldReduceMotion ? 0 : [0, -90, 0],
-            opacity: [0.12, 0.32, 0.12],
-          }}
-          transition={{
-            duration: shouldReduceMotion ? 0.6 : 16,
-            repeat: shouldReduceMotion ? 0 : Infinity,
-            ease: "linear",
-          }}
-          className="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-cyan-600/20 blur-[150px]"
-        />
-      </div>
-
-      <div className="mx-auto max-w-7xl">
-        {/* Header */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-20"
-        >
-          <div className="space-y-4">
-            <h2 id="team-section-heading" className="text-5xl md:text-7xl lg:text-[5.5rem] font-black uppercase tracking-tighter leading-none text-white">
-              Our Team
-            </h2>
-            <p className="text-slate-400 text-sm md:text-base tracking-[0.2em] uppercase font-medium ml-1">
-              Behind the Success
-            </p>
-          </div>
-          <p className="text-slate-300 max-w-md md:text-right text-sm md:text-base leading-relaxed">
-            A diverse team of talented individuals working together to build
-            amazing products and deliver exceptional results.
-          </p>
-        </motion.div>
-
-        {/* Team Categories */}
-        <div className="space-y-24">
-          {teamCategories.map((category, catIdx) => (
-            <div key={category.title}>
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6 }}
-                className="mb-10 flex items-center gap-4"
-              >
-                <h3 className="text-3xl font-bold text-white tracking-tight">
-                  {category.title}
-                </h3>
-                <div className="h-[1px] flex-grow bg-gradient-to-r from-white/20 to-transparent" />
-              </motion.div>
-
-              <motion.div
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
-                className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
-              >
-                {category.members.map((member, index) => (
-                  <TeamMemberCard key={index} member={member} />
-                ))}
-              </motion.div>
-            </div>
-          ))}
+        {/* Background decorative elements */}
+        <div className="absolute inset-0 -z-10 overflow-hidden">
+          <motion.div
+            animate={{
+              scale: shouldReduceMotion ? 1 : [1, 1.18, 1],
+              rotate: shouldReduceMotion ? 0 : [0, 90, 0],
+              opacity: [0.12, 0.3, 0.12],
+            }}
+            transition={{
+              duration: shouldReduceMotion ? 0.6 : 18,
+              repeat: shouldReduceMotion ? 0 : Infinity,
+              ease: "linear",
+            }}
+            className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-blue-600/20 blur-[150px]"
+          />
+          <motion.div
+            animate={{
+              scale: shouldReduceMotion ? 1 : [1.1, 1, 1.1],
+              rotate: shouldReduceMotion ? 0 : [0, -90, 0],
+              opacity: [0.12, 0.32, 0.12],
+            }}
+            transition={{
+              duration: shouldReduceMotion ? 0.6 : 16,
+              repeat: shouldReduceMotion ? 0 : Infinity,
+              ease: "linear",
+            }}
+            className="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-cyan-600/20 blur-[150px]"
+          />
         </div>
 
-      </div>
+        <div className="mx-auto max-w-7xl">
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-20"
+          >
+            <div className="space-y-4">
+              <h2 id="team-section-heading" className="text-5xl md:text-7xl lg:text-[5.5rem] font-black uppercase tracking-tighter leading-none text-white">
+                OUR TEAM
+              </h2>
+              <p className="text-slate-400 text-lg md:text-xl tracking-[0.06em] font-medium ml-1">
+                A diverse team of talented individuals working together to build
+                amazing products and deliver exceptional results.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Team Categories */}
+          <div className="space-y-24">
+            {teamCategories.map((category, catIdx) => (
+              <div key={category.title}>
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.6 }}
+                  className="mb-10 flex items-center gap-4"
+                >
+                  <h3 className="text-3xl font-bold text-white tracking-tight">
+                    {category.title}
+                  </h3>
+                  <div className="h-[1px] flex-grow bg-gradient-to-r from-white/20 to-transparent" />
+                </motion.div>
+
+                {category.title === "Software Subsystem" ? (
+                  <div className="space-y-8">
+                    <motion.div
+                      variants={containerVariants}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true, margin: "-100px" }}
+                      className="flex flex-wrap justify-center gap-8"
+                    >
+                      {category.members.slice(0, 2).map((member, index) => (
+                        <TeamMemberCard
+                          key={`software-top-${index}`}
+                          member={member}
+                        />
+                      ))}
+                    </motion.div>
+
+                    <motion.div
+                      variants={containerVariants}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true, margin: "-100px" }}
+                      className="flex flex-wrap justify-center gap-8"
+                    >
+                      {category.members.slice(2).map((member, index) => (
+                        <TeamMemberCard key={`software-bottom-${index}`} member={member} />
+                      ))}
+                    </motion.div>
+                  </div>
+                ) : (
+                  <motion.div
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-100px" }}
+                    className="flex flex-wrap justify-center gap-8"
+                  >
+                    {category.members.map((member, index) => (
+                      <TeamMemberCard key={index} member={member} />
+                    ))}
+                  </motion.div>
+                )}
+              </div>
+            ))}
+          </div>
+
+        </div>
       </section>
       <Footer />
     </div>
