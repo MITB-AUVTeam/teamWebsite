@@ -77,12 +77,12 @@ export function SponsorsPage() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className={cardClassName}
               >
-                <div className="relative h-40 md:h-48 w-full flex items-center justify-center mb-8 p-6 bg-gradient-to-b from-slate-950/80 to-slate-950/40 rounded-2xl border border-slate-900 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] overflow-hidden group-hover:border-blue-500/20 transition-all duration-300">
+                <div className="relative h-40 md:h-48 w-full flex items-center justify-center mb-8 p-6 bg-gradient-to-br from-[#0c1f4a] via-[#0b1a3d] to-[#08142f] rounded-2xl border border-blue-900/60 shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)] overflow-hidden group-hover:border-blue-400/30 transition-all duration-300">
                   {/* Tech blueprint grid pattern */}
-                  <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:14px_14px] opacity-15 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
+                  <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(96,165,250,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(96,165,250,0.08)_1px,transparent_1px)] bg-[size:14px_14px] opacity-30 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
 
                   {/* Radial glowing orb behind logo */}
-                  <div className="absolute w-[160px] h-[160px] bg-blue-500/5 rounded-full blur-[35px] opacity-40 group-hover:opacity-100 group-hover:bg-blue-500/10 transition-all duration-700 pointer-events-none" />
+                  <div className="absolute w-[180px] h-[180px] bg-blue-300/10 rounded-full blur-[40px] opacity-70 group-hover:opacity-100 group-hover:bg-cyan-300/15 transition-all duration-700 pointer-events-none" />
 
                   <img
                     src={sponsor.logo}
