@@ -51,7 +51,7 @@ export function AboutPage() {
             transition={{ duration: 0.6 }}
             className="bg-[#0f172a] rounded-[2rem] p-8 md:p-12 lg:p-16 flex flex-col justify-center"
           >
-            <div className="space-y-6 text-slate-300 text-sm md:text-base leading-relaxed">
+            <div className="space-y-6 text-slate-300 text-base md:text-lg leading-relaxed">
               <p>
                 We are Team AUV MIT-B, a student-led team passionate about underwater robotics, innovation, and hands-on engineering. Bringing together students from mechanical, electrical, and software domains, we collaboratively design and build autonomous underwater vehicles completely in-house.
               </p>
@@ -63,7 +63,7 @@ export function AboutPage() {
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-6 mt-16 md:mt-32 order-3 md:order-4">
+      <section className="max-w-7xl mx-auto px-6 mt-4 md:mt-8 order-3 md:order-4">
         <VerticalTabs />
       </section>
 
