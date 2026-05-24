@@ -84,12 +84,12 @@ export default function VerticalTabs() {
   };
 
   return (
-    <section className="w-full bg-transparent py-12 md:py-24 lg:py-32">
+    <section className="w-full bg-transparent pt-4 pb-12 md:pb-24 lg:pb-32">
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
           {/* Left Column: Content */}
-          <div className="lg:col-span-5 flex flex-col justify-center order-2 lg:order-1 pt-8">
-            <div className="space-y-2 mb-16">
+          <div className="lg:col-span-5 flex flex-col justify-center order-2 lg:order-1 pt-2">
+            <div className="space-y-2 mb-12">
               <h2 className="tracking-tight text-balance text-4xl font-bold md:text-5xl lg:text-6xl text-white">
                 Our Approach
               </h2>
@@ -150,7 +150,7 @@ export default function VerticalTabs() {
                             animate={{ opacity: 1, height: "auto" }}
                             exit={{ opacity: 0, height: 0 }}
                             transition={{
-                              duration: 4,
+                              duration: 4.5,
                               ease: [0.23, 1, 0.32, 1],
                             }}
                             className="overflow-hidden"
