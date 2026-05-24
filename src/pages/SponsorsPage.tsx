@@ -11,32 +11,37 @@ const sponsors = [
   {
     name: "Manipal Institute of Technology",
     logo: mitLogo,
-    description: "Serves as our primary institutional pillar, providing a state-of-the-art dedicated workshop space equipped with advanced electronic diagnostic instruments, oscilloscopes, dual-channel power supplies, cabling, and tooling. MIT Bengaluru also provides crucial direct funding for critical system components, combined with tireless administrative advocacy, world-class faculty mentorship, and active support in bridging connections with industry partners to facilitate seamless development.",
+    description: "Serves as our primary institutional pillar, providing a state-of-the-art dedicated workshop space equipped with necessary electronic instruments like oscilloscopes, dual-channel power supplies, cabling along with appropriate mechanical tools and equipment. MIT Bengaluru also provides crucial direct funding for critical system components, combined with tireless administrative support, faculty mentorship if and when needed, and active support in bridging connections with industry partners to facilitate seamless development.",
     logoClass: "scale-105 md:scale-115 lg:scale-120"
   },
   { 
     name: "Ansys", 
     logo: ansysLogo, 
     description: "Empowers our engineering analysis by providing advanced Ansys simulation software. This enables our team to rigorously model, test, and optimize fluid dynamics, mechanical stresses, and structural integrity under extreme deep-water pressures before physical deployment.",
-    logoClass: "scale-125 md:scale-135 lg:scale-145" 
+    logoClass: "scale-125 md:scale-135 lg:scale-145",
+    href: "https://www.ansys.com/en-in"
   },
   { 
     name: "Dassault Systèmes", 
     logo: dassaultLogo, 
     description: "Supports our mechanical modeling and prototyping processes by providing SolidWorks CAD software. This serves as the foundation for our entire 3D engineering lifecycle, enabling complex mechanical design, assembly integration, and precise models for custom 3D-printed vehicle components.",
-    logoClass: "scale-115 md:scale-125 lg:scale-130" 
+    logoClass: "scale-115 md:scale-125 lg:scale-130",
+    href: "https://www.solidworks.com/product/students"
   },
   { 
     name: "Vicharak", 
     logo: vicharakLogo, 
     description: "Accelerates our computational hardware by providing us with Shrike Lite microcontroller boards featuring an RP2040 MCU coupled with an onboard FPGA. We utilize these high-performance boards as the master/main microcontroller unit (MCU) driving autonomous navigation and real-time sensor processing inside our AUV.",
-    logoClass: "scale-135 md:scale-150 lg:scale-160" 
+    logoClass: "scale-135 md:scale-150 lg:scale-160",
+    href: "https://vicharak.in/"
   },
   { 
     name: "Wisdom Technologies", 
     logo: wisdomLogo, 
     description: "Ensures the physical integrity and sealing of our vehicle by fabricating our custom AUV aluminum pressure hull. Their high-precision manufacturing provides the secure, watertight, and robust enclosure needed to protect our onboard electronics and computing hardware.",
-    logoClass: "scale-95 md:scale-100" 
+    logoClass: "scale-95 md:scale-100",
+    hoverLogoClass: "group-hover:scale-75 md:group-hover:scale-80",
+    href: "https://in.linkedin.com/company/wisdom-technologies-pvt-ltd"
   }
 ];
 
@@ -59,29 +64,52 @@ export function SponsorsPage() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
-          {sponsors.map((sponsor, index) => (
-            <motion.div
-              key={sponsor.name}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`bg-slate-900/40 rounded-3xl p-8 md:p-12 border border-slate-800/50 hover:bg-slate-900/60 transition-colors group flex flex-col items-center text-center ${
-                sponsor.name === "Manipal Institute of Technology" ? "md:col-span-2 md:max-w-4xl md:w-full md:mx-auto" : ""
-              }`}
-            >
-              <div className="h-40 md:h-48 w-full flex items-center justify-center mb-8 p-4 bg-white/5 rounded-2xl group-hover:bg-white/10 transition-colors overflow-hidden">
-                <img
-                  src={sponsor.logo}
-                  alt={sponsor.name}
-                  className={`max-h-full max-w-full object-contain filter drop-shadow-lg transition-transform duration-300 ${sponsor.logoClass || ""}`}
-                />
-              </div>
-              <h3 className="text-2xl font-bold text-slate-100 mb-4">{sponsor.name}</h3>
-              <p className="text-slate-400 leading-relaxed text-sm md:text-base">
-                {sponsor.description}
-              </p>
-            </motion.div>
-          ))}
+          {sponsors.map((sponsor, index) => {
+            const cardClassName = `bg-gradient-to-b from-slate-950/60 to-slate-900/20 backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-slate-800/80 hover:bg-slate-900/40 hover:border-blue-500/20 transition-all duration-300 group flex flex-col items-center text-center ${
+              sponsor.name === "Manipal Institute of Technology" ? "md:col-span-2 md:max-w-4xl md:w-full md:mx-auto" : ""
+            }`;
+
+            return (
+              <motion.div
+                key={sponsor.name}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className={cardClassName}
+              >
+                <div className="relative h-40 md:h-48 w-full flex items-center justify-center mb-8 p-6 bg-gradient-to-b from-slate-950/80 to-slate-950/40 rounded-2xl border border-slate-900 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] overflow-hidden group-hover:border-blue-500/20 transition-all duration-300">
+                  {/* Tech blueprint grid pattern */}
+                  <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:14px_14px] opacity-15 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
+
+                  {/* Radial glowing orb behind logo */}
+                  <div className="absolute w-[160px] h-[160px] bg-blue-500/5 rounded-full blur-[35px] opacity-40 group-hover:opacity-100 group-hover:bg-blue-500/10 transition-all duration-700 pointer-events-none" />
+
+                  <img
+                    src={sponsor.logo}
+                    alt={sponsor.name}
+                    className={`max-h-full max-w-full object-contain filter drop-shadow-lg transition-transform duration-500 ${sponsor.logoClass || ""} ${sponsor.hoverLogoClass || "group-hover:scale-105"}`}
+                  />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-100 mb-4">
+                  {sponsor.href ? (
+                    <a
+                      href={sponsor.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="transition-colors hover:text-cyan-300"
+                    >
+                      {sponsor.name}
+                    </a>
+                  ) : (
+                    sponsor.name
+                  )}
+                </h3>
+                <p className="text-slate-400 leading-relaxed text-sm md:text-base">
+                  {sponsor.description}
+                </p>
+              </motion.div>
+            );
+          })}
         </div>
 
         <motion.div
