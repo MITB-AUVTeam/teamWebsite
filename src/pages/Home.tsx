@@ -384,14 +384,22 @@ export function Home() {
           <div className="relative flex flex-col items-center gap-[20px] scale-75 md:scale-100">
 
             <div className="relative w-[500px] h-[500px] md:w-[600px] md:h-[600px]">
-              <div className="absolute inset-0 border border-[rgba(0,240,255,0.15)] rounded-full">
+              <div
+                className="absolute inset-0"
+                style={{
+                  transform: `rotate(${scrollY * 0.06}deg)`,
+                  willChange: 'transform'
+                }}
+              >
+                <div className="absolute inset-0 border border-[rgba(0,240,255,0.15)] rounded-full">
 
-                <div className="absolute w-[8px] h-[8px] bg-[#00f0ff] rounded-full left-1/2 -translate-x-1/2 top-0 shadow-[0_0_20px_#00f0ff]" />
+                  <div className="absolute w-[8px] h-[8px] bg-[#00f0ff] rounded-full left-1/2 -translate-x-1/2 top-0 shadow-[0_0_20px_#00f0ff]" />
 
-                <div className="absolute w-[8px] h-[8px] bg-[#00f0ff] rounded-full left-1/2 -translate-x-1/2 bottom-0 shadow-[0_0_20px_#00f0ff]" />
+                  <div className="absolute w-[8px] h-[8px] bg-[#00f0ff] rounded-full left-1/2 -translate-x-1/2 bottom-0 shadow-[0_0_20px_#00f0ff]" />
+                </div>
+
+                <div className="absolute inset-[80px] md:inset-[100px] border border-[rgba(0,240,255,0.25)] border-dashed rounded-full" />
               </div>
-
-              <div className="absolute inset-[80px] md:inset-[100px] border border-[rgba(0,240,255,0.25)] border-dashed rounded-full" />
 
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-[11px] opacity-100">
                 <div className="w-[300px] h-[150px] md:w-[400px] md:h-[200px] relative">
