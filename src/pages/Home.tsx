@@ -53,7 +53,7 @@ const features = [
   {
     Icon: LayoutDashboard,
     name: "Design",
-    description: "Aerodynamic and ergonomic vehicle design.",
+    description: "Social media and content creation",
     href: "/team",
     cta: "Explore Subdivision",
     background: <img src="src/assets/homepage_bento_background/design.jpg" className="absolute inset-0 w-full h-full object-cover opacity-20 transition-transform duration-700 ease-out group-hover:scale-105" alt="Design" />,
@@ -136,7 +136,7 @@ const subdivisionDetails: Record<string, TeamDetail> = {
       },
       {
         title: "Placement of Electronics",
-        desc: "Batteries mounted low and central for stability; other systems Velcro-mounted for adaptive layout.",
+        desc: "Batteries mounted low and central for stability; other systems modular 3D print mounts.",
         icon: Cpu,
       },
       {

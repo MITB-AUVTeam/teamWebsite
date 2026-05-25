@@ -19,10 +19,10 @@ const orderedMembers =
   animeshIndex === -1
     ? nonFacultyMembers
     : nonFacultyMembers.map((_, index) => {
-        const sourceIndex =
-          (index - centerIndex + animeshIndex + nonFacultyMembers.length) % nonFacultyMembers.length;
-        return nonFacultyMembers[sourceIndex];
-      });
+      const sourceIndex =
+        (index - centerIndex + animeshIndex + nonFacultyMembers.length) % nonFacultyMembers.length;
+      return nonFacultyMembers[sourceIndex];
+    });
 
 const testimonials = orderedMembers.map((member, index) => ({
   tempId: index,
@@ -38,11 +38,11 @@ interface TestimonialCardProps {
   cardSize: number;
 }
 
-const TestimonialCard: React.FC<TestimonialCardProps> = ({ 
-  position, 
-  testimonial, 
-  handleMove, 
-  cardSize 
+const TestimonialCard: React.FC<TestimonialCardProps> = ({
+  position,
+  testimonial,
+  handleMove,
+  cardSize
 }) => {
   const isCenter = position === 0;
   const navigate = useNavigate();
@@ -58,8 +58,8 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
       }}
       className={cn(
         "absolute left-1/2 top-1/2 cursor-pointer border-2 p-8 transition-all duration-500 ease-in-out",
-        isCenter 
-          ? "z-10 bg-blue-600 text-white border-blue-500" 
+        isCenter
+          ? "z-10 bg-blue-600 text-white border-blue-500"
           : "z-0 bg-slate-900 text-slate-300 border-slate-800 hover:border-blue-500/50"
       )}
       style={{
@@ -85,7 +85,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
         }}
       />
       <div className="mb-4 flex justify-center">
-        <div className="h-16 w-16 overflow-hidden rounded-full border border-white/20 bg-slate-800 p-1 shadow-[3px_3px_0px_#020617]">
+        <div className="h-16 w-16 overflow-hidden rounded-full border border-white/20 bg-slate-800 p-1 shadow-none">
           <img
             src={testimonial.imgSrc}
             alt={testimonial.by}
@@ -168,7 +168,7 @@ export const StaggerTestimonials: React.FC = () => {
         <button
           onClick={() => handleMove(-1)}
           className={cn(
-            "flex h-14 w-14 items-center justify-center text-2xl transition-colors",
+            "flex h-14 w-14 items-center justify-center rounded-full text-2xl transition-colors",
             "bg-slate-900 border-2 border-slate-800 text-slate-400 hover:bg-blue-600 hover:text-white hover:border-blue-500",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
           )}
@@ -179,7 +179,7 @@ export const StaggerTestimonials: React.FC = () => {
         <button
           onClick={() => handleMove(1)}
           className={cn(
-            "flex h-14 w-14 items-center justify-center text-2xl transition-colors",
+            "flex h-14 w-14 items-center justify-center rounded-full text-2xl transition-colors",
             "bg-slate-900 border-2 border-slate-800 text-slate-400 hover:bg-blue-600 hover:text-white hover:border-blue-500",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
           )}
