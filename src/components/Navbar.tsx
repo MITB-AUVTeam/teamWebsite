@@ -31,7 +31,7 @@ export function Navbar() {
   return (
     <motion.header
       className={cn(
-        "fixed top-0 z-50 flex w-full items-center justify-center transition-all duration-500 pt-6"
+        "fixed top-0 z-[10000] flex w-full items-center justify-center transition-all duration-500 pt-6"
       )}
     >
       <NavBar items={navItems} className="w-[95%] max-w-6xl" isScrolled={isScrolled}>

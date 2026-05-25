@@ -10,11 +10,14 @@ import {
   Code2, 
   Eye, 
   Grab, 
-  Waves 
+  Waves,
+  Download,
+  FileText
 } from "lucide-react";
 import { Footer } from "@/components/Footer";
 import proto1Img from "@/assets/Gallery/IMG_4024_2.webp";
 import proto2Img from "@/assets/Gallery/deuterium2.webp";
+import tdrPdf from "@/assets/tdr/IEEE_Conference_Template.pdf";
 
 export function VehiclesPage() {
   const vehicles = [
@@ -151,6 +154,53 @@ export function VehiclesPage() {
             </div>
           </section>
         ))}
+
+        {/* Technical Design Report Section */}
+        <section className="border-t border-slate-800/50 pt-24 mt-24">
+          <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 mb-12">
+            <div className="space-y-4 max-w-xl">
+              <span className="w-8 h-[2px] bg-blue-500 rounded-full inline-block"></span>
+              <h2 className="text-xs font-bold tracking-widest text-blue-400 uppercase block">Documentation</h2>
+              <h3 className="text-3xl md:text-5xl font-black text-white tracking-tight uppercase leading-none">
+                Technical Design Report
+              </h3>
+              <p className="text-slate-400 text-sm md:text-base leading-relaxed">
+                Our official Technical Design Report (TDR) details the engineering decisions, hardware architecture, and software autonomy methodologies behind our competition vehicles.
+              </p>
+            </div>
+            
+            <a 
+              href={tdrPdf} 
+              download="RoboSub_2026_TDR.pdf"
+              className="flex items-center gap-2 px-6 py-3.5 bg-blue-600 hover:bg-blue-500 active:scale-95 text-white font-bold text-sm rounded-full shadow-lg shadow-blue-900/30 transition-all duration-300 hover:scale-105 group/dl cursor-pointer z-10"
+            >
+              <Download className="w-4 h-4 transition-transform duration-300 group-hover/dl:translate-y-0.5" />
+              Download Report PDF
+            </a>
+          </div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="relative w-full rounded-[2.5rem] overflow-hidden border border-slate-800/85 bg-slate-950/40 backdrop-blur-xl p-4 md:p-6 lg:p-8 shadow-2xl flex flex-col gap-6"
+          >
+            {/* Visual ambient glows inside panel */}
+            <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl pointer-events-none z-0" />
+            <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none z-0" />
+            {/* Interactive Embedded PDF Viewer container */}
+            <div className="relative w-full h-[650px] md:h-[750px] lg:h-[800px] bg-[#0b0f19] rounded-2xl overflow-hidden shadow-inner border border-blue-500/20 flex flex-col z-10">
+              
+              {/* Direct PDF rendering iframe */}
+              <iframe 
+                src={`${tdrPdf}#toolbar=1&navpanes=0`} 
+                className="w-full h-full border-none rounded-2xl" 
+                title="RoboSub 2026 Technical Design Report" 
+              />
+            </div>
+          </motion.div>
+        </section>
       </div>
 
       <Footer />

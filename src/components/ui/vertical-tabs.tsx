@@ -86,7 +86,7 @@ export default function VerticalTabs() {
   return (
     <section className="w-full bg-transparent pt-4 pb-12 md:pb-24 lg:pb-32">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-32 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-12 items-start">
           {/* Left Column: Content */}
           <div className="lg:col-span-5 flex flex-col justify-center order-2 lg:order-1 pt-2">
             <div className="space-y-2 mb-12">
@@ -175,7 +175,7 @@ export default function VerticalTabs() {
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
             >
-              <div className="relative aspect-[4/5] md:aspect-[4/3] lg:aspect-[16/11] rounded-[2rem] md:rounded-[3rem] overflow-hidden bg-slate-900">
+              <div className="relative aspect-[16/9] rounded-[2rem] md:rounded-[3rem] overflow-hidden bg-slate-900 border border-slate-800/80 shadow-2xl">
                 <AnimatePresence
                   initial={false}
                   custom={direction}

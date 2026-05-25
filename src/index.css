@@ -6,6 +6,14 @@
   perspective: 1000px;
 }
 
+@utility no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+}
+
 :root {
   --color-text: #fff;
   --color-bg: #000;
@@ -221,5 +229,31 @@ body {
   }
   html {
     @apply font-sans;
+  }
+  
+  /* Custom premium scrollbar for Chromium browsers (Chrome, Edge, Safari) */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #020617;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #1e293b;
+    border-radius: 9999px;
+    border: 2px solid #020617;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3b82f6;
+  }
+
+  /* Custom premium scrollbar for Firefox */
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: #1e293b #020617;
   }
 }

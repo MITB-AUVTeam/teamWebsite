@@ -56,7 +56,7 @@ export function NavBar({ items, className, children, isScrolled = false }: NavBa
     <>
       <div
         className={cn(
-          "z-50",
+          "z-[10000]",
           className,
         )}
       >
@@ -133,7 +133,7 @@ export function NavBar({ items, className, children, isScrolled = false }: NavBa
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[100] flex flex-col bg-black/40 backdrop-blur-xl p-4 pt-6"
+            className="fixed inset-0 z-[10000] flex flex-col bg-black/40 backdrop-blur-xl p-4 pt-6"
           >
             {/* Top Pill */}
             <div className="flex items-center justify-between px-6 py-3 bg-transparent border-transparent rounded-full">
