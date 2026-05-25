@@ -335,16 +335,18 @@ export function Home() {
       <section className="py-24 border-t border-slate-800/50 bg-[#020617] order-7 md:order-7">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-sm font-bold tracking-widest text-blue-500 uppercase mb-3">Trusted By</h2>
+            <h2 className="text-sm font-bold tracking-widest text-blue-500 uppercase mb-3">Thank You To</h2>
             <h3 className="text-3xl md:text-4xl font-bold text-white tracking-tight">Our Proud Sponsors</h3>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-8 items-center justify-items-center max-w-5xl mx-auto">
             {baseLogos.map((logo, idx) => (
               <div 
                 key={idx} 
-                className="w-full flex items-center justify-center p-3 md:p-4 bg-slate-900/30 rounded-2xl border border-slate-800/50 hover:bg-slate-900/60 hover:border-blue-500/20 transition-all duration-300 group h-32 md:h-40"
+                className="group relative flex h-32 w-full items-center justify-center overflow-hidden rounded-2xl border border-blue-900/60 bg-gradient-to-br from-[#0c1f4a] via-[#0b1a3d] to-[#08142f] p-3 transition-all duration-300 hover:border-blue-400/30 md:h-40 md:p-4"
               >
-                <div className="max-h-full max-w-full object-contain transition-all duration-300 flex items-center justify-center [&_img]:max-h-20 md:[&_img]:max-h-28 [&_img]:w-auto [&_img]:object-contain">
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(96,165,250,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(96,165,250,0.08)_1px,transparent_1px)] bg-[size:14px_14px] opacity-30 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
+                <div className="absolute h-[180px] w-[180px] rounded-full bg-blue-300/10 blur-[40px] opacity-70 transition-all duration-700 group-hover:bg-cyan-300/15 group-hover:opacity-100 pointer-events-none" />
+                <div className="relative flex max-h-full max-w-full items-center justify-center transition-all duration-300 [&_img]:max-h-20 [&_img]:w-auto [&_img]:object-contain [&_img]:drop-shadow-lg [&_img]:transition-transform [&_img]:duration-500 group-hover:[&_img]:scale-105 md:[&_img]:max-h-28">
                   {logo}
                 </div>
               </div>

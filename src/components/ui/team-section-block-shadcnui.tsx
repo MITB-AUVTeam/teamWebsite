@@ -15,28 +15,13 @@ import {
   Linkedin,
   Mail,
 } from "lucide-react";
+import { resolveTeamImage } from "@/lib/team-images";
 import * as React from "react";
 import { useState } from "react";
 
-const personalPhotoModules = import.meta.glob("../../assets/Personal_photo/*", {
-  eager: true,
-  import: "default",
-}) as Record<string, string>;
-
-function resolveTeamImage(image: string) {
-  const personalPhotoPrefix = "/src/assets/Personal_photo/";
-
-  if (!image.startsWith(personalPhotoPrefix)) {
-    return image;
-  }
-
-  const filename = image.slice(personalPhotoPrefix.length);
-  return personalPhotoModules[`../../assets/Personal_photo/${filename}`] ?? image;
-}
-
 const teamCategories = [
   {
-    "title": "Faculty Advisors",
+    "title": "Faculty Advisors and Mentor",
     "members": [
       {
         "name": "Dr. Ujjwal Verma",
@@ -48,7 +33,7 @@ const teamCategories = [
         "gradient": "from-indigo-500/20 via-indigo-500/5 to-transparent",
         "social": {
           "email": "mailto:ujjwal.verma@manipal.edu",
-          "linkedin": null,
+          "linkedin": "https://www.linkedin.com/in/ujjwalverma/",
           "github": null
         }
       },
@@ -56,7 +41,7 @@ const teamCategories = [
         "name": "Dr. Manasa Kongot",
         "role": "Development Office (MIT-BLR)",
         "bio": "",
-        "image": "https://api.dicebear.com/7.x/identicon/svg?seed=AdithyaGSS",
+        "image": "src/assets/Personal_photo/manasa.jpeg",
         "location": "MIT-BLR",
         "skills": ["Faculty Advisor"],
         "gradient": "from-indigo-500/20 via-indigo-500/5 to-transparent",
@@ -79,16 +64,31 @@ const teamCategories = [
           "linkedin": "https://www.linkedin.com/in/dr-adithya-garimella-696353138/",
           "github": null
         }
+      },
+      {
+        "name": "Pritha Jaipal",
+        "role": "Project Mentor (MIT-BLR 25')",
+        "bio": "",
+        "image": "src/assets/Personal_photo/pritha.jpeg",
+        "location": "MIT-BLR",
+        "skills": ["Project Mentor"],
+        "gradient": "from-indigo-500/20 via-indigo-500/5 to-transparent",
+        "social": {
+          "email": "mailto:prithajaipal@gmail.com",
+          "linkedin": "https://www.linkedin.com/in/pritha-jaipal",
+          "github": null
+        }
       }
+
     ]
   },
   {
-    "title": "Leadership",
+    "title": "Founding Team and Current Leadership",
     "members": [
       {
         "name": "Animesh Mishra",
         "role": "Team Co-Lead / Software and Automation Subsystem",
-        "bio": "Stay hungry. Stay goofy.",
+        "bio": "There is no place like 127.0.0.1",
         "image": "https://api.dicebear.com/7.x/identicon/svg?seed=AnimeshMishra",
         "location": "3rd Year",
         "skills": ["Software", "Leadership"],
@@ -280,7 +280,7 @@ const teamCategories = [
     ]
   },
   {
-    "title": "Software Subsystem",
+    "title": "Software and Automation Subsystem",
     "members": [
       {
         "name": "Advithiya Duddu",
@@ -343,14 +343,14 @@ const teamCategories = [
         "skills": ["Software"],
         "gradient": "from-teal-500/20 via-teal-500/5 to-transparent",
         "social": {
-          "linkedin": null,
+          "linkedin": "https://in.linkedin.com/in/farha-pk-909b23207",
           "github": "https://github.com/farha215"
         }
       }
     ]
   },
   {
-    "title": "Management Subsystem",
+    "title": "Management and Design Team",
     "members": [
       {
         "name": "Siddharth P S",
@@ -377,12 +377,7 @@ const teamCategories = [
           "linkedin": null,
           "github": null
         }
-      }
-    ]
-  },
-  {
-    "title": "Design Subsystem",
-    "members": [
+      },
       {
         "name": "Sourish Sri Vignesh S",
         "role": "Design Team Member",
@@ -413,13 +408,19 @@ const teamCategories = [
   }
 ];
 
-const resolvedTeamCategories = teamCategories.map((category) => ({
+export const resolvedTeamCategories = teamCategories.map((category) => ({
   ...category,
   members: category.members.map((member) => ({
     ...member,
     image: resolveTeamImage(member.image),
   })),
 }));
+
+export function getTeamMemberByName(name: string) {
+  return resolvedTeamCategories
+    .flatMap((category) => category.members)
+    .find((member) => member.name === name);
+}
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -686,7 +687,7 @@ export function TeamSectionBlock() {
                 OUR TEAM
               </h2>
               <p className="text-slate-400 text-lg md:text-xl tracking-[0.06em] font-medium ml-1">
-                A diverse team of talented individuals working together to build
+                A diverse team of talented (and extremely fun) individuals working together to build
                 amazing products and deliver exceptional results.
               </p>
             </div>

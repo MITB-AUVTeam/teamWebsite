@@ -2,43 +2,34 @@
 
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { resolvedTeamCategories } from '@/components/ui/team-section-block-shadcnui';
 import { cn } from '@/lib/utils';
 import { useNavigate } from 'react-router-dom';
 
 const SQRT_5000 = Math.sqrt(5000);
 
-const testimonials = [
-  {
-    tempId: 0,
-    testimonial: "Stay hungry. Stay goofy.",
-    by: "Animesh Mishra / Team Co-Lead",
-    imgSrc: "https://api.dicebear.com/7.x/identicon/svg?seed=AnimeshMishra"
-  },
-  {
-    tempId: 1,
-    testimonial: "For the last time: there's more to controls than PID",
-    by: "Azad Roy / Technical Lead",
-    imgSrc: "https://api.dicebear.com/7.x/identicon/svg?seed=AzadRoy"
-  },
-  {
-    tempId: 2,
-    testimonial: "NAH, I'D WIN.",
-    by: "Sourish Sri Vignesh S / Design Team Member",
-    imgSrc: "https://api.dicebear.com/7.x/identicon/svg?seed=SourishSriVigneshS"
-  },
-  {
-    tempId: 3,
-    testimonial: "Life is short— skip DFS, do BFS :)",
-    by: "Aditya R Jemshetty / Software Subsystem",
-    imgSrc: "https://api.dicebear.com/7.x/identicon/svg?seed=AdityaRJemshetty"
-  },
-  {
-    tempId: 4,
-    testimonial: "Professional pixel perfectionist.",
-    by: "Pritisha Kakati / Design Team Member",
-    imgSrc: "https://api.dicebear.com/7.x/identicon/svg?seed=PritishaKakati"
-  }
-];
+const nonFacultyMembers = resolvedTeamCategories
+  .filter((category) => category.title !== "Faculty Advisors and Mentor")
+  .flatMap((category) => category.members);
+
+const animeshIndex = nonFacultyMembers.findIndex((member) => member.name === "Animesh Mishra");
+const centerIndex = Math.floor(nonFacultyMembers.length / 2);
+
+const orderedMembers =
+  animeshIndex === -1
+    ? nonFacultyMembers
+    : nonFacultyMembers.map((_, index) => {
+        const sourceIndex =
+          (index - centerIndex + animeshIndex + nonFacultyMembers.length) % nonFacultyMembers.length;
+        return nonFacultyMembers[sourceIndex];
+      });
+
+const testimonials = orderedMembers.map((member, index) => ({
+  tempId: index,
+  testimonial: member.bio || member.role,
+  by: `${member.name} / ${member.role}`,
+  imgSrc: member.image,
+}));
 
 interface TestimonialCardProps {
   position: number;
