@@ -228,8 +228,8 @@ const teamCategories = [
       {
         "name": "Harshika Devarasetty",
         "role": "Electrical Subsystem Member",
-        "bio": "",
-        "image": "src/assets/Personal_photo/harshika.webp",
+        "bio": "running on trial and error",
+        "image": "src/assets/Personal_photo/harshika.jpg",
         "location": "2nd Year",
         "skills": ["Electrical"],
         "gradient": "from-teal-500/20 via-teal-500/5 to-transparent",
@@ -267,7 +267,7 @@ const teamCategories = [
       {
         "name": "Gayatri. B",
         "role": "Electrical Subsystem Member",
-        "bio": "Yesterday is history, tomorrow is a mystery, but today is a gift.",
+        "bio": "Stay curious",
         "image": "/src/assets/Personal_photo/gayatri.webp",
         "location": "1st Year",
         "skills": ["Electrical"],
