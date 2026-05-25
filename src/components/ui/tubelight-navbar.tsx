@@ -72,7 +72,7 @@ export function NavBar({ items, className, children, isScrolled = false }: NavBa
               {children}
             </div>
           )}
-          
+
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-3">
             {items.map((item) => {
@@ -101,11 +101,7 @@ export function NavBar({ items, className, children, isScrolled = false }: NavBa
                         damping: 30,
                       }}
                     >
-                      <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-8 h-1 bg-blue-500 rounded-t-full">
-                        <div className="absolute w-12 h-6 bg-blue-500/20 rounded-full blur-md -top-2 -left-2" />
-                        <div className="absolute w-8 h-6 bg-blue-500/20 rounded-full blur-md -top-1" />
-                        <div className="absolute w-4 h-4 bg-blue-500/20 rounded-full blur-sm top-0 left-2" />
-                      </div>
+                      {/* removed decorative top tab */}
                     </motion.div>
                   )}
                 </Link>
@@ -140,7 +136,7 @@ export function NavBar({ items, className, children, isScrolled = false }: NavBa
               <div className="uppercase" onClick={() => setIsMobileMenuOpen(false)}>
                 {children}
               </div>
-              <button 
+              <button
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="p-2 bg-white/5 rounded-full hover:bg-white/10 transition-colors"
               >

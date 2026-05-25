@@ -89,7 +89,7 @@ const teamCategories = [
         "name": "Animesh Mishra",
         "role": "Team Co-Lead / Software and Automation Subsystem",
         "bio": "There is no place like 127.0.0.1",
-        "image": "https://api.dicebear.com/7.x/identicon/svg?seed=AnimeshMishra",
+        "image": "src/assets/Personal_photo/animesh.jpeg",
         "location": "3rd Year",
         "skills": ["Software", "Leadership"],
         "gradient": "from-indigo-500/20 via-indigo-500/5 to-transparent",
@@ -115,7 +115,7 @@ const teamCategories = [
         "name": "Azad Roy",
         "role": "Technical Lead / Electrical and Mechanical Subsystem",
         "bio": "For the last time: there's more to controls than PID",
-        "image": "https://api.dicebear.com/7.x/identicon/svg?seed=AzadRoy",
+        "image": "src/assets/Personal_photo/azad.jpeg",
         "location": "3rd Year",
         "skills": ["Electrical", "Mechanical", "Leadership"],
         "gradient": "from-indigo-500/20 via-indigo-500/5 to-transparent",
@@ -132,7 +132,7 @@ const teamCategories = [
       {
         "name": "Chatur Vasireddy",
         "role": "Mechanical Subsystem Lead",
-        "bio": "Turn right to go left",
+        "bio": "meow",
         "image": "src/assets/Personal_photo/chatur.jpeg",
         "location": "2nd Year",
         "skills": ["Mechanical"],
@@ -203,7 +203,7 @@ const teamCategories = [
         "name": "Adwait Bhardwaj",
         "role": "Electrical Subsystem Member",
         "bio": "aquamariner",
-        "image": "https://api.dicebear.com/7.x/identicon/svg?seed=AdwaitBhardwaj",
+        "image": "src/assets/Personal_photo/adwait.jpeg",
         "location": "2nd Year",
         "skills": ["Electrical"],
         "gradient": "from-cyan-500/20 via-cyan-500/5 to-transparent",
@@ -242,7 +242,7 @@ const teamCategories = [
         "name": "Serah Saju Jacob",
         "role": "Electrical Subsystem Member",
         "bio": "reach for the stars",
-        "image": "https://api.dicebear.com/7.x/identicon/svg?seed=SerahSajuJacob",
+        "image": "src/assets/Personal_photo/serah.png",
         "location": "2nd Year",
         "skills": ["Electrical"],
         "gradient": "from-teal-500/20 via-teal-500/5 to-transparent",
@@ -381,14 +381,14 @@ const teamCategories = [
       {
         "name": "Kaushiki Gupta",
         "role": "Management Team Member",
-        "bio": "",
-        "image": "https://api.dicebear.com/7.x/identicon/svg?seed=KaushikiGupta",
+        "bio": "idk",
+        "image": "src/assets/Personal_photo/kaushiki.jpeg",
         "location": "1st Year",
         "skills": ["Management"],
         "gradient": "from-teal-500/20 via-teal-500/5 to-transparent",
         "social": {
-          "linkedin": null,
-          "github": null
+          "linkedin": "https://www.linkedin.com/feed/akentkjbasdf/",
+          "github": "https://github.com/asdjfahlkjsdhfahs"
         }
       },
       {
