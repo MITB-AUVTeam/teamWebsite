@@ -13,14 +13,14 @@ const SERVICES = [
     description:
       "We believe that innovation happens when students are given the freedom to design, experiment, and fail forward. Our mission is to cultivate engineers capable of solving complex underwater challenges through practical learning.",
     image:
-      "https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?q=80&w=1200&auto=format&fit=crop",
+      "src/assets/Gallery/about us page 1.jpeg",
   },
   {
     id: "02",
     title: "How",
     description: "We in MIT-B achieve this by bringing together students from diverse engineering disciplines to collaboratively design and develop autonomous underwater vehicles. Through hands-on problem solving, iterative development, research, and participation in competitions, we create an environment where innovation, technical excellence, and teamwork thrive.",
     image:
-      "https://images.unsplash.com/photo-1584483766114-2cea6facdf57?q=80&w=1200&auto=format&fit=crop",
+      "src/assets/Gallery/about us page 2.jpeg",
   },
   {
     id: "03",
@@ -28,11 +28,11 @@ const SERVICES = [
     description:
       "We design and develop autonomous underwater vehicles by integrating in-house mechanical systems, embedded electronics, and intelligent software, tested extensively for real-world underwater operations.",
     image:
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1200&auto=format&fit=crop",
+      "src/assets/Gallery/about us page 3.jpeg",
   },
 ];
 
-const AUTO_PLAY_DURATION = 3000;
+const AUTO_PLAY_DURATION = 8000;
 
 export default function VerticalTabs() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -86,11 +86,11 @@ export default function VerticalTabs() {
   return (
     <section className="w-full bg-transparent pt-4 pb-12 md:pb-24 lg:pb-32">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-32 items-start">
           {/* Left Column: Content */}
           <div className="lg:col-span-5 flex flex-col justify-center order-2 lg:order-1 pt-2">
             <div className="space-y-2 mb-12">
-              <h2 className="tracking-tight text-balance text-4xl font-bold md:text-5xl lg:text-6xl text-white">
+              <h2 className="tracking-tight text-balance text-4xl font-bold md:text-5xl lg:text-6xl text-white uppercase">
                 Our Approach
               </h2>
               <span className="text-xs font-medium text-slate-400 uppercase tracking-[0.3em] block ml-1">
