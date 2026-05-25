@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Footer } from "@/components/Footer";
-import ansysLogo from "../assets/Backgroud - less sponsors logos/Ansys.png";
-import dassaultLogo from "../assets/Backgroud - less sponsors logos/Dassault Systemes.png";
-import vicharakLogo from "../assets/Backgroud - less sponsors logos/Vicharak.png";
-import wisdomLogo from "../assets/Backgroud - less sponsors logos/Wisdom Technologies.png";
-import mitLogo from "../assets/Backgroud - less sponsors logos/MIT.png";
+import ansysLogo from "../assets/Background - less sponsors logos/Ansys.png";
+import dassaultLogo from "../assets/Background - less sponsors logos/Dassault Systemes.png";
+import vicharakLogo from "../assets/Background - less sponsors logos/Vicharak.png";
+import wisdomLogo from "../assets/Background - less sponsors logos/Wisdom Technologies.png";
+import mitLogo from "../assets/Background - less sponsors logos/MIT.png";
 
 const sponsors = [
   {

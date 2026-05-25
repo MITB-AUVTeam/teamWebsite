@@ -6,12 +6,12 @@ import imgChatGptImageOct252025114243PmPhotoroom1 from "../assets/hero_parallax/
 import imgGeminiGeneratedImageSucjggsucjggsucjPhotoroom13 from "../assets/hero_parallax/724bc4d4bdcd3aa5ae40dbbe2940545d28abfe9c.png";
 import imgGeminiGeneratedImage41Nzht41Nzht41NzPhotoroom1 from "../assets/hero_parallax/152fd27cdd307ca2d7657a11e9e58325de922f88.png";
 import imgGeminiGeneratedImageK988Jxk988Jxk988Photoroom1 from "../assets/hero_parallax/1c12efb875dc486a28207d77f13caa9aaac52df6.png";
-import logoAnsys from "../assets/Backgroud - less sponsors logos/Ansys.png";
+import logoAnsys from "../assets/Background - less sponsors logos/Ansys.png";
 import AUV_GROUP_PIC from "@/assets/Group_photo/AUV_GROUP_PIC.jpeg";
-import logoDassault from "../assets/Backgroud - less sponsors logos/Dassault Systemes.png";
-import logoMIT from "../assets/Backgroud - less sponsors logos/MIT.png";
-import logoVicharak from "../assets/Backgroud - less sponsors logos/Vicharak.png";
-import logoWisdom from "../assets/Backgroud - less sponsors logos/Wisdom Technologies.png";
+import logoDassault from "../assets/Background - less sponsors logos/Dassault Systemes.png";
+import logoMIT from "../assets/Background - less sponsors logos/MIT.png";
+import logoVicharak from "../assets/Background - less sponsors logos/Vicharak.png";
+import logoWisdom from "../assets/Background - less sponsors logos/Wisdom Technologies.png";
 import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
 import { cn } from "@/lib/utils";
 import { LogoSlider } from "@/components/ui/logo-slider";

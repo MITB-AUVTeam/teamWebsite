@@ -70,7 +70,7 @@ export function ContactUs() {
     {
       id: 3,
       title: "LinkedIn",
-      href: "https://www.linkedin.com/company/team-auv-mit-b/",
+      href: "https://www.linkedin.com/in/team-auv-mit-b-75129b371/",
       subtitle: "Professional Network",
       description: "Connect with our team professionally.",
       icon: <Linkedin className="w-4 h-4" />,
@@ -156,50 +156,61 @@ export function ContactUs() {
               </p>
 
               <div className="space-y-6">
-                <div className="flex items-center gap-4 group">
-                  <div className="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 group-hover:bg-blue-500/20 transition-colors">
-                    <Phone className="w-5 h-5 text-blue-400" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-slate-500 font-medium uppercase tracking-wider">Call Us</p>
-                    <div className="space-y-1 text-slate-200 text-base md:text-lg">
-                      <p>
-                        <a href="tel:+918210876521" className="hover:text-blue-400 transition-colors">+91 82108 76521</a>
-                        <span className="ml-2 text-sm text-slate-500">Animesh Mishra</span>
-                      </p>
-                      <p>
-                        <a href="tel:+919113095603" className="hover:text-blue-400 transition-colors">+91 91130 95603</a>
-                        <span className="ml-2 text-sm text-slate-500">Siddharth P S</span>
-                      </p>
+                <div className="group">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 group-hover:bg-blue-500/20 transition-colors">
+                      <Phone className="w-5 h-5 text-blue-400" />
                     </div>
+                    <p className="text-sm text-slate-500 font-medium uppercase tracking-wider">Call Us</p>
                   </div>
-                </div>
-
-                <div className="flex items-center gap-4 group">
-                  <div className="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 group-hover:bg-blue-500/20 transition-colors">
-                    <Mail className="w-5 h-5 text-blue-400" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-slate-500 font-medium uppercase tracking-wider">Email Us</p>
-                    <p className="text-slate-200 text-lg">
-                      <a href="mailto:auv.mitblr@manipal.edu" className="hover:text-blue-400 transition-colors">auv.mitblr@manipal.edu</a>
+                  <div className="pl-16 mt-2 space-y-1 text-slate-200 text-base md:text-lg">
+                    <p>
+                      <a href="tel:+918210876521" className="hover:text-blue-400 transition-colors">+91 82108 76521</a>
+                      <span className="ml-2 text-sm text-slate-500">Animesh Mishra</span>
+                    </p>
+                    <p>
+                      <a href="tel:+919113095603" className="hover:text-blue-400 transition-colors">+91 91130 95603</a>
+                      <span className="ml-2 text-sm text-slate-500">Siddharth P S</span>
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 group">
-                  <div className="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 group-hover:bg-blue-500/20 transition-colors">
-                    <MapPin className="w-5 h-5 text-blue-400" />
+                <div className="group">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 group-hover:bg-blue-500/20 transition-colors">
+                      <Mail className="w-5 h-5 text-blue-400" />
+                    </div>
+                    <p className="text-sm text-slate-500 font-medium uppercase tracking-wider">Email Us</p>
                   </div>
-                  <div>
+                  <div className="pl-16 mt-2 space-y-1 text-slate-200 text-base md:text-lg">
+                    <p>
+                      <a href="mailto:auv.mitblr@manipal.edu" className="hover:text-blue-400 transition-colors">auv.mitblr@manipal.edu</a>
+                    </p>
+                    <p>
+                      <a href="mailto:auv.mitb@gmail.com" className="hover:text-blue-400 transition-colors">auv.mitb@gmail.com</a>
+                    </p>
+                  </div>
+                </div>
+
+                <div className="group">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20 group-hover:bg-blue-500/20 transition-colors">
+                      <MapPin className="w-5 h-5 text-blue-400" />
+                    </div>
                     <p className="text-sm text-slate-500 font-medium uppercase tracking-wider">Visit Us</p>
+                  </div>
+                  <div className="pl-16 mt-2">
                     <a
                       href={workshopLocationUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-slate-200 text-lg hover:text-blue-400 transition-colors"
+                      className="text-slate-200 text-base md:text-lg hover:text-blue-400 transition-colors"
                     >
-                      Manipal Institute of Technology, Bengaluru (Academic Block-4)
+                      Team AUV Workshop <br/>
+                      Room 209, 210 AB-4<br/>
+                      Manipal Institute of Technology Bengaluru,<br />
+                      Manipal Academy of Higher Education,<br />
+                      Bengaluru, Karnataka, India
                     </a>
                   </div>
                 </div>
