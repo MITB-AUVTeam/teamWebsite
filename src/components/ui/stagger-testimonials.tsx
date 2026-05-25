@@ -57,7 +57,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
         }
       }}
       className={cn(
-        "absolute left-1/2 top-1/2 cursor-pointer border-2 p-8 transition-all duration-500 ease-in-out",
+        "absolute left-1/2 top-1/2 cursor-pointer border-2 p-8 transition-all duration-700 ease-in-out",
         isCenter
           ? "z-10 bg-blue-600 text-white border-blue-500"
           : "z-0 bg-slate-900 text-slate-300 border-slate-800 hover:border-blue-500/50"
@@ -119,21 +119,23 @@ export const StaggerTestimonials: React.FC = () => {
   const [testimonialsList, setTestimonialsList] = useState(testimonials);
 
   const handleMove = (steps: number) => {
-    const newList = [...testimonialsList];
-    if (steps > 0) {
-      for (let i = steps; i > 0; i--) {
-        const item = newList.shift();
-        if (!item) return;
-        newList.push({ ...item, tempId: Math.random() });
+    setTestimonialsList((currentList) => {
+      const newList = [...currentList];
+      if (steps > 0) {
+        for (let i = steps; i > 0; i--) {
+          const item = newList.shift();
+          if (!item) return currentList;
+          newList.push({ ...item, tempId: Math.random() });
+        }
+      } else {
+        for (let i = steps; i < 0; i++) {
+          const item = newList.pop();
+          if (!item) return currentList;
+          newList.unshift({ ...item, tempId: Math.random() });
+        }
       }
-    } else {
-      for (let i = steps; i < 0; i++) {
-        const item = newList.pop();
-        if (!item) return;
-        newList.unshift({ ...item, tempId: Math.random() });
-      }
-    }
-    setTestimonialsList(newList);
+      return newList;
+    });
   };
 
   useEffect(() => {
@@ -142,9 +144,16 @@ export const StaggerTestimonials: React.FC = () => {
       setCardSize(matches ? 365 : 290);
     };
 
+    const autoAdvance = window.setInterval(() => {
+      handleMove(1);
+    }, 4000);
+
     updateSize();
     window.addEventListener("resize", updateSize);
-    return () => window.removeEventListener("resize", updateSize);
+    return () => {
+      window.clearInterval(autoAdvance);
+      window.removeEventListener("resize", updateSize);
+    };
   }, []);
 
   return (
