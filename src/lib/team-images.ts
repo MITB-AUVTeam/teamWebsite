@@ -1,4 +1,9 @@
-const personalPhotoModules = import.meta.glob("../assets/Personal_photo/*", {
+const personalPhotoModules = import.meta.glob([
+  "../assets/Personal_photo/*.webp",
+  "../assets/Personal_photo/*.jpeg",
+  "../assets/Personal_photo/*.jpg",
+  "../assets/Personal_photo/*.png",
+], {
   eager: true,
   import: "default",
 }) as Record<string, string>;

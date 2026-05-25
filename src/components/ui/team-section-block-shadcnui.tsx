@@ -164,7 +164,7 @@ const teamCategories = [
         "skills": ["Mechanical"],
         "gradient": "from-teal-500/20 via-teal-500/5 to-transparent",
         "social": {
-          "linkedin": null,
+          "linkedin": "https://www.linkedin.com/in/kanishk-tr/",
           "github": "https://github.com/K-anishk"
         }
       },
@@ -223,6 +223,19 @@ const teamCategories = [
         "social": {
           "linkedin": "https://www.linkedin.com/in/chatur-vasireddy-4845621a5/",
           "github": "https://github.com/ChaturVasireddy"
+        }
+      },
+      {
+        "name": "Harshika Devarasetty",
+        "role": "Electrical Subsystem Member",
+        "bio": "",
+        "image": "src/assets/Personal_photo/harshika.webp",
+        "location": "2nd Year",
+        "skills": ["Electrical"],
+        "gradient": "from-teal-500/20 via-teal-500/5 to-transparent",
+        "social": {
+          "linkedin": "https://www.linkedin.com/in/harshika-devarasetty-198b1a389/",
+          "github": "https://github.com/Harshika2304"
         }
       },
       {
@@ -324,7 +337,7 @@ const teamCategories = [
       {
         "name": "Aaishi Gupta",
         "role": "Software and Automation Subsystem Member",
-        "bio": "",
+        "bio": "nothing changes if nothing changes",
         "image": "/src/assets/Personal_photo/aaishi.webp",
         "location": "1st Year",
         "skills": ["Software"],

@@ -14,14 +14,14 @@ import {
 } from "lucide-react";
 import { Footer } from "@/components/Footer";
 import proto1Img from "@/assets/Gallery/IMG_4024_2.webp";
-import proto2Img from "@/assets/Gallery/deuterium.webp";
+import proto2Img from "@/assets/Gallery/deuterium2.webp";
 
 export function VehiclesPage() {
   const vehicles = [
     {
       name: "Hydrogen",
-      tagline: "Prototype 1",
-      description: "Our first prototype, designed to test core navigation and control systems in a compact form factor.",
+      tagline: "Prototype 0",
+      description: "Our zeroth prototype, which was esentially an ROV, designed to test our basic design philosophy and understand core underwater robotics concepts.",
       image: proto1Img,
       specs: [
         { icon: Ruler, label: "Dimensions", value: "330mm (L) × 340mm (W) × 230mm (H)" },
@@ -36,8 +36,8 @@ export function VehiclesPage() {
     },
     {
       name: "Deuterium",
-      tagline: "Prototype 2",
-      description: "Our advanced prototype featuring onboard vision, manipulation, and custom SONAR capabilities for complex underwater tasks.",
+      tagline: "Prototype 1",
+      description: "Our very first AUV, designed based on our learnings from Hydrogen, this model gives us extreme modularity and ample space to house all essential electronics safely for successful task execution.",
       image: proto2Img,
       specs: [
         { icon: Ruler, label: "Dimensions", value: "620mm (L) × 400mm (W) × 250mm (H)" },
