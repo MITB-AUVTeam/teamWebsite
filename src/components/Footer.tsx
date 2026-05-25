@@ -83,7 +83,7 @@ export function Footer() {
                 Room 209, 210 AB-4<br/>
                 Manipal Institute of Technology,<br />
                 Manipal Academy of Higher Education,<br />
-                Bengaluru, Karnataka
+                Bengaluru, Karnataka, India
               </p>
             </a>
           </div>
