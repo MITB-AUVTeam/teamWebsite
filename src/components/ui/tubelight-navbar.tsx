@@ -62,7 +62,10 @@ export function NavBar({ items, className, children, isScrolled = false }: NavBa
       >
         <div className={cn(
           "flex items-center justify-between py-2 px-4 md:px-2 transition-all duration-300",
-          "bg-transparent border-transparent md:border-white/10 backdrop-blur-md md:backdrop-blur-lg shadow-none md:shadow-lg rounded-full"
+          isScrolled
+            ? "bg-[#0a1128]/95 border border-white/20 shadow-2xl"
+            : "bg-[#0a1128]/80 border border-white/10 shadow-lg",
+          "backdrop-blur-lg rounded-full"
         )}>
           {children && (
             <div className="pl-2 md:pl-6 pr-4 flex items-center">

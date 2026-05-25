@@ -4,6 +4,12 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
+const imageModules = import.meta.glob<{ default: string }>(
+  "../../assets/Gallery/*.{webp,png,jpg,jpeg}",
+  { eager: true }
+);
+const allImages = Object.values(imageModules).map((mod) => mod.default);
+
 export const PhotoGallery = ({
   animationDelay = 0.2,
 }: {
@@ -13,6 +19,13 @@ export const PhotoGallery = ({
   const [isLoaded, setIsLoaded] = useState(false);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const [randomImages] = useState<string[]>(() => {
+    if (allImages.length === 0) return [];
+    // Shuffle allImages and slice first 5
+    const shuffled = [...allImages].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, 5);
+  });
 
   useEffect(() => {
     if (isInView) {
@@ -81,7 +94,7 @@ export const PhotoGallery = ({
       y: "15px",
       zIndex: 50, // Highest z-index (on top)
       direction: "left" as Direction,
-      src: "https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg", // Underwater
+      src: randomImages[0] || "",
     },
     {
       id: 2,
@@ -90,7 +103,7 @@ export const PhotoGallery = ({
       y: "32px",
       zIndex: 40,
       direction: "left" as Direction,
-      src: "https://images.pexels.com/photos/1125979/pexels-photo-1125979.jpeg", // Ocean
+      src: randomImages[1] || "",
     },
     {
       id: 3,
@@ -99,7 +112,7 @@ export const PhotoGallery = ({
       y: "8px",
       zIndex: 30,
       direction: "right" as Direction,
-      src: "https://images.pexels.com/photos/3041110/pexels-photo-3041110.jpeg", // Submarine/water
+      src: randomImages[2] || "",
     },
     {
       id: 4,
@@ -108,7 +121,7 @@ export const PhotoGallery = ({
       y: "22px",
       zIndex: 20,
       direction: "right" as Direction,
-      src: "https://images.pexels.com/photos/315755/pexels-photo-315755.jpeg", // Tech
+      src: randomImages[3] || "",
     },
     {
       id: 5,
@@ -117,7 +130,7 @@ export const PhotoGallery = ({
       y: "44px",
       zIndex: 10, // Lowest z-index (at bottom)
       direction: "left" as Direction,
-      src: "https://images.pexels.com/photos/2768877/pexels-photo-2768877.jpeg", // Deep sea
+      src: randomImages[4] || "",
     },
   ];
 

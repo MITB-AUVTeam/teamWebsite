@@ -241,7 +241,7 @@ const teamCategories = [
       {
         "name": "Serah Saju Jacob",
         "role": "Electrical Subsystem Member",
-        "bio": "",
+        "bio": "reach for the stars",
         "image": "https://api.dicebear.com/7.x/identicon/svg?seed=SerahSajuJacob",
         "location": "2nd Year",
         "skills": ["Electrical"],
@@ -723,7 +723,7 @@ export function TeamSectionBlock() {
                   <div className="h-[1px] flex-grow bg-gradient-to-r from-white/20 to-transparent" />
                 </motion.div>
 
-                {category.title === "Software Subsystem" ? (
+                {category.title === "Software and Automation Subsystem" ? (
                   <div className="space-y-8">
                     <motion.div
                       variants={containerVariants}

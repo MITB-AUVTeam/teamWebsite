@@ -21,7 +21,7 @@ export function VehiclesPage() {
     {
       name: "Hydrogen",
       tagline: "Prototype 0",
-      description: "Our zeroth prototype, which was esentially an ROV, designed to test our basic design philosophy and understand core underwater robotics concepts.",
+      description: "Our zeroth prototype, which was esentially an ROV, designed to test our basic design philosophy and understand the core concepts around underwater robotics.",
       image: proto1Img,
       specs: [
         { icon: Ruler, label: "Dimensions", value: "330mm (L) × 340mm (W) × 230mm (H)" },
