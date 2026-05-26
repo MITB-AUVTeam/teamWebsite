@@ -1,32 +1,32 @@
 import { motion } from "framer-motion";
-import { Calendar, Clock, ArrowRight, Tag } from "lucide-react";
+import { Calendar, User, ArrowRight, Tag } from "lucide-react";
 import { Footer } from "@/components/Footer";
 
 export function MediaPage() {
   const featuredPost = {
-    title: "The Evolution of Deuterium: Integrating Custom SONAR",
-    excerpt: "A deep dive into the engineering challenges and breakthroughs our team faced while designing and integrating an in-house SONAR system for our latest autonomous underwater vehicle.",
-    category: "Engineering",
-    date: "March 15, 2026",
-    readTime: "8 min read",
-    image: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=2000&auto=format&fit=crop",
+    title: "The Evolution of Deuterium: Integrating Custom HYDROPHONES",
+    excerpt: "Coming Soon....",
+    category: "Engineering / Electrical Subsystem",
+    date: "15 June, 2026",
+    author: "Chatur Vasireddy",
+    image: "",
   };
 
   const recentPosts = [
     {
-      title: "Team AUV at SAUVC 2025: A Retrospective",
-      excerpt: "Reflecting on our performance at the Singapore AUV Challenge, the lessons learned, and how we're preparing for the next big competition.",
-      category: "Competition",
-      date: "February 28, 2026",
-      readTime: "5 min read",
-      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800&auto=format&fit=crop",
+      title: "RTAB-Map or RTAB-Maybe: Navigating the Deep Without Lying to Yourself",
+      excerpt: "A deep dive into the trial and error with one of the core stacks the Software Team worked on to overcome the challange of not having a DVL.",
+      category: "Engineering / Software and Automation Subsystem",
+      date: "May 23, 2026",
+      author: "Advithiya Duddu",
+      image: "",
     },
     {
       title: "Mastering 5 Degrees of Freedom in Underwater Robotics",
       excerpt: "Understanding the complex control systems required to achieve stable surge, heave, roll, pitch, and yaw in unpredictable aquatic environments.",
       category: "Technical",
       date: "January 12, 2026",
-      readTime: "6 min read",
+      author: "Kshithij Jaitly",
       image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&auto=format&fit=crop",
     },
     {
@@ -34,7 +34,7 @@ export function MediaPage() {
       excerpt: "How our team is giving back to the community by hosting STEM workshops and robotics demonstrations for local high school students.",
       category: "Outreach",
       date: "December 05, 2025",
-      readTime: "4 min read",
+      author: "Siddharth P S",
       image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=800&auto=format&fit=crop",
     }
   ];
@@ -58,7 +58,7 @@ export function MediaPage() {
             </p>
           </div>
           <p className="text-slate-300 max-w-md md:text-right text-sm md:text-base leading-relaxed">
-            Read about our latest engineering breakthroughs, competition updates, and the stories behind our autonomous underwater vehicles.
+            Read about our latest AUV builds, competition updates, and the stories around the team that builds it.
           </p>
         </motion.div>
       </section>
@@ -99,8 +99,8 @@ export function MediaPage() {
             
             <div className="flex items-center justify-between mt-auto">
               <div className="flex items-center gap-1.5 text-slate-400 text-xs font-medium">
-                <Clock className="w-3.5 h-3.5" />
-                {featuredPost.readTime}
+                <User className="w-3.5 h-3.5" />
+                {featuredPost.author}
               </div>
               <span className="flex items-center gap-2 text-sm font-bold text-white group-hover:text-blue-400 transition-colors">
                 Read Article <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -147,8 +147,8 @@ export function MediaPage() {
                     {post.date}
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <Clock className="w-3.5 h-3.5" />
-                    {post.readTime}
+                    <User className="w-3.5 h-3.5" />
+                    {post.author}
                   </div>
                 </div>
                 
