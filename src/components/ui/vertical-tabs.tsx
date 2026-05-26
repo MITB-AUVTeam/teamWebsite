@@ -4,30 +4,31 @@ import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 
+import ABOUT_TAB_1 from "@/assets/Gallery/about us page 1.jpeg";
+import ABOUT_TAB_2 from "@/assets/Gallery/about us page 2.jpeg";
+import ABOUT_TAB_3 from "@/assets/Gallery/about us page 3.jpeg";
+
 const SERVICES = [
   {
     id: "01",
     title: "Why",
     description:
       "Innovation grows when students are free to build, test, make mistakes, and learn from them. The goal is to help students become creative engineers who can solve underwater problems through real hands-on experience.",
-    image:
-      "src/assets/Gallery/about us page 1.jpeg",
+    image: ABOUT_TAB_1,
   },
   {
     id: "02",
     title: "How",
     description:
       "Students from different engineering fields work together to build underwater robots. Learning happens through designing, solving problems, testing ideas, and taking part in competitions as a team.",
-    image:
-      "src/assets/Gallery/about us page 2.jpeg",
+    image: ABOUT_TAB_2,
   },
   {
     id: "03",
     title: "What",
     description:
       "Autonomous underwater vehicles are designed and built using mechanical parts, electronics, and software. The robots are tested carefully to work in real underwater conditions.",
-    image:
-      "src/assets/Gallery/about us page 3.jpeg",
+    image: ABOUT_TAB_3,
   },
 ];
 

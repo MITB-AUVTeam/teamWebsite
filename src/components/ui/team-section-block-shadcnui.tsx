@@ -24,16 +24,16 @@ const teamCategories = [
     "title": "Faculty Advisors and Mentor",
     "members": [
       {
-        "name": "Dr. Ujjwal Verma",
-        "role": "ECE Dept. (MIT-Manipal)",
+        "name": "Dr. Adithya G.S.S",
+        "role": "Mechanical Dept. (MIT-BLR)",
         "bio": "",
-        "image": "src/assets/Personal_photo/ujwal.jpeg",
-        "location": "MIT-Manipal",
+        "image": "src/assets/Personal_photo/gss.jpg",
+        "location": "MIT-BLR",
         "skills": ["Faculty Advisor"],
         "gradient": "from-indigo-500/20 via-indigo-500/5 to-transparent",
         "social": {
-          "email": "mailto:ujjwal.verma@manipal.edu",
-          "linkedin": "https://www.linkedin.com/in/ujjwalverma/",
+          "email": "mailto:srinivas.adithya@manipal.edu",
+          "linkedin": "https://www.linkedin.com/in/dr-adithya-garimella-696353138/",
           "github": null
         }
       },
@@ -52,16 +52,16 @@ const teamCategories = [
         }
       },
       {
-        "name": "Dr. Adithya G.S.S",
-        "role": "Mechanical Dept. (MIT-BLR)",
+        "name": "Dr. Ujjwal Verma",
+        "role": "ECE Dept. (MIT-Manipal)",
         "bio": "",
-        "image": "src/assets/Personal_photo/gss.jpg",
-        "location": "MIT-BLR",
+        "image": "src/assets/Personal_photo/ujwal.jpeg",
+        "location": "MIT-Manipal",
         "skills": ["Faculty Advisor"],
         "gradient": "from-indigo-500/20 via-indigo-500/5 to-transparent",
         "social": {
-          "email": "mailto:srinivas.adithya@manipal.edu",
-          "linkedin": "https://www.linkedin.com/in/dr-adithya-garimella-696353138/",
+          "email": "mailto:ujjwal.verma@manipal.edu",
+          "linkedin": "https://www.linkedin.com/in/ujjwalverma/",
           "github": null
         }
       },
