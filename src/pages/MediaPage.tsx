@@ -39,7 +39,7 @@ export function MediaPage() {
     title: "Evolution of Deuterium: Integrating Custom HYDROPHONES",
     excerpt: "Coming Soon....",
     category: "Technical / Electrical Subsystem",
-    date: "15 June, 2026",
+    date: "Coming Soon....",
     author: "Chatur Vasireddy",
     image: pcb,
   };
@@ -68,7 +68,7 @@ export function MediaPage() {
       date: "March 20, 2026",
       author: "Azad Roy",
       image: azadLockedIn,
-      externalLink: "https://azadroy.com",
+      externalLink: "https://azadroy.com/2026/03/20/but-what-is-the-kalman-filter.html",
     },
     {
       title: "From Hobby projects to real Embeddded Firmware",
@@ -77,14 +77,14 @@ export function MediaPage() {
       date: "January 11, 2026",
       author: "Azad Roy",
       image: img_2816,
-      externalLink: "https://azadroy.com",
+      externalLink: "https://azadroy.com/2026/01/11/hobby-to-real-firmware.html",
     },
     {
       title: "Community Outreach: Building and learning together with the community",
       excerpt: "How our team is reaching out to the Bangalore Robotics and AI community through workshops, competitions and interactions with fellow engineers and learner.",
       category: "Outreach / Management and Design Team",
       date: "Various Dates",
-      author: "Siddharth P S",
+      author: "Siddharth P S and Team",
       image: IMG_3923,
     }
   ];
