@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Calendar, User, ArrowRight, Tag } from "lucide-react";
 import { Footer } from "@/components/Footer";
+import azadLockedIn from "@/assets/Gallery/azad_lockedin.webp";
 
 export function MediaPage() {
   const featuredPost = {
@@ -17,25 +18,53 @@ export function MediaPage() {
       title: "RTAB-Map or RTAB-Maybe: Navigating the Deep Without Lying to Yourself",
       excerpt: "A deep dive into the trial and error with one of the core stacks the Software Team worked on to overcome the challange of not having a DVL.",
       category: "Engineering / Software and Automation Subsystem",
-      date: "May 23, 2026",
+      date: "May 19, 2026",
       author: "Advithiya Duddu",
       image: "",
     },
     {
-      title: "Mastering 5 Degrees of Freedom in Underwater Robotics",
+      title: "But what is the Kalman Filter?",
+      excerpt: (
+        <span>
+          Demistifying the concept of Kalman Filters, building from the ground up in an intuitive form. Check it out at{" "}
+          <a
+            href="https://azadroy.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-400 hover:underline hover:text-blue-300 transition-colors"
+          >
+            azadroy.com
+          </a>
+        </span>
+      ),
+      category: "Technical / Electrical Subsystem",
+      date: "March 20, 2026",
+      author: "Azad Roy",
+      image: azadLockedIn,
+    },
+        {
+      title: "From Hobby projects to real Embeddded Firmware",
       excerpt: "Understanding the complex control systems required to achieve stable surge, heave, roll, pitch, and yaw in unpredictable aquatic environments.",
-      category: "Technical",
-      date: "January 12, 2026",
-      author: "Kshithij Jaitly",
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&auto=format&fit=crop",
+      category: "Technical / Electrical Subsystem",
+      date: "January 11, 2026",
+      author: "Azad Roy",
+      image: "",
     },
     {
-      title: "Community Outreach: Inspiring the Next Generation of Engineers",
-      excerpt: "How our team is giving back to the community by hosting STEM workshops and robotics demonstrations for local high school students.",
+      title: "",
+      excerpt: "Understanding the complex control systems required to achieve stable surge, heave, roll, pitch, and yaw in unpredictable aquatic environments.",
+      category: "Technical / Electrical Subsystem",
+      date: "May 12, 2026",
+      author: "Harshika Devarasetty",
+      image: "",
+    },
+    {
+      title: "Community Outreach: Building, learning together with the community",
+      excerpt: "How our team is reaching out to the Bangalore Robotics and AI community through workshops, competitions and interactions with fellow engineers and learner.",
       category: "Outreach",
-      date: "December 05, 2025",
+      date: "Various Dates",
       author: "Siddharth P S",
-      image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=800&auto=format&fit=crop",
+      image: "",
     }
   ];
 
