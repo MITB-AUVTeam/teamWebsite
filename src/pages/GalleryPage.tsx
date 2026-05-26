@@ -112,10 +112,10 @@ const archiveImages = [
   { src: img2, category: "testing", alt: "IMG2" },
   { src: img3, category: "team", alt: "IMG3" },
   { src: img4, category: "team", alt: "IMG4" },
-  { src: img5, category: "goofystuff", alt: "IMG5" },
+  { src: img5, category: "goofy", alt: "IMG5" },
   { src: img6, category: "team", alt: "IMG6" },
   { src: img7, category: "testing", alt: "IMG7" },
-  { src: img8, category: "goofystuff", alt: "IMG8" },
+  { src: img8, category: "goofy", alt: "IMG8" },
   { src: img9, category: "testing", alt: "IMG9" },
   { src: img10, category: "testing", alt: "IMG10" },
   { src: img11, category: "testing", alt: "IMG11" },
@@ -317,25 +317,41 @@ export function GalleryPage() {
 
           <ToggleGroup
             type="single"
-            className="bg-white/5 backdrop-blur-sm rounded-full border border-white/10 p-1.5"
+            className="flex flex-wrap items-center justify-center gap-3 rounded-full border border-white/10 bg-[#0a1128]/95 px-3 py-2 shadow-2xl backdrop-blur-lg"
             value={key}
             onValueChange={(e) => {
               if (e) setKey(e);
-            }}>
-            <ToggleGroupItem value="all" className="sm:px-6 rounded-full data-[state=on]:bg-blue-500 data-[state=on]:text-white text-slate-300 hover:text-white hover:bg-white/10 transition-all">
+            }}
+          >
+            <ToggleGroupItem
+              value="all"
+              className="rounded-full px-6 py-2 text-sm font-semibold text-slate-300 transition-colors hover:text-blue-400 hover:bg-white/5 data-[state=on]:bg-white/5 data-[state=on]:text-blue-400"
+            >
               All
             </ToggleGroupItem>
-            <ToggleGroupItem value="vehicles" className="sm:px-6 rounded-full data-[state=on]:bg-blue-500 data-[state=on]:text-white text-slate-300 hover:text-white hover:bg-white/10 transition-all">
+            <ToggleGroupItem
+              value="vehicles"
+              className="rounded-full px-6 py-2 text-sm font-semibold text-slate-300 transition-colors hover:text-blue-400 hover:bg-white/5 data-[state=on]:bg-white/5 data-[state=on]:text-blue-400"
+            >
               Vehicles
             </ToggleGroupItem>
-            <ToggleGroupItem value="team" className="sm:px-6 rounded-full data-[state=on]:bg-blue-500 data-[state=on]:text-white text-slate-300 hover:text-white hover:bg-white/10 transition-all">
+            <ToggleGroupItem
+              value="team"
+              className="rounded-full px-6 py-2 text-sm font-semibold text-slate-300 transition-colors hover:text-blue-400 hover:bg-white/5 data-[state=on]:bg-white/5 data-[state=on]:text-blue-400"
+            >
               Team
             </ToggleGroupItem>
-            <ToggleGroupItem value="testing" className="sm:px-6 rounded-full data-[state=on]:bg-blue-500 data-[state=on]:text-white text-slate-300 hover:text-white hover:bg-white/10 transition-all">
+            <ToggleGroupItem
+              value="testing"
+              className="rounded-full px-6 py-2 text-sm font-semibold text-slate-300 transition-colors hover:text-blue-400 hover:bg-white/5 data-[state=on]:bg-white/5 data-[state=on]:text-blue-400"
+            >
               Testing
             </ToggleGroupItem>
-            <ToggleGroupItem value="goofy" className="sm:px-6 rounded-full data-[state=on]:bg-blue-500 data-[state=on]:text-white text-slate-300 hover:text-white hover:bg-white/10 transition-all">
-              Goofy stuff
+            <ToggleGroupItem
+              value="goofy"
+              className="rounded-full px-6 py-2 text-sm font-semibold text-slate-300 transition-colors hover:text-blue-400 hover:bg-white/5 data-[state=on]:bg-white/5 data-[state=on]:text-blue-400"
+            >
+              Goofy Stuff
             </ToggleGroupItem>
           </ToggleGroup>
 
