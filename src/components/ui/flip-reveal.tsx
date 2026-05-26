@@ -24,6 +24,7 @@ type FlipRevealProps = {
 
 export const FlipReveal = ({ keys, hideClass = "", showClass = "", ...props }: FlipRevealProps) => {
     const wrapperRef = useRef<HTMLDivElement | null>(null);
+    const isFirstRender = useRef(true);
 
     const isShow = (key: string | null) => !!key && (keys.includes("all") || keys.includes(key));
 
@@ -31,8 +32,25 @@ export const FlipReveal = ({ keys, hideClass = "", showClass = "", ...props }: F
         () => {
             if (!wrapperRef.current) return;
 
-            const items = gsap.utils.toArray<HTMLDivElement>(["[data-flip]"]);
-            const state = Flip.getState(items);
+            const parent = wrapperRef.current;
+            const items = gsap.utils.toArray<HTMLDivElement>("[data-flip]", parent);
+
+            if (isFirstRender.current) {
+                isFirstRender.current = false;
+                items.forEach((item) => {
+                    const key = item.getAttribute("data-flip");
+                    if (isShow(key)) {
+                        item.classList.add(showClass);
+                        item.classList.remove(hideClass);
+                    } else {
+                        item.classList.remove(showClass);
+                        item.classList.add(hideClass);
+                    }
+                });
+                return;
+            }
+
+            const state = Flip.getState([parent, ...items]);
 
             items.forEach((item) => {
                 const key = item.getAttribute("data-flip");
@@ -50,7 +68,7 @@ export const FlipReveal = ({ keys, hideClass = "", showClass = "", ...props }: F
                 scale: true,
                 ease: "power1.inOut",
                 stagger: 0.05,
-                absolute: true,
+                absolute: "[data-flip]",
                 onEnter: (elements) =>
                     gsap.fromTo(
                         elements,

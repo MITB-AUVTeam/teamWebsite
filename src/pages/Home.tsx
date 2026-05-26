@@ -416,8 +416,8 @@ export function Home() {
                     src={imgScreenshot20251022182250Photoroom1}
                   />
                 </div>
-                <div className="font-medium text-lg sm:text-3xl md:text-[40px] text-white text-center tracking-widest drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">
-                  TEAM AUV MIT-BENGALURU
+                <div className="font-medium text-lg sm:text-3xl md:text-[40px] text-white text-center tracking-widest drop-shadow-[0_0_10px_rgba(255,255,255,0.3)] -mt-2 sm:-mt-4 md:-mt-5">
+                  MIT-BENGALURU
                 </div>
               </div>
 
