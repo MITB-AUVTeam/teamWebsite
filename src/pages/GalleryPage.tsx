@@ -31,7 +31,6 @@ import img_3977 from "@/assets/Gallery/IMG_3977.webp";
 import img_3980 from "@/assets/Gallery/IMG_3980.webp";
 import img_4006 from "@/assets/Gallery/IMG_4006.webp";
 import img_4017 from "@/assets/Gallery/IMG_4017.webp";
-import img_4024 from "@/assets/Gallery/IMG_4024.webp";
 import img_4026 from "@/assets/Gallery/IMG_4026.webp";
 import img0 from "@/assets/Gallery/IMG0.webp";
 import img1 from "@/assets/Gallery/IMG1.webp";
@@ -80,6 +79,22 @@ import img43 from "@/assets/Gallery/IMG43.webp";
 import img44 from "@/assets/Gallery/IMG44.webp";
 import img45 from "@/assets/Gallery/IMG45.webp";
 import img46 from "@/assets/Gallery/IMG46.webp";
+import im2g0 from "@/assets/Gallery/IM2G0.webp";
+import im2g1 from "@/assets/Gallery/IM2G1.webp";
+import im2g2 from "@/assets/Gallery/IM2G2.webp";
+import im2g3 from "@/assets/Gallery/IM2G3.webp";
+import im2g4 from "@/assets/Gallery/IM2G4.webp";
+import im2g5 from "@/assets/Gallery/IM2G5.webp";
+import im2g6 from "@/assets/Gallery/IM2G6.webp";
+import im2g7 from "@/assets/Gallery/IM2G7.webp";
+import im2g8 from "@/assets/Gallery/IM2G8.webp";
+import im2g9 from "@/assets/Gallery/IM2G9.webp";
+import im2g10 from "@/assets/Gallery/IM2G10.webp";
+import im2g11 from "@/assets/Gallery/IM2G11.webp";
+import im2g12 from "@/assets/Gallery/IM2G12.webp";
+import im2g13 from "@/assets/Gallery/IM2G13.webp";
+import im2g14 from "@/assets/Gallery/IM2G14.webp";
+import im2g15 from "@/assets/Gallery/IM2G15.webp";
 
 const archiveImages = [
   { src: img_1184, category: "team", alt: "Team" },
@@ -105,8 +120,7 @@ const archiveImages = [
   { src: img_3980, category: "vehicles", alt: "Team" },
   { src: img_4006, category: "testing", alt: "Testing" },
   { src: img_4017, category: "testing", alt: "Testing" },
-  { src: img_4024, category: "testing", alt: "Vehicless" },
-  { src: img_4026, category: "testing", alt: "Vehicless" },
+  { src: img_4026, category: "vehicles", alt: "Vehicless" },
   { src: img0, category: "testing", alt: "IMG0" },
   { src: img1, category: "testing", alt: "IMG1" },
   { src: img2, category: "testing", alt: "IMG2" },
@@ -154,6 +168,22 @@ const archiveImages = [
   { src: img44, category: "team", alt: "IMG44" },
   { src: img45, category: "goofy", alt: "IMG45" },
   { src: img46, category: "goofy", alt: "IMG46" },
+  { src: im2g0, category: "goofy", alt: "IM2G0" },
+  { src: im2g1, category: "goofy", alt: "IM2G1" },
+  { src: im2g2, category: "team", alt: "IM2G2" },
+  { src: im2g3, category: "testing", alt: "IM2G3" },
+  { src: im2g4, category: "goofy", alt: "IM2G4" },
+  { src: im2g5, category: "goofy", alt: "IM2G5" },
+  { src: im2g6, category: "team", alt: "IM2G6" },
+  { src: im2g7, category: "goofy", alt: "IM2G7" },
+  { src: im2g8, category: "goofy", alt: "IM2G8" },
+  { src: im2g9, category: "goofy", alt: "IM2G9" },
+  { src: im2g10, category: "goofy", alt: "IM2G10" },
+  { src: im2g11, category: "team", alt: "IM2G11" },
+  { src: im2g12, category: "team", alt: "IM2G12" },
+  { src: im2g13, category: "goofy", alt: "IM2G13" },
+  { src: im2g14, category: "testing", alt: "IM2G14" },
+  { src: im2g15, category: "testing", alt: "IM2G15" },
   { src: azadLockedIn, category: "team", alt: "Azad Roy" },
 ];
 

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import VerticalTabs from "@/components/ui/vertical-tabs";
-import AUV_GROUP_PIC from "@/assets/Group_photo/AUV_GROUP_PIC.jpeg";
+import AUV_GROUP_PIC from "@/assets/Group_photo/AUV_GROUP_PIC.webp";
 import { Footer } from "@/components/Footer";
 
 export function AboutPage() {
@@ -41,7 +41,7 @@ export function AboutPage() {
           initial={{ opacity: 0, scale: 1 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="relative w-full aspect-[16/9] rounded-[2rem] overflow-hidden border border-slate-800/80 bg-slate-950 shadow-2xl"
+          className="relative w-full aspect-[16/8.2] rounded-[2rem] overflow-hidden border border-slate-800/80 bg-slate-950 shadow-2xl"
         >
           <img
             src={AUV_GROUP_PIC}
