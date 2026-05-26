@@ -409,6 +409,9 @@ export function Home() {
               </div>
 
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-[11px] opacity-100">
+                <div className="font-medium text-xs sm:text-lg md:text-xl text-white tracking-widest uppercase select-none drop-shadow-[0_0_10px_rgba(255,255,255,0.3)] -mb-2 sm:-mb-4 md:-mb-5">
+                  TEAM
+                </div>
                 <div className="w-[180px] h-[90px] sm:w-[300px] sm:h-[150px] md:w-[400px] md:h-[200px] relative">
                   <img
                     alt="AUV Logo Main"
