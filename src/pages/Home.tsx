@@ -290,23 +290,7 @@ const subsystemDetails: Record<string, TeamDetail> = {
 
 export function Home() {
   const [scrollY, setScrollY] = useState(0);
-  const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
   const [activeTeam, setActiveTeam] = useState<string | null>(null);
-
-  const handleHeroPointerMove = (event: PointerEvent<HTMLElement>) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-    const x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-    const y = ((event.clientY - rect.top) / rect.height) * 2 - 1;
-
-    setMouseOffset({
-      x: Math.max(-1, Math.min(1, x)),
-      y: Math.max(-1, Math.min(1, y)),
-    });
-  };
-
-  const resetHeroPointerOffset = () => {
-    setMouseOffset({ x: 0, y: 0 });
-  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -345,14 +329,12 @@ export function Home() {
 
       <section
         className="relative h-[100vh] w-full overflow-hidden bg-[#000910] order-1 md:order-1"
-        onPointerMove={handleHeroPointerMove}
-        onPointerLeave={resetHeroPointerOffset}
       >
 
         <div
           className="absolute inset-0 w-full h-[120vh]"
           style={{
-            transform: `translate3d(${mouseOffset.x * 3}px, ${scrollY * 0.3 + mouseOffset.y * 2}px, 0)`,
+            transform: `translate3d(0px, ${scrollY * 0.3}px, 0)`,
             willChange: 'transform'
           }}
         >
@@ -366,7 +348,7 @@ export function Home() {
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            transform: `translate3d(${mouseOffset.x * 5}px, ${scrollY * 0.4 + mouseOffset.y * 3}px, 0)`,
+            transform: `translate3d(0px, ${scrollY * 0.4}px, 0)`,
             willChange: 'transform'
           }}
         >
@@ -391,7 +373,7 @@ export function Home() {
         <div
           className="absolute inset-0 pointer-events-none z-20"
           style={{
-            transform: `translate3d(${mouseOffset.x * 7}px, ${scrollY * 0.6 + mouseOffset.y * 4}px, 0)`,
+            transform: `translate3d(0px, ${scrollY * 0.6}px, 0)`,
             willChange: 'transform'
           }}
         >
@@ -412,7 +394,7 @@ export function Home() {
               <div
                 className="absolute inset-0"
                 style={{
-                  transform: `translate3d(${mouseOffset.x * 2}px, ${mouseOffset.y * 2}px, 0) rotate(${scrollY * 0.06}deg)`,
+                  transform: `rotate(${scrollY * 0.06}deg)`,
                   willChange: 'transform'
                 }}
               >
@@ -442,7 +424,7 @@ export function Home() {
               <div
                 className="absolute w-[300px] h-[250px] md:w-[400px] md:h-[350px] right-[-60px] top-[40px] md:right-[-80px] md:top-[50px] opacity-90"
                 style={{
-                  transform: `translate3d(${scrollY * -0.1 + mouseOffset.x * -3}px, ${scrollY * -0.15 + mouseOffset.y * -2}px, 0)`,
+                  transform: `translate3d(${scrollY * -0.1}px, ${scrollY * -0.15}px, 0)`,
                   willChange: 'transform'
                 }}
               >
