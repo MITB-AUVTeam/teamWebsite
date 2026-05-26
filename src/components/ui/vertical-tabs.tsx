@@ -3,22 +3,21 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
-import { ArrowLeft01Icon, ArrowRight01Icon } from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/react";
 
 const SERVICES = [
   {
     id: "01",
     title: "Why",
     description:
-      "We believe that innovation happens when students are given the freedom to design, experiment, and fail forward. Our mission is to cultivate engineers capable of solving complex underwater challenges through practical learning.",
+      "Innovation grows when students are free to build, test, make mistakes, and learn from them. The goal is to help students become creative engineers who can solve underwater problems through real hands-on experience.",
     image:
       "src/assets/Gallery/about us page 1.jpeg",
   },
   {
     id: "02",
     title: "How",
-    description: "We in MIT-B achieve this by bringing together students from diverse engineering disciplines to collaboratively design and develop autonomous underwater vehicles. Through hands-on problem solving, iterative development, research, and participation in competitions, we create an environment where innovation, technical excellence, and teamwork thrive.",
+    description:
+      "Students from different engineering fields work together to build underwater robots. Learning happens through designing, solving problems, testing ideas, and taking part in competitions as a team.",
     image:
       "src/assets/Gallery/about us page 2.jpeg",
   },
@@ -26,7 +25,7 @@ const SERVICES = [
     id: "03",
     title: "What",
     description:
-      "We design and develop autonomous underwater vehicles by integrating in-house mechanical systems, embedded electronics, and intelligent software, tested extensively for real-world underwater operations.",
+      "Autonomous underwater vehicles are designed and built using mechanical parts, electronics, and software. The robots are tested carefully to work in real underwater conditions.",
     image:
       "src/assets/Gallery/about us page 3.jpeg",
   },
@@ -67,18 +66,15 @@ export default function VerticalTabs() {
   }, [activeIndex, isPaused, handleNext]);
 
   const variants = {
-    enter: (direction: number) => ({
-      y: direction > 0 ? "-100%" : "100%",
+    enter: () => ({
       opacity: 0,
     }),
     center: {
       zIndex: 1,
-      y: 0,
       opacity: 1,
     },
-    exit: (direction: number) => ({
+    exit: () => ({
       zIndex: 0,
-      y: direction > 0 ? "100%" : "-100%",
       opacity: 0,
     }),
   };
@@ -90,12 +86,9 @@ export default function VerticalTabs() {
           {/* Left Column: Content */}
           <div className="lg:col-span-5 flex flex-col justify-center order-2 lg:order-1 pt-2">
             <div className="space-y-2 mb-12">
-              <h2 className="tracking-tight text-balance text-4xl font-bold md:text-5xl lg:text-6xl text-white uppercase">
-                Our Approach
+              <h2 className="tracking-tight text-balance text-4xl font-bold md:text-5xl lg:text-6xl text-white whitespace-nowrap">
+                Mission & Vision
               </h2>
-              <span className="text-xs font-medium text-slate-400 uppercase tracking-[0.3em] block ml-1">
-                (MISSION & VISION)
-              </span>
             </div>
 
             <div className="flex flex-col space-y-0">
@@ -150,7 +143,7 @@ export default function VerticalTabs() {
                             animate={{ opacity: 1, height: "auto" }}
                             exit={{ opacity: 0, height: 0 }}
                             transition={{
-                              duration: 4.5,
+                              duration: 0.45,
                               ease: [0.23, 1, 0.32, 1],
                             }}
                             className="overflow-hidden"
@@ -169,9 +162,9 @@ export default function VerticalTabs() {
           </div>
 
           {/* Right Column: Image Gallery */}
-          <div className="lg:col-span-7 flex flex-col justify-end h-full order-1 lg:order-2">
+          <div className="lg:col-span-7 flex flex-col justify-center h-full order-1 lg:order-2">
             <div
-              className="relative group/gallery"
+              className="relative group/gallery w-full lg:max-w-[85%] lg:mx-auto transform lg:translate-x-6"
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
             >
@@ -179,7 +172,7 @@ export default function VerticalTabs() {
                 <AnimatePresence
                   initial={false}
                   custom={direction}
-                  mode="popLayout"
+                  mode="wait"
                 >
                   <motion.div
                     key={activeIndex}
@@ -189,7 +182,6 @@ export default function VerticalTabs() {
                     animate="center"
                     exit="exit"
                     transition={{
-                      y: { type: "spring", stiffness: 260, damping: 32 },
                       opacity: { duration: 0.4 },
                     }}
                     className="absolute inset-0 w-full h-full cursor-pointer"
@@ -206,29 +198,6 @@ export default function VerticalTabs() {
                   </motion.div>
                 </AnimatePresence>
 
-                {/* Navigation Controls */}
-                <div className="absolute bottom-6 right-6 md:bottom-10 md:right-10 flex gap-3 md:gap-4 z-20">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handlePrev();
-                    }}
-                    className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-black/50 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-black/80 transition-all active:scale-90 shadow-sm"
-                    aria-label="Previous"
-                  >
-                    <HugeiconsIcon icon={ArrowLeft01Icon} className="w-5 h-5 md:w-6 md:h-6" />
-                  </button>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleNext();
-                    }}
-                    className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-black/50 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-black/80 transition-all active:scale-90 shadow-sm"
-                    aria-label="Next"
-                  >
-                    <HugeiconsIcon icon={ArrowRight01Icon} className="w-5 h-5 md:w-6 md:h-6" />
-                  </button>
-                </div>
               </div>
             </div>
           </div>
