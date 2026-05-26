@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Calendar, User, ArrowRight, Tag } from "lucide-react";
 import { Footer } from "@/components/Footer";
 import azadLockedIn from "@/assets/Gallery/azad_lockedin.webp";
+import img_2816 from "@/assets/Gallery/IMG_2816.webp";
 
 export function MediaPage() {
   const featuredPost = {
@@ -48,7 +49,7 @@ export function MediaPage() {
       category: "Technical / Electrical Subsystem",
       date: "January 11, 2026",
       author: "Azad Roy",
-      image: "",
+      image: img_2816,
     },
     {
       title: "",
