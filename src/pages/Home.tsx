@@ -12,6 +12,11 @@ import logoDassault from "../assets/Background - less sponsors logos/Dassault Sy
 import logoMIT from "../assets/Background - less sponsors logos/MIT.png";
 import logoVicharak from "../assets/Background - less sponsors logos/Vicharak.png";
 import logoWisdom from "../assets/Background - less sponsors logos/Wisdom Technologies.png";
+import mechanicalBg from "@/assets/homepage_bento_background/mechanical.jpeg";
+import electricalBg from "@/assets/homepage_bento_background/electrical.jpg";
+import designBg from "@/assets/homepage_bento_background/design.jpg";
+import managementBg from "@/assets/homepage_bento_background/management.jpeg";
+import softwareBg from "@/assets/homepage_bento_background/software.jpg";
 import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
 import { cn } from "@/lib/utils";
 import { LogoSlider } from "@/components/ui/logo-slider";
@@ -37,8 +42,8 @@ const features = [
     name: "Mechanical",
     description: "Structural integrity and fluid dynamics.",
     href: "/team",
-    cta: "Explore Subdivision",
-    background: <img src="src/assets/homepage_bento_background/mechanical.jpeg" className="absolute inset-0 w-full h-full object-cover opacity-20 transition-transform duration-700 ease-out group-hover:scale-105" alt="Mechanical" />,
+    cta: "Explore Subsystem",
+    background: <img src={mechanicalBg} className="absolute inset-0 w-full h-full object-cover opacity-20 transition-transform duration-700 ease-out group-hover:scale-105" alt="Mechanical" />,
     className: "lg:row-start-1 lg:row-end-4 lg:col-start-2 lg:col-end-3",
   },
   {
@@ -46,8 +51,8 @@ const features = [
     name: "Electrical",
     description: "Power systems and embedded electronics.",
     href: "/team",
-    cta: "Explore Subdivision",
-    background: <img src="src/assets/homepage_bento_background/electrical.jpg" className="absolute inset-0 w-full h-full object-cover opacity-20 transition-transform duration-700 ease-out group-hover:scale-105" alt="Electrical" />,
+    cta: "Explore Subsystem",
+    background: <img src={electricalBg} className="absolute inset-0 w-full h-full object-cover opacity-20 transition-transform duration-700 ease-out group-hover:scale-105" alt="Electrical" />,
     className: "lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-3",
   },
   {
@@ -55,8 +60,8 @@ const features = [
     name: "Design",
     description: "Social media and content creation",
     href: "/team",
-    cta: "Explore Subdivision",
-    background: <img src="src/assets/homepage_bento_background/design.jpg" className="absolute inset-0 w-full h-full object-cover opacity-20 transition-transform duration-700 ease-out group-hover:scale-105" alt="Design" />,
+    cta: "Explore Subsystem",
+    background: <img src={designBg} className="absolute inset-0 w-full h-full object-cover opacity-20 transition-transform duration-700 ease-out group-hover:scale-105" alt="Design" />,
     className: "lg:col-start-1 lg:col-end-2 lg:row-start-3 lg:row-end-4",
   },
   {
@@ -64,8 +69,8 @@ const features = [
     name: "Management",
     description: "Project timelines and resource allocation.",
     href: "/team",
-    cta: "Explore Subdivision",
-    background: <img src="src/assets/homepage_bento_background/management.jpeg" className="absolute inset-0 w-full h-full object-cover opacity-20 transition-transform duration-700 ease-out group-hover:scale-105" alt="Management" />,
+    cta: "Explore Subsystem",
+    background: <img src={managementBg} className="absolute inset-0 w-full h-full object-cover opacity-20 transition-transform duration-700 ease-out group-hover:scale-105" alt="Management" />,
     className: "lg:col-start-3 lg:col-end-3 lg:row-start-1 lg:row-end-2",
   },
   {
@@ -73,8 +78,8 @@ const features = [
     name: "Software",
     description: "Autonomous navigation and computer vision.",
     href: "/team",
-    cta: "Explore Subdivision",
-    background: <img src="src/assets/homepage_bento_background/software.jpg" className="absolute inset-0 w-full h-full object-cover opacity-20 transition-transform duration-700 ease-out group-hover:scale-105" alt="Software" />,
+    cta: "Explore Subsystem",
+    background: <img src={softwareBg} className="absolute inset-0 w-full h-full object-cover opacity-20 transition-transform duration-700 ease-out group-hover:scale-105" alt="Software" />,
     className: "lg:col-start-3 lg:col-end-3 lg:row-start-2 lg:row-end-4",
   },
 ];
@@ -110,7 +115,7 @@ interface TeamDetail {
   glowColor: string;
 }
 
-const subdivisionDetails: Record<string, TeamDetail> = {
+const subsystemDetails: Record<string, TeamDetail> = {
   "Mechanical": {
     title: "Mechanical Team",
     subTitle: "Physical design, hydrodynamic optimization, and structural fabrication",
@@ -224,7 +229,7 @@ const subdivisionDetails: Record<string, TeamDetail> = {
   "Design": {
     title: "Management, Business & Design Team",
     subTitle: "Web representation, corporate sponsorships, and campus administration",
-    description: "The Management, Business and Design subdivision handles the operational and outreach side of the project. Responsibilities include general administration, approaching companies for sponsorships, financial auditing and logistics support, designing and maintaining the team website, producing the team introduction video, and running both on-campus and off-campus promotional activities.",
+    description: "The Management, Business and Design subsystem handles the operational and outreach side of the project. Responsibilities include general administration, approaching companies for sponsorships, financial auditing and logistics support, designing and maintaining the team website, producing the team introduction video, and running both on-campus and off-campus promotional activities.",
     colorClass: "from-fuchsia-500 to-pink-600 shadow-fuchsia-500/15",
     borderColor: "border-blue-500/20 hover:border-blue-500/40",
     glowColor: "bg-blue-500/10",
@@ -254,7 +259,7 @@ const subdivisionDetails: Record<string, TeamDetail> = {
   "Management": {
     title: "Management, Business & Design Team",
     subTitle: "Web representation, corporate sponsorships, and campus administration",
-    description: "The Management, Business and Design subdivision handles the operational and outreach side of the project. Responsibilities include general administration, approaching companies for sponsorships, financial auditing and logistics support, designing and maintaining the team website, producing the team introduction video, and running both on-campus and off-campus promotional activities.",
+    description: "The Management, Business and Design subsystem handles the operational and outreach side of the project. Responsibilities include general administration, approaching companies for sponsorships, financial auditing and logistics support, designing and maintaining the team website, producing the team introduction video, and running both on-campus and off-campus promotional activities.",
     colorClass: "from-fuchsia-500 to-pink-600 shadow-fuchsia-500/15",
     borderColor: "border-blue-500/20 hover:border-blue-500/40",
     glowColor: "bg-blue-500/10",
@@ -606,8 +611,8 @@ export function Home() {
       </div>
 
       <AnimatePresence>
-        {activeTeam && subdivisionDetails[activeTeam] && (() => {
-          const detail = subdivisionDetails[activeTeam];
+        {activeTeam && subsystemDetails[activeTeam] && (() => {
+          const detail = subsystemDetails[activeTeam];
           return (
             <motion.div
               initial={{ opacity: 0 }}
@@ -637,9 +642,6 @@ export function Home() {
                 {/* Header */}
                 <div className="relative z-10 flex items-start justify-between mb-6 md:mb-8">
                   <div>
-                    <span className="text-[10px] md:text-xs font-black uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
-                      Subdivision Showcase
-                    </span>
                     <h2 className="text-2xl md:text-4xl font-extrabold text-white mt-1 leading-tight tracking-tight">
                       {detail.title}
                     </h2>
