@@ -417,7 +417,7 @@ export function Home() {
                   />
                 </div>
                 <div className="font-medium text-3xl md:text-[40px] text-white text-center tracking-widest drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">
-                  MIT BENGALURU
+                  TEAM AUV MIT-BENGALURU
                 </div>
               </div>
 
