@@ -227,7 +227,7 @@ const subsystemDetails: Record<string, TeamDetail> = {
     ]
   },
   "Design": {
-    title: "Management, Business & Design Team",
+    title: "Management and Design Team",
     subTitle: "Web representation, corporate sponsorships, and campus administration",
     description: "The Management, Business and Design subsystem handles the operational and outreach side of the project. Responsibilities include general administration, approaching companies for sponsorships, financial auditing and logistics support, designing and maintaining the team website, producing the team introduction video, and running both on-campus and off-campus promotional activities.",
     colorClass: "from-fuchsia-500 to-pink-600 shadow-fuchsia-500/15",
@@ -257,7 +257,7 @@ const subsystemDetails: Record<string, TeamDetail> = {
     ]
   },
   "Management": {
-    title: "Management, Business & Design Team",
+    title: "Management and Design Team",
     subTitle: "Web representation, corporate sponsorships, and campus administration",
     description: "The Management, Business and Design subsystem handles the operational and outreach side of the project. Responsibilities include general administration, approaching companies for sponsorships, financial auditing and logistics support, designing and maintaining the team website, producing the team introduction video, and running both on-campus and off-campus promotional activities.",
     colorClass: "from-fuchsia-500 to-pink-600 shadow-fuchsia-500/15",
