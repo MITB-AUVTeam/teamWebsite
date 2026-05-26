@@ -121,7 +121,7 @@ export function MediaPage() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="group relative rounded-3xl overflow-hidden bg-white/5 border border-white/10 flex flex-col lg:flex-row cursor-pointer hover:border-white/20 transition-colors"
         >
-          <div className="w-full lg:w-3/5 h-[300px] lg:h-[500px] overflow-hidden">
+          <div className="w-full lg:w-3/5 h-[220px] sm:h-[300px] lg:h-[500px] overflow-hidden">
             <img 
               src={featuredPost.image} 
               alt={featuredPost.title}

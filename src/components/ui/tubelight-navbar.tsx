@@ -145,8 +145,8 @@ export function NavBar({ items, className, children, isScrolled = false }: NavBa
             </div>
 
             {/* Menu Items Box */}
-            <div className="mt-4 flex-1 bg-transparent border border-white/10 rounded-[2rem] overflow-hidden flex flex-col shadow-2xl">
-              <div className="flex-1 flex flex-col px-6 py-8 justify-center">
+            <div className="mt-4 flex-1 bg-transparent border border-white/10 rounded-[2rem] overflow-y-auto flex flex-col shadow-2xl min-h-0">
+              <div className="flex-1 flex flex-col px-6 py-4 md:py-8 justify-start md:justify-center">
                 <div className="flex flex-col">
                   {items.map((item) => {
                     const isActive = activeTab === item.name;
@@ -158,7 +158,7 @@ export function NavBar({ items, className, children, isScrolled = false }: NavBa
                           setIsMobileMenuOpen(false);
                         }}
                         className={cn(
-                          "relative py-6 text-center text-sm font-bold tracking-[0.2em] uppercase border-b border-white/5 last:border-b-0 transition-colors flex items-center justify-center",
+                          "relative py-4 sm:py-5 text-center text-sm font-bold tracking-[0.2em] uppercase border-b border-white/5 last:border-b-0 transition-colors flex items-center justify-center",
                           isActive ? "text-blue-500" : "text-slate-300 hover:text-blue-400"
                         )}
                       >

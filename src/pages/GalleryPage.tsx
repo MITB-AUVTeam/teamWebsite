@@ -273,62 +273,62 @@ export function GalleryPage() {
         </motion.div>
 
         <Floating sensitivity={-1} className="overflow-hidden">
-          <FloatingElement depth={0.5} className="top-[8%] left-[11%]">
+          <FloatingElement depth={0.5} className="top-[2%] left-[-6%] md:top-[8%] md:left-[11%]">
             <motion.img
               initial={{ opacity: 0 }}
               src={exampleImages[0].url}
-              className="w-16 h-16 md:w-24 md:h-24 object-cover rounded-xl hover:scale-105 duration-200 cursor-pointer transition-transform shadow-2xl"
+              className="w-24 h-24 md:w-36 md:h-36 object-cover rounded-2xl hover:scale-105 duration-200 cursor-pointer transition-transform shadow-2xl -rotate-12 md:rotate-0"
             />
           </FloatingElement>
-          <FloatingElement depth={1} className="top-[10%] left-[32%]">
+          <FloatingElement depth={1} className="top-[10%] left-[22%] md:top-[10%] md:left-[32%]">
             <motion.img
               initial={{ opacity: 0 }}
               src={exampleImages[1].url}
-              className="w-20 h-20 md:w-28 md:h-28 object-cover rounded-xl hover:scale-105 duration-200 cursor-pointer transition-transform shadow-2xl"
+              className="w-24 h-24 md:w-40 md:h-40 object-cover rounded-2xl hover:scale-105 duration-200 cursor-pointer transition-transform shadow-2xl rotate-6 md:rotate-0"
             />
           </FloatingElement>
-          <FloatingElement depth={2} className="top-[2%] left-[53%]">
+          <FloatingElement depth={2} className="top-[2%] left-[48%] md:top-[2%] md:left-[53%]">
             <motion.img
               initial={{ opacity: 0 }}
               src={exampleImages[2].url}
-              className="w-28 h-40 md:w-40 md:h-52 object-cover rounded-xl hover:scale-105 duration-200 cursor-pointer transition-transform shadow-2xl"
+              className="w-24 h-30 md:w-40 md:h-56 lg:w-56 lg:h-72 object-cover rounded-2xl hover:scale-105 duration-200 cursor-pointer transition-transform shadow-2xl -rotate-6 md:rotate-0"
             />
           </FloatingElement>
-          <FloatingElement depth={1} className="top-[0%] left-[83%]">
+          <FloatingElement depth={1} className="top-[12%] left-[78%] md:top-[0%] md:left-[83%]">
             <motion.img
               initial={{ opacity: 0 }}
               src={exampleImages[3].url}
-              className="w-24 h-24 md:w-32 md:h-32 object-cover rounded-xl hover:scale-105 duration-200 cursor-pointer transition-transform shadow-2xl"
+              className="w-24 h-24 md:w-44 md:h-44 object-cover rounded-2xl hover:scale-105 duration-200 cursor-pointer transition-transform shadow-2xl rotate-12 md:rotate-0"
             />
           </FloatingElement>
 
-          <FloatingElement depth={1} className="top-[40%] left-[2%]">
+          <FloatingElement depth={1} className="top-[38%] left-[-8%] md:top-[40%] md:left-[2%]">
             <motion.img
               initial={{ opacity: 0 }}
               src={exampleImages[4].url}
-              className="w-28 h-28 md:w-36 md:h-36 object-cover rounded-xl hover:scale-105 duration-200 cursor-pointer transition-transform shadow-2xl"
+              className="w-24 h-24 sm:w-36 sm:h-36 md:w-48 md:h-48 object-cover rounded-2xl hover:scale-105 duration-200 cursor-pointer transition-transform shadow-2xl rotate-12 md:rotate-0"
             />
           </FloatingElement>
-          <FloatingElement depth={2} className="top-[70%] left-[77%]">
+          <FloatingElement depth={2} className="top-[42%] left-[86%] md:top-[70%] md:left-[77%]">
             <motion.img
               initial={{ opacity: 0 }}
               src={exampleImages[7].url}
-              className="w-28 h-28 md:w-36 md:h-48 object-cover rounded-xl hover:scale-105 duration-200 cursor-pointer transition-transform shadow-2xl"
+              className="w-24 h-24 sm:w-36 sm:h-36 md:w-48 md:h-60 object-cover rounded-2xl hover:scale-105 duration-200 cursor-pointer transition-transform shadow-2xl -rotate-12 md:rotate-0"
             />
           </FloatingElement>
 
-          <FloatingElement depth={4} className="top-[73%] left-[15%]">
+          <FloatingElement depth={4} className="top-[74%] left-[4%] md:top-[73%] md:left-[15%]">
             <motion.img
               initial={{ opacity: 0 }}
               src={exampleImages[5].url}
-              className="w-40 md:w-52 h-full object-cover rounded-xl hover:scale-105 duration-200 cursor-pointer transition-transform shadow-2xl"
+              className="w-24 h-30 md:w-56 md:h-72 object-cover rounded-2xl hover:scale-105 duration-200 cursor-pointer transition-transform shadow-2xl -rotate-6 md:rotate-0"
             />
           </FloatingElement>
-          <FloatingElement depth={1} className="top-[80%] left-[50%]">
+          <FloatingElement depth={1} className="top-[80%] left-[48%] md:top-[80%] md:left-[50%]">
             <motion.img
               initial={{ opacity: 0 }}
               src={exampleImages[6].url}
-              className="w-24 h-24 md:w-32 md:h-32 object-cover rounded-xl hover:scale-105 duration-200 cursor-pointer transition-transform shadow-2xl"
+              className="w-24 h-24 md:w-44 md:h-44 object-cover rounded-2xl hover:scale-105 duration-200 cursor-pointer transition-transform shadow-2xl rotate-6 md:rotate-0"
             />
           </FloatingElement>
         </Floating>
@@ -347,7 +347,7 @@ export function GalleryPage() {
 
           <ToggleGroup
             type="single"
-            className="flex flex-wrap items-center justify-center gap-3 rounded-full border border-white/10 bg-[#0a1128]/95 px-3 py-2 shadow-2xl backdrop-blur-lg"
+            className="flex flex-wrap items-center justify-center gap-3 rounded-2xl sm:rounded-full border border-white/10 bg-[#0a1128]/95 px-3 py-2 shadow-2xl backdrop-blur-lg"
             value={key}
             onValueChange={(e) => {
               if (e) setKey(e);

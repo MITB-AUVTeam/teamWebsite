@@ -388,9 +388,9 @@ export function Home() {
         </div>
 
         <div className="absolute inset-0 flex items-center justify-center z-10 pt-16">
-          <div className="relative flex flex-col items-center gap-[20px] scale-75 md:scale-100">
+          <div className="relative flex flex-col items-center gap-[20px] scale-[0.85] sm:scale-75 md:scale-100">
 
-            <div className="relative w-[500px] h-[500px] md:w-[600px] md:h-[600px]">
+            <div className="relative w-[290px] h-[290px] sm:w-[500px] sm:h-[500px] md:w-[600px] md:h-[600px]">
               <div
                 className="absolute inset-0"
                 style={{
@@ -405,24 +405,24 @@ export function Home() {
                   <div className="absolute w-[8px] h-[8px] bg-[#00f0ff] rounded-full left-1/2 -translate-x-1/2 bottom-0 shadow-[0_0_20px_#00f0ff]" />
                 </div>
 
-                <div className="absolute inset-[80px] md:inset-[100px] border border-[rgba(0,240,255,0.25)] border-dashed rounded-full" />
+                <div className="absolute inset-[45px] sm:inset-[80px] md:inset-[100px] border border-[rgba(0,240,255,0.25)] border-dashed rounded-full" />
               </div>
 
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-[11px] opacity-100">
-                <div className="w-[300px] h-[150px] md:w-[400px] md:h-[200px] relative">
+                <div className="w-[180px] h-[90px] sm:w-[300px] sm:h-[150px] md:w-[400px] md:h-[200px] relative">
                   <img
                     alt="AUV Logo Main"
                     className="w-full h-full object-contain filter drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]"
                     src={imgScreenshot20251022182250Photoroom1}
                   />
                 </div>
-                <div className="font-medium text-3xl md:text-[40px] text-white text-center tracking-widest drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">
+                <div className="font-medium text-lg sm:text-3xl md:text-[40px] text-white text-center tracking-widest drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">
                   TEAM AUV MIT-BENGALURU
                 </div>
               </div>
 
               <div
-                className="absolute w-[300px] h-[250px] md:w-[400px] md:h-[350px] right-[-60px] top-[40px] md:right-[-80px] md:top-[50px] opacity-90"
+                className="absolute w-[180px] h-[150px] sm:w-[300px] sm:h-[250px] md:w-[400px] md:h-[350px] right-[-40px] top-[20px] sm:right-[-60px] sm:top-[40px] md:right-[-80px] md:top-[50px] opacity-90"
                 style={{
                   transform: `translate3d(${scrollY * -0.1}px, ${scrollY * -0.15}px, 0)`,
                   willChange: 'transform'
@@ -610,7 +610,7 @@ export function Home() {
                 transition={{ type: "spring", duration: 0.4 }}
                 onClick={(e) => e.stopPropagation()}
                 className={cn(
-                  "relative w-full max-w-4xl max-h-[90vh] md:max-h-[85vh] flex flex-col overflow-hidden rounded-[2rem] border bg-slate-950 shadow-2xl p-6 md:p-10 select-none",
+                  "relative w-full max-w-4xl max-h-[90vh] md:max-h-[85vh] flex flex-col overflow-hidden rounded-2xl sm:rounded-[2rem] border bg-slate-950 shadow-2xl p-4 sm:p-6 md:p-10 select-none",
                   detail.borderColor
                 )}
               >

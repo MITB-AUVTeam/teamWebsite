@@ -27,6 +27,17 @@ export const PhotoGallery = ({
     return shuffled.slice(0, 5);
   });
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   useEffect(() => {
     if (isInView) {
       // First make the container visible with a fade-in
@@ -90,7 +101,7 @@ export const PhotoGallery = ({
     {
       id: 1,
       order: 0,
-      x: "-320px",
+      x: isMobile ? "-100px" : "-320px",
       y: "15px",
       zIndex: 50, // Highest z-index (on top)
       direction: "left" as Direction,
@@ -99,7 +110,7 @@ export const PhotoGallery = ({
     {
       id: 2,
       order: 1,
-      x: "-160px",
+      x: isMobile ? "-50px" : "-160px",
       y: "32px",
       zIndex: 40,
       direction: "left" as Direction,
@@ -117,7 +128,7 @@ export const PhotoGallery = ({
     {
       id: 4,
       order: 3,
-      x: "160px",
+      x: isMobile ? "50px" : "160px",
       y: "22px",
       zIndex: 20,
       direction: "right" as Direction,
@@ -126,7 +137,7 @@ export const PhotoGallery = ({
     {
       id: 5,
       order: 4,
-      x: "320px",
+      x: isMobile ? "100px" : "320px",
       y: "44px",
       zIndex: 10, // Lowest z-index (at bottom)
       direction: "left" as Direction,

@@ -86,7 +86,7 @@ export default function VerticalTabs() {
           {/* Left Column: Content */}
           <div className="lg:col-span-5 flex flex-col justify-center order-2 lg:order-1 pt-2">
             <div className="space-y-2 mb-12">
-              <h2 className="tracking-tight text-balance text-4xl font-bold md:text-5xl lg:text-6xl text-white whitespace-nowrap">
+              <h2 className="tracking-tight text-balance text-3xl font-bold md:text-5xl lg:text-6xl text-white">
                 Mission & Vision
               </h2>
             </div>
@@ -99,13 +99,13 @@ export default function VerticalTabs() {
                     key={service.id}
                     onClick={() => handleTabClick(index)}
                     className={cn(
-                      "group relative flex items-start gap-6 py-8 md:py-10 text-left transition-all duration-500 border-t border-white/10 first:border-0",
+                      "group relative flex items-start gap-6 py-6 md:py-10 text-left transition-all duration-500 border-t border-white/10 first:border-0 pl-6 md:pl-0",
                       isActive
                         ? "text-white"
                         : "text-slate-500 hover:text-slate-300"
                     )}
                   >
-                    <div className="absolute left-[-24px] md:left-[-32px] top-0 bottom-0 w-[2px] bg-white/10">
+                    <div className="absolute left-0 md:left-[-32px] top-0 bottom-0 w-[2px] bg-white/10">
                       {isActive && (
                         <motion.div
                           key={`progress-${index}-${isPaused}`}

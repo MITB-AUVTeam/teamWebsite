@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { 
   Ruler, 
@@ -20,6 +21,17 @@ import proto2Img from "@/assets/Gallery/deuterium3.jpeg";
 import tdrPdf from "@/assets/tdr/IEEE_Conference_Template.pdf";
 
 export function VehiclesPage() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const vehicles = [
     {
       name: "Hydrogen",
@@ -189,16 +201,43 @@ export function VehiclesPage() {
             {/* Visual ambient glows inside panel */}
             <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl pointer-events-none z-0" />
             <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none z-0" />
-            {/* Interactive Embedded PDF Viewer container */}
-            <div className="relative w-full h-[650px] md:h-[750px] lg:h-[800px] bg-[#0b0f19] rounded-2xl overflow-hidden shadow-inner border border-blue-500/20 flex flex-col z-10">
-              
-              {/* Direct PDF rendering iframe */}
-              <iframe 
-                src={`${tdrPdf}#toolbar=1&navpanes=0`} 
-                className="w-full h-full border-none rounded-2xl" 
-                title="RoboSub 2026 Technical Design Report" 
-              />
-            </div>
+            
+            {isMobile ? (
+              /* High-Tech Technical PDF Card Mockup for Mobile */
+              <div className="relative z-10 w-full p-6 sm:p-8 bg-[#0b0f19]/90 border border-blue-500/20 rounded-2xl flex flex-col items-center text-center shadow-inner gap-6">
+                <div className="w-16 h-16 rounded-2xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.2)]">
+                  <FileText className="w-8 h-8" />
+                </div>
+                <div className="space-y-2">
+                  <h4 className="text-lg font-bold text-white uppercase tracking-tight">
+                    RoboSub 2026 TDR
+                  </h4>
+                  <p className="text-slate-400 text-xs tracking-wider uppercase font-mono">
+                    Format: PDF • 10 Pages • IEEE Standard
+                  </p>
+                </div>
+                <p className="text-slate-300 text-sm leading-relaxed max-w-sm">
+                  The document includes comprehensive details on vehicle hull structures, thruster math models, electronic wiring layout, sensor specs, and autonomous behavior trees.
+                </p>
+                <a 
+                  href={tdrPdf} 
+                  download="RoboSub_2026_TDR.pdf"
+                  className="w-full flex items-center justify-center gap-2 py-3 px-6 bg-blue-600 hover:bg-blue-500 active:scale-95 text-white font-bold text-sm rounded-xl transition-all shadow-md shadow-blue-950"
+                >
+                  <Download className="w-4 h-4" />
+                  Download Document
+                </a>
+              </div>
+            ) : (
+              /* Interactive Embedded PDF Viewer container for Desktop */
+              <div className="relative w-full h-[650px] md:h-[750px] lg:h-[800px] bg-[#0b0f19] rounded-2xl overflow-hidden shadow-inner border border-blue-500/20 flex flex-col z-10">
+                <iframe 
+                  src={`${tdrPdf}#toolbar=1&navpanes=0`} 
+                  className="w-full h-full border-none rounded-2xl" 
+                  title="RoboSub 2026 Technical Design Report" 
+                />
+              </div>
+            )}
           </motion.div>
         </section>
       </div>
