@@ -13,14 +13,14 @@ const SERVICES = [
     id: "01",
     title: "Why",
     description:
-      "Students from different engineering fields coming together after late nights to work even later nights full of rapid prototyping, frequent fixes, and more time than we’d like to admit with our heads in our hands. All for the purpose of bringing that bot to life.",
+      "To create an environment where young students learn engineering through real systems, real problems, with real teamwork, and real responsibility, in the face of budget and time constraints. An environment that’s larger than any one person and where hard work and talent are taken for granted. With the added benefit of developing cost-effective and efficient AUVs in India, for the world.",
     image: ABOUT_TAB_1,
   },
   {
     id: "02",
     title: "How",
     description:
-      "Students from different engineering fields work together to build underwater robots. Learning happens through designing, solving problems, testing ideas, and taking part in competitions as a team.",
+      "Students from different engineering fields coming together after late nights to work even later nights full of rapid prototyping, frequent fixes, and more time than we’d like to admit with our heads in our hands. All for the purpose of bringing that bot to life.",
     image: ABOUT_TAB_2,
   },
   {
