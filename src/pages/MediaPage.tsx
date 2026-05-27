@@ -395,7 +395,7 @@ export function MediaPage() {
           {/* Main Featured Video */}
           <div className="lg:col-span-2 aspect-video rounded-3xl overflow-hidden border border-white/10 bg-slate-950 shadow-2xl relative group">
             <iframe
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+              src="https://www.youtube.com/watch?v=er7BXNt_4Kw"
               title="Team AUV Introduction Video"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
