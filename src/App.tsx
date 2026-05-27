@@ -23,7 +23,7 @@ export default function App() {
   const isHome = location.pathname === "/";
 
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-50 selection:bg-blue-500/30">
+    <div className="min-h-screen bg-black text-slate-50 selection:bg-blue-500/30">
       <ScrollToTop watch={location.pathname} />
       <Navbar />
       <main className={isHome ? "" : "pt-24"}>

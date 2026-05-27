@@ -90,7 +90,7 @@ export function MediaPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-50 pb-0 font-sans">
+    <div className="min-h-screen bg-black text-slate-50 pb-0 font-sans">
       
       <section className="max-w-7xl mx-auto px-6 pt-12 md:pt-20 mb-16">
         <motion.div 
@@ -100,7 +100,7 @@ export function MediaPage() {
           className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6"
         >
           <div className="space-y-4">
-            <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-black uppercase tracking-tighter leading-none">
+            <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-semibold uppercase tracking-tighter leading-none">
               Media & Works
             </h1>
             <p className="text-slate-400 text-sm md:text-base tracking-[0.2em] uppercase font-medium ml-1">
@@ -140,7 +140,7 @@ export function MediaPage() {
               </div>
             </div>
             
-            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight group-hover:text-blue-400 transition-colors">
+            <h2 className="text-3xl lg:text-4xl font-semibold text-white mb-4 leading-tight group-hover:text-blue-400 transition-colors">
               {featuredPost.title}
             </h2>
             
@@ -163,7 +163,7 @@ export function MediaPage() {
 
       <section className="max-w-7xl mx-auto px-6 pb-24">
         <div className="flex items-center justify-between mb-10">
-          <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tight">
+          <h3 className="text-2xl md:text-3xl font-semibold text-white tracking-tight">
             Recent Articles
           </h3>
         </div>

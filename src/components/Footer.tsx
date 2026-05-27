@@ -3,7 +3,7 @@ import logoImg from "../assets/hero_parallax/b0b02181d3064ccfa838a5b7d18e44696ad
 
 export function Footer() {
   return (
-    <footer className="bg-[#020617] border-t border-slate-800/50 pt-16 pb-8">
+    <footer className="bg-black border-t border-slate-800/50 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           

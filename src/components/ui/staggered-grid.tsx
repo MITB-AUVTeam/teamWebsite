@@ -167,7 +167,7 @@ export function StaggeredGrid({
 
           <section className="hidden lg:grid place-items-center w-full relative">
               <div ref={gridFullRef} className="grid--full relative w-full my-[10vh] h-auto aspect-[1.1] max-w-none p-4 grid gap-4 grid-cols-7 grid-rows-5">
-                  <div className="grid-overlay absolute inset-0 z-[15] pointer-events-none opacity-0 bg-[#020617]/80 rounded-lg transition-opacity duration-500" />
+                        <div className="grid-overlay absolute inset-0 z-[15] pointer-events-none opacity-0 bg-black/80 rounded-lg transition-opacity duration-500" />
                   {mixedGridItems.map((item, i) => {
                       if (item === 'BENTO_GROUP') {
                           if (!bentoItems || bentoItems.length === 0) return null;
@@ -257,7 +257,7 @@ export function StaggeredGrid({
                               >
                                   <figure className="w-full h-full m-0">
                                       <div className="grid__item-img w-full h-full [backface-visibility:hidden] will-change-transform rounded-xl overflow-hidden shadow-sm border border-slate-800 bg-slate-900/40 flex items-center justify-center transition-all duration-500 ease-out group-hover:scale-105 group-hover:shadow-xl group-hover:shadow-blue-900/20">
-                                          <div className="absolute inset-0 bg-gradient-to-b from-[#020617]/40 via-[#020617]/80 to-[#020617] backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
+                                            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/80 to-black backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
                                           <div className="relative z-10 flex flex-col items-center justify-center gap-3">
                                               <Icon className="w-8 h-8 text-slate-500 transition-all duration-300 group-hover:text-blue-400 group-hover:scale-110" />
                                               <div className="text-center opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 delay-75">

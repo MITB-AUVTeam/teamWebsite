@@ -71,7 +71,7 @@ export function VehiclesPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-50 pb-0 font-sans">
+    <div className="min-h-screen bg-black text-slate-50 pb-0 font-sans">
       
       <section className="max-w-7xl mx-auto px-6 pt-12 md:pt-20 mb-20">
         <motion.div 
@@ -81,7 +81,7 @@ export function VehiclesPage() {
           className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6"
         >
           <div className="space-y-4">
-            <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-black uppercase tracking-tighter leading-none">
+            <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-semibold uppercase tracking-tighter leading-none">
               Our Vehicles
             </h1>
             <p className="text-slate-400 text-sm md:text-base tracking-[0.2em] uppercase font-medium ml-1">
@@ -113,13 +113,13 @@ export function VehiclesPage() {
                     alt={vehicle.name} 
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent z-20" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-20" />
                   
                   <div className="absolute bottom-8 left-8 z-30">
                     <span className="px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-bold tracking-widest uppercase text-white mb-4 inline-block">
                       {vehicle.tagline}
                     </span>
-                    <h2 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tight">
+                    <h2 className="text-4xl md:text-5xl font-semibold text-white uppercase tracking-tight">
                       {vehicle.name}
                     </h2>
                   </div>
@@ -173,7 +173,7 @@ export function VehiclesPage() {
             <div className="space-y-4 max-w-xl">
               <span className="w-8 h-[2px] bg-blue-500 rounded-full inline-block"></span>
               <h2 className="text-xs font-bold tracking-widest text-blue-400 uppercase block">Documentation</h2>
-              <h3 className="text-3xl md:text-5xl font-black text-white tracking-tight uppercase leading-none">
+              <h3 className="text-3xl md:text-5xl font-semibold text-white tracking-tight uppercase leading-none">
                 Technical Design Report
               </h3>
               <p className="text-slate-400 text-sm md:text-base leading-relaxed">

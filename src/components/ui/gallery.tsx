@@ -151,7 +151,7 @@ export const PhotoGallery = ({
       
       <div className="flex flex-col items-center justify-center text-center mb-16 px-6 max-w-7xl mx-auto">
         <h2 className="text-sm font-bold tracking-widest text-blue-500 uppercase mb-3">Gallery</h2>
-        <h3 className="text-4xl md:text-5xl font-bold tracking-tight text-white">A journey through the depths</h3>
+        <h3 className="text-4xl md:text-5xl font-semibold tracking-tight text-white">A journey through the depths</h3>
       </div>
 
       <div className="relative mb-8 h-[350px] w-full items-center justify-center lg:flex">

@@ -247,7 +247,7 @@ export function GalleryPage() {
   }, [animate])
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#020617] -mt-24">
+    <div className="flex flex-col min-h-screen bg-black -mt-24">
       <div
         className="relative flex w-full h-screen min-h-[600px] justify-center items-center overflow-hidden"
         ref={scope}
@@ -258,7 +258,7 @@ export function GalleryPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.88, delay: 1.5 }}
         >
-          <p className="text-4xl md:text-6xl lg:text-7xl z-50 text-white font-bold tracking-tight">
+          <p className="text-4xl md:text-6xl lg:text-7xl z-50 text-white font-semibold tracking-tight">
             Explore Our Gallery
           </p>
           <p className="text-slate-300 text-lg md:text-xl max-w-xl z-50">
@@ -337,7 +337,7 @@ export function GalleryPage() {
       <div className="flex-1 min-h-screen flex flex-col items-center justify-start pt-24 pb-12 px-6 border-t border-white/5">
         <div className="max-w-7xl w-full flex flex-col items-center gap-12">
           <div className="text-center space-y-4">
-            <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tight text-white">
+            <h2 className="text-3xl md:text-5xl font-semibold uppercase tracking-tight text-white">
               Project Archives
             </h2>
             <p className="text-slate-400 max-w-2xl mx-auto">

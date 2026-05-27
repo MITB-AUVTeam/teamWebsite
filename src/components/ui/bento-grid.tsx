@@ -74,7 +74,7 @@ const BentoCard = ({
       <p className="max-w-lg text-slate-500 dark:text-slate-400">{description}</p>
       
       {onClick && (
-        <span className="text-xs font-black text-blue-400 flex items-center gap-1 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 mt-2 select-none uppercase tracking-wider">
+        <span className="text-xs font-bold text-blue-400 flex items-center gap-1 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 mt-2 select-none uppercase tracking-wider">
           {cta}
           <ArrowRightIcon className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5" />
         </span>

@@ -87,7 +87,7 @@ export default function VerticalTabs() {
           {/* Left Column: Content */}
           <div className="lg:col-span-5 flex flex-col justify-center order-2 lg:order-1 pt-2">
             <div className="space-y-2 mb-12">
-              <h2 className="tracking-tight text-balance text-3xl font-bold md:text-5xl lg:text-6xl text-white">
+              <h2 className="tracking-tight text-balance text-3xl font-semibold md:text-5xl lg:text-6xl text-white">
                 Mission & Vision
               </h2>
             </div>

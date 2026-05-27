@@ -40,7 +40,7 @@ const Feature108 = ({
       <div className="container mx-auto">
         <div className="flex flex-col items-center gap-4 text-center mb-16">
           <Badge variant="outline" className="tracking-widest uppercase text-blue-500 border-blue-500/50">{badge}</Badge>
-          <h1 className="max-w-2xl text-4xl md:text-5xl font-bold tracking-tight">
+          <h1 className="max-w-2xl text-4xl md:text-5xl font-semibold tracking-tight">
             {heading}
           </h1>
           <p className="text-slate-400 text-lg">{description}</p>
@@ -65,10 +65,10 @@ const Feature108 = ({
                 className="grid place-items-center gap-12 lg:grid-cols-2 lg:gap-16 outline-none animate-in fade-in-50 duration-500 data-[state=inactive]:hidden"
               >
                 <div className="flex flex-col gap-5 order-2 lg:order-1">
-                  <Badge variant="outline" className="w-fit bg-[#020617] text-blue-400 border-blue-500/30">
+                  <Badge variant="outline" className="w-fit bg-black text-blue-400 border-blue-500/30">
                     {tab.content.badge}
                   </Badge>
-                  <h3 className="text-3xl font-bold lg:text-4xl tracking-tight text-slate-50">
+                  <h3 className="text-3xl font-semibold lg:text-4xl tracking-tight text-slate-50">
                     {tab.content.title}
                   </h3>
                   <p className="text-slate-400 lg:text-lg leading-relaxed">

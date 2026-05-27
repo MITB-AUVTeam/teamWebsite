@@ -148,7 +148,7 @@ export function ContactUs() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             
             <div className="flex flex-col justify-center">
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
+              <h2 className="text-4xl md:text-5xl font-semibold text-white mb-6 tracking-tight">
                 Get in <span className="text-blue-500">Touch</span>
               </h2>
               <p className="text-slate-400 text-lg mb-10 leading-relaxed">

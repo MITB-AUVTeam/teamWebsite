@@ -47,7 +47,7 @@ const sponsors = [
 
 export function SponsorsPage() {
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-50 selection:bg-blue-500/30">
+    <div className="min-h-screen bg-black text-slate-50 selection:bg-blue-500/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 min-h-[calc(100vh-400px)]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -55,7 +55,7 @@ export function SponsorsPage() {
           transition={{ duration: 0.5 }}
           className="text-center mb-20"
         >
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+          <h1 className="text-4xl md:text-5xl font-semibold tracking-tight mb-4">
             Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Sponsors</span>
           </h1>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto leading-relaxed">
@@ -118,7 +118,7 @@ export function SponsorsPage() {
           transition={{ duration: 0.5, delay: 0.5 }}
           className="mt-24 text-center bg-blue-900/20 rounded-3xl p-10 lg:p-16 border border-blue-500/20"
         >
-          <h2 className="text-3xl font-bold text-white mb-6">Become a Sponsor</h2>
+          <h2 className="text-3xl font-semibold text-white mb-6">Become a Sponsor</h2>
           <p className="text-slate-300 text-lg max-w-2xl mx-auto mb-8">
             Join us in shaping the future of underwater technology. Partnering with our team provides visibility among top engineering talent and demonstrates your commitment to innovation.
           </p>

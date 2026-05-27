@@ -5,7 +5,7 @@ import { Footer } from "@/components/Footer";
 
 export function AboutPage() {
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-50 pb-0 font-sans flex flex-col">
+    <div className="min-h-screen bg-black text-slate-50 pb-0 font-sans flex flex-col">
 
       <section className="max-w-7xl mx-auto px-6 pt-12 md:pt-20 order-1 md:order-1">
         <motion.div
@@ -14,7 +14,7 @@ export function AboutPage() {
           transition={{ duration: 0.6 }}
           className="flex flex-col md:flex-row justify-start items-start gap-6 w-full"
         >
-          <h1 className="text-left mx-0 pl-0 text-5xl md:text-7xl lg:text-[5.5rem] font-black uppercase tracking-tighter leading-none">
+          <h1 className="text-left mx-0 pl-0 text-5xl md:text-7xl lg:text-[5.5rem] font-semibold uppercase tracking-tighter leading-none">
             About Us
           </h1>
         </motion.div>

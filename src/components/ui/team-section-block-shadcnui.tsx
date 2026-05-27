@@ -652,7 +652,7 @@ export function TeamSectionBlock() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-50 pb-0 font-sans">
+    <div className="min-h-screen bg-black text-slate-50 pb-0 font-sans">
       <section
         aria-labelledby="team-section-heading"
         className="relative w-full overflow-hidden px-4 py-20 sm:px-6 lg:px-10"
@@ -696,7 +696,7 @@ export function TeamSectionBlock() {
             className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-20"
           >
             <div className="space-y-4">
-              <h2 id="team-section-heading" className="text-5xl md:text-7xl lg:text-[5.5rem] font-black uppercase tracking-tighter leading-none text-white">
+              <h2 id="team-section-heading" className="text-5xl md:text-7xl lg:text-[5.5rem] font-semibold uppercase tracking-tighter leading-none text-white">
                 OUR TEAM
               </h2>
               <p className="text-slate-400 text-lg md:text-xl tracking-[0.06em] font-medium ml-1">
@@ -717,7 +717,7 @@ export function TeamSectionBlock() {
                   transition={{ duration: 0.6 }}
                   className="mb-10 flex items-center gap-4"
                 >
-                  <h3 className="text-3xl font-bold text-white tracking-tight">
+                  <h3 className="text-3xl font-semibold text-white tracking-tight">
                     {category.title}
                   </h3>
                   <div className="h-[1px] flex-grow bg-gradient-to-r from-white/20 to-transparent" />

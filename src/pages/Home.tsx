@@ -441,7 +441,7 @@ export function Home() {
           </div>
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 h-[300px] bg-gradient-to-t from-[#020617] via-[#020617]/80 to-transparent pointer-events-none z-30" />
+        <div className="absolute bottom-0 left-0 right-0 h-[300px] bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none z-30" />
       </section>
 
       <section className="py-24 px-6 max-w-7xl mx-auto relative z-10 order-2 md:order-2">
@@ -463,7 +463,7 @@ export function Home() {
                 <span className="text-xs font-bold tracking-widest text-blue-400 uppercase">About Our Mission</span>
               </div>
 
-              <h3 className="text-4xl md:text-5xl font-black mb-6 tracking-tight leading-[1.1] text-white">
+              <h3 className="text-4xl md:text-5xl font-semibold mb-6 tracking-tight leading-[1.1] text-white">
                 Pushing the boundaries of <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-300">marine robotics.</span>
               </h3>
 
@@ -476,28 +476,28 @@ export function Home() {
                 {/* Stat 1 */}
                 <div className="flex flex-col p-5 bg-slate-950/40 backdrop-blur-md border border-slate-900 rounded-2xl relative overflow-hidden group/cell transition-all duration-300 hover:border-blue-500/20 hover:bg-slate-950/60 shadow-inner">
                   <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-blue-500 to-cyan-400 group-hover/cell:w-full transition-all duration-300" />
-                  <span className="text-3xl font-black text-white tracking-tight mb-1 drop-shadow-[0_0_10px_rgba(59,130,246,0.2)]">2</span>
+                  <span className="text-3xl font-semibold text-white tracking-tight mb-1 drop-shadow-[0_0_10px_rgba(59,130,246,0.2)]">2</span>
                   <span className="text-[9px] text-slate-500 font-bold uppercase tracking-wider font-mono">Vehicles Built</span>
                 </div>
 
                 {/* Stat 2 */}
                 <div className="flex flex-col p-5 bg-slate-950/40 backdrop-blur-md border border-slate-900 rounded-2xl relative overflow-hidden group/cell transition-all duration-300 hover:border-blue-500/20 hover:bg-slate-950/60 shadow-inner">
                   <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-blue-500 to-cyan-400 group-hover/cell:w-full transition-all duration-300" />
-                  <span className="text-3xl font-black text-white tracking-tight mb-1 drop-shadow-[0_0_10px_rgba(59,130,246,0.2)]">20+</span>
+                  <span className="text-3xl font-semibold text-white tracking-tight mb-1 drop-shadow-[0_0_10px_rgba(59,130,246,0.2)]">20+</span>
                   <span className="text-[9px] text-slate-500 font-bold uppercase tracking-wider font-mono">Team Members</span>
                 </div>
 
                 {/* Stat 3 */}
                 <div className="flex flex-col p-5 bg-slate-950/40 backdrop-blur-md border border-slate-900 rounded-2xl relative overflow-hidden group/cell transition-all duration-300 hover:border-blue-500/20 hover:bg-slate-950/60 shadow-inner">
                   <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-blue-500 to-cyan-400 group-hover/cell:w-full transition-all duration-300" />
-                  <span className="text-3xl font-black text-white tracking-tight mb-1 drop-shadow-[0_0_10px_rgba(59,130,246,0.2)]">1+</span>
+                  <span className="text-3xl font-semibold text-white tracking-tight mb-1 drop-shadow-[0_0_10px_rgba(59,130,246,0.2)]">1+</span>
                   <span className="text-[9px] text-slate-500 font-bold uppercase tracking-wider font-mono">Awards Won</span>
                 </div>
 
                 {/* Stat 4 */}
                 <div className="flex flex-col p-5 bg-slate-950/40 backdrop-blur-md border border-slate-900 rounded-2xl relative overflow-hidden group/cell transition-all duration-300 hover:border-blue-500/20 hover:bg-slate-950/60 shadow-inner">
                   <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-blue-500 to-cyan-400 group-hover/cell:w-full transition-all duration-300" />
-                  <span className="text-3xl font-black text-white tracking-tight mb-1 drop-shadow-[0_0_10px_rgba(59,130,246,0.2)]">2025</span>
+                  <span className="text-3xl font-semibold text-white tracking-tight mb-1 drop-shadow-[0_0_10px_rgba(59,130,246,0.2)]">2025</span>
                   <span className="text-[9px] text-slate-500 font-bold uppercase tracking-wider font-mono">Established</span>
                 </div>
               </div>
@@ -526,7 +526,7 @@ export function Home() {
 
                 {/* Floating HUD glass label */}
                 <div className="absolute bottom-6 left-6 right-6 z-20 transition-all duration-500 transform translate-y-1 group-hover/img:translate-y-0">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-blue-400 bg-slate-950/80 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-slate-800/80 shadow-sm inline-block">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-blue-400 bg-slate-950/80 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-slate-800/80 shadow-sm inline-block">
                     Team MIT Bengaluru
                   </span>
                 </div>
@@ -540,7 +540,7 @@ export function Home() {
       <section className="py-24 px-6 max-w-7xl mx-auto order-4 md:order-3">
         <div className="text-center mb-16">
           <h2 className="text-sm font-bold tracking-widest text-blue-500 uppercase mb-3">Sub-systems</h2>
-          <h3 className="text-4xl md:text-5xl font-bold tracking-tight">The core of our vehicle</h3>
+          <h3 className="text-4xl md:text-5xl font-semibold tracking-tight">The core of our vehicle</h3>
         </div>
         <BentoGrid className="lg:grid-rows-3">
           {features.map((feature) => (
@@ -557,7 +557,7 @@ export function Home() {
       <section className="py-24 overflow-hidden border-t border-slate-800/50 order-6 md:order-5">
         <div className="flex flex-col items-center justify-center text-center mb-16 px-6 max-w-7xl mx-auto">
           <h2 className="text-sm font-bold tracking-widest text-blue-500 uppercase mb-3">Our Team</h2>
-          <h3 className="text-4xl md:text-5xl font-bold tracking-tight">Meet the minds behind the machine</h3>
+          <h3 className="text-4xl md:text-5xl font-semibold tracking-tight">Meet the minds behind the machine</h3>
         </div>
         <div className="flex w-full justify-center items-center">
           <StaggerTestimonials />
@@ -568,11 +568,11 @@ export function Home() {
         <PhotoGallery />
       </section>
 
-      <section className="py-24 border-t border-slate-800/50 bg-[#020617] order-7 md:order-7">
+      <section className="py-24 border-t border-slate-800/50 bg-black order-7 md:order-7">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-sm font-bold tracking-widest text-blue-500 uppercase mb-3">Thank You To</h2>
-            <h3 className="text-3xl md:text-4xl font-bold text-white tracking-tight">Our Proud Sponsors</h3>
+            <h3 className="text-3xl md:text-4xl font-semibold text-white tracking-tight">Our Proud Sponsors</h3>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-8 items-center justify-items-center max-w-5xl mx-auto">
             {baseLogos.map((logo, idx) => (
