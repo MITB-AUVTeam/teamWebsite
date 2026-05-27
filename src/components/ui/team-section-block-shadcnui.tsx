@@ -75,7 +75,7 @@ const teamCategories = [
         "gradient": "from-indigo-500/20 via-indigo-500/5 to-transparent",
         "social": {
           "email": "mailto:prithajaipal@gmail.com",
-          "linkedin": "https://www.linkedin.com/in/pritha-jaipal",
+          "linkedin": "https://www.linkedin.com/in/pritha-jaipal-058b85187/",
           "github": null
         }
       }
@@ -101,7 +101,7 @@ const teamCategories = [
       {
         "name": "Arunava Maiti",
         "role": "Team Co-Lead / Electrical and Mechanical Subsystem",
-        "bio": "Balling  🏀",
+        "bio": "No Risk No Story",
         "image": "/src/assets/Personal_photo/arunava.webp",
         "location": "3rd Year",
         "skills": ["Electrical", "Mechanical", "Leadership"],
@@ -158,7 +158,7 @@ const teamCategories = [
       {
         "name": "Kanishk Thoguluva Ramesh Babu",
         "role": "Mechanical Subsystem Member",
-        "bio": "Monkey See Monkey Do",
+        "bio": "All you have to do is just try.",
         "image": "/src/assets/Personal_photo/kanishk.webp",
         "location": "1st Year",
         "skills": ["Mechanical"],

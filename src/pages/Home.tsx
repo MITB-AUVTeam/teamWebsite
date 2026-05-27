@@ -476,7 +476,7 @@ export function Home() {
               </h3>
 
               <p className="text-slate-300 text-base md:text-lg leading-relaxed mb-8">
-                We are a team of passionate engineers and researchers dedicated to developing state-of-the-art autonomous underwater vehicles. Our mission is to create robust, intelligent systems capable of performing complex tasks in the harsh underwater environment, from environmental monitoring to underwater inspection.
+                We are a team of passionate engineers and researchers dedicated to developing effective and affordable autonomous underwater vehicles. Our mission is to create robust, intelligent systems capable of performing complex tasks in the harsh underwater environment, from environmental monitoring to underwater inspection.
               </p>
 
               {/* High-Tech Stats Telemetry Grid */}
@@ -498,7 +498,7 @@ export function Home() {
                 {/* Stat 3 */}
                 <div className="flex flex-col p-5 bg-slate-950/40 backdrop-blur-md border border-slate-900 rounded-2xl relative overflow-hidden group/cell transition-all duration-300 hover:border-blue-500/20 hover:bg-slate-950/60 shadow-inner">
                   <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-blue-500 to-cyan-400 group-hover/cell:w-full transition-all duration-300" />
-                  <span className="text-3xl font-black text-white tracking-tight mb-1 drop-shadow-[0_0_10px_rgba(59,130,246,0.2)]">1+</span>
+                  <span className="text-3xl font-black text-white tracking-tight mb-1 drop-shadow-[0_0_10px_rgba(59,130,246,0.2)]">1</span>
                   <span className="text-[9px] text-slate-500 font-bold uppercase tracking-wider font-mono">Awards Won</span>
                 </div>
 

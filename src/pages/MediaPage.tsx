@@ -48,7 +48,7 @@ export function MediaPage() {
   const recentPosts = [
     {
       title: "The Long Dive: Starting an AUV Team at MIT Bengaluru",
-      excerpt: "A reflection by team mentor Pritha Jaipal on the journey of AUV MIT-B—from a spark of an idea in August 2024 to qualifying for RoboSub 2026.",
+      excerpt: "A reflection by team mentor Pritha Jaipal on the journey of AUV MIT-B—from a spark of an idea in August 2024 to the team taking part in RoboSub 2026.",
       category: "Personal Memoir",
       date: "May 26, 2026",
       author: "Pritha Jaipal",
