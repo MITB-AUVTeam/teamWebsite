@@ -46,6 +46,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
 }) => {
   const isCenter = position === 0;
   const navigate = useNavigate();
+  const cardWidth = cardSize * 0.92;
 
   return (
     <div
@@ -59,16 +60,16 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
       className={cn(
         "absolute left-1/2 top-1/2 cursor-pointer border-2 p-8 transition-all duration-700 ease-in-out",
         isCenter
-          ? "z-10 bg-slate-900 text-white border-slate-700"
-          : "z-0 bg-slate-900 text-slate-300 border-slate-800 hover:border-blue-500/50"
+          ? "z-10 bg-black text-white border-white/10"
+          : "z-0 bg-black text-slate-300 border-white/10 hover:border-white/20"
       )}
       style={{
-        width: cardSize,
+        width: cardWidth,
         height: cardSize,
         clipPath: `polygon(50px 0%, calc(100% - 50px) 0%, 100% 50px, 100% 100%, calc(100% - 50px) 100%, 50px 100%, 0 100%, 0 0)`,
         transform: `
           translate(-50%, -50%) 
-          translateX(${(cardSize / 1.5) * position}px)
+          translateX(${(cardWidth / 1.5) * position}px)
           translateY(${isCenter ? -65 : position % 2 ? 15 : -15}px)
           rotate(${isCenter ? 0 : position % 2 ? 2.5 : -2.5}deg)
         `,
@@ -76,7 +77,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
       }}
     >
       <span
-        className="absolute block origin-top-right rotate-45 bg-slate-800"
+        className="absolute block origin-top-right rotate-45 bg-white/10"
         style={{
           right: -2,
           top: 48,
@@ -85,7 +86,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
         }}
       />
       <div className="mb-4 flex justify-center">
-        <div className="h-16 w-16 overflow-hidden rounded-full border border-white/20 bg-slate-800 p-1 shadow-none">
+        <div className="h-16 w-16 overflow-hidden rounded-full border border-white/10 bg-black p-1 shadow-none">
           <img
             src={testimonial.imgSrc}
             alt={testimonial.by}
@@ -105,11 +106,6 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
       )}>
         - {testimonial.by}
       </p>
-      {isCenter && (
-        <p className="absolute bottom-3 right-8 left-8 text-center text-xs font-bold text-slate-300 uppercase tracking-widest">
-          Click to view team &rarr;
-        </p>
-      )}
     </div>
   );
 };
@@ -178,8 +174,8 @@ export const StaggerTestimonials: React.FC = () => {
           onClick={() => handleMove(-1)}
           className={cn(
             "flex h-14 w-14 items-center justify-center rounded-full text-2xl transition-colors",
-            "bg-slate-900 border-2 border-slate-800 text-slate-400 hover:bg-blue-600 hover:text-white hover:border-blue-500",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+            "bg-black border-2 border-white/10 text-slate-400 hover:bg-black hover:text-white hover:border-white/20",
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
           )}
           aria-label="Previous testimonial"
         >
@@ -189,8 +185,8 @@ export const StaggerTestimonials: React.FC = () => {
           onClick={() => handleMove(1)}
           className={cn(
             "flex h-14 w-14 items-center justify-center rounded-full text-2xl transition-colors",
-            "bg-slate-900 border-2 border-slate-800 text-slate-400 hover:bg-blue-600 hover:text-white hover:border-blue-500",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+            "bg-black border-2 border-white/10 text-slate-400 hover:bg-black hover:text-white hover:border-white/20",
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
           )}
           aria-label="Next testimonial"
         >

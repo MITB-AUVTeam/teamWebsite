@@ -696,8 +696,8 @@ export function TeamSectionBlock() {
             className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-20"
           >
             <div className="space-y-4">
-              <h2 id="team-section-heading" className="text-5xl md:text-7xl lg:text-[5.5rem] font-semibold uppercase tracking-tighter leading-none text-white">
-                OUR TEAM
+              <h2 id="team-section-heading" className="text-5xl md:text-7xl lg:text-[5.5rem] font-semibold tracking-tighter leading-none text-white">
+                Our Team
               </h2>
               <p className="text-slate-400 text-lg md:text-xl tracking-[0.06em] font-medium ml-1">
                 A diverse team of talented (and extremely fun) individuals working together to build

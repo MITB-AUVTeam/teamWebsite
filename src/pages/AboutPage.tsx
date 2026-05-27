@@ -14,7 +14,7 @@ export function AboutPage() {
           transition={{ duration: 0.6 }}
           className="flex flex-col md:flex-row justify-start items-start gap-6 w-full"
         >
-          <h1 className="text-left mx-0 pl-0 text-5xl md:text-7xl lg:text-[5.5rem] font-semibold uppercase tracking-tighter leading-none">
+          <h1 className="text-left mx-0 pl-0 text-5xl md:text-7xl lg:text-[5.5rem] font-semibold tracking-tighter leading-none">
             About Us
           </h1>
         </motion.div>

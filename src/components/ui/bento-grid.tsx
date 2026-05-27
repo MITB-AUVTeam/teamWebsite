@@ -66,7 +66,7 @@ const BentoCard = ({
     )}
   >
     <div>{background}</div>
-    <div className="pointer-events-none z-10 flex transform-gpu flex-col gap-1 p-6 transition-all duration-300 group-hover:-translate-y-1.5">
+    <div className="pointer-events-none z-10 flex transform-gpu flex-col gap-1 p-6 pb-4 transition-all duration-300 group-hover:-translate-y-6">
       {Icon ? (
         <Icon className="h-12 w-12 origin-left transform-gpu text-slate-400 transition-all duration-300 ease-in-out group-hover:scale-75 group-hover:text-blue-400" />
       ) : null}
@@ -74,14 +74,14 @@ const BentoCard = ({
         {name}
       </h3>
       <p className="max-w-lg text-slate-500 dark:text-slate-400">{description}</p>
-
-      {onClick && (
-        <span className="text-xs font-bold text-blue-400 flex items-center gap-1 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 mt-2 select-none uppercase tracking-wider">
-          {cta}
-          <ArrowRightIcon className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5" />
-        </span>
-      )}
     </div>
+
+    {onClick && (
+      <span className="pointer-events-none absolute bottom-4 left-6 right-6 z-10 flex translate-y-2 items-center gap-1 text-xs font-bold uppercase tracking-wider text-blue-400 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 select-none">
+        {cta}
+        <ArrowRightIcon className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5" />
+      </span>
+    )}
 
     {!onClick && (
       <div

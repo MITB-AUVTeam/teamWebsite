@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, useMotionValue } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
 import { Home, Info, Navigation, Users, Image, PlaySquare, Mail, Star } from "lucide-react";
@@ -8,10 +8,23 @@ import logoImg from "../assets/hero_parallax/b0b02181d3064ccfa838a5b7d18e44696ad
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const lastScrollY = useRef(0);
+  const navY = useMotionValue(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const currentScrollY = window.scrollY;
+      const scrollDelta = currentScrollY - lastScrollY.current;
+
+      setIsScrolled(currentScrollY > 50);
+
+      if (currentScrollY < 80) {
+        navY.set(0);
+      } else {
+        navY.set(Math.max(-110, Math.min(0, navY.get() - scrollDelta)));
+      }
+
+      lastScrollY.current = currentScrollY;
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -30,6 +43,7 @@ export function Navbar() {
 
   return (
     <motion.header
+      style={{ y: navY }}
       className={cn(
         "fixed top-0 z-[10000] flex w-full items-center justify-center transition-all duration-500 pt-6"
       )}

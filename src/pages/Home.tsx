@@ -527,7 +527,7 @@ export function Home() {
           <h2 className="text-sm font-bold tracking-widest text-blue-500 uppercase mb-3">Sub-systems</h2>
           <h3 className="text-4xl md:text-5xl font-semibold tracking-tight">The core of our vehicle</h3>
         </div>
-        <BentoGrid className="lg:grid-rows-3">
+        <BentoGrid className="auto-rows-[20rem] sm:auto-rows-[22rem] lg:grid-rows-[repeat(3,14rem)]">
           {features.map((feature) => (
             <BentoCard
               key={feature.name}

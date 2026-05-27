@@ -81,7 +81,7 @@ export function VehiclesPage() {
           className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6"
         >
           <div className="space-y-4">
-            <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-semibold uppercase tracking-tighter leading-none">
+            <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-semibold tracking-tighter leading-none">
               Our Vehicles
             </h1>
             <p className="text-slate-400 text-sm md:text-base tracking-[0.2em] uppercase font-medium ml-1">
