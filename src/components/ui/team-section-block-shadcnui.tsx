@@ -248,7 +248,7 @@ const teamCategories = [
         "gradient": "from-teal-500/20 via-teal-500/5 to-transparent",
         "social": {
           "linkedin": "https://www.linkedin.com/in/serah-jacob-08a4bb33a",
-          "github": "https://github.com/serahjacob76"
+          "github": "https://github.com/soeoroah"
         }
       },
       {
@@ -381,14 +381,14 @@ const teamCategories = [
       {
         "name": "Kaushiki Gupta",
         "role": "Management Team Member",
-        "bio": "idk",
+        "bio": "I wish I could, but I don't want to.",
         "image": "src/assets/Personal_photo/kaushiki.jpeg",
         "location": "1st Year",
         "skills": ["Management"],
         "gradient": "from-teal-500/20 via-teal-500/5 to-transparent",
         "social": {
-          "linkedin": "https://www.linkedin.com/feed/akentkjbasdf/",
-          "github": "https://github.com/asdjfahlkjsdhfahs"
+          "linkedin": "",
+          "github": ""
         }
       },
       {

@@ -13,7 +13,7 @@ const SERVICES = [
     id: "01",
     title: "Why",
     description:
-      "Innovation grows when students are free to build, test, make mistakes, and learn from them. The goal is to help students become creative engineers who can solve underwater problems through real hands-on experience.",
+      "Students from different engineering fields coming together after late nights to work even later nights full of rapid prototyping, frequent fixes, and more time than we’d like to admit with our heads in our hands. All for the purpose of bringing that bot to life.",
     image: ABOUT_TAB_1,
   },
   {
