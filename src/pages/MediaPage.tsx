@@ -377,6 +377,60 @@ export function MediaPage() {
         )}
       </section>
 
+      {/* New Section: Creative Works - Videos */}
+      <section className="max-w-7xl mx-auto px-6 pb-24 border-t border-white/10 pt-16">
+        <div className="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4">
+          <div>
+            <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tight">
+              Creative Works - Videos
+            </h3>
+            <p className="text-slate-400 text-sm mt-2">
+              Watch our team updates, vehicle demonstrations, and technical presentations.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Main Featured Video */}
+          <div className="lg:col-span-2 aspect-video rounded-3xl overflow-hidden border border-white/10 bg-slate-950 shadow-2xl relative group">
+            <iframe
+              src="https://www.youtube.com/embed/dQw4w9WgXcQ" // REPLACE WITH YOUR INTRO YOUTUBE VIDEO ID/EMBED URL
+              title="Team AUV Introduction Video"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              className="w-full h-full"
+            />
+          </div>
+
+          {/* Video Information / Sidebar */}
+          <div className="flex flex-col justify-center bg-white/5 border border-white/10 rounded-3xl p-8 lg:p-10">
+            <span className="px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs font-bold tracking-wider uppercase self-start mb-6">
+              Featured Video
+            </span>
+            <h4 className="text-2xl font-bold text-white mb-4 leading-tight">
+              Team AUV Introduction
+            </h4>
+            <p className="text-slate-300 text-sm leading-relaxed mb-6">
+              An overview of our autonomous underwater vehicle projects, student-led workshop environments, and collaborative engineering journey.
+            </p>
+            <div className="pt-6 border-t border-white/10 flex items-center justify-between mt-auto">
+              <span className="text-slate-400 text-xs font-medium">
+                Published by Team AUV
+              </span>
+              <a
+                href="https://www.youtube.com/@TeamAUVMIT-B"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-1.5"
+              >
+                Visit Channel <ArrowRight className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <AnimatePresence>
         {activePost && (
           <motion.div
