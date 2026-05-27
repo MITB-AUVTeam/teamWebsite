@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Calendar, User, ArrowRight, Tag, X } from "lucide-react";
+import { Calendar, User, ArrowRight, Tag, X, Search } from "lucide-react";
 import { Footer } from "@/components/Footer";
 import azadLockedIn from "@/assets/Gallery/azad_lockedin.webp";
 import img_2816 from "@/assets/Gallery/IMG_2816.webp";
@@ -12,6 +12,7 @@ import prithaPhoto from "@/assets/Personal_photo/pritha.jpeg";
 
 export function MediaPage() {
   const [activePost, setActivePost] = useState<any | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Esc key listener to close modal
   useEffect(() => {
@@ -182,6 +183,29 @@ export function MediaPage() {
     }
   ];
 
+  const filteredPosts = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
+
+    if (!query) {
+      return recentPosts;
+    }
+
+    return recentPosts.filter((post) => {
+      const searchableText = [
+        post.title,
+        post.excerpt,
+        post.category,
+        post.date,
+        post.author,
+        Array.isArray(post.content) ? post.content.join(" ") : "",
+      ]
+        .join(" ")
+        .toLowerCase();
+
+      return searchableText.includes(query);
+    });
+  }, [recentPosts, searchQuery]);
+
   return (
     <div className="min-h-screen bg-[#020617] text-slate-50 pb-0 font-sans">
       
@@ -190,7 +214,7 @@ export function MediaPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6"
+          className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6"
         >
           <div className="space-y-4">
             <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-black uppercase tracking-tighter leading-none">
@@ -200,59 +224,71 @@ export function MediaPage() {
               Our Journey & Insights
             </p>
           </div>
-          <p className="text-slate-300 max-w-md md:text-right text-sm md:text-base leading-relaxed">
-            Read about our latest AUV builds, competition updates, and the stories around the team that builds it.
-          </p>
+          <div className="flex w-full max-w-md flex-col gap-4 md:items-end md:-translate-y-5">
+            <label className="relative w-full md:w-80">
+              <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
+              <input
+                type="search"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search articles"
+                aria-label="Search articles"
+                className="w-full rounded-full border border-white/10 bg-white/5 py-3 pl-11 pr-4 text-sm text-white outline-none transition-colors placeholder:text-slate-500 hover:border-white/20 focus:border-blue-400 focus:bg-white/10"
+              />
+            </label>
+          </div>
         </motion.div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-6 mb-20">
-        <motion.div 
-          onClick={() => setActivePost(featuredPost)}
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="group relative rounded-3xl overflow-hidden bg-white/5 border border-white/10 flex flex-col lg:flex-row cursor-pointer hover:border-white/20 transition-colors"
-        >
-          <div className="w-full lg:w-3/5 h-[220px] sm:h-[300px] lg:h-[500px] overflow-hidden">
-            <img 
-              src={featuredPost.image} 
-              alt={featuredPost.title}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-          </div>
-          <div className="w-full lg:w-2/5 p-8 lg:p-12 flex flex-col justify-center">
-            <div className="flex items-center gap-4 mb-6">
-              <span className="px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs font-bold tracking-wider uppercase flex items-center gap-1.5">
-                <Tag className="w-3 h-3" />
-                {featuredPost.category}
-              </span>
-              <div className="flex items-center gap-1.5 text-slate-400 text-xs font-medium">
-                <Calendar className="w-3.5 h-3.5" />
-                {featuredPost.date}
+      {!searchQuery.trim() && (
+        <section className="max-w-7xl mx-auto px-6 mb-20">
+          <motion.div 
+            onClick={() => setActivePost(featuredPost)}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="group relative rounded-3xl overflow-hidden bg-white/5 border border-white/10 flex flex-col lg:flex-row cursor-pointer hover:border-white/20 transition-colors"
+          >
+            <div className="w-full lg:w-3/5 h-[220px] sm:h-[300px] lg:h-[500px] overflow-hidden">
+              <img 
+                src={featuredPost.image} 
+                alt={featuredPost.title}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+            <div className="w-full lg:w-2/5 p-8 lg:p-12 flex flex-col justify-center">
+              <div className="flex items-center gap-4 mb-6">
+                <span className="px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs font-bold tracking-wider uppercase flex items-center gap-1.5">
+                  <Tag className="w-3 h-3" />
+                  {featuredPost.category}
+                </span>
+                <div className="flex items-center gap-1.5 text-slate-400 text-xs font-medium">
+                  <Calendar className="w-3.5 h-3.5" />
+                  {featuredPost.date}
+                </div>
+              </div>
+              
+              <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight group-hover:text-blue-400 transition-colors">
+                {featuredPost.title}
+              </h2>
+              
+              <p className="text-slate-300 leading-relaxed mb-8">
+                {featuredPost.excerpt}
+              </p>
+              
+              <div className="flex items-center justify-between mt-auto">
+                <div className="flex items-center gap-1.5 text-slate-400 text-xs font-medium">
+                  <User className="w-3.5 h-3.5" />
+                  {featuredPost.author}
+                </div>
+                <span className="flex items-center gap-2 text-sm font-bold text-white group-hover:text-blue-400 transition-colors">
+                  Read Article <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </span>
               </div>
             </div>
-            
-            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight group-hover:text-blue-400 transition-colors">
-              {featuredPost.title}
-            </h2>
-            
-            <p className="text-slate-300 leading-relaxed mb-8">
-              {featuredPost.excerpt}
-            </p>
-            
-            <div className="flex items-center justify-between mt-auto">
-              <div className="flex items-center gap-1.5 text-slate-400 text-xs font-medium">
-                <User className="w-3.5 h-3.5" />
-                {featuredPost.author}
-              </div>
-              <span className="flex items-center gap-2 text-sm font-bold text-white group-hover:text-blue-400 transition-colors">
-                Read Article <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </span>
-            </div>
-          </div>
-        </motion.div>
-      </section>
+          </motion.div>
+        </section>
+      )}
 
       <section className="max-w-7xl mx-auto px-6 pb-24">
         <div className="flex items-center justify-between mb-10">
@@ -261,8 +297,9 @@ export function MediaPage() {
           </h3>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {recentPosts.map((post, index) => (
+        {filteredPosts.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredPosts.map((post, index) => (
             <motion.div
               key={post.title}
               onClick={() => {
@@ -328,8 +365,16 @@ export function MediaPage() {
                 )}
               </div>
             </motion.div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="rounded-2xl border border-white/10 bg-white/5 px-6 py-12 text-center">
+            <p className="text-lg font-semibold text-white">No articles found</p>
+            <p className="mt-2 text-sm text-slate-400">
+              Try searching by title, author, category, or topic.
+            </p>
+          </div>
+        )}
       </section>
 
       <AnimatePresence>
