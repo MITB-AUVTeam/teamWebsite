@@ -187,7 +187,7 @@ export function VehiclesPage() {
                 Technical Design Report
               </h3>
               <p className="text-slate-400 text-sm md:text-base leading-relaxed">
-                Our official Technical Design Report (TDR) details the engineering decisions, hardware architecture, and software autonomy methodologies behind our competition vehicles.
+                Our official Technical Design Report (TDR) details the engineering decisions, hardware architecture, and software autonomy methodologies behind our competition vehicle.
               </p>
             </div>
             
@@ -223,11 +223,11 @@ export function VehiclesPage() {
                     RoboSub 2026 TDR
                   </h4>
                   <p className="text-slate-400 text-xs tracking-wider uppercase font-mono">
-                    Format: PDF • 10 Pages • IEEE Standard
+                    Format: PDF • 12 Pages • IEEE Standard
                   </p>
                 </div>
                 <p className="text-slate-300 text-sm leading-relaxed max-w-sm">
-                  The document includes comprehensive details on vehicle hull structures, thruster math models, electronic wiring layout, sensor specs, and autonomous behavior trees.
+                  The document includes comprehensive details on vehicle hull structures, thruster placement logic, electrical architecture, sensor listing and specs, and modelled behavior trees for autonomy.
                 </p>
                 <a 
                   href={tdrPdf} 
