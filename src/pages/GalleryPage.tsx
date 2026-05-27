@@ -37,15 +37,12 @@ import img1 from "@/assets/Gallery/IMG1.webp";
 import img2 from "@/assets/Gallery/IMG2.webp";
 import img3 from "@/assets/Gallery/IMG3.webp";
 import img4 from "@/assets/Gallery/IMG4.webp";
-import img5 from "@/assets/Gallery/IMG5.webp";
 import img6 from "@/assets/Gallery/IMG6.webp";
 import img7 from "@/assets/Gallery/IMG7.webp";
-import img8 from "@/assets/Gallery/IMG8.webp";
 import img9 from "@/assets/Gallery/IMG9.webp";
 import img10 from "@/assets/Gallery/IMG10.webp";
 import img11 from "@/assets/Gallery/IMG11.webp";
 import img12 from "@/assets/Gallery/IMG12.webp";
-import img13 from "@/assets/Gallery/IMG13.webp";
 import img14 from "@/assets/Gallery/IMG14.webp";
 import img15 from "@/assets/Gallery/IMG15.webp";
 import img16 from "@/assets/Gallery/IMG16.webp";
@@ -53,53 +50,41 @@ import img17 from "@/assets/Gallery/IMG17.webp";
 import img18 from "@/assets/Gallery/IMG18.webp";
 import img19 from "@/assets/Gallery/IMG19.webp";
 import img20 from "@/assets/Gallery/IMG20.webp";
-import img21 from "@/assets/Gallery/IMG21.webp";
 import img22 from "@/assets/Gallery/IMG22.webp";
 import img23 from "@/assets/Gallery/IMG23.webp";
-import img24 from "@/assets/Gallery/IMG24.webp";
 import img25 from "@/assets/Gallery/IMG25.webp";
 import img26 from "@/assets/Gallery/IMG26.webp";
-import img27 from "@/assets/Gallery/IMG27.webp";
 import img28 from "@/assets/Gallery/IMG28.webp";
-import img29 from "@/assets/Gallery/IMG29.webp";
-import img30 from "@/assets/Gallery/IMG30.webp";
 import img31 from "@/assets/Gallery/IMG31.webp";
 import img32 from "@/assets/Gallery/IMG32.webp";
 import img33 from "@/assets/Gallery/IMG33.webp";
 import img34 from "@/assets/Gallery/IMG34.webp";
-import img35 from "@/assets/Gallery/IMG35.webp";
 import img36 from "@/assets/Gallery/IMG36.webp";
-import img37 from "@/assets/Gallery/IMG37.webp";
-import img38 from "@/assets/Gallery/IMG38.webp";
 import img39 from "@/assets/Gallery/IMG39.webp";
 import img40 from "@/assets/Gallery/IMG40.webp";
 import img41 from "@/assets/Gallery/IMG41.webp";
 import img42 from "@/assets/Gallery/IMG42.webp";
 import img43 from "@/assets/Gallery/IMG43.webp";
 import img44 from "@/assets/Gallery/IMG44.webp";
-import img45 from "@/assets/Gallery/IMG45.webp";
-import img46 from "@/assets/Gallery/IMG46.webp";
-import im2g0 from "@/assets/Gallery/IM2G0.webp";
-import im2g1 from "@/assets/Gallery/IM2G1.webp";
-import im2g2 from "@/assets/Gallery/IM2G2.webp";
 import im2g3 from "@/assets/Gallery/IM2G3.webp";
-import im2g4 from "@/assets/Gallery/IM2G4.webp";
-import im2g5 from "@/assets/Gallery/IM2G5.webp";
 import im2g6 from "@/assets/Gallery/IM2G6.webp";
-import im2g7 from "@/assets/Gallery/IM2G7.webp";
-import im2g8 from "@/assets/Gallery/IM2G8.webp";
-import im2g9 from "@/assets/Gallery/IM2G9.webp";
-import im2g10 from "@/assets/Gallery/IM2G10.webp";
-import im2g11 from "@/assets/Gallery/IM2G11.webp";
 import im2g12 from "@/assets/Gallery/IM2G12.webp";
-import im2g13 from "@/assets/Gallery/IM2G13.webp";
 import im2g14 from "@/assets/Gallery/IM2G14.webp";
 import im2g15 from "@/assets/Gallery/IM2G15.webp";
+import aryanImg from "@/assets/Gallery/aryan.jpeg";
+import cam1Img from "@/assets/Gallery/cam1.jpeg";
+import internalImg from "@/assets/Gallery/internal.jpeg";
+import teamImg from "@/assets/Gallery/team.jpeg";
 
 const archiveImages = [
+  { src: aryanImg, category: "team", alt: "Aryan" },
+  { src: cam1Img, category: "testing", alt: "Camera View" },
+  { src: internalImg, category: "vehicles", alt: "Internal Vehicle View" },
+  { src: teamImg, category: "team", alt: "Team Photo" },
   { src: img_1184, category: "team", alt: "Team" },
   { src: img_1187, category: "team", alt: "Team" },
   { src: img_1325, category: "team", alt: "Testing" },
+  { src: img_1328, category: "team", alt: "Testing" },
   { src: img_1328, category: "team", alt: "Testing" },
   { src: img_2551, category: "team", alt: "Vehicles" },
   { src: img_2811, category: "team", alt: "Vehicles" },
@@ -126,15 +111,12 @@ const archiveImages = [
   { src: img2, category: "testing", alt: "IMG2" },
   { src: img3, category: "team", alt: "IMG3" },
   { src: img4, category: "team", alt: "IMG4" },
-  { src: img5, category: "goofy", alt: "IMG5" },
   { src: img6, category: "team", alt: "IMG6" },
   { src: img7, category: "testing", alt: "IMG7" },
-  { src: img8, category: "goofy", alt: "IMG8" },
   { src: img9, category: "testing", alt: "IMG9" },
   { src: img10, category: "testing", alt: "IMG10" },
   { src: img11, category: "testing", alt: "IMG11" },
   { src: img12, category: "vehicles", alt: "IMG12" },
-  { src: img13, category: "goofy", alt: "IMG13" },
   { src: img14, category: "vehicles", alt: "IMG14" },
   { src: img15, category: "team", alt: "IMG15" },
   { src: img16, category: "team", alt: "IMG16" },
@@ -142,46 +124,25 @@ const archiveImages = [
   { src: img18, category: "team", alt: "IMG18" },
   { src: img19, category: "testing", alt: "IMG19" },
   { src: img20, category: "team", alt: "IMG20" },
-  { src: img21, category: "goofy", alt: "IMG21" },
   { src: img22, category: "vehicles", alt: "IMG22" },
   { src: img23, category: "vehicles", alt: "IMG23" },
-  { src: img24, category: "goofy", alt: "IMG24" },
   { src: img25, category: "testing", alt: "IMG25" },
   { src: img26, category: "team", alt: "IMG26" },
-  { src: img27, category: "testing", alt: "IMG27" },
   { src: img28, category: "testing", alt: "IMG28" },
-  { src: img29, category: "goofy", alt: "IMG29" },
-  { src: img30, category: "goofy", alt: "IMG30" },
   { src: img31, category: "team", alt: "IMG31" },
   { src: img32, category: "team", alt: "IMG32" },
   { src: img33, category: "team", alt: "IMG33" },
   { src: img34, category: "team", alt: "IMG34" },
-  { src: img35, category: "team", alt: "IMG35" },
   { src: img36, category: "vehicles", alt: "IMG36" },
-  { src: img37, category: "goofy", alt: "IMG37" },
-  { src: img38, category: "goofy", alt: "IMG38" },
   { src: img39, category: "vehicles", alt: "IMG39" },
   { src: img40, category: "team", alt: "IMG40" },
   { src: img41, category: "team", alt: "IMG41" },
   { src: img42, category: "team", alt: "IMG42" },
   { src: img43, category: "testing", alt: "IMG43" },
   { src: img44, category: "team", alt: "IMG44" },
-  { src: img45, category: "goofy", alt: "IMG45" },
-  { src: img46, category: "goofy", alt: "IMG46" },
-  { src: im2g0, category: "goofy", alt: "IM2G0" },
-  { src: im2g1, category: "goofy", alt: "IM2G1" },
-  { src: im2g2, category: "team", alt: "IM2G2" },
   { src: im2g3, category: "testing", alt: "IM2G3" },
-  { src: im2g4, category: "goofy", alt: "IM2G4" },
-  { src: im2g5, category: "goofy", alt: "IM2G5" },
   { src: im2g6, category: "team", alt: "IM2G6" },
-  { src: im2g7, category: "goofy", alt: "IM2G7" },
-  { src: im2g8, category: "goofy", alt: "IM2G8" },
-  { src: im2g9, category: "goofy", alt: "IM2G9" },
-  { src: im2g10, category: "goofy", alt: "IM2G10" },
-  { src: im2g11, category: "team", alt: "IM2G11" },
   { src: im2g12, category: "team", alt: "IM2G12" },
-  { src: im2g13, category: "goofy", alt: "IM2G13" },
   { src: im2g14, category: "testing", alt: "IM2G14" },
   { src: im2g15, category: "testing", alt: "IM2G15" },
   { src: azadLockedIn, category: "team", alt: "Azad Roy" },
@@ -377,12 +338,7 @@ export function GalleryPage() {
             >
               Testing
             </ToggleGroupItem>
-            <ToggleGroupItem
-              value="goofy"
-              className="rounded-full px-6 py-2 text-sm font-semibold text-slate-300 transition-colors hover:text-blue-400 hover:bg-white/5 data-[state=on]:bg-white/5 data-[state=on]:text-blue-400"
-            >
-              Goofy Stuff
-            </ToggleGroupItem>
+
           </ToggleGroup>
 
           <FlipReveal className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 w-full mt-8" keys={[key]} showClass="flex" hideClass="hidden">

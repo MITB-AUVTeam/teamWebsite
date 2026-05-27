@@ -19,6 +19,7 @@ import { Footer } from "@/components/Footer";
 import proto1Img from "@/assets/Gallery/IMG_4024_2.png";
 import proto2Img from "@/assets/Gallery/deuterium3.jpeg";
 import tdrPdf from "@/assets/tdr/IEEE_Conference_Template.pdf";
+import dimensionsIcon from "@/assets/dimensions.png";
 
 export function VehiclesPage() {
   const [isMobile, setIsMobile] = useState(false);
@@ -39,7 +40,7 @@ export function VehiclesPage() {
       description: "Our zeroth prototype, which was essentially an ROV, designed to test our basic design philosophy and understand the core concepts around underwater robotics.",
       image: proto1Img,
       specs: [
-        { icon: Ruler, label: "Dimensions", value: "330mm (L) × 340mm (W) × 230mm (H)" },
+        { icon: dimensionsIcon, label: "Dimensions", value: "330mm (L) × 340mm (W) × 230mm (H)" },
         { icon: Weight, label: "Mass", value: "5 kg" },
         { icon: Move3d, label: "Degrees of Freedom", value: "5 (Surge, Heave, Roll, Pitch, Yaw)" },
         { icon: Compass, label: "Navigation", value: "BNO055 IMU" },
@@ -55,7 +56,7 @@ export function VehiclesPage() {
       description: "Our very first AUV, designed based on our learnings from Hydrogen, this model gives us extreme modularity and ample space to house all essential electronics safely for successful task execution.",
       image: proto2Img,
       specs: [
-        { icon: Ruler, label: "Dimensions", value: "620mm (L) × 400mm (W) × 250mm (H)" },
+        { icon: dimensionsIcon, label: "Dimensions", value: "620mm (L) × 400mm (W) × 250mm (H)" },
         { icon: Weight, label: "Mass", value: "20 kg" },
         { icon: Move3d, label: "Degrees of Freedom", value: "5 (Surge, Heave, Roll, Pitch, Yaw)" },
         { icon: Compass, label: "Navigation", value: "BNO055 IMU, BlueRobotics Pressure/Depth Sensor" },
@@ -148,7 +149,16 @@ export function VehiclesPage() {
                       className="flex items-start gap-4"
                     >
                       <div className="w-10 h-10 rounded-xl bg-slate-800/50 border border-slate-700/50 flex items-center justify-center shrink-0 mt-1">
-                        <spec.icon className="w-5 h-5 text-blue-400" />
+                        {typeof spec.icon === "string" ? (
+                          <img 
+                            src={spec.icon} 
+                            alt={spec.label} 
+                            className="w-5 h-5 object-contain" 
+                            style={{ filter: "invert(67%) sepia(61%) saturate(2225%) hue-rotate(194deg) brightness(101%) contrast(98%)" }} 
+                          />
+                        ) : (
+                          <spec.icon className="w-5 h-5 text-blue-400" />
+                        )}
                       </div>
                       <div>
                         <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">
