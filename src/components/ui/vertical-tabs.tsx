@@ -32,7 +32,7 @@ const SERVICES = [
   },
 ];
 
-const AUTO_PLAY_DURATION = 8000;
+const AUTO_PLAY_DURATION = 12000;
 
 export default function VerticalTabs() {
   const [activeIndex, setActiveIndex] = useState(0);
