@@ -527,7 +527,7 @@ export function Home() {
           <h2 className="text-sm font-bold tracking-widest text-blue-500 uppercase mb-3">Sub-systems</h2>
           <h3 className="text-4xl md:text-5xl font-semibold tracking-tight">The core of our vehicle</h3>
         </div>
-        <BentoGrid className="auto-rows-[20rem] sm:auto-rows-[22rem] lg:grid-rows-[repeat(3,14rem)]">
+        <BentoGrid className="auto-rows-[18rem] sm:auto-rows-[20rem] lg:grid-rows-[repeat(3,13rem)]">
           {features.map((feature) => (
             <BentoCard
               key={feature.name}
@@ -597,14 +597,11 @@ export function Home() {
                 exit={{ scale: 0.95, y: 15, opacity: 0 }}
                 transition={{ type: "spring", duration: 0.4 }}
                 onClick={(e) => e.stopPropagation()}
-                className={cn(
-                  "relative w-full max-w-4xl max-h-[90vh] md:max-h-[85vh] flex flex-col overflow-hidden rounded-2xl sm:rounded-[2rem] border bg-slate-950 shadow-2xl p-4 sm:p-6 md:p-10 select-none",
-                  detail.borderColor
-                )}
+                className="relative w-full max-w-4xl max-h-[90vh] md:max-h-[85vh] flex flex-col overflow-hidden rounded-2xl sm:rounded-[2rem] border border-white/10 bg-black shadow-2xl p-4 sm:p-6 md:p-10 select-none"
               >
                 {/* Visual back-glow */}
-                <div className={cn("absolute -top-40 -left-40 w-96 h-96 rounded-full blur-3xl pointer-events-none z-0 opacity-40", detail.glowColor)} />
-                <div className={cn("absolute -bottom-40 -right-40 w-96 h-96 rounded-full blur-3xl pointer-events-none z-0 opacity-40", detail.glowColor)} />
+                <div className="absolute -top-40 -left-40 w-96 h-96 rounded-full bg-white/5 blur-3xl pointer-events-none z-0 opacity-30" />
+                <div className="absolute -bottom-40 -right-40 w-96 h-96 rounded-full bg-white/5 blur-3xl pointer-events-none z-0 opacity-30" />
 
                 {/* Tech background grid overlay */}
                 <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none opacity-40" />
@@ -615,16 +612,13 @@ export function Home() {
                     <h2 className="text-2xl md:text-4xl font-extrabold text-white mt-1 leading-tight tracking-tight">
                       {detail.title}
                     </h2>
-                    <p className="text-slate-400 text-xs md:text-sm mt-1.5 md:mt-2 max-w-2xl leading-relaxed">
-                      {detail.subTitle}
-                    </p>
                   </div>
 
                   {/* Close button */}
                   <button
                     onClick={() => setActiveTeam(null)}
                     aria-label="Close modal"
-                    className="p-2 md:p-3 rounded-full bg-slate-900 border border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800 transition-all duration-300 shadow-md group hover:scale-105 active:scale-95 cursor-pointer ml-4"
+                    className="p-2 md:p-3 rounded-full bg-black border border-white/10 text-slate-400 hover:text-white hover:bg-black hover:border-white/20 transition-all duration-300 shadow-md group hover:scale-105 active:scale-95 cursor-pointer ml-4"
                   >
                     <X className="w-5 h-5 transition-transform duration-300 group-hover:rotate-90" />
                   </button>
@@ -633,7 +627,7 @@ export function Home() {
                 {/* Content body */}
                 <div className="relative z-10 flex-1 overflow-y-auto space-y-6 md:space-y-8 pr-2">
                   {/* Description paragraph */}
-                  <div className="bg-slate-900/40 backdrop-blur-sm border border-slate-800/80 p-5 md:p-6 rounded-2xl">
+                  <div className="bg-black border border-white/10 p-5 md:p-6 rounded-2xl">
                     <p className="text-slate-300 text-sm md:text-base leading-relaxed tracking-wide font-normal font-sans">
                       {detail.description}
                     </p>
@@ -641,23 +635,16 @@ export function Home() {
 
                   {/* Highlights Grid */}
                   <div>
-                    <h3 className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-slate-500 mb-4 font-mono">
-                      Key Responsibilities & Domains
-                    </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {detail.highlights.map((item, index) => {
-                        const IconComponent = item.icon;
                         return (
                           <div
                             key={index}
                             className={cn(
-                              "flex gap-4 p-4 md:p-5 rounded-2xl bg-gradient-to-br from-slate-950 via-slate-950 to-slate-900 border border-slate-900/60 transition-all duration-300 hover:border-slate-800",
-                              "hover:bg-slate-950/80 group/item relative overflow-hidden"
+                              "flex gap-4 p-4 md:p-5 rounded-2xl bg-black border border-white/10 transition-all duration-300 hover:border-white/20",
+                              "group/item relative overflow-hidden"
                             )}
                           >
-                            <div className="flex-shrink-0 flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-xl bg-slate-900 border border-slate-800 text-blue-400 transition-colors duration-300 group-hover/item:text-cyan-400 group-hover/item:border-cyan-500/20">
-                              <IconComponent className="w-5 h-5 md:w-6 md:h-6" />
-                            </div>
                             <div className="flex-1 min-w-0">
                               <h4 className="text-sm md:text-base font-semibold text-slate-200 group-hover/item:text-white transition-colors duration-300">
                                 {item.title}

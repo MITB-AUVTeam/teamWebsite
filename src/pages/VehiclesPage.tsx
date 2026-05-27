@@ -147,8 +147,8 @@ export function VehiclesPage() {
                       transition={{ duration: 0.4, delay: 0.3 + (i * 0.05) }}
                       className="flex items-start gap-4"
                     >
-                      <div className="w-10 h-10 rounded-xl bg-slate-800/50 border border-slate-700/50 flex items-center justify-center shrink-0 mt-1">
-                        <spec.icon className="w-5 h-5 text-blue-400" />
+                      <div className="w-10 h-10 flex items-center justify-center shrink-0 mt-1">
+                        <spec.icon className="w-5 h-5 text-white" />
                       </div>
                       <div>
                         <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">
