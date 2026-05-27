@@ -6,12 +6,12 @@ export function Footer() {
     <footer className="bg-black border-t border-slate-800/50 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-          
+
           <div className="flex flex-col items-start">
-            <img 
-              src={logoImg} 
-              alt="AUV Logo" 
-              className="h-[40px] w-auto object-contain mb-4" 
+            <img
+              src={logoImg}
+              alt="AUV Logo"
+              className="h-[40px] w-auto object-contain mb-4"
             />
             <p className="text-slate-400 mb-6 text-sm leading-relaxed max-w-xs">
               Building cool underwater robots everyday.
@@ -71,16 +71,16 @@ export function Footer() {
 
           <div className="flex flex-col items-start">
             <h4 className="text-white font-semibold mb-6 tracking-wide uppercase text-sm">Location</h4>
-            <a 
-              href="https://maps.app.goo.gl/FBcetpnuBDREDUjG7" 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href="https://maps.app.goo.gl/FBcetpnuBDREDUjG7"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-start gap-3 group/map transition-colors"
             >
               <MapPin className="w-5 h-5 text-slate-500 shrink-0 mt-0.5 group-hover/map:text-blue-400 transition-colors" />
               <p className="text-slate-400 group-hover/map:text-blue-400 text-sm leading-relaxed transition-colors">
-                Team AUV Workshop <br/>
-                Room 209, 210 AB-4<br/>
+                Team AUV Workshop <br />
+                Room 209, 210 AB-4<br />
                 Manipal Institute of Technology,<br />
                 Manipal Academy of Higher Education,<br />
                 Bengaluru, Karnataka, India

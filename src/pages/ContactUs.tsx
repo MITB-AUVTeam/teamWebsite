@@ -2,18 +2,18 @@ import { useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import { StaggeredGrid, BentoItem } from "@/components/ui/staggered-grid";
 import { SmoothScroll } from "@/components/ui/smooth-scroll";
-import { 
-  Github, 
-  Instagram, 
-  Linkedin, 
-  Mail, 
-  Youtube, 
-  MapPin, 
-  Phone, 
-  Send, 
-  Loader2, 
-  CheckCircle2, 
-  AlertCircle 
+import {
+  Github,
+  Instagram,
+  Linkedin,
+  Mail,
+  Youtube,
+  MapPin,
+  Phone,
+  Send,
+  Loader2,
+  CheckCircle2,
+  AlertCircle
 } from "lucide-react";
 import youtubeImg from "../assets/contacts/youtube.png";
 import instagramImg from "../assets/contacts/instagram.png";
@@ -31,7 +31,7 @@ export function ContactUs() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
 
@@ -146,7 +146,7 @@ export function ContactUs() {
 
         <div className="max-w-7xl mx-auto px-6 py-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            
+
             <div className="flex flex-col justify-center">
               <h2 className="text-4xl md:text-5xl font-semibold text-white mb-6 tracking-tight">
                 Get in <span className="text-blue-500">Touch</span>
@@ -206,8 +206,8 @@ export function ContactUs() {
                       rel="noopener noreferrer"
                       className="text-slate-200 text-base md:text-lg hover:text-blue-400 transition-colors"
                     >
-                      Team AUV Workshop <br/>
-                      Room 209, 210 AB-4<br/>
+                      Team AUV Workshop <br />
+                      Room 209, 210 AB-4<br />
                       Manipal Institute of Technology Bengaluru,<br />
                       Manipal Academy of Higher Education,<br />
                       Bengaluru, Karnataka, India
@@ -219,7 +219,7 @@ export function ContactUs() {
 
             <div id="contact-form" className="bg-slate-900/40 backdrop-blur-xl border border-slate-800/60 p-8 rounded-3xl shadow-2xl relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none"></div>
-              
+
               <form className="space-y-6 relative z-10" onSubmit={handleSubmit}>
                 <div className="space-y-3">
                   <label className="block text-sm font-medium text-slate-300">Name</label>
@@ -273,7 +273,7 @@ export function ContactUs() {
                   </div>
                 )}
 
-                <button 
+                <button
                   type="submit"
                   disabled={isSubmitting}
                   className="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-3 px-6 rounded-xl transition-all flex items-center justify-center gap-2 group shadow-lg shadow-blue-900/20 disabled:opacity-50 disabled:cursor-not-allowed"

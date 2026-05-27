@@ -60,13 +60,15 @@ export function NavBar({ items, className, children, isScrolled = false }: NavBa
           className,
         )}
       >
-        <div className={cn(
-          "flex items-center justify-between py-2 px-4 md:px-2 transition-all duration-300",
-          isScrolled
-            ? "bg-[#0a1128]/95 border border-white/20 shadow-2xl"
-            : "bg-[#0a1128]/80 border border-white/10 shadow-lg",
-          "backdrop-blur-lg rounded-full"
-        )}>
+        <div
+          className={cn(
+            "flex items-center justify-between py-2 px-4 md:px-2 transition-all duration-300",
+            "bg-transparent rounded-full",
+            isScrolled
+              ? "border border-white/20 shadow-2xl backdrop-blur-xl"
+              : "border border-white/10 shadow-lg backdrop-blur-lg",
+          )}
+        >
           {children && (
             <div className="pl-2 md:pl-6 pr-4 flex items-center">
               {children}
@@ -85,7 +87,7 @@ export function NavBar({ items, className, children, isScrolled = false }: NavBa
                   className={cn(
                     "relative cursor-pointer text-sm font-semibold px-6 py-2 rounded-full transition-colors",
                     "text-slate-300 hover:text-blue-400",
-                    isActive && "bg-white/5 text-blue-400",
+                    isActive && "bg-white/5 text-white",
                   )}
                 >
                   <span>{item.name}</span>
@@ -159,12 +161,12 @@ export function NavBar({ items, className, children, isScrolled = false }: NavBa
                         }}
                         className={cn(
                           "relative py-4 sm:py-5 text-center text-sm font-bold tracking-[0.2em] uppercase border-b border-white/5 last:border-b-0 transition-colors flex items-center justify-center",
-                          isActive ? "text-blue-500" : "text-slate-300 hover:text-blue-400"
+                          isActive ? "text-white" : "text-slate-300 hover:text-blue-400"
                         )}
                       >
-                        {isActive && <span className="absolute left-6 text-blue-500 font-normal">[</span>}
+                        {isActive && <span className="absolute left-6 text-white font-normal">[</span>}
                         {item.name}
-                        {isActive && <span className="absolute right-6 text-blue-500 font-normal">]</span>}
+                        {isActive && <span className="absolute right-6 text-white font-normal">]</span>}
                       </Link>
                     )
                   })}

@@ -91,9 +91,9 @@ export function MediaPage() {
 
   return (
     <div className="min-h-screen bg-black text-slate-50 pb-0 font-sans">
-      
+
       <section className="max-w-7xl mx-auto px-6 pt-12 md:pt-20 mb-16">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -114,7 +114,7 @@ export function MediaPage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-6 mb-20">
-        <motion.div 
+        <motion.div
           onClick={() => setActivePost(featuredPost)}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -122,8 +122,8 @@ export function MediaPage() {
           className="group relative rounded-3xl overflow-hidden bg-white/5 border border-white/10 flex flex-col lg:flex-row cursor-pointer hover:border-white/20 transition-colors"
         >
           <div className="w-full lg:w-3/5 h-[220px] sm:h-[300px] lg:h-[500px] overflow-hidden">
-            <img 
-              src={featuredPost.image} 
+            <img
+              src={featuredPost.image}
               alt={featuredPost.title}
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
@@ -139,15 +139,15 @@ export function MediaPage() {
                 {featuredPost.date}
               </div>
             </div>
-            
+
             <h2 className="text-3xl lg:text-4xl font-semibold text-white mb-4 leading-tight group-hover:text-blue-400 transition-colors">
               {featuredPost.title}
             </h2>
-            
+
             <p className="text-slate-300 leading-relaxed mb-8">
               {featuredPost.excerpt}
             </p>
-            
+
             <div className="flex items-center justify-between mt-auto">
               <div className="flex items-center gap-1.5 text-slate-400 text-xs font-medium">
                 <User className="w-3.5 h-3.5" />
@@ -167,7 +167,7 @@ export function MediaPage() {
             Recent Articles
           </h3>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {recentPosts.map((post, index) => (
             <motion.div
@@ -186,8 +186,8 @@ export function MediaPage() {
               className="group flex flex-col bg-white/5 border border-white/10 rounded-2xl overflow-hidden cursor-pointer hover:border-white/20 transition-colors"
             >
               <div className="h-56 overflow-hidden relative">
-                <img 
-                  src={post.image} 
+                <img
+                  src={post.image}
                   alt={post.title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
@@ -197,7 +197,7 @@ export function MediaPage() {
                   </span>
                 </div>
               </div>
-              
+
               <div className="p-6 flex flex-col flex-1">
                 <div className="flex items-center gap-4 mb-4 text-slate-400 text-xs font-medium">
                   <div className="flex items-center gap-1.5">
@@ -209,15 +209,15 @@ export function MediaPage() {
                     {post.author}
                   </div>
                 </div>
-                
+
                 <h4 className="text-xl font-bold text-white mb-3 leading-snug group-hover:text-blue-400 transition-colors">
                   {post.title}
                 </h4>
-                
+
                 <div className="text-slate-400 text-sm leading-relaxed mb-6 flex-1">
                   {post.excerpt}
                 </div>
-                
+
                 {post.externalLink ? (
                   <a
                     href={post.externalLink}

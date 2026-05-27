@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { 
-  Ruler, 
-  Weight, 
-  Move3d, 
-  Compass, 
-  Cpu, 
-  Battery, 
-  Fan, 
-  Code2, 
-  Eye, 
-  Grab, 
+import {
+  Ruler,
+  Weight,
+  Move3d,
+  Compass,
+  Cpu,
+  Battery,
+  Fan,
+  Code2,
+  Eye,
+  Grab,
   Waves,
   Download,
   FileText
@@ -72,9 +72,9 @@ export function VehiclesPage() {
 
   return (
     <div className="min-h-screen bg-black text-slate-50 pb-0 font-sans">
-      
+
       <section className="max-w-7xl mx-auto px-6 pt-12 md:pt-20 mb-20">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -99,7 +99,7 @@ export function VehiclesPage() {
           <section key={vehicle.name} className="relative">
             <div className={`flex flex-col ${index % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-12 lg:gap-20 items-center`}>
 
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, x: index % 2 === 1 ? 30 : -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
@@ -108,13 +108,13 @@ export function VehiclesPage() {
               >
                 <div className="relative aspect-[4/3] rounded-[2rem] overflow-hidden group">
                   <div className="absolute inset-0 bg-blue-500/10 mix-blend-overlay z-10" />
-                  <img 
-                    src={vehicle.image} 
-                    alt={vehicle.name} 
+                  <img
+                    src={vehicle.image}
+                    alt={vehicle.name}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-20" />
-                  
+
                   <div className="absolute bottom-8 left-8 z-30">
                     <span className="px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-bold tracking-widest uppercase text-white mb-4 inline-block">
                       {vehicle.tagline}
@@ -126,7 +126,7 @@ export function VehiclesPage() {
                 </div>
               </motion.div>
 
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, x: index % 2 === 1 ? -30 : 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
@@ -139,7 +139,7 @@ export function VehiclesPage() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
                   {vehicle.specs.map((spec, i) => (
-                    <motion.div 
+                    <motion.div
                       key={spec.label}
                       initial={{ opacity: 0, y: 10 }}
                       whileInView={{ opacity: 1, y: 0 }}
@@ -180,9 +180,9 @@ export function VehiclesPage() {
                 Our official Technical Design Report (TDR) details the engineering decisions, hardware architecture, and software autonomy methodologies behind our competition vehicles.
               </p>
             </div>
-            
-            <a 
-              href={tdrPdf} 
+
+            <a
+              href={tdrPdf}
               download="RoboSub_2026_TDR.pdf"
               className="flex items-center gap-2 px-6 py-3.5 bg-blue-600 hover:bg-blue-500 active:scale-95 text-white font-bold text-sm rounded-full shadow-lg shadow-blue-900/30 transition-all duration-300 hover:scale-105 group/dl cursor-pointer z-10"
             >
@@ -191,7 +191,7 @@ export function VehiclesPage() {
             </a>
           </div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -201,7 +201,7 @@ export function VehiclesPage() {
             {/* Visual ambient glows inside panel */}
             <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl pointer-events-none z-0" />
             <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none z-0" />
-            
+
             {isMobile ? (
               /* High-Tech Technical PDF Card Mockup for Mobile */
               <div className="relative z-10 w-full p-6 sm:p-8 bg-[#0b0f19]/90 border border-blue-500/20 rounded-2xl flex flex-col items-center text-center shadow-inner gap-6">
@@ -219,8 +219,8 @@ export function VehiclesPage() {
                 <p className="text-slate-300 text-sm leading-relaxed max-w-sm">
                   The document includes comprehensive details on vehicle hull structures, thruster math models, electronic wiring layout, sensor specs, and autonomous behavior trees.
                 </p>
-                <a 
-                  href={tdrPdf} 
+                <a
+                  href={tdrPdf}
                   download="RoboSub_2026_TDR.pdf"
                   className="w-full flex items-center justify-center gap-2 py-3 px-6 bg-blue-600 hover:bg-blue-500 active:scale-95 text-white font-bold text-sm rounded-xl transition-all shadow-md shadow-blue-950"
                 >
@@ -231,10 +231,10 @@ export function VehiclesPage() {
             ) : (
               /* Interactive Embedded PDF Viewer container for Desktop */
               <div className="relative w-full h-[650px] md:h-[750px] lg:h-[800px] bg-[#0b0f19] rounded-2xl overflow-hidden shadow-inner border border-blue-500/20 flex flex-col z-10">
-                <iframe 
-                  src={`${tdrPdf}#toolbar=1&navpanes=0`} 
-                  className="w-full h-full border-none rounded-2xl" 
-                  title="RoboSub 2026 Technical Design Report" 
+                <iframe
+                  src={`${tdrPdf}#toolbar=1&navpanes=0`}
+                  className="w-full h-full border-none rounded-2xl"
+                  title="RoboSub 2026 Technical Design Report"
                 />
               </div>
             )}

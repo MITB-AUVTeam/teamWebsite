@@ -14,30 +14,30 @@ const sponsors = [
     description: "Serves as our primary institutional pillar, providing a state-of-the-art dedicated workshop space equipped with necessary electronic instruments like oscilloscopes, dual-channel power supplies, cabling along with appropriate mechanical tools and equipment. MIT Bengaluru also provides crucial direct funding for critical system components, combined with tireless administrative support, faculty mentorship if and when needed, and active support in bridging connections with industry partners to facilitate seamless development.",
     logoClass: "scale-105 md:scale-115 lg:scale-120"
   },
-  { 
-    name: "Ansys", 
-    logo: ansysLogo, 
+  {
+    name: "Ansys",
+    logo: ansysLogo,
     description: "Empowers our engineering analysis by providing advanced Ansys simulation software. This enables our team to rigorously model, test, and optimize fluid dynamics, mechanical stresses, and structural integrity under extreme deep-water pressures before physical deployment.",
     logoClass: "scale-125 md:scale-135 lg:scale-145",
     href: "https://www.ansys.com/en-in"
   },
-  { 
-    name: "Dassault Systèmes", 
-    logo: dassaultLogo, 
+  {
+    name: "Dassault Systèmes",
+    logo: dassaultLogo,
     description: "Supports our mechanical modeling and prototyping processes by providing SolidWorks CAD software. This serves as the foundation for our entire 3D engineering lifecycle, enabling complex mechanical design, assembly integration, and precise models for custom 3D-printed vehicle components.",
     logoClass: "scale-115 md:scale-125 lg:scale-130",
     href: "https://www.solidworks.com/product/students"
   },
-  { 
-    name: "Vicharak", 
-    logo: vicharakLogo, 
+  {
+    name: "Vicharak",
+    logo: vicharakLogo,
     description: "Accelerates our computational hardware by providing us with Shrike Lite microcontroller boards featuring an RP2040 MCU coupled with an onboard FPGA. We utilize these high-performance boards as the master/main microcontroller unit (MCU) driving autonomous navigation and real-time sensor processing inside our AUV.",
     logoClass: "scale-135 md:scale-150 lg:scale-160",
     href: "https://vicharak.in/"
   },
-  { 
-    name: "Wisdom Technologies", 
-    logo: wisdomLogo, 
+  {
+    name: "Wisdom Technologies",
+    logo: wisdomLogo,
     description: "Ensures the physical integrity and sealing of our vehicle by fabricating our custom AUV aluminum pressure hull. Their high-precision manufacturing provides the secure, watertight, and robust enclosure needed to protect our onboard electronics and computing hardware.",
     logoClass: "scale-95 md:scale-100",
     hoverLogoClass: "group-hover:scale-75 md:group-hover:scale-80",
@@ -65,9 +65,8 @@ export function SponsorsPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
           {sponsors.map((sponsor, index) => {
-            const cardClassName = `bg-gradient-to-b from-slate-950/60 to-slate-900/20 backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-slate-800/80 hover:bg-slate-900/40 hover:border-blue-500/20 transition-all duration-300 group flex flex-col items-center text-center ${
-              sponsor.name === "Manipal Institute of Technology" ? "md:col-span-2 md:max-w-4xl md:w-full md:mx-auto" : ""
-            }`;
+            const cardClassName = `bg-gradient-to-b from-slate-950/60 to-slate-900/20 backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-slate-800/80 hover:bg-slate-900/40 hover:border-blue-500/20 transition-all duration-300 group flex flex-col items-center text-center ${sponsor.name === "Manipal Institute of Technology" ? "md:col-span-2 md:max-w-4xl md:w-full md:mx-auto" : ""
+              }`;
 
             return (
               <motion.div

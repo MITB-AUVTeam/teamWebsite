@@ -23,13 +23,6 @@ import { LogoSlider } from "@/components/ui/logo-slider";
 import { StaggerTestimonials } from "@/components/ui/stagger-testimonials";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import {
-  FileTextIcon,
-  InputIcon,
-  GlobeIcon,
-  CalendarIcon,
-  BellIcon,
-} from "@radix-ui/react-icons";
 import { ArrowRight, Cpu, Zap, Code, LayoutDashboard, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -38,7 +31,6 @@ import { PhotoGallery } from "@/components/ui/gallery";
 
 const features = [
   {
-    Icon: Cpu,
     name: "Mechanical",
     description: "Structural integrity and fluid dynamics.",
     href: "/team",
@@ -47,7 +39,6 @@ const features = [
     className: "lg:row-start-1 lg:row-end-4 lg:col-start-2 lg:col-end-3",
   },
   {
-    Icon: Zap,
     name: "Electrical",
     description: "Power systems and embedded electronics.",
     href: "/team",
@@ -56,7 +47,6 @@ const features = [
     className: "lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-3",
   },
   {
-    Icon: LayoutDashboard,
     name: "Design",
     description: "Social media and content creation",
     href: "/team",
@@ -65,7 +55,6 @@ const features = [
     className: "lg:col-start-1 lg:col-end-2 lg:row-start-3 lg:row-end-4",
   },
   {
-    Icon: CalendarIcon,
     name: "Management",
     description: "Project timelines and resource allocation.",
     href: "/team",
@@ -74,7 +63,6 @@ const features = [
     className: "lg:col-start-3 lg:col-end-3 lg:row-start-1 lg:row-end-2",
   },
   {
-    Icon: Code,
     name: "Software",
     description: "Autonomous navigation and computer vision.",
     href: "/team",
@@ -447,9 +435,6 @@ export function Home() {
       <section className="py-24 px-6 max-w-7xl mx-auto relative z-10 order-2 md:order-2">
         {/* Sleek, master high-tech panel container */}
         <div className="relative overflow-hidden bg-slate-950/40 backdrop-blur-xl border border-slate-800/80 rounded-[2.5rem] p-8 md:p-12 lg:p-14 shadow-2xl group/panel">
-          {/* Subtle decorative grid lines / tech styling */}
-          <div className="absolute inset-0 border border-slate-850 rounded-[2.5rem] pointer-events-none z-20 m-2" />
-
           {/* Faint blue glows placed dynamically under the hood */}
           <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none z-0" />
           <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none z-0" />

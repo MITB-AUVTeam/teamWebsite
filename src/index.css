@@ -9,10 +9,14 @@
 }
 
 @utility no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+
+  /* Firefox */
   &::-webkit-scrollbar {
-    display: none; /* Chrome, Safari and Opera */
+    display: none;
+    /* Chrome, Safari and Opera */
   }
 }
 
@@ -112,19 +116,22 @@ body {
   -webkit-mask: linear-gradient(90deg, transparent, black 15% 85%, transparent);
 }
 
-.logo-slider__blur > div {
+.logo-slider__blur>div {
   z-index: var(--blur-index);
   mask: linear-gradient(90deg,
-    transparent calc(var(--blur-index) * calc((100 / var(--blurs)) * 1%)),
-    black calc((var(--blur-index) + 1) * calc((100 / var(--blurs)) * 1%)),
-    black calc((var(--blur-index) + 2) * calc((100 / var(--blurs)) * 1%)),
-    transparent calc((var(--blur-index) + 3) * calc((100 / var(--blurs)) * 1%)));
+      transparent calc(var(--blur-index) * calc((100 / var(--blurs)) * 1%)),
+      black calc((var(--blur-index) + 1) * calc((100 / var(--blurs)) * 1%)),
+      black calc((var(--blur-index) + 2) * calc((100 / var(--blurs)) * 1%)),
+      transparent calc((var(--blur-index) + 3) * calc((100 / var(--blurs)) * 1%)));
   backdrop-filter: blur(calc((var(--blur-index, 0) * var(--blur, 0)) * 1px));
   -webkit-backdrop-filter: blur(calc((var(--blur-index, 0) * var(--blur, 0)) * 1px));
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .logo-slider__track { gap: 0; }
+  .logo-slider__track {
+    gap: 0;
+  }
+
   .logo-slider__item {
     --duration: calc(var(--speed) * 1s);
     --delay: calc((var(--duration) / var(--count)) * (var(--item-index, 0) * -1));
@@ -133,8 +140,11 @@ body {
     animation: logo-slider-slide var(--duration) var(--delay) infinite linear;
     translate: var(--origin-x) 0;
   }
+
   @keyframes logo-slider-slide {
-    100% { translate: var(--destination-x) 0; }
+    100% {
+      translate: var(--destination-x) 0;
+    }
   }
 }
 
@@ -226,13 +236,15 @@ body {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+
   html {
     @apply font-sans;
   }
-  
+
   /* Custom premium scrollbar for Chromium browsers (Chrome, Edge, Safari) */
   ::-webkit-scrollbar {
     width: 10px;

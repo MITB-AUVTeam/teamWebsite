@@ -59,7 +59,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
       className={cn(
         "absolute left-1/2 top-1/2 cursor-pointer border-2 p-8 transition-all duration-700 ease-in-out",
         isCenter
-          ? "z-10 bg-blue-600 text-white border-blue-500"
+          ? "z-10 bg-slate-900 text-white border-slate-700"
           : "z-0 bg-slate-900 text-slate-300 border-slate-800 hover:border-blue-500/50"
       )}
       style={{
@@ -72,7 +72,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
           translateY(${isCenter ? -65 : position % 2 ? 15 : -15}px)
           rotate(${isCenter ? 0 : position % 2 ? 2.5 : -2.5}deg)
         `,
-        boxShadow: isCenter ? "0px 8px 0px 4px rgba(59, 130, 246, 0.5)" : "0px 0px 0px 0px transparent"
+        boxShadow: "0px 0px 0px 0px transparent"
       }}
     >
       <span
@@ -101,12 +101,12 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
       </h3>
       <p className={cn(
         "absolute bottom-8 left-8 right-8 mt-2 text-sm italic text-center",
-        isCenter ? "text-blue-100" : "text-slate-500"
+        isCenter ? "text-slate-300" : "text-slate-500"
       )}>
         - {testimonial.by}
       </p>
       {isCenter && (
-        <p className="absolute bottom-3 right-8 left-8 text-center text-xs font-bold text-blue-200 uppercase tracking-widest">
+        <p className="absolute bottom-3 right-8 left-8 text-center text-xs font-bold text-slate-300 uppercase tracking-widest">
           Click to view team &rarr;
         </p>
       )}
