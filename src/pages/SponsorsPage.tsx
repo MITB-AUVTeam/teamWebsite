@@ -9,7 +9,7 @@ import mitLogo from "../assets/Background - less sponsors logos/MIT.png";
 
 const sponsors = [
   {
-    name: "Manipal Institute of Technology",
+    name: "Manipal Institute of Technology, Bengaluru",
     logo: mitLogo,
     description: "Serves as our primary institutional pillar, providing a state-of-the-art dedicated workshop space equipped with necessary electronic instruments like oscilloscopes, dual-channel power supplies, cabling along with appropriate mechanical tools and equipment. MIT Bengaluru also provides crucial direct funding for critical system components, combined with tireless administrative support, faculty mentorship if and when needed, and active support in bridging connections with industry partners to facilitate seamless development.",
     logoClass: "scale-105 md:scale-115 lg:scale-120"
@@ -66,7 +66,7 @@ export function SponsorsPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
           {sponsors.map((sponsor, index) => {
             const cardClassName = `bg-gradient-to-b from-slate-950/60 to-slate-900/20 backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-slate-800/80 hover:bg-slate-900/40 hover:border-blue-500/20 transition-all duration-300 group flex flex-col items-center text-center ${
-              sponsor.name === "Manipal Institute of Technology" ? "md:col-span-2 md:max-w-4xl md:w-full md:mx-auto" : ""
+              sponsor.name === "Manipal Institute of Technology, Bengaluru" ? "md:col-span-2 md:max-w-4xl md:w-full md:mx-auto" : ""
             }`;
 
             return (
