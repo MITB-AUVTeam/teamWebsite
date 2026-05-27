@@ -27,7 +27,7 @@ const SERVICES = [
     id: "03",
     title: "What",
     description:
-      "Autonomous underwater vehicles are designed and built using mechanical parts, electronics, and software. The robots are tested carefully to work in real underwater conditions.",
+      "An autonomous underwater vehicle designed, built, broken, rebuilt, and tested almost entirely in-house. From the electronics that keep it running, to the frame that keeps it safe, to the software that brings it to life.",
     image: ABOUT_TAB_3,
   },
 ];

@@ -81,23 +81,29 @@ import galleryUnderwater from "@/assets/Gallery/gallery_underwater.jpg";
 import galleryBoard from "@/assets/Gallery/gallery_board.jpg";
 import galleryCad from "@/assets/Gallery/gallery_cad.jpg";
 import img_5589 from "@/assets/Gallery/IMG_5589.MOV";
+import galleryMentors from "@/assets/Gallery/gallery_mentors.jpg";
+import galleryWorking from "@/assets/Gallery/gallery_working.jpg";
+import galleryAward from "@/assets/Gallery/gallery_award.jpg";
+import galleryPressureTest from "@/assets/Gallery/gallery_pressure_test.jpg";
+import galleryPoolTest2 from "@/assets/Gallery/gallery_pool_test_2.mov";
 
 const archiveImages = [
   { src: aryanImg, category: "team", alt: "Aryan" },
   { src: cam1Img, category: "testing", alt: "Camera View" },
   { src: internalImg, category: "vehicles", alt: "Internal Vehicle View" },
   { src: teamImg, category: "team", alt: "Team Photo" },
+  { src: galleryMentors, category: "team", alt: "Team with Mentors" },
   { src: img_1184, category: "team", alt: "Team" },
   { src: img_1187, category: "team", alt: "Team" },
   { src: galleryWhiteboard, category: "team", alt: "Whiteboard Brainstorming" },
   { src: img_1325, category: "team", alt: "Testing" },
-  { src: img_1328, category: "team", alt: "Testing" },
   { src: img_1328, category: "team", alt: "Testing" },
   { src: img_2551, category: "team", alt: "Vehicles" },
   { src: img_2811, category: "team", alt: "Vehicles" },
   { src: img_2812, category: "team", alt: "Vehicles" },
   { src: galleryPoolSide, category: "testing", alt: "Poolside Testing" },
   { src: img_2816, category: "team", alt: "Vehicles" },
+  { src: galleryWorking, category: "team", alt: "Prototyping Session" },
   { src: img_3106, category: "team", alt: "Team" },
   { src: img_3145, category: "team", alt: "Testing" },
   { src: img_3146, category: "team", alt: "Testing" },
@@ -108,6 +114,7 @@ const archiveImages = [
   { src: img_3568, category: "vehicles", alt: "Team" },
   { src: img_3845, category: "vehicles", alt: "Testing" },
   { src: img_3849, category: "vehicles", alt: "Testing" },
+  { src: galleryAward, category: "vehicles", alt: "First Prize at IEEE RAS Competition" },
   { src: img_3923, category: "team", alt: "Vehicless" },
   { src: img_3933, category: "team", alt: "Vehicless" },
   { src: img_3977, category: "team", alt: "Team" },
@@ -129,6 +136,7 @@ const archiveImages = [
   { src: img11, category: "testing", alt: "IMG11" },
   { src: img12, category: "vehicles", alt: "IMG12" },
   { src: img14, category: "vehicles", alt: "IMG14" },
+  { src: galleryPressureTest, category: "testing", alt: "Watertight Pressure Testing" },
   { src: img15, category: "team", alt: "IMG15" },
   { src: img16, category: "team", alt: "IMG16" },
   { src: img17, category: "testing", alt: "IMG17" },
@@ -149,6 +157,7 @@ const archiveImages = [
   { src: img39, category: "vehicles", alt: "IMG39" },
   { src: img40, category: "team", alt: "IMG40" },
   { src: img41, category: "team", alt: "IMG41" },
+  { src: galleryPoolTest2, category: "testing", alt: "Underwater Swimming Test" },
   { src: img42, category: "team", alt: "IMG42" },
   { src: img43, category: "testing", alt: "IMG43" },
   { src: img44, category: "team", alt: "IMG44" },
