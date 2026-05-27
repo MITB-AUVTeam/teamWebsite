@@ -18,7 +18,7 @@ import {
 import { Footer } from "@/components/Footer";
 import proto1Img from "@/assets/Gallery/IMG_4024_2.png";
 import proto2Img from "@/assets/Gallery/deuterium3.jpeg";
-import tdrPdf from "@/assets/tdr/IEEE_Conference_Template.pdf";
+import tdrPdf from "@/assets/tdr/TDR_Team AUV MIT-B_RS2026.pdf";
 import dimensionsIcon from "@/assets/dimensions.png";
 
 export function VehiclesPage() {
