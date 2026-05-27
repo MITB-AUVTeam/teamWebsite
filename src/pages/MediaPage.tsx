@@ -257,14 +257,15 @@ export function MediaPage() {
               />
             </div>
             <div className="w-full lg:w-2/5 p-8 lg:p-12 flex flex-col justify-center">
-              <div className="flex items-center gap-4 mb-6">
-                <span className="px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs font-bold tracking-wider uppercase flex items-center gap-1.5">
-                  <Tag className="w-3 h-3" />
-                  {featuredPost.category}
-                </span>
-                <div className="flex items-center gap-1.5 text-slate-400 text-xs font-medium">
-                  <Calendar className="w-3.5 h-3.5" />
-                  {featuredPost.date}
+              <div className="flex flex-wrap items-center gap-y-2 gap-x-4 mb-6 text-slate-400 text-xs font-medium">
+                <div className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                  <span className="font-semibold tracking-wider uppercase">{featuredPost.category}</span>
+                </div>
+                <div className="w-1 h-1 rounded-full bg-slate-700 hidden sm:block" />
+                <div className="flex items-center gap-1.5">
+                  <Calendar className="w-3.5 h-3.5 text-slate-500" />
+                  <span>{featuredPost.date}</span>
                 </div>
               </div>
               
@@ -382,10 +383,10 @@ export function MediaPage() {
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4">
           <div>
             <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tight">
-              Creative Works - Videos
+              Team Introduction Video
             </h3>
             <p className="text-slate-400 text-sm mt-2">
-              Watch our team updates, vehicle demonstrations, and technical presentations.
+              Watch our team introduction video for RoboSub 2026. More updates coming soon....
             </p>
           </div>
         </div>
@@ -394,7 +395,7 @@ export function MediaPage() {
           {/* Main Featured Video */}
           <div className="lg:col-span-2 aspect-video rounded-3xl overflow-hidden border border-white/10 bg-slate-950 shadow-2xl relative group">
             <iframe
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ" // REPLACE WITH YOUR INTRO YOUTUBE VIDEO ID/EMBED URL
+              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
               title="Team AUV Introduction Video"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -471,18 +472,20 @@ export function MediaPage() {
 
                 {/* Content Area */}
                 <div className="p-6 md:p-10">
-                  <div className="flex flex-wrap items-center gap-4 mb-6">
-                    <span className="px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs font-bold tracking-wider uppercase flex items-center gap-1.5">
-                      <Tag className="w-3 h-3" />
-                      {activePost.category}
-                    </span>
-                    <div className="flex items-center gap-1.5 text-slate-400 text-xs font-medium">
-                      <Calendar className="w-3.5 h-3.5" />
-                      {activePost.date}
+                  <div className="flex flex-wrap items-center gap-y-2 gap-x-4 mb-6 text-slate-400 text-xs font-medium">
+                    <div className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                      <span className="font-semibold tracking-wider uppercase">{activePost.category}</span>
                     </div>
-                    <div className="flex items-center gap-1.5 text-slate-400 text-xs font-medium">
-                      <User className="w-3.5 h-3.5" />
-                      {activePost.author}
+                    <div className="w-1 h-1 rounded-full bg-slate-700 hidden sm:block" />
+                    <div className="flex items-center gap-1.5">
+                      <Calendar className="w-3.5 h-3.5 text-slate-500" />
+                      <span>{activePost.date}</span>
+                    </div>
+                    <div className="w-1 h-1 rounded-full bg-slate-700 hidden sm:block" />
+                    <div className="flex items-center gap-1.5">
+                      <User className="w-3.5 h-3.5 text-slate-500" />
+                      <span>{activePost.author}</span>
                     </div>
                   </div>
 

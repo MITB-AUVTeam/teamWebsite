@@ -387,8 +387,8 @@ const teamCategories = [
         "skills": ["Management"],
         "gradient": "from-teal-500/20 via-teal-500/5 to-transparent",
         "social": {
-          "linkedin": "",
-          "github": ""
+          "linkedin": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+          "github": "https://www.youtube.com/embed/dQw4w9WgXcQ"
         }
       },
       {
@@ -701,7 +701,7 @@ export function TeamSectionBlock() {
               </h2>
               <p className="text-slate-400 text-lg md:text-xl tracking-[0.06em] font-medium ml-1">
                 A diverse team of talented (and extremely fun) individuals working together to build
-                amazing products and deliver exceptional results.
+                amazing products and delivering exceptional results.
               </p>
             </div>
           </motion.div>

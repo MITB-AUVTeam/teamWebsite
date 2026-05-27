@@ -7,7 +7,7 @@ import imgGeminiGeneratedImageSucjggsucjggsucjPhotoroom13 from "../assets/hero_p
 import imgGeminiGeneratedImage41Nzht41Nzht41NzPhotoroom1 from "../assets/hero_parallax/152fd27cdd307ca2d7657a11e9e58325de922f88.webp";
 import imgGeminiGeneratedImageK988Jxk988Jxk988Photoroom1 from "../assets/hero_parallax/1c12efb875dc486a28207d77f13caa9aaac52df6.webp";
 import logoAnsys from "../assets/Background - less sponsors logos/Ansys.webp";
-import AUV_GROUP_PIC from "@/assets/Group_photo/AUV_GROUP_PIC.webp";
+import hullPoolTesting from "@/assets/Gallery/hull_pool_testing.jpg";
 import logoDassault from "../assets/Background - less sponsors logos/Dassault Systemes.webp";
 import logoMIT from "../assets/Background - less sponsors logos/MIT.webp";
 import logoVicharak from "../assets/Background - less sponsors logos/Vicharak.webp";
@@ -84,13 +84,17 @@ const features = [
   },
 ];
 
-const baseLogos = [
-  <img key="1" src={logoAnsys} alt="Ansys" />,
-  <img key="2" src={logoDassault} alt="Dassault Systemes" />,
-  <img key="3" src={logoMIT} alt="MIT" />,
-  <img key="4" src={logoVicharak} alt="Vicharak" />,
-  <img key="5" src={logoWisdom} alt="Wisdom Technologies" />,
+const sponsorItems = [
+  { logo: logoAnsys, alt: "Ansys", href: "https://www.ansys.com/en-in" },
+  { logo: logoDassault, alt: "Dassault Systemes", href: "https://www.solidworks.com/product/students" },
+  { logo: logoMIT, alt: "MIT", href: "" },
+  { logo: logoVicharak, alt: "Vicharak", href: "https://vicharak.in/" },
+  { logo: logoWisdom, alt: "Wisdom Technologies", href: "https://in.linkedin.com/company/wisdom-technologies-pvt-ltd" },
 ];
+
+const baseLogos = sponsorItems.map((s, idx) => (
+  <img key={idx + 1} src={s.logo} alt={s.alt} />
+));
 
 const logos = [
   ...baseLogos,
@@ -466,10 +470,6 @@ export function Home() {
 
             {/* Left Content Column */}
             <div className="lg:col-span-7 flex flex-col justify-center text-left">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="w-8 h-[2px] bg-blue-500 rounded-full"></span>
-                <span className="text-xs font-bold tracking-widest text-blue-400 uppercase">About Our Mission</span>
-              </div>
 
               <h3 className="text-4xl md:text-5xl font-black mb-6 tracking-tight leading-[1.1] text-white">
                 Pushing the boundaries of <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-300">marine robotics.</span>
@@ -523,8 +523,8 @@ export function Home() {
               <div className="relative z-10 w-[95%] md:w-[90%] aspect-[16/9] rounded-[2rem] overflow-hidden border border-slate-800/80 bg-slate-950 shadow-2xl group/img transition-all duration-700 hover:border-blue-500/40 hover:shadow-[0_0_40px_rgba(59,130,246,0.15)]">
                 <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 via-transparent to-cyan-500/5 opacity-40 z-0 pointer-events-none" />
                 <img
-                  src={AUV_GROUP_PIC}
-                  alt="AUV MIT Bengaluru Team Group Photo"
+                  src={hullPoolTesting}
+                  alt="AUV Hull Pool Testing"
                   className="w-full h-full object-cover grayscale-[10%] group-hover/img:grayscale-0 group-hover/img:scale-[1.03] transition-all duration-700 ease-out z-10"
                 />
 
@@ -532,12 +532,6 @@ export function Home() {
                 <div className="absolute inset-0 border border-slate-800/40 rounded-[2rem] pointer-events-none z-20 m-1.5" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-60 z-10 pointer-events-none" />
 
-                {/* Floating HUD glass label */}
-                <div className="absolute bottom-6 left-6 right-6 z-20 transition-all duration-500 transform translate-y-1 group-hover/img:translate-y-0">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-blue-400 bg-slate-950/80 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-slate-800/80 shadow-sm inline-block">
-                    Team MIT Bengaluru
-                  </span>
-                </div>
               </div>
             </div>
 
@@ -583,18 +577,39 @@ export function Home() {
             <h3 className="text-3xl md:text-4xl font-bold text-white tracking-tight">Our Proud Sponsors</h3>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-8 items-center justify-items-center max-w-5xl mx-auto">
-            {baseLogos.map((logo, idx) => (
-              <div
-                key={idx}
-                className="group relative flex h-32 w-full items-center justify-center overflow-hidden rounded-2xl border border-blue-900/60 bg-gradient-to-br from-[#0c1f4a] via-[#0b1a3d] to-[#08142f] p-3 transition-all duration-300 hover:border-blue-400/30 md:h-40 md:p-4 last:col-span-2 last:max-w-[calc(50%-12px)] md:last:col-span-1 md:last:max-w-full"
-              >
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(96,165,250,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(96,165,250,0.08)_1px,transparent_1px)] bg-[size:14px_14px] opacity-30 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
-                <div className="absolute h-[180px] w-[180px] rounded-full bg-blue-300/10 blur-[40px] opacity-70 transition-all duration-700 group-hover:bg-cyan-300/15 group-hover:opacity-100 pointer-events-none" />
-                <div className="relative flex max-h-full max-w-full items-center justify-center transition-all duration-300 [&_img]:max-h-20 [&_img]:w-auto [&_img]:object-contain [&_img]:drop-shadow-lg [&_img]:transition-transform [&_img]:duration-500 group-hover:[&_img]:scale-105 md:[&_img]:max-h-28">
-                  {logo}
+            {sponsorItems.map((sponsor, idx) => {
+              const CardContent = (
+                <>
+                  <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(96,165,250,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(96,165,250,0.08)_1px,transparent_1px)] bg-[size:14px_14px] opacity-30 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
+                  <div className="absolute h-[180px] w-[180px] rounded-full bg-blue-300/10 blur-[40px] opacity-70 transition-all duration-700 group-hover:bg-cyan-300/15 group-hover:opacity-100 pointer-events-none" />
+                  <div className="relative flex max-h-full max-w-full items-center justify-center transition-all duration-300 [&_img]:max-h-20 [&_img]:w-auto [&_img]:object-contain [&_img]:drop-shadow-lg [&_img]:transition-transform [&_img]:duration-500 group-hover:[&_img]:scale-105 md:[&_img]:max-h-28">
+                    <img src={sponsor.logo} alt={sponsor.alt} />
+                  </div>
+                </>
+              );
+
+              const cardClasses = "group relative flex h-32 w-full items-center justify-center overflow-hidden rounded-2xl border border-blue-900/60 bg-gradient-to-br from-[#0c1f4a] via-[#0b1a3d] to-[#08142f] p-3 transition-all duration-300 hover:border-blue-400/30 md:h-40 md:p-4 last:col-span-2 last:max-w-[calc(50%-12px)] md:last:col-span-1 md:last:max-w-full cursor-pointer";
+
+              if (sponsor.href) {
+                return (
+                  <a
+                    key={idx}
+                    href={sponsor.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={cardClasses}
+                  >
+                    {CardContent}
+                  </a>
+                );
+              }
+
+              return (
+                <div key={idx} className={cardClasses.replace("cursor-pointer", "cursor-default")}>
+                  {CardContent}
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
