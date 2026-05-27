@@ -288,6 +288,14 @@ const subsystemDetails: Record<string, TeamDetail> = {
   }
 };
 
+const subsystemImages: Record<string, string> = {
+  "Mechanical": mechanicalBg,
+  "Electrical": electricalBg,
+  "Software": softwareBg,
+  "Design": designBg,
+  "Management": managementBg,
+};
+
 export function Home() {
   const [scrollY, setScrollY] = useState(0);
   const [activeTeam, setActiveTeam] = useState<string | null>(null);
@@ -604,86 +612,89 @@ export function Home() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setActiveTeam(null)}
-              className="fixed inset-0 z-[20000] flex items-center justify-center p-4 md:p-6 backdrop-blur-md bg-slate-950/70"
+              className="fixed inset-0 z-[20000] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md overflow-y-auto"
             >
               <motion.div
-                initial={{ scale: 0.95, y: 15, opacity: 0 }}
+                initial={{ scale: 0.95, y: 20, opacity: 0 }}
                 animate={{ scale: 1, y: 0, opacity: 1 }}
-                exit={{ scale: 0.95, y: 15, opacity: 0 }}
-                transition={{ type: "spring", duration: 0.4 }}
+                exit={{ scale: 0.95, y: 20, opacity: 0 }}
+                transition={{ type: "spring", duration: 0.5, bounce: 0.15 }}
                 onClick={(e) => e.stopPropagation()}
-                className={cn(
-                  "relative w-full max-w-4xl max-h-[90vh] md:max-h-[85vh] flex flex-col overflow-hidden rounded-2xl sm:rounded-[2rem] border bg-slate-950 shadow-2xl p-4 sm:p-6 md:p-10 select-none",
-                  detail.borderColor
-                )}
+                className="relative w-full max-w-4xl h-auto md:h-[620px] bg-[#030712] border border-white/10 rounded-[2.5rem] overflow-hidden shadow-2xl flex flex-col md:flex-row my-8 select-none animate-in fade-in-50"
               >
-                {/* Visual back-glow */}
-                <div className={cn("absolute -top-40 -left-40 w-96 h-96 rounded-full blur-3xl pointer-events-none z-0 opacity-40", detail.glowColor)} />
-                <div className={cn("absolute -bottom-40 -right-40 w-96 h-96 rounded-full blur-3xl pointer-events-none z-0 opacity-40", detail.glowColor)} />
+                {/* Close Button */}
+                <button
+                  onClick={() => setActiveTeam(null)}
+                  className="absolute top-6 right-6 z-30 w-9 h-9 rounded-full bg-slate-950/80 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-800 transition-colors shadow-lg cursor-pointer"
+                >
+                  <X className="w-4 h-4" />
+                </button>
 
-                {/* Tech background grid overlay */}
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none opacity-40" />
+                {/* Left Panel: Visual Hero */}
+                {subsystemImages[activeTeam] && (
+                  <div className="w-full md:w-[38%] h-56 md:h-full relative overflow-hidden shrink-0 border-b md:border-b-0 md:border-r border-white/5">
+                    <img
+                      src={subsystemImages[activeTeam]}
+                      alt={detail.title}
+                      className="w-full h-full object-cover opacity-60 md:opacity-75 transition-transform duration-1000"
+                    />
+                    {/* Multi-directional gradient mask */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-transparent to-transparent z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#030712]/30 z-10 hidden md:block" />
+                    
+                    {/* Bottom-left title branding */}
+                    <div className="absolute bottom-8 left-8 right-8 z-20">
+                      <h2 className="text-3xl font-black text-white uppercase tracking-tight leading-none flex flex-wrap items-baseline gap-2">
+                        <span>{activeTeam}</span>
+                        <span className="text-blue-400 text-xs font-bold tracking-widest uppercase">Subsystem</span>
+                      </h2>
+                    </div>
+                  </div>
+                )}
 
-                {/* Header */}
-                <div className="relative z-10 flex items-start justify-between mb-6 md:mb-8">
-                  <div>
-                    <h2 className="text-2xl md:text-4xl font-extrabold text-white mt-1 leading-tight tracking-tight">
-                      {detail.title}
-                    </h2>
-                    <p className="text-slate-400 text-xs md:text-sm mt-1.5 md:mt-2 max-w-2xl leading-relaxed">
-                      {detail.subTitle}
-                    </p>
+                {/* Right Panel: Content Details */}
+                <div className="w-full md:w-[62%] h-[400px] md:h-full overflow-y-auto p-6 md:p-10 flex flex-col justify-start relative scrollbar-thin scrollbar-thumb-slate-800 scrollbar-track-transparent">
+                  {/* Subtle top decoration */}
+                  <div className="hidden md:flex items-center gap-2 mb-6">
+                    <span className="w-6 h-[1px] bg-blue-500/30"></span>
+                    <span className="text-[10px] font-mono tracking-widest text-slate-500 uppercase">TELEMETRY & CAPABILITIES</span>
                   </div>
 
-                  {/* Close button */}
-                  <button
-                    onClick={() => setActiveTeam(null)}
-                    aria-label="Close modal"
-                    className="p-2 md:p-3 rounded-full bg-slate-900 border border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800 transition-all duration-300 shadow-md group hover:scale-105 active:scale-95 cursor-pointer ml-4"
-                  >
-                    <X className="w-5 h-5 transition-transform duration-300 group-hover:rotate-90" />
-                  </button>
-                </div>
+                  <div className="space-y-8 text-slate-300 leading-relaxed text-sm md:text-base">
+                    {/* Overview description */}
+                    <div className="relative">
+                      <span className="absolute left-0 top-0 bottom-0 w-[2px] bg-blue-500/40 rounded-full" />
+                      <p className="pl-4 text-slate-200 leading-relaxed text-base font-normal">
+                        {detail.description}
+                      </p>
+                    </div>
 
-                {/* Content body */}
-                <div className="relative z-10 flex-1 overflow-y-auto space-y-6 md:space-y-8 pr-2">
-                  {/* Description paragraph */}
-                  <div className="bg-slate-900/40 backdrop-blur-sm border border-slate-800/80 p-5 md:p-6 rounded-2xl">
-                    <p className="text-slate-300 text-sm md:text-base leading-relaxed tracking-wide font-normal font-sans">
-                      {detail.description}
-                    </p>
-                  </div>
+                    {/* Timeline section */}
+                    <div className="space-y-6">
+                      <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 font-mono mb-2">
+                        Key Responsibilities & Domains
+                      </h3>
+                      
+                      <div className="relative pl-6 border-l border-white/5 space-y-6">
+                        {/* Glowy track indicator line */}
+                        <div className="absolute left-[-1px] top-2 bottom-2 w-[1px] bg-gradient-to-b from-blue-500/40 to-transparent pointer-events-none" />
 
-                  {/* Highlights Grid */}
-                  <div>
-                    <h3 className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-slate-500 mb-4 font-mono">
-                      Key Responsibilities & Domains
-                    </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {detail.highlights.map((item, index) => {
-                        const IconComponent = item.icon;
-                        return (
-                          <div
-                            key={index}
-                            className={cn(
-                              "flex gap-4 p-4 md:p-5 rounded-2xl bg-gradient-to-br from-slate-950 via-slate-950 to-slate-900 border border-slate-900/60 transition-all duration-300 hover:border-slate-800",
-                              "hover:bg-slate-950/80 group/item relative overflow-hidden"
-                            )}
-                          >
-                            <div className="flex-shrink-0 flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-xl bg-slate-900 border border-slate-800 text-blue-400 transition-colors duration-300 group-hover/item:text-cyan-400 group-hover/item:border-cyan-500/20">
-                              <IconComponent className="w-5 h-5 md:w-6 md:h-6" />
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <h4 className="text-sm md:text-base font-semibold text-slate-200 group-hover/item:text-white transition-colors duration-300">
+                        {detail.highlights.map((item, idx) => (
+                          <div key={idx} className="relative group transition-all duration-300">
+                            {/* Dot on the timeline */}
+                            <div className="absolute -left-[31px] top-[6px] w-2 h-2 rounded-full bg-slate-800 border border-slate-750 group-hover:bg-blue-400 group-hover:border-blue-300 group-hover:scale-125 transition-all duration-300 shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
+                            
+                            <div className="space-y-1">
+                              <h4 className="text-sm md:text-base font-bold text-slate-100 group-hover:text-blue-400 transition-colors duration-300 tracking-tight">
                                 {item.title}
                               </h4>
-                              <p className="text-slate-400 text-xs md:text-sm mt-1 leading-relaxed">
+                              <p className="text-slate-400 text-xs md:text-sm leading-relaxed group-hover:text-slate-300 transition-colors duration-300">
                                 {item.desc}
                               </p>
                             </div>
                           </div>
-                        );
-                      })}
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
