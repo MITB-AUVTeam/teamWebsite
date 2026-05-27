@@ -75,6 +75,12 @@ import aryanImg from "@/assets/Gallery/aryan.jpeg";
 import cam1Img from "@/assets/Gallery/cam1.jpeg";
 import internalImg from "@/assets/Gallery/internal.jpeg";
 import teamImg from "@/assets/Gallery/team.jpeg";
+import galleryWhiteboard from "@/assets/Gallery/gallery_whiteboard.jpg";
+import galleryPoolSide from "@/assets/Gallery/gallery_pool_side.jpg";
+import galleryUnderwater from "@/assets/Gallery/gallery_underwater.jpg";
+import galleryBoard from "@/assets/Gallery/gallery_board.jpg";
+import galleryCad from "@/assets/Gallery/gallery_cad.jpg";
+import img_5589 from "@/assets/Gallery/IMG_5589.MOV";
 
 const archiveImages = [
   { src: aryanImg, category: "team", alt: "Aryan" },
@@ -83,18 +89,21 @@ const archiveImages = [
   { src: teamImg, category: "team", alt: "Team Photo" },
   { src: img_1184, category: "team", alt: "Team" },
   { src: img_1187, category: "team", alt: "Team" },
+  { src: galleryWhiteboard, category: "team", alt: "Whiteboard Brainstorming" },
   { src: img_1325, category: "team", alt: "Testing" },
   { src: img_1328, category: "team", alt: "Testing" },
   { src: img_1328, category: "team", alt: "Testing" },
   { src: img_2551, category: "team", alt: "Vehicles" },
   { src: img_2811, category: "team", alt: "Vehicles" },
   { src: img_2812, category: "team", alt: "Vehicles" },
+  { src: galleryPoolSide, category: "testing", alt: "Poolside Testing" },
   { src: img_2816, category: "team", alt: "Vehicles" },
   { src: img_3106, category: "team", alt: "Team" },
   { src: img_3145, category: "team", alt: "Testing" },
   { src: img_3146, category: "team", alt: "Testing" },
   { src: img_3556, category: "vehicles", alt: "Vehicless" },
   { src: img_3559, category: "team", alt: "Vehicless" },
+  { src: galleryUnderwater, category: "testing", alt: "AUV Underwater Test" },
   { src: img_3566, category: "team", alt: "Team" },
   { src: img_3568, category: "vehicles", alt: "Team" },
   { src: img_3845, category: "vehicles", alt: "Testing" },
@@ -105,6 +114,8 @@ const archiveImages = [
   { src: img_3980, category: "vehicles", alt: "Team" },
   { src: img_4006, category: "testing", alt: "Testing" },
   { src: img_4017, category: "testing", alt: "Testing" },
+  { src: img_5589, category: "testing", alt: "AUV Test Run Video" },
+  { src: galleryBoard, category: "vehicles", alt: "Main MCU Board" },
   { src: img_4026, category: "vehicles", alt: "Vehicless" },
   { src: img0, category: "testing", alt: "IMG0" },
   { src: img1, category: "testing", alt: "IMG1" },
@@ -134,6 +145,7 @@ const archiveImages = [
   { src: img33, category: "team", alt: "IMG33" },
   { src: img34, category: "team", alt: "IMG34" },
   { src: img36, category: "vehicles", alt: "IMG36" },
+  { src: galleryCad, category: "vehicles", alt: "AUV 3D Render" },
   { src: img39, category: "vehicles", alt: "IMG39" },
   { src: img40, category: "team", alt: "IMG40" },
   { src: img41, category: "team", alt: "IMG41" },
@@ -342,15 +354,27 @@ export function GalleryPage() {
           </ToggleGroup>
 
           <FlipReveal className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 w-full mt-8" keys={[key]} showClass="flex" hideClass="hidden">
-            {archiveImages.map((img, idx) => (
-              <FlipRevealItem key={idx} flipKey={img.category} className="w-full aspect-square">
-                <img
-                  src={img.src}
-                  alt={img.alt}
-                  className="w-full h-full object-cover rounded-2xl hover:scale-[1.02] transition-transform duration-300 shadow-xl border border-white/5"
-                />
-              </FlipRevealItem>
-            ))}
+            {archiveImages.map((img, idx) => {
+              const isVideo = img.src.endsWith(".MOV") || img.src.endsWith(".mov") || img.src.endsWith(".mp4");
+              return (
+                <FlipRevealItem key={idx} flipKey={img.category} className="w-full aspect-square">
+                  {isVideo ? (
+                    <video
+                      src={img.src}
+                      controls
+                      preload="metadata"
+                      className="w-full h-full object-cover rounded-2xl shadow-xl border border-white/5"
+                    />
+                  ) : (
+                    <img
+                      src={img.src}
+                      alt={img.alt}
+                      className="w-full h-full object-cover rounded-2xl hover:scale-[1.02] transition-transform duration-300 shadow-xl border border-white/5"
+                    />
+                  )}
+                </FlipRevealItem>
+              );
+            })}
           </FlipReveal>
         </div>
       </div>
