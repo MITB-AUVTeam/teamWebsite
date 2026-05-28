@@ -395,8 +395,8 @@ export function MediaPage() {
           {/* Main Featured Video */}
           <div className="lg:col-span-2 aspect-video rounded-3xl overflow-hidden border border-white/10 bg-slate-950 shadow-2xl relative group">
             <iframe
-              src="https://www.youtube.com/watch?v=er7BXNt_4Kw"
-              title="Team AUV Introduction Video"
+              src="https://www.youtube.com/embed/er7BXNt_4Kw"
+              title="Team AUV MIT-B Introduction Video | RoboSub 2026"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
@@ -406,18 +406,22 @@ export function MediaPage() {
 
           {/* Video Information / Sidebar */}
           <div className="flex flex-col justify-center bg-white/5 border border-white/10 rounded-3xl p-8 lg:p-10">
-            <span className="px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs font-bold tracking-wider uppercase self-start mb-6">
-              Featured Video
-            </span>
             <h4 className="text-2xl font-bold text-white mb-4 leading-tight">
-              Team AUV Introduction
+             Team AUV MIT-B Introduction Video | 
+             RoboSub 2026
             </h4>
+
             <p className="text-slate-300 text-sm leading-relaxed mb-6">
-              An overview of our autonomous underwater vehicle projects, student-led workshop environments, and collaborative engineering journey.
+              Get to know the team building and representing Manipal Institute of Technology, Bengaluru for the very first time at RoboSub 2026.
             </p>
+
+            <p className="text-slate-300 text-sm leading-relaxed mb-6">
+              Built with the effort of all 23 members on the team, Deuterium is the culmination of our work over the last 1.5 years.
+            </p>
+
             <div className="pt-6 border-t border-white/10 flex items-center justify-between mt-auto">
               <span className="text-slate-400 text-xs font-medium">
-                Published by Team AUV
+                Published by Team AUV MIT-B
               </span>
               <a
                 href="https://www.youtube.com/@TeamAUVMIT-B"
