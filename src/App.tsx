@@ -12,6 +12,7 @@ import { VehiclesPage } from "@/pages/VehiclesPage";
 import { MediaPage } from "@/pages/MediaPage";
 import { SponsorsPage } from "@/pages/SponsorsPage";
 import ScrollToTop from "@/components/ScrollToTop";
+import { Analytics } from "@vercel/analytics/react";
 
 export default function App() {
   const location = useLocation();
@@ -38,6 +39,7 @@ export default function App() {
           <Route path="/sponsors" element={<SponsorsPage />} />
         </Routes>
       </main>
+      <Analytics />
     </div>
   );
 }
