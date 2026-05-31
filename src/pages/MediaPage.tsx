@@ -9,6 +9,7 @@ import rtab from "@/assets/Gallery/rtab.jpg";
 import pcb from "@/assets/Gallery/pcb.jpg";
 import IMG_3923 from "@/assets/Gallery/IMG_3923.webp";
 import prithaPhoto from "@/assets/Personal_photo/pritha.jpeg";
+import faculty_group from "@/assets/Personal_photo/faculty_group.jpeg";
 
 export function MediaPage() {
   const [activePost, setActivePost] = useState<any | null>(null);
@@ -38,7 +39,7 @@ export function MediaPage() {
   }, [activePost]);
 
   const featuredPost = {
-    title: "Evolution of Deuterium: Integrating Custom HYDROPHONES",
+    title: "'Maxxxing' Deuterium: Integrating Custom HYDROPHONES",
     excerpt: "Coming Soon....",
     category: "Technical / Electrical Subsystem",
     date: "Coming Soon....",
@@ -47,6 +48,23 @@ export function MediaPage() {
   };
 
   const recentPosts = [
+    {
+      title: "",
+      excerpt: "A short memoir by Dr. Manasa Kongot on the Team's journey from building small prototypes to now cometing in RoboSub 2026, during her time heading the Developments Office at MIT-Bengaluru.",
+      category: "Personal Memoir",
+      date: "May 30, 2026",
+      author: "Dr. Manasa Kongot",
+      image: faculty_group,
+      content: [
+        "When I was entrusted with the responsibility of facilitating major student projects at MIT Bengaluru by the Director of MIT Blr in July 2025, the students who first met me were Mr. Animesh and Mr. Arunava, the founders and current team leads of AUV, MITB.",
+        "By the time they met me, the students had already managed to build a small prototype using very limited funds and resources. Even at that early stage, what stood out was their passion, sincerity, and determination to build something meaningful completely from scratch.",
+        "My role was mainly to support and facilitate the team through institutional permissions, workspace, processes, and funding support wherever possible. But the real strength of this journey has always been the students themselves. They built the team from the ground up, sourced components, approached sponsors, learned independently, and worked tirelessly day and night to bring their ideas to life.",
+        "Over time, their dedication transformed a small student initiative into the first legacy major student project team of our institute, aspiring to participate in RoboSub 2026, one of the world’s prestigious AUV competitions conducted by RoboNation.",
+        "Today, Team AUV proudly represents MAHE and India on a global platform. I feel fortunate to have been associated with the team since its official inception and to have witnessed their journey so closely.",
+        "Sometimes, all students need is a small window of support to transform their passion into something remarkable. I hope Team AUV’s journey inspires many more students to dream boldly, build fearlessly, and use their knowledge and innovation to contribute meaningfully towards our nation and society.",
+        "And yes, the team has definitely kept me busy with endless approvals, urgent requests, and last-minute discussions and decisions, but seeing their passion and growth, I can happily say every bit of it has been worth it! Hope to see the team growing to newer heights with time!"
+      ]
+    },
     {
       title: "The Long Dive: Starting an AUV Team at MIT Bengaluru",
       excerpt: "A reflection by team mentor Pritha Jaipal on the journey of AUV MIT-B—from a spark of an idea in August 2024 to the team taking part in RoboSub 2026.",
@@ -184,13 +202,42 @@ export function MediaPage() {
   ];
 
   const filteredPosts = useMemo(() => {
+    const sortedPosts = [...recentPosts].sort((a, b) => {
+      // If a date is empty, treat it as newest
+      const aDateEmpty = !a.date;
+      const bDateEmpty = !b.date;
+      if (aDateEmpty && !bDateEmpty) return -1;
+      if (!aDateEmpty && bDateEmpty) return 1;
+      if (aDateEmpty && bDateEmpty) return 0;
+
+      // Handle "Various Dates" as oldest (placed at the bottom)
+      const aVarious = a.date.toLowerCase() === "various dates";
+      const bVarious = b.date.toLowerCase() === "various dates";
+      if (aVarious && !bVarious) return 1;
+      if (!aVarious && bVarious) return -1;
+      if (aVarious && bVarious) return 0;
+
+      // Standard date parsing
+      const timeA = Date.parse(a.date);
+      const timeB = Date.parse(b.date);
+      
+      const validA = !isNaN(timeA);
+      const validB = !isNaN(timeB);
+      
+      if (!validA && validB) return 1;
+      if (validA && !validB) return -1;
+      if (!validA && !validB) return 0;
+
+      return timeB - timeA; // Descending (newest first)
+    });
+
     const query = searchQuery.trim().toLowerCase();
 
     if (!query) {
-      return recentPosts;
+      return sortedPosts;
     }
 
-    return recentPosts.filter((post) => {
+    return sortedPosts.filter((post) => {
       const searchableText = [
         post.title,
         post.excerpt,
@@ -253,6 +300,7 @@ export function MediaPage() {
               <img 
                 src={featuredPost.image} 
                 alt={featuredPost.title}
+                loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
             </div>
@@ -278,14 +326,14 @@ export function MediaPage() {
               </p>
               
               <div className="flex items-center justify-between mt-auto">
-                <div className="flex items-center gap-1.5 text-slate-400 text-xs font-medium">
-                  <User className="w-3.5 h-3.5" />
-                  {featuredPost.author}
-                </div>
-                <span className="flex items-center gap-2 text-sm font-bold text-white group-hover:text-blue-400 transition-colors">
-                  Read Article <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </div>
+                 <div className="flex items-center gap-1.5 text-slate-400 text-xs font-medium">
+                   <User className="w-3.5 h-3.5 text-blue-400" />
+                   <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-300">{featuredPost.author}</span>
+                 </div>
+                 <span className="flex items-center gap-2 text-sm font-bold text-white group-hover:text-blue-400 transition-colors">
+                   Read Article <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                 </span>
+               </div>
             </div>
           </motion.div>
         </section>
@@ -320,6 +368,7 @@ export function MediaPage() {
                 <img 
                   src={post.image} 
                   alt={post.title}
+                  loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute top-4 left-4">
@@ -336,8 +385,8 @@ export function MediaPage() {
                     {post.date}
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <User className="w-3.5 h-3.5" />
-                    {post.author}
+                    <User className="w-3.5 h-3.5 text-blue-400" />
+                    <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-300">{post.author}</span>
                   </div>
                 </div>
                 
@@ -468,6 +517,7 @@ export function MediaPage() {
                     <img
                       src={activePost.image}
                       alt={activePost.title}
+                      loading="lazy"
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent" />
@@ -488,8 +538,8 @@ export function MediaPage() {
                     </div>
                     <div className="w-1 h-1 rounded-full bg-slate-700 hidden sm:block" />
                     <div className="flex items-center gap-1.5">
-                      <User className="w-3.5 h-3.5 text-slate-500" />
-                      <span>{activePost.author}</span>
+                      <User className="w-3.5 h-3.5 text-blue-400" />
+                      <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-300">{activePost.author}</span>
                     </div>
                   </div>
 

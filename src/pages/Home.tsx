@@ -304,6 +304,35 @@ export function Home() {
   const [scrollY, setScrollY] = useState(0);
   const [activeTeam, setActiveTeam] = useState<string | null>(null);
 
+  // Preload hero parallax images
+  useEffect(() => {
+    const imagesToPreload = [
+      imgBg,
+      imgGeminiGeneratedImage41Nzht41Nzht41NzPhotoroom1,
+      imgGeminiGeneratedImageK988Jxk988Jxk988Photoroom1,
+      imgGeminiGeneratedImageSucjggsucjggsucjPhotoroom13,
+      imgScreenshot20251022182250Photoroom1,
+      imgChatGptImageOct252025114243PmPhotoroom1,
+    ];
+
+    const linkElements = imagesToPreload.map((src) => {
+      const link = document.createElement("link");
+      link.rel = "preload";
+      link.as = "image";
+      link.href = src;
+      document.head.appendChild(link);
+      return link;
+    });
+
+    return () => {
+      linkElements.forEach((link) => {
+        if (document.head.contains(link)) {
+          document.head.removeChild(link);
+        }
+      });
+    };
+  }, []);
+
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
@@ -354,6 +383,7 @@ export function Home() {
             alt="Deep Ocean Background"
             className="w-full h-full object-cover opacity-60"
             src={imgBg}
+            fetchPriority="high"
           />
         </div>
 
@@ -370,6 +400,7 @@ export function Home() {
               alt="Left Rocks"
               className="w-full h-auto object-contain opacity-90"
               src={imgGeminiGeneratedImage41Nzht41Nzht41NzPhotoroom1}
+              fetchPriority="high"
             />
           </div>
 
@@ -378,6 +409,7 @@ export function Home() {
               alt="Right Rocks"
               className="w-full h-auto object-contain opacity-90"
               src={imgGeminiGeneratedImageK988Jxk988Jxk988Photoroom1}
+              fetchPriority="high"
             />
           </div>
         </div>
@@ -395,6 +427,7 @@ export function Home() {
               alt="Foreground Rocks"
               className="w-full h-auto object-contain"
               src={imgGeminiGeneratedImageSucjggsucjggsucjPhotoroom13}
+              fetchPriority="high"
             />
           </div>
         </div>
@@ -429,6 +462,7 @@ export function Home() {
                     alt="AUV Logo Main"
                     className="w-full h-full object-contain filter drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]"
                     src={imgScreenshot20251022182250Photoroom1}
+                    fetchPriority="high"
                   />
                 </div>
                 <div className="font-medium text-lg sm:text-3xl md:text-[40px] text-white text-center tracking-widest drop-shadow-[0_0_10px_rgba(255,255,255,0.3)] -mt-2 sm:-mt-4 md:-mt-5">
@@ -447,6 +481,7 @@ export function Home() {
                   alt="School of Fish"
                   className="w-full h-full object-contain"
                   src={imgChatGptImageOct252025114243PmPhotoroom1}
+                  fetchPriority="high"
                 />
               </div>
             </div>
@@ -526,6 +561,7 @@ export function Home() {
                   src={hullPoolTesting}
                   alt="AUV Hull Pool Testing"
                   className="w-full h-full object-cover grayscale-[10%] group-hover/img:grayscale-0 group-hover/img:scale-[1.03] transition-all duration-700 ease-out z-10"
+                  loading="lazy"
                 />
 
                 {/* HUD border frame overlay */}

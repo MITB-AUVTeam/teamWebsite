@@ -552,6 +552,7 @@ function TeamMemberCard({ member }: { member: any }) {
                     src={member.image}
                     alt={member.name}
                     className="h-full w-full rounded-full object-cover"
+                    loading="lazy"
                     whileHover={{ scale: 1.1 }}
                     transition={{ duration: 0.3 }}
                   />

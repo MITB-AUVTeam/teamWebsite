@@ -89,6 +89,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
           <img
             src={testimonial.imgSrc}
             alt={testimonial.by}
+            loading="lazy"
             className="h-full w-full rounded-full object-cover"
           />
         </div>

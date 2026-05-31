@@ -378,6 +378,7 @@ export function GalleryPage() {
                     <img
                       src={img.src}
                       alt={img.alt}
+                      loading="lazy"
                       className="w-full h-full object-cover rounded-2xl hover:scale-[1.02] transition-transform duration-300 shadow-xl border border-white/5"
                     />
                   )}

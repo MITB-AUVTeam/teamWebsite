@@ -296,6 +296,7 @@ export const Photo = ({
           className={cn("rounded-3xl object-cover w-full h-full")}
           src={src}
           alt={alt}
+          loading="lazy"
           {...props}
           draggable={false}
         />
