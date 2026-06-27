@@ -1,76 +1,70 @@
-<div align="center">
-  <h1>🌊 AUV MIT Bengaluru</h1>
-  <p>The official website for the Autonomous Underwater Vehicle (AUV) team at MIT Bengaluru, showcasing our marine robotics innovation, vehicles, and the incredible team behind it all.</p>
-</div>
+# AUV MIT Bengaluru — Team Website
+
+The official website for the Autonomous Underwater Vehicle team at MIT Bengaluru. It serves as a public-facing presence for the team, covering the vehicle, team members, media articles, gallery, sponsors, and contact information.
 
 ---
 
-## 🚀 Overview
+## Pages
 
-Welcome to the **AUV MIT Bengaluru** website repository. This application serves as the digital front door for our team, highlighting our cutting-edge subsystems in Mechanical, Electrical, Design, Management, and Software engineering. 
+- **Home** — Landing page with an overview of the team and its work.
+- **About** — Background on the team, its mission, and subsystems.
+- **Vehicles** — Details on the AUV builds.
+- **Team** — Member profiles organized by subsystem (Mechanical, Electrical, Software, Design, Management).
+- **Gallery** — Photo gallery from competitions and build sessions.
+- **Media** — Written articles and technical writeups authored by team members.
+- **Sponsors** — Current and past sponsors.
+- **Contact** — Contact form powered by EmailJS.
 
-We push the boundaries of marine robotics to create robust, intelligent systems capable of performing complex tasks in harsh underwater environments.
+---
 
-## ✨ Key Features
+## Tech Stack
 
-- **Stunning UI/UX:** Built with a deep-sea aesthetic, featuring parallax hero sections and dynamic scrolling animations.
-- **Comprehensive Pages:** Detailed pages including Home, About, Vehicles, Team, Gallery, Media & Works, Sponsors, and Contact Us.
-- **Performant Animations:** Powered by **Framer Motion** and **GSAP** for fluid, engaging interactions.
-- **Modern Stack:** Harnesses the power of React 19 and Vite for a lightning-fast development experience.
-- **Responsive Design:** Fully styled with Tailwind CSS to ensure a beautiful experience across all devices.
+- **React 19** with **TypeScript**
+- **Vite** (build tool, dev server runs on port 3000)
+- **Tailwind CSS v4** (styling)
+- **Framer Motion** and **GSAP** (animations)
+- **React Router v7** (client-side routing)
+- **Radix UI** and **Shadcn UI** (component primitives)
+- **Lenis** (smooth scrolling)
+- **EmailJS** (contact form)
+- **Vercel Analytics** (deployed on Vercel)
 
-## 🛠️ Technology Stack
+---
 
-- **Framework:** [React 19](https://react.dev/)
-- **Build Tool:** [Vite](https://vitejs.dev/)
-- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/)
-- **Animations:** [Framer Motion](https://www.framer.com/motion/), [GSAP](https://gsap.com/)
-- **Icons:** [Lucide React](https://lucide.dev/), [@radix-ui/react-icons](https://www.radix-ui.com/icons)
-- **UI Components:** Customized Shadcn UI, [Radix UI](https://www.radix-ui.com/)
-- **Routing:** [React Router](https://reactrouter.com/)
+## Project Structure
 
-## 🏗️ Project Structure
+```
+src/
+  pages/        # One file per route
+  components/   # Reusable UI components and layout pieces
+  assets/       # Images, team photos, sponsor logos
+```
 
-- `src/pages/` - Contains all route pages (Home, About, Vehicles, Team, Gallery, Media, Sponsors, Contact Us).
-- `src/components/` - Reusable UI elements, sophisticated navigation (Tubelight NavBar), and interactive sections (Bento Grid, Logo Slider).
-- `src/assets/` - Project images, backgrounds, and sponsor logos.
+---
 
-## 💻 Getting Started
+## Getting Started
 
-### Prerequisites
-Make sure you have [Node.js](https://nodejs.org/) installed on your machine.
+**Prerequisites:** Node.js installed.
 
-### Installation
+```bash
+# Clone the repo
+git clone <repo-url>
+cd teamWebsite
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/your-repo/auv-mitb.git
-   cd auv-mitb
-   ```
+# Install dependencies
+npm install
 
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
+# Start the dev server
+npm run dev
+# Opens at http://localhost:3000
+```
 
-3. **Run the development server:**
-   ```bash
-   npm run dev
-   ```
-   Open your browser and navigate to the localhost port provided in your terminal (usually `http://localhost:3000`).
-
-### Build for Production
-
-To create an optimized production build:
+**Production build:**
 ```bash
 npm run build
 ```
 
-## 🤝 Sponsorship
-
-We are constantly looking to collaborate with industry leaders. If you are interested in shaping the future of underwater technology and supporting our team, please visit our [Sponsors](/#/sponsors) page or reach out via the Contact page.
-
----
-<div align="center">
-  <p>Engineered for performance. Built for the deep. ⚓</p>
-</div>
+**Type check:**
+```bash
+npm run lint
+```
