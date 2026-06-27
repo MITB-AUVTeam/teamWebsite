@@ -11,8 +11,19 @@ import IMG_3923 from "@/assets/Gallery/IMG_3923.webp";
 import prithaPhoto from "@/assets/Personal_photo/pritha.jpeg";
 import faculty_group from "@/assets/Personal_photo/faculty_group.jpeg";
 
+interface Post {
+  title: string;
+  excerpt: string;
+  category: string;
+  date: string;
+  author: string;
+  image: string;
+  content?: string[];
+  externalLink?: string;
+}
+
 export function MediaPage() {
-  const [activePost, setActivePost] = useState<any | null>(null);
+  const [activePost, setActivePost] = useState<Post | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
 
   // Esc key listener to close modal
@@ -38,7 +49,7 @@ export function MediaPage() {
     };
   }, [activePost]);
 
-  const featuredPost = {
+  const featuredPost: Post = {
     title: "'Maxxxing' Deuterium: Integrating Custom HYDROPHONES",
     excerpt: "Coming Soon....",
     category: "Technical / Electrical Subsystem",
@@ -47,9 +58,9 @@ export function MediaPage() {
     image: pcb,
   };
 
-  const recentPosts = [
+  const recentPosts: Post[] = [
     {
-      title: "",
+      title: "Empowering Student Initiatives: A Faculty Perspective",
       excerpt: "A short memoir by Dr. Manasa Kongot on the Team's journey from building small prototypes to now cometing in RoboSub 2026, during her time heading the Developments Office at MIT-Bengaluru.",
       category: "Personal Memoir",
       date: "May 30, 2026",
@@ -202,7 +213,15 @@ export function MediaPage() {
   ];
 
   const filteredPosts = useMemo(() => {
-    const sortedPosts = [...recentPosts].sort((a, b) => {
+    const allPosts = [featuredPost, ...recentPosts];
+    const sortedAllPosts = [...allPosts].sort((a, b) => {
+      // Handle "Coming Soon...." as newest (placed at the top)
+      const aComing = a.date.toLowerCase().includes("coming soon");
+      const bComing = b.date.toLowerCase().includes("coming soon");
+      if (aComing && !bComing) return -1;
+      if (!aComing && bComing) return 1;
+      if (aComing && bComing) return 0;
+
       // If a date is empty, treat it as newest
       const aDateEmpty = !a.date;
       const bDateEmpty = !b.date;
@@ -234,10 +253,11 @@ export function MediaPage() {
     const query = searchQuery.trim().toLowerCase();
 
     if (!query) {
-      return sortedPosts;
+      // Exclude the featured post from the grid when not searching (as it is shown in the hero section)
+      return sortedAllPosts.filter(post => post !== featuredPost);
     }
 
-    return sortedPosts.filter((post) => {
+    return sortedAllPosts.filter((post) => {
       const searchableText = [
         post.title,
         post.excerpt,

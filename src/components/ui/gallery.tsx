@@ -2,6 +2,7 @@ import { forwardRef, useState, useEffect, useRef } from "react";
 import { motion, useMotionValue, useInView } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { LiquidButton } from "@/components/animate-ui/components/buttons/liquid";
 import { Link } from "react-router-dom";
 
 const imageModules = import.meta.glob<{ default: string }>(
@@ -195,9 +196,9 @@ export const PhotoGallery = ({
         </motion.div>
       </div>
       <div className="flex w-full justify-center">
-      <Button asChild className="rounded-full px-8 bg-blue-600 hover:bg-blue-500 text-white">
+      <LiquidButton variant="blueToWhite" asChild className="rounded-full px-8 font-bold text-sm">
         <Link to="/gallery">View All Photos</Link>
-      </Button>
+      </LiquidButton>
       </div>
     </div>
   );

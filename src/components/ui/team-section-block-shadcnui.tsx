@@ -459,8 +459,26 @@ const itemVariants: Variants = {
   },
 };
 
+function useIsMobile() {
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const checkMobile = () => {
+      const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      const isSmall = window.innerWidth <= 768;
+      setIsMobile(hasTouch || isSmall);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  return isMobile;
+}
+
 function TeamMemberCard({ member }: { member: any }) {
   const [isHovered, setIsHovered] = useState(false);
+  const isMobile = useIsMobile();
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const shouldReduceMotion = useReducedMotion();
@@ -497,14 +515,18 @@ function TeamMemberCard({ member }: { member: any }) {
       className="perspective-1000 w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)]"
     >
       <motion.div
-        style={{
-          rotateX,
-          rotateY,
-          transformStyle: "preserve-3d",
-        }}
-        onMouseMove={handleMouseMove}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={handleMouseLeave}
+        style={
+          isMobile
+            ? { transformStyle: "flat" }
+            : {
+                rotateX,
+                rotateY,
+                transformStyle: "preserve-3d",
+              }
+        }
+        onMouseMove={isMobile ? undefined : handleMouseMove}
+        onMouseEnter={isMobile ? undefined : () => setIsHovered(true)}
+        onMouseLeave={isMobile ? undefined : handleMouseLeave}
         className="group relative h-full"
       >
         <Card className="relative h-full overflow-hidden rounded-3xl border border-white/10 bg-[#0a1128]/80 backdrop-blur-xl transition-shadow duration-500 hover:shadow-[0_0_30px_-5px_rgba(59,130,246,0.3)]">
@@ -512,20 +534,18 @@ function TeamMemberCard({ member }: { member: any }) {
           <motion.div
             className={`absolute inset-0 bg-gradient-to-br ${member.gradient} opacity-0 transition-opacity duration-500 group-hover:opacity-100`}
             animate={
-              isHovered
+              !isMobile && isHovered
                 ? { opacity: 1 }
                 : { opacity: shouldReduceMotion ? 0.05 : 0 }
             }
           />
-
-
 
           <div className="relative z-10 px-6 pt-6 pb-4 flex flex-col h-full">
             {/* Avatar Section */}
             <div className="mb-4 flex justify-center">
               <motion.div
                 className="relative"
-                whileHover={{ scale: 1.05 }}
+                whileHover={isMobile ? undefined : { scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
                 <motion.div
@@ -534,7 +554,7 @@ function TeamMemberCard({ member }: { member: any }) {
                     background: `linear-gradient(135deg, rgba(59,130,246,0.5), rgba(59,130,246,0))`,
                   }}
                   animate={
-                    isHovered
+                    !isMobile && isHovered
                       ? {
                         rotate: shouldReduceMotion ? 0 : 360,
                         scale: shouldReduceMotion ? 1 : [1, 1.08, 1],
@@ -553,7 +573,7 @@ function TeamMemberCard({ member }: { member: any }) {
                     alt={member.name}
                     className="h-full w-full rounded-full object-cover"
                     loading="lazy"
-                    whileHover={{ scale: 1.1 }}
+                    whileHover={isMobile ? undefined : { scale: 1.1 }}
                     transition={{ duration: 0.3 }}
                   />
                 </div>
@@ -564,7 +584,7 @@ function TeamMemberCard({ member }: { member: any }) {
             <div className="text-center flex-grow flex flex-col gap-3">
               <motion.h3
                 className="text-xl font-semibold tracking-tight text-white"
-                animate={isHovered ? { scale: 1.05 } : { scale: 1 }}
+                animate={!isMobile && isHovered ? { scale: 1.05 } : { scale: 1 }}
                 transition={{ duration: 0.2 }}
               >
                 {member.name}
@@ -611,12 +631,12 @@ function TeamMemberCard({ member }: { member: any }) {
                       key={social.label}
                       initial={{ scale: 0, rotate: -180 }}
                       animate={
-                        isHovered
+                        !isMobile && isHovered
                           ? { scale: 1, rotate: shouldReduceMotion ? 0 : 0 }
                           : { scale: 0.85, rotate: 0 }
                       }
                       transition={{
-                        delay: isHovered ? 0.1 * idx : 0,
+                        delay: !isMobile && isHovered ? 0.1 * idx : 0,
                         type: "spring",
                         stiffness: 300,
                         damping: 20,
@@ -651,6 +671,7 @@ function TeamMemberCard({ member }: { member: any }) {
 
 export function TeamSectionBlock() {
   const shouldReduceMotion = useReducedMotion();
+  const isMobile = useIsMobile();
 
   return (
     <div className="min-h-screen bg-[#020617] text-slate-50 pb-0 font-sans">
@@ -659,34 +680,36 @@ export function TeamSectionBlock() {
         className="relative w-full overflow-hidden px-4 py-20 sm:px-6 lg:px-10"
       >
         {/* Background decorative elements */}
-        <div className="absolute inset-0 -z-10 overflow-hidden">
-          <motion.div
-            animate={{
-              scale: shouldReduceMotion ? 1 : [1, 1.18, 1],
-              rotate: shouldReduceMotion ? 0 : [0, 90, 0],
-              opacity: [0.12, 0.3, 0.12],
-            }}
-            transition={{
-              duration: shouldReduceMotion ? 0.6 : 18,
-              repeat: shouldReduceMotion ? 0 : Infinity,
-              ease: "linear",
-            }}
-            className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-blue-600/20 blur-[150px]"
-          />
-          <motion.div
-            animate={{
-              scale: shouldReduceMotion ? 1 : [1.1, 1, 1.1],
-              rotate: shouldReduceMotion ? 0 : [0, -90, 0],
-              opacity: [0.12, 0.32, 0.12],
-            }}
-            transition={{
-              duration: shouldReduceMotion ? 0.6 : 16,
-              repeat: shouldReduceMotion ? 0 : Infinity,
-              ease: "linear",
-            }}
-            className="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-cyan-600/20 blur-[150px]"
-          />
-        </div>
+        {!isMobile && (
+          <div className="absolute inset-0 -z-10 overflow-hidden">
+            <motion.div
+              animate={{
+                scale: shouldReduceMotion ? 1 : [1, 1.18, 1],
+                rotate: shouldReduceMotion ? 0 : [0, 90, 0],
+                opacity: [0.12, 0.3, 0.12],
+              }}
+              transition={{
+                duration: shouldReduceMotion ? 0.6 : 18,
+                repeat: shouldReduceMotion ? 0 : Infinity,
+                ease: "linear",
+              }}
+              className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-blue-600/20 blur-[150px]"
+            />
+            <motion.div
+              animate={{
+                scale: shouldReduceMotion ? 1 : [1.1, 1, 1.1],
+                rotate: shouldReduceMotion ? 0 : [0, -90, 0],
+                opacity: [0.12, 0.32, 0.12],
+              }}
+              transition={{
+                duration: shouldReduceMotion ? 0.6 : 16,
+                repeat: shouldReduceMotion ? 0 : Infinity,
+                ease: "linear",
+              }}
+              className="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-cyan-600/20 blur-[150px]"
+            />
+          </div>
+        )}
 
         <div className="mx-auto max-w-7xl">
           {/* Header */}

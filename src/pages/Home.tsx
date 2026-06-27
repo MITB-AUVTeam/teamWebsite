@@ -23,6 +23,7 @@ import { LogoSlider } from "@/components/ui/logo-slider";
 import { StaggerTestimonials } from "@/components/ui/stagger-testimonials";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { LiquidButton } from "@/components/animate-ui/components/buttons/liquid";
 import {
   FileTextIcon,
   InputIcon,
@@ -87,7 +88,7 @@ const features = [
 const sponsorItems = [
   { logo: logoAnsys, alt: "Ansys", href: "https://www.ansys.com/en-in" },
   { logo: logoDassault, alt: "Dassault Systemes", href: "https://www.solidworks.com/product/students" },
-  { logo: logoMIT, alt: "MIT", href: "" },
+  { logo: logoMIT, alt: "MIT", href: "https://www.manipal.edu/mu/campuses/mahe-bengaluru/academics/institution-list/mit-blr.html" },
   { logo: logoVicharak, alt: "Vicharak", href: "https://vicharak.in/" },
   { logo: logoWisdom, alt: "Wisdom Technologies", href: "https://in.linkedin.com/company/wisdom-technologies-pvt-ltd" },
 ];
@@ -545,12 +546,12 @@ export function Home() {
                 </div>
               </div>
 
-              <Button className="w-fit rounded-full px-8 py-6 bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-900/30 font-bold transition-all duration-300 hover:scale-105 group z-10" asChild>
+              <LiquidButton variant="blueToWhite" className="w-fit rounded-full px-8 py-6 shadow-lg shadow-blue-900/30 font-bold text-sm hover:scale-105 group z-10" asChild>
                 <Link to="/about">
                   Read our full story
                   <ArrowRight className="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
-              </Button>
+              </LiquidButton>
             </div>
 
             {/* Right Picture Column */}
@@ -733,7 +734,7 @@ export function Home() {
                         {detail.highlights.map((item, idx) => (
                           <div key={idx} className="relative group transition-all duration-300">
                             {/* Dot on the timeline */}
-                            <div className="absolute -left-[31px] top-[6px] w-2 h-2 rounded-full bg-slate-800 border border-slate-750 group-hover:bg-blue-400 group-hover:border-blue-300 group-hover:scale-125 transition-all duration-300 shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
+                            <div className="absolute -left-[28px] top-[6px] w-2 h-2 rounded-full bg-slate-800 border border-slate-750 group-hover:bg-blue-400 group-hover:border-blue-300 group-hover:scale-125 transition-all duration-300 shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
                             
                             <div className="space-y-1">
                               <h4 className="text-sm md:text-base font-bold text-slate-100 group-hover:text-blue-400 transition-colors duration-300 tracking-tight">

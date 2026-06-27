@@ -21,6 +21,7 @@ import linkedinImg from "../assets/contacts/linkedin.png";
 import gmailImg from "../assets/contacts/gmail.png";
 import githubImg from "../assets/contacts/github.png";
 import { Footer } from "@/components/Footer";
+import { LiquidButton } from "@/components/animate-ui/components/buttons/liquid";
 
 const workshopLocationUrl = "https://maps.app.goo.gl/66QbM4rkSU4i7S5o9";
 
@@ -248,7 +249,7 @@ export function ContactUs() {
                 <div className="space-y-3">
                   <label className="block text-sm font-medium text-slate-300">Message</label>
                   <textarea
-                    rows={4}
+                    rows={8}
                     required
                     disabled={isSubmitting}
                     value={message}
@@ -273,23 +274,29 @@ export function ContactUs() {
                   </div>
                 )}
 
-                <button 
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-3 px-6 rounded-xl transition-all flex items-center justify-center gap-2 group shadow-lg shadow-blue-900/20 disabled:opacity-50 disabled:cursor-not-allowed"
+                <LiquidButton 
+                  variant="blueToWhite" 
+                  asChild 
+                  className="w-full shadow-lg shadow-blue-900/20 disabled:opacity-50 disabled:cursor-not-allowed rounded-xl font-bold text-base"
                 >
-                  {isSubmitting ? (
-                    <>
-                      Sending Message...
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                    </>
-                  ) : (
-                    <>
-                      Send Message
-                      <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                    </>
-                  )}
-                </button>
+                  <button 
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full font-bold py-4 px-6 transition-all flex items-center justify-center gap-2 group cursor-pointer disabled:cursor-not-allowed text-base"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        Sending Message...
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                      </>
+                    ) : (
+                      <>
+                        Send Message
+                        <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                      </>
+                    )}
+                  </button>
+                </LiquidButton>
               </form>
             </div>
           </div>

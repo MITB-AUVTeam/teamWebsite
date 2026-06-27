@@ -16,6 +16,7 @@ import {
   FileText
 } from "lucide-react";
 import { Footer } from "@/components/Footer";
+import { LiquidButton } from "@/components/animate-ui/components/buttons/liquid";
 import proto1Img from "@/assets/Gallery/IMG_4024_2.png";
 import proto2Img from "@/assets/Gallery/deuterium3.jpeg";
 import tdrPdf from "@/assets/tdr/TDR_Team AUV MIT-B_RS2026.pdf";
@@ -191,14 +192,20 @@ export function VehiclesPage() {
               </p>
             </div>
             
-            <a 
-              href={tdrPdf} 
-              download="RoboSub_2026_TDR.pdf"
-              className="flex items-center gap-2 px-6 py-3.5 bg-blue-600 hover:bg-blue-500 active:scale-95 text-white font-bold text-sm rounded-full shadow-lg shadow-blue-900/30 transition-all duration-300 hover:scale-105 group/dl cursor-pointer z-10"
+            <LiquidButton 
+              variant="blueToWhite" 
+              asChild 
+              className="px-6 py-3.5 shadow-lg shadow-blue-900/30 hover:scale-105 group/dl z-10 rounded-full cursor-pointer text-sm"
             >
-              <Download className="w-4 h-4 transition-transform duration-300 group-hover/dl:translate-y-0.5" />
-              Download Report PDF
-            </a>
+              <a 
+                href={tdrPdf} 
+                download="RoboSub_2026_TDR.pdf"
+                className="flex items-center gap-2 font-bold text-sm"
+              >
+                <Download className="w-4 h-4 transition-transform duration-300 group-hover/dl:translate-y-0.5" />
+                Download Report PDF
+              </a>
+            </LiquidButton>
           </div>
 
           <motion.div 

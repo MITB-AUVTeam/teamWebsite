@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Footer } from "@/components/Footer";
+import { LiquidButton } from "@/components/animate-ui/components/buttons/liquid";
 import ansysLogo from "../assets/Background - less sponsors logos/Ansys.png";
 import dassaultLogo from "../assets/Background - less sponsors logos/Dassault Systemes.png";
 import vicharakLogo from "../assets/Background - less sponsors logos/Vicharak.png";
@@ -12,7 +13,8 @@ const sponsors = [
     name: "Manipal Institute of Technology, Bengaluru",
     logo: mitLogo,
     description: "Serves as our primary institutional pillar, providing a state-of-the-art dedicated workshop space equipped with necessary electronic instruments like oscilloscopes, dual-channel power supplies, cabling along with appropriate mechanical tools and equipment. MIT Bengaluru also provides crucial direct funding for critical system components, combined with tireless administrative support, faculty mentorship if and when needed, and active support in bridging connections with industry partners to facilitate seamless development.",
-    logoClass: "scale-105 md:scale-115 lg:scale-120"
+    logoClass: "scale-105 md:scale-115 lg:scale-120",
+    href: "https://www.manipal.edu/mu/campuses/mahe-bengaluru/academics/institution-list/mit-blr.html"
   },
   { 
     name: "Ansys", 
@@ -122,12 +124,18 @@ export function SponsorsPage() {
           <p className="text-slate-300 text-lg max-w-2xl mx-auto mb-8">
             Join us in shaping the future of underwater technology. Partnering with our team provides visibility among top engineering talent and demonstrates your commitment to innovation.
           </p>
-          <Link
-            to="/contact#contact-form"
-            className="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white transition-colors bg-blue-600 border border-transparent rounded-full shadow-sm hover:bg-blue-700"
+          <LiquidButton 
+            variant="blueToWhite" 
+            asChild 
+            className="shadow-sm rounded-full cursor-pointer hover:scale-105 transition-transform font-bold text-base"
           >
-            Contact Us for Sponsorship
-          </Link>
+            <Link
+              to="/contact#contact-form"
+              className="inline-flex items-center justify-center px-8 py-4 text-base font-bold"
+            >
+              Contact Us for Sponsorship
+            </Link>
+          </LiquidButton>
         </motion.div>
       </div>
       <Footer />

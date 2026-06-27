@@ -7,6 +7,7 @@ import Floating, {
 import { FlipReveal, FlipRevealItem } from "@/components/ui/flip-reveal";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Footer } from "@/components/Footer";
+import { LiquidButton } from "@/components/animate-ui/components/buttons/liquid";
 import azadLockedIn from "@/assets/Gallery/azad_lockedin.webp";
 import img_1184 from "@/assets/Gallery/IMG_1184.webp";
 import img_1187 from "@/assets/Gallery/IMG_1187.webp";
@@ -246,12 +247,18 @@ export function GalleryPage() {
           <p className="text-slate-300 text-lg md:text-xl max-w-xl z-50">
             A visual journey through our team's projects, events, and achievements.
           </p>
-          <button
-            onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
-            className="text-sm font-semibold z-50 hover:scale-105 transition-transform bg-white text-black rounded-full px-8 py-3 mt-4"
+          <LiquidButton 
+            variant="outlineToWhite" 
+            asChild 
+            className="mt-4 z-50 hover:scale-105 text-sm"
           >
-            Scroll Down
-          </button>
+            <button
+              onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+              className="text-sm font-bold rounded-full px-8 py-3 cursor-pointer"
+            >
+              Scroll Down
+            </button>
+          </LiquidButton>
         </motion.div>
 
         <Floating sensitivity={-1} className="overflow-hidden">
