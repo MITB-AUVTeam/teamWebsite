@@ -13,10 +13,7 @@ import { MediaPage } from "@/pages/MediaPage";
 import { SponsorsPage } from "@/pages/SponsorsPage";
 import ScrollToTop from "@/components/ScrollToTop";
 import { Analytics } from "@vercel/analytics/react";
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
 export default function App() {
   const location = useLocation();
 
