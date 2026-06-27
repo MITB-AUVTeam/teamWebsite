@@ -13,7 +13,6 @@ import { MediaPage } from "@/pages/MediaPage";
 import { SponsorsPage } from "@/pages/SponsorsPage";
 import ScrollToTop from "@/components/ScrollToTop";
 import { Analytics } from "@vercel/analytics/react";
-import TargetCursor from "@/components/ui/target-cursor";
 
 export default function App() {
   const location = useLocation();
@@ -26,7 +25,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#020617] text-slate-50 selection:bg-blue-500/30">
-      <TargetCursor />
       <ScrollToTop watch={location.pathname} />
       <Navbar />
       <main className={isHome ? "" : "pt-24"}>
