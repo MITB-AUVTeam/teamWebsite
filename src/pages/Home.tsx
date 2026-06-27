@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState, type PointerEvent } from "react";
+import { useEffect, useState, useRef, useCallback, type PointerEvent } from "react";
 import imgBg from "../assets/hero_parallax/979650ce95a6c67ea15bbbf0ad0681f152bbf7b3.webp";
 import imgScreenshot20251022182250Photoroom1 from "../assets/hero_parallax/b0b02181d3064ccfa838a5b7d18e44696ad67457.webp";
 import imgChatGptImageOct252025114243PmPhotoroom1 from "../assets/hero_parallax/ffd48cdd2aea9c7f098608b847a7c0c99b5f4eb8.webp";
@@ -304,6 +304,8 @@ const subsystemImages: Record<string, string> = {
 export function Home() {
   const [scrollY, setScrollY] = useState(0);
   const [activeTeam, setActiveTeam] = useState<string | null>(null);
+  
+
 
   // Preload hero parallax images
   useEffect(() => {
@@ -576,11 +578,21 @@ export function Home() {
         </div>
       </section>
 
-      <section className="py-24 px-6 max-w-7xl mx-auto order-4 md:order-3">
+      <section className="py-24 px-6 max-w-7xl mx-auto order-4 md:order-3 relative">
         <div className="text-center mb-16">
           <h2 className="text-sm font-bold tracking-widest text-blue-500 uppercase mb-3">Sub-systems</h2>
           <h3 className="text-4xl md:text-5xl font-bold tracking-tight">The core of our vehicle</h3>
         </div>
+
+        {/* Permanent scrolling helper hint */}
+        <div className="flex justify-center mb-8 select-none">
+          <div className="bg-slate-900/60 backdrop-blur-md border border-white/5 px-4 py-2 rounded-full shadow-xl flex items-center justify-center">
+            <span className="text-xs md:text-sm font-medium text-slate-400 tracking-wider">
+              👇 Tap any subsystem to explore its internals
+            </span>
+          </div>
+        </div>
+
         <BentoGrid className="lg:grid-rows-3">
           {features.map((feature) => (
             <BentoCard
