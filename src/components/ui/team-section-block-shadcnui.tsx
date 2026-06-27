@@ -226,19 +226,6 @@ const teamCategories = [
         }
       },
       {
-        "name": "Harshika Devarasetty",
-        "role": "Electrical Subsystem Member",
-        "bio": "running on trial and error",
-        "image": "src/assets/Personal_photo/harshika.jpg",
-        "location": "2nd Year",
-        "skills": ["Electrical"],
-        "gradient": "from-teal-500/20 via-teal-500/5 to-transparent",
-        "social": {
-          "linkedin": "https://www.linkedin.com/in/harshika-devarasetty-198b1a389/",
-          "github": "https://github.com/Harshika2304"
-        }
-      },
-      {
         "name": "Serah Saju Jacob",
         "role": "Electrical Subsystem Member",
         "bio": "reach for the stars",
@@ -319,32 +306,6 @@ const teamCategories = [
         "social": {
           "linkedin": "https://www.linkedin.com/in/aditya-r-jemshetty-036311331/",
           "github": "https://github.com/Aditya5191"
-        }
-      },
-      {
-        "name": "Piyush Sahoo",
-        "role": "Software and Automation Subsystem Member",
-        "bio": "Remember to source install/setup.bash ;)",
-        "image": "/src/assets/Personal_photo/piyush.webp",
-        "location": "1st Year",
-        "skills": ["Software"],
-        "gradient": "from-teal-500/20 via-teal-500/5 to-transparent",
-        "social": {
-          "linkedin": "https://www.linkedin.com/in/piyush-sahoo-230269323/",
-          "github": "https://github.com/piyushSahooDB"
-        }
-      },
-      {
-        "name": "Aaishi Gupta",
-        "role": "Software and Automation Subsystem Member",
-        "bio": "nothing changes if nothing changes",
-        "image": "/src/assets/Personal_photo/aaishi.webp",
-        "location": "1st Year",
-        "skills": ["Software"],
-        "gradient": "from-teal-500/20 via-teal-500/5 to-transparent",
-        "social": {
-          "linkedin": "https://www.linkedin.com/in/aaishi-gupta-1651782a9",
-          "github": "https://github.com/aaishii07"
         }
       },
       {
