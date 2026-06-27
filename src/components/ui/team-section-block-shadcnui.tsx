@@ -252,19 +252,6 @@ const teamCategories = [
         }
       },
       {
-        "name": "Gayatri. B",
-        "role": "Electrical Subsystem Member",
-        "bio": "Stay curious",
-        "image": "/src/assets/Personal_photo/gayatri.webp",
-        "location": "1st Year",
-        "skills": ["Electrical"],
-        "gradient": "from-teal-500/20 via-teal-500/5 to-transparent",
-        "social": {
-          "linkedin": "https://www.linkedin.com/in/gayatri-b-9484003a9/",
-          "github": "https://github.com/GayatriB7"
-        }
-      },
-      {
         "name": "Kopal Agrawal",
         "role": "Electrical Subsystem Member",
         "bio": "It's not that deep",
