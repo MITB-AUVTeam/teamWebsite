@@ -263,11 +263,9 @@ export function Home() {
   const [scrollY, setScrollY] = useState(0);
   const [activeTeam, setActiveTeam] = useState<string | null>(null);
   const [showBanner, setShowBanner] = useState(false);
-  const [confettiBurst, setConfettiBurst] = useState(0);
+  const [showConfetti, setShowConfetti] = useState(false);
 
-  const triggerConfetti = () => setConfettiBurst(n => n + 1);
-
-  const confettiPieces = confettiBurst > 0 ? [...Array(160)].map((_, i) => {
+  const confettiPieces = showConfetti ? [...Array(160)].map((_, i) => {
     const colors = ["bg-blue-400","bg-cyan-300","bg-pink-400","bg-yellow-300","bg-purple-400","bg-green-400","bg-white","bg-orange-400","bg-red-400","bg-sky-300"];
     const fromLeft = i < 80;
     const angle = fromLeft
@@ -276,7 +274,7 @@ export function Home() {
     const rad = (angle * Math.PI) / 180;
     const dist = 400 + Math.random() * 600;
     return {
-      id: `${confettiBurst}-${i}`,
+      id: `confetti-${i}`,
       color: colors[i % colors.length],
       fromLeft,
       delay: Math.random() * 0.4,
@@ -290,7 +288,10 @@ export function Home() {
 
   useEffect(() => {
     if (sessionStorage.getItem("robosub-banner-dismissed") !== "true") {
-      const t = setTimeout(() => setShowBanner(true), 800);
+      const t = setTimeout(() => {
+        setShowBanner(true);
+        setShowConfetti(true);
+      }, 800);
       return () => clearTimeout(t);
     }
   }, []);
@@ -696,11 +697,10 @@ export function Home() {
 
               {/* Pill */}
               <div
-                onClick={triggerConfetti}
-                className="flex items-center gap-3 pl-4 pr-3 py-2.5 rounded-full bg-slate-950/90 backdrop-blur-xl border border-blue-500/25 shadow-[0_0_24px_-4px_rgba(59,130,246,0.3)] whitespace-nowrap cursor-pointer select-none"
+                className="flex items-center gap-2 sm:gap-3 px-3 sm:pl-4 sm:pr-3 py-2.5 rounded-full bg-slate-950/90 backdrop-blur-xl border border-blue-500/25 shadow-[0_0_24px_-4px_rgba(59,130,246,0.3)] select-none max-w-[92vw]"
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse shrink-0" />
-                <span className="text-sm text-slate-200 font-medium">
+                <span className="text-xs sm:text-sm text-slate-200 font-medium text-center leading-tight">
                   Team AUV MIT-B prequalified to the <span className="text-white font-bold">Semi-Final Round</span> at <span className="text-blue-300 font-semibold">RoboSub 2026</span>
                 </span>
                 <button
