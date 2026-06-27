@@ -14,7 +14,6 @@ import logoVicharak from "../assets/Background - less sponsors logos/Vicharak.we
 import logoWisdom from "../assets/Background - less sponsors logos/Wisdom Technologies.webp";
 import mechanicalBg from "@/assets/homepage_bento_background/mechanical.webp";
 import electricalBg from "@/assets/homepage_bento_background/electrical.webp";
-import designBg from "@/assets/homepage_bento_background/design.webp";
 import managementBg from "@/assets/homepage_bento_background/management.webp";
 import softwareBg from "@/assets/homepage_bento_background/software.webp";
 import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
@@ -28,7 +27,6 @@ import {
   FileTextIcon,
   InputIcon,
   GlobeIcon,
-  CalendarIcon,
   BellIcon,
 } from "@radix-ui/react-icons";
 import { ArrowRight, Cpu, Zap, Code, LayoutDashboard, X } from "lucide-react";
@@ -45,7 +43,7 @@ const features = [
     href: "/team",
     cta: "Explore Subsystem",
     background: <img src={mechanicalBg} className="absolute inset-0 w-full h-full object-cover opacity-20 transition-transform duration-700 ease-out group-hover:scale-105" alt="Mechanical" />,
-    className: "lg:row-start-1 lg:row-end-4 lg:col-start-2 lg:col-end-3",
+    className: "lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-3",
   },
   {
     Icon: Zap,
@@ -54,25 +52,7 @@ const features = [
     href: "/team",
     cta: "Explore Subsystem",
     background: <img src={electricalBg} className="absolute inset-0 w-full h-full object-cover opacity-20 transition-transform duration-700 ease-out group-hover:scale-105" alt="Electrical" />,
-    className: "lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-3",
-  },
-  {
-    Icon: LayoutDashboard,
-    name: "Design",
-    description: "Social media and content creation",
-    href: "/team",
-    cta: "Explore Subsystem",
-    background: <img src={designBg} className="absolute inset-0 w-full h-full object-cover opacity-20 transition-transform duration-700 ease-out group-hover:scale-105" alt="Design" />,
-    className: "lg:col-start-1 lg:col-end-2 lg:row-start-3 lg:row-end-4",
-  },
-  {
-    Icon: CalendarIcon,
-    name: "Management",
-    description: "Project timelines and resource allocation.",
-    href: "/team",
-    cta: "Explore Subsystem",
-    background: <img src={managementBg} className="absolute inset-0 w-full h-full object-cover opacity-20 transition-transform duration-700 ease-out group-hover:scale-105" alt="Management" />,
-    className: "lg:col-start-3 lg:col-end-3 lg:row-start-1 lg:row-end-2",
+    className: "lg:col-start-2 lg:col-end-3 lg:row-start-1 lg:row-end-2",
   },
   {
     Icon: Code,
@@ -81,7 +61,16 @@ const features = [
     href: "/team",
     cta: "Explore Subsystem",
     background: <img src={softwareBg} className="absolute inset-0 w-full h-full object-cover opacity-20 transition-transform duration-700 ease-out group-hover:scale-105" alt="Software" />,
-    className: "lg:col-start-3 lg:col-end-3 lg:row-start-2 lg:row-end-4",
+    className: "lg:col-start-2 lg:col-end-3 lg:row-start-2 lg:row-end-3",
+  },
+  {
+    Icon: LayoutDashboard,
+    name: "Management & Design",
+    description: "Sponsorships, branding, media production, and outreach.",
+    href: "/team",
+    cta: "Explore Subsystem",
+    background: <img src={managementBg} className="absolute inset-0 w-full h-full object-cover opacity-20 transition-transform duration-700 ease-out group-hover:scale-105" alt="Management and Design" />,
+    className: "lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-3",
   },
 ];
 
@@ -231,37 +220,7 @@ const subsystemDetails: Record<string, TeamDetail> = {
       },
     ]
   },
-  "Design": {
-    title: "Management and Design Team",
-    subTitle: "Web representation, corporate sponsorships, and campus administration",
-    description: "The Management, Business and Design subsystem handles the operational and outreach side of the project. Responsibilities include general administration, approaching companies for sponsorships, financial auditing and logistics support, designing and maintaining the team website, producing the team introduction video, and running both on-campus and off-campus promotional activities.",
-    colorClass: "from-fuchsia-500 to-pink-600 shadow-fuchsia-500/15",
-    borderColor: "border-blue-500/20 hover:border-blue-500/40",
-    glowColor: "bg-blue-500/10",
-    highlights: [
-      {
-        title: "Sponsorship & Finances",
-        desc: "Managing corporate outreach, sponsor packages, and financial auditing.",
-        icon: LayoutDashboard,
-      },
-      {
-        title: "Website & Branding",
-        desc: "Designing and developing this responsive platform, maintaining AUV identity.",
-        icon: LayoutDashboard,
-      },
-      {
-        title: "Media Production",
-        desc: "Filming, editing, and producing the official high-impact AUV introduction videos.",
-        icon: LayoutDashboard,
-      },
-      {
-        title: "Events & Promotion",
-        desc: "Organizing wet test events and on/off-campus promotion for general public.",
-        icon: LayoutDashboard,
-      },
-    ]
-  },
-  "Management": {
+  "Management & Design": {
     title: "Management and Design Team",
     subTitle: "Web representation, corporate sponsorships, and campus administration",
     description: "The Management, Business and Design subsystem handles the operational and outreach side of the project. Responsibilities include general administration, approaching companies for sponsorships, financial auditing and logistics support, designing and maintaining the team website, producing the team introduction video, and running both on-campus and off-campus promotional activities.",
@@ -297,13 +256,37 @@ const subsystemImages: Record<string, string> = {
   "Mechanical": mechanicalBg,
   "Electrical": electricalBg,
   "Software": softwareBg,
-  "Design": designBg,
-  "Management": managementBg,
+  "Management & Design": managementBg,
 };
 
 export function Home() {
   const [scrollY, setScrollY] = useState(0);
   const [activeTeam, setActiveTeam] = useState<string | null>(null);
+  const [showBanner, setShowBanner] = useState(false);
+  const [confettiBurst, setConfettiBurst] = useState(0);
+
+  const triggerConfetti = () => setConfettiBurst(n => n + 1);
+
+  const confettiPieces = confettiBurst > 0 ? [...Array(80)].map((_, i) => {
+    const colors = ["bg-blue-400","bg-cyan-300","bg-pink-400","bg-yellow-300","bg-purple-400","bg-green-400","bg-white","bg-orange-400","bg-red-400","bg-sky-300"];
+    return {
+      id: `${confettiBurst}-${i}`,
+      color: colors[i % colors.length],
+      left: `${Math.random() * 100}%`,
+      delay: Math.random() * 0.6,
+      duration: 1.8 + Math.random() * 1.4,
+      isRect: i % 3 !== 0,
+      rotate: Math.random() > 0.5 ? 540 : -540,
+      drift: (Math.random() - 0.5) * 120,
+    };
+  }) : [];
+
+  useEffect(() => {
+    if (sessionStorage.getItem("robosub-banner-dismissed") !== "true") {
+      const t = setTimeout(() => setShowBanner(true), 800);
+      return () => clearTimeout(t);
+    }
+  }, []);
   
 
 
@@ -370,6 +353,7 @@ export function Home() {
 
   return (
     <div className="min-h-screen relative w-full overflow-x-hidden flex flex-col">
+
 
       <section
         className="relative h-[100vh] w-full overflow-hidden bg-[#000910] order-1 md:order-1"
@@ -584,8 +568,8 @@ export function Home() {
           <h3 className="text-4xl md:text-5xl font-bold tracking-tight">The core of our vehicle</h3>
         </div>
 
-        <BentoGrid className="lg:grid-rows-3">
-          {features.map((feature, idx) => (
+        <BentoGrid className="lg:grid-rows-2">
+          {features.map((feature) => (
             <BentoCard
               key={feature.name}
               {...feature}
@@ -658,6 +642,75 @@ export function Home() {
       <div className="order-8 md:order-8">
         <Footer />
       </div>
+
+      <AnimatePresence>
+        {showBanner && (
+          <motion.div
+            initial={{ y: 24, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 16, opacity: 0 }}
+            transition={{ type: "spring", duration: 0.5, bounce: 0.25 }}
+            className="fixed bottom-16 left-1/2 -translate-x-1/2 z-[19000] pointer-events-auto"
+          >
+            <div className="relative flex items-center justify-center">
+              {/* Burst particles — fire once on mount */}
+              {[...Array(16)].map((_, i) => {
+                const angle = (i / 16) * 360;
+                const dist = 55 + Math.random() * 30;
+                const rad = (angle * Math.PI) / 180;
+                const colors = ["bg-blue-400","bg-cyan-300","bg-white","bg-blue-300","bg-sky-400"];
+                const color = colors[i % colors.length];
+                return (
+                  <motion.div
+                    key={i}
+                    className={`absolute rounded-full ${color} ${i % 3 === 0 ? "w-1.5 h-1.5" : "w-1 h-1"}`}
+                    initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
+                    animate={{
+                      x: Math.cos(rad) * dist,
+                      y: Math.sin(rad) * dist,
+                      opacity: 0,
+                      scale: 0,
+                    }}
+                    transition={{ duration: 0.9, ease: [0.2, 0.8, 0.4, 1], delay: 0.5 }}
+                  />
+                );
+              })}
+
+              {/* Continuous floating particles */}
+              {[...Array(8)].map((_, i) => (
+                <motion.div
+                  key={`float-${i}`}
+                  className={`absolute bottom-0 w-px h-px rounded-full ${i % 2 === 0 ? "bg-blue-400" : "bg-cyan-300"}`}
+                  style={{ left: `${10 + i * 11}%` }}
+                  animate={{ y: [-4, -28], opacity: [0, 0.7, 0], scale: [0.5, 1.5, 0.5] }}
+                  transition={{ duration: 1.8 + i * 0.3, repeat: Infinity, delay: i * 0.4, ease: "easeOut" }}
+                />
+              ))}
+
+              {/* Pill */}
+              <div
+                onClick={triggerConfetti}
+                className="flex items-center gap-3 pl-4 pr-3 py-2.5 rounded-full bg-slate-950/90 backdrop-blur-xl border border-blue-500/25 shadow-[0_0_24px_-4px_rgba(59,130,246,0.3)] whitespace-nowrap cursor-pointer select-none"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse shrink-0" />
+                <span className="text-sm text-slate-200 font-medium">
+                  Team AUV MIT-B prequalified to the <span className="text-white font-bold">Semi-Final Round</span> at <span className="text-blue-300 font-semibold">RoboSub 2026</span>
+                </span>
+                <button
+                  onClick={() => {
+                    setShowBanner(false);
+                    sessionStorage.setItem("robosub-banner-dismissed", "true");
+                  }}
+                  className="ml-1 w-5 h-5 rounded-full flex items-center justify-center text-slate-500 hover:text-slate-200 transition-colors cursor-pointer"
+                  aria-label="Dismiss"
+                >
+                  <X className="w-3 h-3" />
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <AnimatePresence>
         {activeTeam && subsystemDetails[activeTeam] && (() => {
@@ -758,6 +811,34 @@ export function Home() {
             </motion.div>
           );
         })()}
+      </AnimatePresence>
+
+      {/* Full-page confetti */}
+      <AnimatePresence>
+        {confettiPieces.length > 0 && (
+          <div className="fixed inset-0 z-[18000] pointer-events-none overflow-hidden">
+            {confettiPieces.map((p) => (
+              <motion.div
+                key={p.id}
+                className={`absolute ${p.color} ${p.isRect ? "w-2 h-3 rounded-sm" : "w-2 h-2 rounded-full"}`}
+                style={{ left: p.left, top: -12 }}
+                initial={{ y: -12, x: 0, opacity: 1, rotate: 0, scale: 1 }}
+                animate={{
+                  y: "110vh",
+                  x: p.drift,
+                  opacity: [1, 1, 0],
+                  rotate: p.rotate,
+                  scale: [1, 0.8, 0.6],
+                }}
+                transition={{
+                  duration: p.duration,
+                  delay: p.delay,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                }}
+              />
+            ))}
+          </div>
+        )}
       </AnimatePresence>
     </div>
   );
