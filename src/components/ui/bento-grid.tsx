@@ -34,6 +34,7 @@ const BentoCard = ({
   href,
   cta,
   onClick,
+  index = 0,
 }: {
   name: string;
   className: string;
@@ -43,6 +44,7 @@ const BentoCard = ({
   href: string;
   cta: string;
   onClick?: () => void;
+  index?: number;
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
@@ -143,6 +145,12 @@ const BentoCard = ({
         className,
       )}
     >
+      {/* HUD Corner Brackets */}
+      <div className="absolute top-3 left-3 w-2.5 h-2.5 border-t border-l border-slate-700/40 group-hover:border-blue-500/40 transition-colors duration-300 pointer-events-none z-20" />
+      <div className="absolute top-3 right-3 w-2.5 h-2.5 border-t border-r border-slate-700/40 group-hover:border-blue-500/40 transition-colors duration-300 pointer-events-none z-20" />
+      <div className="absolute bottom-3 left-3 w-2.5 h-2.5 border-b border-l border-slate-700/40 group-hover:border-blue-500/40 transition-colors duration-300 pointer-events-none z-20" />
+      <div className="absolute bottom-3 right-3 w-2.5 h-2.5 border-b border-r border-slate-700/40 group-hover:border-blue-500/40 transition-colors duration-300 pointer-events-none z-20" />
+
       {/* Background Graphic (Old desktop scale/overlay is native to background prop) */}
       <div className="absolute inset-0 z-0">
         {background}
@@ -157,27 +165,43 @@ const BentoCard = ({
 
       {/* Content Area */}
       <div className="pointer-events-none z-10 flex transform-gpu flex-col gap-1 p-6 transition-all duration-300 group-hover:-translate-y-1.5">
-        <Icon className="h-12 w-12 origin-left transform-gpu text-slate-400 transition-all duration-300 ease-in-out group-hover:scale-75 group-hover:text-blue-400" />
+        
+        {/* Sonar Icon wrapper (Cascading ripples - container scales & shifts on hover to guarantee perfect alignment) */}
+        <div className="relative w-12 h-12 flex items-center justify-center mb-1 transform-gpu origin-left transition-transform duration-300 group-hover:scale-75">
+          <span 
+            style={{ animationDelay: `${index * 0.8}s` }} 
+            className="absolute inset-0 rounded-full border border-blue-500/35 animate-sonar-ping pointer-events-none" 
+          />
+          <span 
+            style={{ animationDelay: `${index * 0.8 + 1.5}s` }} 
+            className="absolute inset-0 rounded-full border border-blue-500/15 animate-sonar-ping pointer-events-none" 
+          />
+          <Icon className="h-12 w-12 text-slate-400 transition-colors duration-300 group-hover:text-blue-400 z-10" />
+        </div>
+
         <h3 className="text-xl font-semibold text-slate-800 dark:text-slate-100 mt-2">
           {name}
         </h3>
         <p className="max-w-lg text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{description}</p>
         
         {onClick && (
-          <span className={cn(
-            "text-xs font-black text-blue-400 flex items-center gap-1 transition-all duration-300 mt-2 select-none uppercase tracking-wider",
-            isMobile
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0"
-          )}>
-            {cta}
-            <ArrowRightIcon className={cn(
-              "h-3 w-3 transition-transform duration-300",
+          <div className="mt-3">
+            <span className={cn(
+              "inline-flex items-center gap-2 select-none text-[10px] uppercase font-bold tracking-widest px-3 py-1.5 rounded-full border border-blue-500/25 bg-blue-500/5 text-blue-400 transition-all duration-300 ease-out",
               isMobile
-                ? animateArrow ? "animate-arrow-nudge" : ""
-                : "group-hover:translate-x-0.5"
-            )} />
-          </span>
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0"
+            )}>
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6] animate-pulse" />
+              {cta}
+              <ArrowRightIcon className={cn(
+                "h-3 w-3 transition-transform duration-300",
+                isMobile
+                  ? animateArrow ? "animate-arrow-nudge" : ""
+                  : "group-hover:translate-x-0.5"
+              )} />
+            </span>
+          </div>
         )}
       </div>
 

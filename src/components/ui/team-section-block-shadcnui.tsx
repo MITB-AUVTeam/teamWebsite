@@ -412,9 +412,7 @@ function useIsMobile() {
 
   React.useEffect(() => {
     const checkMobile = () => {
-      const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-      const isSmall = window.innerWidth <= 768;
-      setIsMobile(hasTouch || isSmall);
+      setIsMobile(window.innerWidth <= 768);
     };
     checkMobile();
     window.addEventListener("resize", checkMobile);

@@ -219,6 +219,30 @@ const exampleImages = [
     link: "#",
     title: "Vehicle photo 3",
   },
+  {
+    url: galleryUnderwater,
+    link: "#",
+    author: "Testing",
+    title: "Underwater Testing",
+  },
+  {
+    url: galleryAward,
+    link: "#",
+    author: "Achievements",
+    title: "IEEE RAS Competition Award",
+  },
+  {
+    url: img_3559,
+    link: "#",
+    author: "Team",
+    title: "Team working on Hydrogen",
+  },
+  {
+    url: img_3568,
+    link: "#",
+    author: "Vehicles",
+    title: "Hydrogen Assembly",
+  },
 ];
 
 export function GalleryPage() {
@@ -318,6 +342,34 @@ export function GalleryPage() {
               initial={{ opacity: 0 }}
               src={exampleImages[6].url}
               className="w-24 h-24 md:w-44 md:h-44 object-cover rounded-2xl hover:scale-105 duration-200 cursor-pointer transition-transform shadow-2xl rotate-6 md:rotate-0"
+            />
+          </FloatingElement>
+          <FloatingElement depth={1.5} className="top-[38%] left-[64%] md:top-[38%] md:left-[68%]">
+            <motion.img
+              initial={{ opacity: 0 }}
+              src={exampleImages[8].url}
+              className="w-24 h-24 sm:w-36 sm:h-36 md:w-44 md:h-44 object-cover rounded-2xl hover:scale-105 duration-200 cursor-pointer transition-transform shadow-2xl rotate-6 md:rotate-0"
+            />
+          </FloatingElement>
+          <FloatingElement depth={2.5} className="top-[45%] left-[26%] md:top-[42%] md:left-[22%]">
+            <motion.img
+              initial={{ opacity: 0 }}
+              src={exampleImages[9].url}
+              className="w-24 h-24 sm:w-36 sm:h-36 md:w-40 md:h-40 object-cover rounded-2xl hover:scale-105 duration-200 cursor-pointer transition-transform shadow-2xl -rotate-12 md:rotate-0"
+            />
+          </FloatingElement>
+          <FloatingElement depth={0.8} className="top-[22%] left-[90%] md:top-[22%] md:left-[89%]">
+            <motion.img
+              initial={{ opacity: 0 }}
+              src={exampleImages[10].url}
+              className="w-24 h-24 sm:w-36 sm:h-36 md:w-40 md:h-40 object-cover rounded-2xl hover:scale-105 duration-200 cursor-pointer transition-transform shadow-2xl rotate-12 md:rotate-0"
+            />
+          </FloatingElement>
+          <FloatingElement depth={2} className="top-[88%] left-[83%] md:top-[85%] md:left-[92%]">
+            <motion.img
+              initial={{ opacity: 0 }}
+              src={exampleImages[11].url}
+              className="w-24 h-24 sm:w-36 sm:h-36 md:w-44 md:h-44 object-cover rounded-2xl hover:scale-105 duration-200 cursor-pointer transition-transform shadow-2xl -rotate-6 md:rotate-0"
             />
           </FloatingElement>
         </Floating>

@@ -584,20 +584,12 @@ export function Home() {
           <h3 className="text-4xl md:text-5xl font-bold tracking-tight">The core of our vehicle</h3>
         </div>
 
-        {/* Permanent scrolling helper hint */}
-        <div className="flex justify-center mb-8 select-none">
-          <div className="bg-slate-900/60 backdrop-blur-md border border-white/5 px-4 py-2 rounded-full shadow-xl flex items-center justify-center">
-            <span className="text-xs md:text-sm font-medium text-slate-400 tracking-wider">
-              👇 Tap any subsystem to explore its internals
-            </span>
-          </div>
-        </div>
-
         <BentoGrid className="lg:grid-rows-3">
-          {features.map((feature) => (
+          {features.map((feature, idx) => (
             <BentoCard
               key={feature.name}
               {...feature}
+              index={idx}
               onClick={() => setActiveTeam(feature.name)}
             />
           ))}

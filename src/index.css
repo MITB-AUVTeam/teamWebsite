@@ -270,6 +270,17 @@ body {
   50% { transform: translateX(4px); }
 }
 
+@keyframes sonarPing {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
 .animate-viewport-pulse {
   animation: viewportPulse 400ms cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
@@ -278,9 +289,14 @@ body {
   animation: arrowNudge 250ms ease-in-out;
 }
 
+.animate-sonar-ping {
+  animation: sonarPing 3s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-viewport-pulse,
-  .animate-arrow-nudge {
+  .animate-arrow-nudge,
+  .animate-sonar-ping {
     animation: none !important;
     transition: none !important;
   }
