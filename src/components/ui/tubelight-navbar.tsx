@@ -122,58 +122,50 @@ export function NavBar({ items, className, children, isScrolled = false }: NavBa
       </div>
 
       {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[10000] flex flex-col bg-[#020617]/95 backdrop-blur-xl p-4 pt-6"
-          >
-            {/* Top Pill */}
-            <div className="flex items-center justify-between px-6 py-3 bg-transparent border-transparent rounded-full">
-              <div className="uppercase" onClick={() => setIsMobileMenuOpen(false)}>
-                {children}
-              </div>
-              <button
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="p-2 bg-white/5 rounded-full hover:bg-white/10 transition-colors"
-              >
-                <X className="text-blue-500" size={20} strokeWidth={2} />
-              </button>
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-[50000] flex flex-col bg-[#020617] p-4 pt-6">
+          {/* Top Pill */}
+          <div className="flex items-center justify-between px-6 py-3 bg-transparent border-transparent rounded-full">
+            <div className="uppercase" onClick={() => setIsMobileMenuOpen(false)}>
+              {children}
             </div>
+            <button
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="p-2 bg-white/5 rounded-full hover:bg-white/10 transition-colors"
+            >
+              <X className="text-blue-500" size={20} strokeWidth={2} />
+            </button>
+          </div>
 
-            {/* Menu Items Box */}
-            <div className="mt-4 flex-1 bg-transparent border border-white/10 rounded-[2rem] overflow-y-auto flex flex-col shadow-2xl min-h-0">
-              <div className="flex-1 flex flex-col px-6 py-4 md:py-8 justify-start md:justify-center">
-                <div className="flex flex-col">
-                  {items.map((item) => {
-                    const isActive = activeTab === item.name;
-                    return (
-                      <Link
-                        key={item.name}
-                        to={item.url}
-                        onClick={() => {
-                          setIsMobileMenuOpen(false);
-                        }}
-                        className={cn(
-                          "relative py-4 sm:py-5 text-center text-sm font-bold tracking-[0.2em] uppercase border-b border-white/5 last:border-b-0 transition-colors flex items-center justify-center",
-                          isActive ? "text-blue-500" : "text-slate-300 hover:text-blue-400"
-                        )}
-                      >
-                        {isActive && <span className="absolute left-6 text-blue-500 font-normal">[</span>}
-                        {item.name}
-                        {isActive && <span className="absolute right-6 text-blue-500 font-normal">]</span>}
-                      </Link>
-                    )
-                  })}
-                </div>
+          {/* Menu Items Box */}
+          <div className="mt-4 flex-1 bg-transparent border border-white/10 rounded-[2rem] overflow-y-auto flex flex-col shadow-2xl min-h-0">
+            <div className="flex-1 flex flex-col px-6 py-4 md:py-8 justify-start md:justify-center">
+              <div className="flex flex-col">
+                {items.map((item) => {
+                  const isActive = activeTab === item.name;
+                  return (
+                    <Link
+                      key={item.name}
+                      to={item.url}
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                      }}
+                      className={cn(
+                        "relative py-4 sm:py-5 text-center text-sm font-bold tracking-[0.2em] uppercase border-b border-white/5 last:border-b-0 transition-colors flex items-center justify-center",
+                        isActive ? "text-blue-500" : "text-slate-300 hover:text-blue-400"
+                      )}
+                    >
+                      {isActive && <span className="absolute left-6 text-blue-500 font-normal">[</span>}
+                      {item.name}
+                      {isActive && <span className="absolute right-6 text-blue-500 font-normal">]</span>}
+                    </Link>
+                  )
+                })}
               </div>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+        </div>
+      )}
     </>
   )
 }
