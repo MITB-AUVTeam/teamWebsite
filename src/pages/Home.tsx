@@ -267,17 +267,24 @@ export function Home() {
 
   const triggerConfetti = () => setConfettiBurst(n => n + 1);
 
-  const confettiPieces = confettiBurst > 0 ? [...Array(80)].map((_, i) => {
+  const confettiPieces = confettiBurst > 0 ? [...Array(160)].map((_, i) => {
     const colors = ["bg-blue-400","bg-cyan-300","bg-pink-400","bg-yellow-300","bg-purple-400","bg-green-400","bg-white","bg-orange-400","bg-red-400","bg-sky-300"];
+    const fromLeft = i < 80;
+    const angle = fromLeft
+      ? -(30 + Math.random() * 50)
+      : -(100 + Math.random() * 50);
+    const rad = (angle * Math.PI) / 180;
+    const dist = 400 + Math.random() * 600;
     return {
       id: `${confettiBurst}-${i}`,
       color: colors[i % colors.length],
-      left: `${Math.random() * 100}%`,
-      delay: Math.random() * 0.6,
-      duration: 1.8 + Math.random() * 1.4,
+      fromLeft,
+      delay: Math.random() * 0.4,
+      duration: 1.2 + Math.random() * 1.0,
       isRect: i % 3 !== 0,
       rotate: Math.random() > 0.5 ? 540 : -540,
-      drift: (Math.random() - 0.5) * 120,
+      dx: Math.cos(rad) * dist,
+      dy: Math.sin(rad) * dist,
     };
   }) : [];
 
@@ -569,7 +576,7 @@ export function Home() {
         </div>
 
         <BentoGrid className="lg:grid-rows-2">
-          {features.map((feature) => (
+          {features.map((feature, idx) => (
             <BentoCard
               key={feature.name}
               {...feature}
@@ -821,19 +828,19 @@ export function Home() {
               <motion.div
                 key={p.id}
                 className={`absolute ${p.color} ${p.isRect ? "w-2 h-3 rounded-sm" : "w-2 h-2 rounded-full"}`}
-                style={{ left: p.left, top: -12 }}
-                initial={{ y: -12, x: 0, opacity: 1, rotate: 0, scale: 1 }}
+                style={{ left: p.fromLeft ? 0 : undefined, right: p.fromLeft ? undefined : 0, bottom: 0 }}
+                initial={{ x: 0, y: 0, opacity: 1, rotate: 0, scale: 1 }}
                 animate={{
-                  y: "110vh",
-                  x: p.drift,
-                  opacity: [1, 1, 0],
+                  x: p.dx,
+                  y: p.dy,
+                  opacity: [1, 1, 0.8, 0],
                   rotate: p.rotate,
-                  scale: [1, 0.8, 0.6],
+                  scale: [0.8, 1.2, 1, 0.6],
                 }}
                 transition={{
                   duration: p.duration,
                   delay: p.delay,
-                  ease: [0.25, 0.46, 0.45, 0.94],
+                  ease: [0.15, 0.6, 0.4, 1],
                 }}
               />
             ))}
