@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import { createPortal } from "react-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import { Link, useLocation } from "react-router-dom"
 import { LucideIcon, Menu, X } from "lucide-react"
@@ -123,13 +124,13 @@ export function NavBar({ items, className, children, isScrolled = false }: NavBa
 
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
-        {isMobileMenuOpen && (
+        {isMobileMenuOpen && createPortal(
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[10000] flex flex-col bg-black/40 backdrop-blur-xl p-4 pt-6"
+            className="fixed inset-0 z-[10000] flex flex-col bg-[#020617]/95 backdrop-blur-xl p-4 pt-6"
           >
             {/* Top Pill */}
             <div className="flex items-center justify-between px-6 py-3 bg-transparent border-transparent rounded-full">
@@ -171,7 +172,8 @@ export function NavBar({ items, className, children, isScrolled = false }: NavBa
                 </div>
               </div>
             </div>
-          </motion.div>
+          </motion.div>,
+          document.body
         )}
       </AnimatePresence>
     </>
