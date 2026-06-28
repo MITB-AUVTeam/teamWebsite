@@ -653,7 +653,7 @@ export function Home() {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 16, opacity: 0 }}
             transition={{ type: "spring", duration: 0.5, bounce: 0.25 }}
-            className="fixed bottom-16 left-1/2 -translate-x-1/2 z-[19000] pointer-events-auto"
+            className="fixed bottom-16 left-1/2 -translate-x-1/2 z-[9000] pointer-events-auto"
           >
             <div className="relative flex items-center justify-center">
               {/* Burst particles — fire once on mount */}
