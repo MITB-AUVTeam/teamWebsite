@@ -34,6 +34,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { PhotoGallery } from "@/components/ui/gallery";
+import confetti from "canvas-confetti";
 
 const features = [
   {
@@ -263,34 +264,28 @@ export function Home() {
   const [scrollY, setScrollY] = useState(0);
   const [activeTeam, setActiveTeam] = useState<string | null>(null);
   const [showBanner, setShowBanner] = useState(false);
-  const [showConfetti, setShowConfetti] = useState(false);
-
-  const confettiPieces = showConfetti ? [...Array(160)].map((_, i) => {
-    const colors = ["bg-blue-400","bg-cyan-300","bg-pink-400","bg-yellow-300","bg-purple-400","bg-green-400","bg-white","bg-orange-400","bg-red-400","bg-sky-300"];
-    const fromLeft = i < 80;
-    const angle = fromLeft
-      ? -(30 + Math.random() * 50)
-      : -(100 + Math.random() * 50);
-    const rad = (angle * Math.PI) / 180;
-    const dist = 400 + Math.random() * 600;
-    return {
-      id: `confetti-${i}`,
-      color: colors[i % colors.length],
-      fromLeft,
-      delay: Math.random() * 0.4,
-      duration: 1.2 + Math.random() * 1.0,
-      isRect: i % 3 !== 0,
-      rotate: Math.random() > 0.5 ? 540 : -540,
-      dx: Math.cos(rad) * dist,
-      dy: Math.sin(rad) * dist,
-    };
-  }) : [];
 
   useEffect(() => {
     if (sessionStorage.getItem("robosub-banner-dismissed") !== "true") {
       const t = setTimeout(() => {
         setShowBanner(true);
-        setShowConfetti(true);
+        // Staggered corner confetti cannons using canvas-confetti directly
+        confetti({
+          particleCount: 80,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0, y: 1 },
+          colors: ['#3b82f6', '#06b6d4', '#ec4899', '#eab308', '#a855f7'],
+          zIndex: 18000
+        });
+        confetti({
+          particleCount: 80,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1, y: 1 },
+          colors: ['#3b82f6', '#06b6d4', '#ec4899', '#eab308', '#a855f7'],
+          zIndex: 18000
+        });
       }, 800);
       return () => clearTimeout(t);
     }
@@ -697,10 +692,10 @@ export function Home() {
 
               {/* Pill */}
               <div
-                className="flex items-center gap-2 sm:gap-3 px-3 sm:pl-4 sm:pr-3 py-2.5 rounded-full bg-slate-950/90 backdrop-blur-xl border border-blue-500/25 shadow-[0_0_24px_-4px_rgba(59,130,246,0.3)] select-none max-w-[92vw]"
+                className="flex items-center justify-between sm:justify-start gap-2 sm:gap-3 px-3.5 sm:pl-4 sm:pr-3 py-2.5 rounded-full bg-slate-950/90 backdrop-blur-xl border border-blue-500/25 shadow-[0_0_24px_-4px_rgba(59,130,246,0.3)] select-none w-[92vw] sm:w-auto"
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse shrink-0" />
-                <span className="text-xs sm:text-sm text-slate-200 font-medium text-center leading-tight">
+                <span className="flex-1 sm:flex-none text-xs sm:text-sm text-slate-200 font-medium text-center leading-tight">
                   Team AUV MIT-B prequalified to the <span className="text-white font-bold">Semi-Final Round</span> at <span className="text-blue-300 font-semibold">RoboSub 2026</span>
                 </span>
                 <button
@@ -708,7 +703,7 @@ export function Home() {
                     setShowBanner(false);
                     sessionStorage.setItem("robosub-banner-dismissed", "true");
                   }}
-                  className="ml-1 w-5 h-5 rounded-full flex items-center justify-center text-slate-500 hover:text-slate-200 transition-colors cursor-pointer"
+                  className="ml-1 w-5 h-5 rounded-full flex items-center justify-center text-slate-500 hover:text-slate-200 transition-colors cursor-pointer shrink-0"
                   aria-label="Dismiss"
                 >
                   <X className="w-3 h-3" />
@@ -820,33 +815,7 @@ export function Home() {
         })()}
       </AnimatePresence>
 
-      {/* Full-page confetti */}
-      <AnimatePresence>
-        {confettiPieces.length > 0 && (
-          <div className="fixed inset-0 z-[18000] pointer-events-none overflow-hidden">
-            {confettiPieces.map((p) => (
-              <motion.div
-                key={p.id}
-                className={`absolute ${p.color} ${p.isRect ? "w-2 h-3 rounded-sm" : "w-2 h-2 rounded-full"}`}
-                style={{ left: p.fromLeft ? 0 : undefined, right: p.fromLeft ? undefined : 0, bottom: 0 }}
-                initial={{ x: 0, y: 0, opacity: 1, rotate: 0, scale: 1 }}
-                animate={{
-                  x: p.dx,
-                  y: p.dy,
-                  opacity: [1, 1, 0.8, 0],
-                  rotate: p.rotate,
-                  scale: [0.8, 1.2, 1, 0.6],
-                }}
-                transition={{
-                  duration: p.duration,
-                  delay: p.delay,
-                  ease: [0.15, 0.6, 0.4, 1],
-                }}
-              />
-            ))}
-          </div>
-        )}
-      </AnimatePresence>
+
     </div>
   );
 }
