@@ -1,0 +1,94 @@
+.wrapper {
+  position: fixed;
+  inset: 0;
+  background-color: #0a0a0a;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(0);
+}
+
+.exiting {
+  transform: translateY(-100%);
+}
+
+.brandContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1.25rem;
+  opacity: 1;
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brandExiting {
+  opacity: 0;
+}
+
+.logo {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.25));
+}
+
+.tagline {
+  color: #e2e8f0;
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  font-family: 'Outfit', 'Inter', sans-serif;
+  opacity: 0.85;
+}
+
+.progressBlock {
+  position: absolute;
+  bottom: 8%;
+  left: 5%;
+  right: 5%;
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.track {
+  width: 100%;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #06b6d4);
+  border-radius: 9999px;
+  will-change: width;
+}
+
+.statusRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+}
+
+.statusLabel {
+  color: #64748b;
+  text-transform: uppercase;
+}
+
+.statusPercentage {
+  color: #3b82f6;
+  font-weight: 600;
+  text-shadow: 0 0 8px rgba(59, 130, 246, 0.3);
+}

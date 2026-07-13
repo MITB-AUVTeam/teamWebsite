@@ -35,6 +35,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { PhotoGallery } from "@/components/ui/gallery";
 import confetti from "canvas-confetti";
+import { Preloader } from "@/components/ui/Preloader/Preloader";
 
 const features = [
   {
@@ -264,6 +265,7 @@ export function Home() {
   const [scrollY, setScrollY] = useState(0);
   const [activeTeam, setActiveTeam] = useState<string | null>(null);
   const [showBanner, setShowBanner] = useState(false);
+  const [isPreloaderActive, setIsPreloaderActive] = useState(true);
 
   useEffect(() => {
     if (sessionStorage.getItem("robosub-banner-dismissed") !== "true") {
@@ -356,6 +358,9 @@ export function Home() {
 
   return (
     <div className="min-h-screen relative w-full overflow-x-hidden flex flex-col">
+      {isPreloaderActive && (
+        <Preloader onFinished={() => setIsPreloaderActive(false)} />
+      )}
 
 
       <section
