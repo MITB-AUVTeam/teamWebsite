@@ -37,6 +37,17 @@
   filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.25));
 }
 
+.subtitle {
+  color: #3b82f6;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  font-family: 'Outfit', 'Inter', sans-serif;
+  text-transform: uppercase;
+  margin-top: -0.25rem;
+  opacity: 0.8;
+}
+
 .progressBlock {
   width: 280px;
   max-width: 80vw;
