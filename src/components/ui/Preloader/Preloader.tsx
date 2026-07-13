@@ -67,7 +67,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onFinished }) => {
     >
       <div className={`${styles.brandContent} ${isExiting ? styles.brandExiting : ''}`}>
         <img src={logoImg} alt="AUV Logo" className={styles.logo} />
-        <div className={styles.subtitle}>MIT_BENGALURU</div>
+        <div className={styles.subtitle}>MIT-BENGALURU</div>
         
         <div className={styles.progressBlock}>
           <div className={styles.track}>
