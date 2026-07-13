@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import VerticalTabs from "@/components/ui/vertical-tabs";
 import AUV_GROUP_PIC from "@/assets/Group_photo/AUV_GROUP_PIC.webp";
-import { FAQSection } from "@/components/ui/faq";
 import { Footer } from "@/components/Footer";
 
 export function AboutPage() {
@@ -58,10 +57,6 @@ export function AboutPage() {
       </section>
 
       <div className="order-5 md:order-5">
-        <FAQSection />
-      </div>
-
-      <div className="order-6 md:order-6">
         <Footer />
       </div>
     </div>
