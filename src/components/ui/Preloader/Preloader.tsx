@@ -41,6 +41,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onFinished }) => {
         // Count reached 100. Trigger exit sequence.
         setIsExiting(true);
         const exitTimeout = setTimeout(() => {
+          sessionStorage.setItem("preloader-seen", "true");
           onFinished();
         }, 700); // Wait 700ms for exit animation
         return () => clearTimeout(exitTimeout);
@@ -66,19 +67,18 @@ export const Preloader: React.FC<PreloaderProps> = ({ onFinished }) => {
     >
       <div className={`${styles.brandContent} ${isExiting ? styles.brandExiting : ''}`}>
         <img src={logoImg} alt="AUV Logo" className={styles.logo} />
-        <h1 className={styles.tagline}>Building cool underwater robots everyday.</h1>
-      </div>
-
-      <div className={styles.progressBlock}>
-        <div className={styles.track}>
-          <div
-            className={styles.fill}
-            style={{ width: `${displayProgress}%` }}
-          />
-        </div>
-        <div className={styles.statusRow}>
-          <span className={styles.statusLabel}>Loading</span>
-          <span className={styles.statusPercentage}>{paddedNumber}</span>
+        
+        <div className={styles.progressBlock}>
+          <div className={styles.track}>
+            <div
+              className={styles.fill}
+              style={{ width: `${displayProgress}%` }}
+            />
+          </div>
+          <div className={styles.statusRow}>
+            <span className={styles.statusLabel}>Loading</span>
+            <span className={styles.statusPercentage}>{paddedNumber}</span>
+          </div>
         </div>
       </div>
     </div>

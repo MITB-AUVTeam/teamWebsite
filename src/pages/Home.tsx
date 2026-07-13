@@ -35,7 +35,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { PhotoGallery } from "@/components/ui/gallery";
 import confetti from "canvas-confetti";
-import { Preloader } from "@/components/ui/Preloader/Preloader";
 
 const features = [
   {
@@ -265,10 +264,11 @@ export function Home() {
   const [scrollY, setScrollY] = useState(0);
   const [activeTeam, setActiveTeam] = useState<string | null>(null);
   const [showBanner, setShowBanner] = useState(false);
-  const [isPreloaderActive, setIsPreloaderActive] = useState(true);
-
   useEffect(() => {
     if (sessionStorage.getItem("robosub-banner-dismissed") !== "true") {
+      const hasSeenPreloader = sessionStorage.getItem("preloader-seen") === "true";
+      const delay = hasSeenPreloader ? 800 : 2800;
+
       const t = setTimeout(() => {
         setShowBanner(true);
         // Staggered corner confetti cannons using canvas-confetti directly
@@ -288,7 +288,7 @@ export function Home() {
           colors: ['#3b82f6', '#06b6d4', '#ec4899', '#eab308', '#a855f7'],
           zIndex: 18000
         });
-      }, 800);
+      }, delay);
       return () => clearTimeout(t);
     }
   }, []);
@@ -358,9 +358,6 @@ export function Home() {
 
   return (
     <div className="min-h-screen relative w-full overflow-x-hidden flex flex-col">
-      {isPreloaderActive && (
-        <Preloader onFinished={() => setIsPreloaderActive(false)} />
-      )}
 
 
       <section

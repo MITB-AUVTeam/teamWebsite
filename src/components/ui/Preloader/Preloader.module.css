@@ -37,22 +37,10 @@
   filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.25));
 }
 
-.tagline {
-  color: #e2e8f0;
-  font-size: 0.95rem;
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  font-family: 'Outfit', 'Inter', sans-serif;
-  opacity: 0.85;
-}
-
 .progressBlock {
-  position: absolute;
-  bottom: 8%;
-  left: 5%;
-  right: 5%;
-  max-width: 480px;
-  margin: 0 auto;
+  width: 280px;
+  max-width: 80vw;
+  margin-top: 1.75rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;

@@ -1,7 +1,7 @@
 
 
 import { Routes, Route, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { TeamSectionBlock } from "@/components/ui/team-section-block-shadcnui";
 import { Navbar } from "@/components/Navbar";
 import { ContactUs } from "@/pages/ContactUs";
@@ -13,9 +13,11 @@ import { MediaPage } from "@/pages/MediaPage";
 import { SponsorsPage } from "@/pages/SponsorsPage";
 import ScrollToTop from "@/components/ScrollToTop";
 import { Analytics } from "@vercel/analytics/react";
+import { Preloader } from "@/components/ui/Preloader/Preloader";
 
 export default function App() {
   const location = useLocation();
+  const [isPreloaderActive, setIsPreloaderActive] = useState(true);
 
   useEffect(() => {
     document.title = "AUV-MITB";
@@ -25,6 +27,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#020617] text-slate-50 selection:bg-blue-500/30">
+      {isPreloaderActive && (
+        <Preloader onFinished={() => setIsPreloaderActive(false)} />
+      )}
       <ScrollToTop watch={location.pathname} />
       <Navbar />
       <main className={isHome ? "" : "pt-24"}>
