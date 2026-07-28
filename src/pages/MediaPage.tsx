@@ -1,12 +1,16 @@
 import { useState, useEffect, useMemo } from "react";
+import type { ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Calendar, User, ArrowRight, Tag, X, Search } from "lucide-react";
 import { Footer } from "@/components/Footer";
+import communicationBlog from "@/assets/blogs/communication-is-everything.md?raw";
+import teamTreeLookup from "@/assets/Gallery/team_tree_lookup.jpg";
 import azadLockedIn from "@/assets/Gallery/azad_lockedin.webp";
 import img_2816 from "@/assets/Gallery/IMG_2816.webp";
 import hull_inside from "@/assets/Gallery/hull_inside.jpg";
 import rtab from "@/assets/Gallery/rtab.jpg";
 import pcb from "@/assets/Gallery/pcb.jpg";
+import galleryBoard from "@/assets/Gallery/gallery_board.jpg";
 import IMG_3923 from "@/assets/Gallery/IMG_3923.webp";
 import prithaPhoto from "@/assets/Personal_photo/pritha.jpeg";
 import faculty_group from "@/assets/Personal_photo/faculty_group.jpeg";
@@ -19,7 +23,156 @@ interface Post {
   author: string;
   image: string;
   content?: string[];
+  markdown?: string;
   externalLink?: string;
+}
+
+// --- Lightweight markdown renderer (headings, bold/italic, inline code,
+// fenced code blocks, bullet lists and horizontal rules) ---
+
+function renderInline(text: string, keyPrefix: string): ReactNode[] {
+  // Inline code first so formatting markers inside code are left untouched.
+  return text.split(/(`[^`]+`)/g).flatMap<ReactNode>((part, i) => {
+    const key = `${keyPrefix}-${i}`;
+    if (/^`[^`]+`$/.test(part)) {
+      return [
+        <code
+          key={key}
+          className="rounded bg-slate-800 px-1.5 py-0.5 font-mono text-[0.85em] text-cyan-300"
+        >
+          {part.slice(1, -1)}
+        </code>,
+      ];
+    }
+    return renderBold(part, key);
+  });
+}
+
+function renderBold(text: string, keyPrefix: string): ReactNode[] {
+  return text.split(/(\*\*[^*]+\*\*)/g).flatMap<ReactNode>((part, i) => {
+    const key = `${keyPrefix}-b${i}`;
+    if (/^\*\*[^*]+\*\*$/.test(part)) {
+      return [
+        <strong key={key} className="font-bold text-white">
+          {renderItalic(part.slice(2, -2), key)}
+        </strong>,
+      ];
+    }
+    return renderItalic(part, key);
+  });
+}
+
+function renderItalic(text: string, keyPrefix: string): ReactNode[] {
+  return text.split(/(_[^_]+_|\*[^*]+\*)/g).flatMap<ReactNode>((part, i) => {
+    const key = `${keyPrefix}-i${i}`;
+    if (/^_[^_]+_$/.test(part) || /^\*[^*]+\*$/.test(part)) {
+      return [
+        <em key={key} className="italic">
+          {part.slice(1, -1)}
+        </em>,
+      ];
+    }
+    return part ? [<span key={key}>{part}</span>] : [];
+  });
+}
+
+function MarkdownContent({ text }: { text: string }) {
+  const lines = text.replace(/\r\n/g, "\n").split("\n");
+  const blocks: ReactNode[] = [];
+  let i = 0;
+  let key = 0;
+
+  const isBlockStart = (l: string) =>
+    /^\s*```/.test(l) || /^\s*---+\s*$/.test(l) || /^#{1,6}\s/.test(l) || /^\s*[-•]\s+/.test(l);
+
+  while (i < lines.length) {
+    const line = lines[i];
+
+    // Fenced code block
+    if (/^\s*```/.test(line)) {
+      const code: string[] = [];
+      i++;
+      while (i < lines.length && !/^\s*```/.test(lines[i])) {
+        code.push(lines[i]);
+        i++;
+      }
+      i++; // skip closing fence
+      blocks.push(
+        <pre
+          key={key++}
+          className="overflow-x-auto rounded-xl border border-white/10 bg-slate-950 p-4 text-sm"
+        >
+          <code className="font-mono whitespace-pre text-slate-200">{code.join("\n")}</code>
+        </pre>,
+      );
+      continue;
+    }
+
+    // Horizontal rule
+    if (/^\s*---+\s*$/.test(line)) {
+      blocks.push(<hr key={key++} className="my-8 border-white/10" />);
+      i++;
+      continue;
+    }
+
+    // Blank line
+    if (line.trim() === "") {
+      i++;
+      continue;
+    }
+
+    // Heading
+    const heading = line.match(/^(#{1,6})\s+(.*)$/);
+    if (heading) {
+      blocks.push(
+        <h4
+          key={key++}
+          className="border-b border-white/10 pt-6 pb-2 text-xl font-bold tracking-tight text-white md:text-2xl"
+        >
+          {renderInline(heading[2], `h${key}`)}
+        </h4>,
+      );
+      i++;
+      continue;
+    }
+
+    // Bullet list
+    if (/^\s*[-•]\s+/.test(line)) {
+      const items: string[] = [];
+      while (i < lines.length && /^\s*[-•]\s+/.test(lines[i])) {
+        items.push(lines[i].replace(/^\s*[-•]\s+/, ""));
+        i++;
+      }
+      blocks.push(
+        <ul key={key++} className="space-y-2">
+          {items.map((item, idx) => (
+            <li
+              key={idx}
+              className="relative pl-6 leading-relaxed text-slate-300 before:absolute before:left-2 before:text-blue-400 before:content-['•']"
+            >
+              {renderInline(item, `li${key}-${idx}`)}
+            </li>
+          ))}
+        </ul>,
+      );
+      continue;
+    }
+
+    // Paragraph (join soft-wrapped lines until a blank line or block start)
+    const para = [line];
+    i++;
+    while (i < lines.length && lines[i].trim() !== "" && !isBlockStart(lines[i])) {
+      para.push(lines[i]);
+      i++;
+    }
+    blocks.push(
+      <p key={key++} className="leading-relaxed text-slate-300">
+        {renderInline(para.join(" "), `p${key}`)}
+      </p>,
+    );
+  }
+
+  return <>{blocks}</>;
 }
 
 export function MediaPage() {
@@ -59,6 +212,56 @@ export function MediaPage() {
   };
 
   const recentPosts: Post[] = [
+    {
+      title: "Communication Issues: Teaching a Robot to Talk Better Than I Do",
+      excerpt: "I'm terrible at conversations — yet I somehow got a hull full of electronics talking to each other. A lighthearted tour through the protocols that keep Deuterium's Jetson, Pico, sensors and thrusters in sync.",
+      category: "Technical / Software and Automation Subsystem",
+      date: "June 9, 2026",
+      author: "Aditya R Jemshetty",
+      image: teamTreeLookup,
+      markdown: communicationBlog,
+    },
+    {
+      title: "Current Affairs: Powering Deuterium from the Inside Out",
+      excerpt: "A look inside the Power Supply Distribution System (PSDS) — the electrical backbone that quietly keeps every subsystem on the AUV alive, and the lessons learned building it by hand on perf boards.",
+      category: "Technical / Electrical Subsystem",
+      date: "June 2, 2026",
+      author: "Adwait Bhardwaj",
+      image: galleryBoard,
+      content: [
+        "Power distribution probably isn't the first thing people notice when they look at an Autonomous Underwater Vehicle (AUV). The cameras, thrusters and software usually steal the spotlight. But beneath all of that sits a subsystem that quietly keeps everything alive — and it's also one of the few systems that nobody notices until it fails.",
+        "A poorly designed power system rarely fails spectacularly. Instead, it causes problems that are much harder to track down: a voltage rail dips for a fraction of a second and the onboard computer silently reboots, electrical noise from a motor controller creeps into a sensor line, or a connector heats up under load and starts affecting everything downstream. Individually trivial, together these issues can turn the AUV into a dead boat.",
+        "For us, designing the electrical subsystem was never about simply getting power from the battery to the components. It was about ensuring every component received the right power, at the right voltage, with as little interference as possible — which eventually evolved into the Power Supply Distribution System (PSDS), responsible for distribution, voltage regulation, electrical isolation, noise suppression and safety.",
+        "The challenge grows underwater. Our propulsion system consists of multiple thrusters driven by Electronic Speed Controllers (ESCs), while the compute side houses a Jetson Orin Nano Super, RPi Pico-based controllers and a collection of sensors. All draw from the same battery but expect completely different things from it. The propulsion side is electrically noisy by nature — ESCs switch large currents using PWM, generating ripple and EMI that tries to propagate through shared power lines. The compute side is far less tolerant: even small disturbances can cause communication errors or unexpected resets.",
+        "That wasn't just theory — we learned it the hard way, retiring more than a few RPi Picos over multiple iterations before realising the common thread was power integrity: high-current switching noise leaking into places it didn't belong. Being a relatively new team, we also chose to build the first revision of the PSDS by hand on perf boards rather than jumping straight to custom PCBs — considerably more soldering and frustration, but it forced us to understand every connection we made.",
+        "Designing the Power Architecture",
+        "Every subsystem wants power, but not every subsystem wants the same kind of power. Feeding everything from a common supply would have been the easiest build — and the quickest way to introduce noise and instability. So the first decision was to split the vehicle into two electrical domains: compute and actuation.",
+        "The compute domain — Jetson Orin Nano, RPi Pico controllers, sensors and supporting electronics — consumes comparatively little power but demands a clean, well-regulated supply, since the Jetson handles vision and navigation. The actuation domain — thrusters and servos — draws heavy, rapidly changing current, and every ESC happily injects switching noise back into the supply while doing its job. These two domains should not share the same electrical environment.",
+        "At the very beginning sits a 4S Lithium-Ion battery pack (roughly 12–16.2 V), followed by a Battery Management System (BMS) that protects the battery itself against over-current, over-charge and excessive discharge — it does not protect the vehicle; everything past that point is the PSDS's job. From the BMS, power enters the main distribution bus, which carries battery voltage to the different power branches without stepping it up or down, keeping fault isolation simple.",
+        "The first major branch feeds the PDB-Kill/PSDC-I, where battery voltage is converted into the various rails the vehicle needs. Instead of one shared regulator, dedicated converters generate each voltage, so high-current loads, compute hardware and auxiliary electronics all get a rail sized to their needs.",
+        "Building the PSDS",
+        "The Jetson rail got by far the most attention. Running variable workloads, the Jetson's power draw can change almost instantaneously, and small voltage dips that would go unnoticed elsewhere can cause brownouts here. The rail was built with a dedicated boost converter, bulk electrolytic capacitors for sudden load changes, ceramic capacitors for high-frequency noise, and Schottky diodes to block backfeed into the converter during power-down. None of these components is exciting on its own; together they make a resilient rail.",
+        "The servo rail follows a different philosophy. Servos tolerate supply disturbances far better than compute hardware but produce sharp current spikes whenever they move, so the rail is locally regulated and filtered to keep those spikes from travelling across the vehicle. Across every rail, capacitors are placed as physically close as possible to the device they support — longer wires add inductance that fast-changing currents don't have time to fight, so local decoupling shortens that path.",
+        "Perf boards made all of this harder than a textbook would suggest. There are no ground planes or controlled trace widths — every high-current connection had to be planned manually with heavier-gauge wire, and converter placement mattered as much as the schematic. It was also one of the biggest learning experiences of the project: every routing and grounding decision had a visible effect on the system, for better or worse.",
+        "Every Watt Counts",
+        "Efficiency isn't just about battery runtime — every watt that doesn't reach the electronics becomes heat, and inside a sealed pressure hull with limited airflow, unnecessary heat is as undesirable as unnecessary current draw. The figures below are engineering estimates from datasheets and our own testing rather than lab-grade measurements, but they're accurate enough to justify the design choices.",
+        "The propulsion system is the largest consumer: five Blue Robotics T200 thrusters, each drawing roughly 8 A under sustained operation, put the actuation system near 40 A before transient peaks — though thrusters spend little time at max thrust in a typical mission. The Jetson draws far less current but needs a far steadier supply, so reliability took priority over squeezing out the last few points of efficiency.",
+        "Take the Jetson rail: at roughly 30 W of load and about 88% converter efficiency, the converter draws close to 34.1 W, dissipating just over 4 W as heat — continuously, whenever the Jetson is under load. Add up similar losses across every converter and the subsystem produces a noticeable amount of heat inside an enclosed hull, so cutting unnecessary losses helps both runtime and thermal stability. That's why buck converters were used wherever voltage needed stepping down, and boost converters only where a rail genuinely needed to go up — there's no point boosting a voltage only to cut it back down later. Schottky diodes were preferred over silicon rectifiers for the same reason: their lower forward-voltage drop adds up across a whole mission.",
+        "The more important lesson was knowing when not to optimise for efficiency. Extra filtering, bulk capacitance and local protection all cost a little power, weight and space, but they buy real robustness — a rail that's 2% less efficient but significantly more reliable is almost always the right call in an underwater robot.",
+        "Harmony Between the Subsystems",
+        "Giving every subsystem its own rail is only half the battle — the harder part is keeping each one well-behaved once everything is switched on. With thrusters, converters, microcontrollers, sensors and an embedded GPU all sharing one battery, some electrical noise is inevitable; the goal was to stop it from spreading rather than eliminate it entirely.",
+        "The PSDS uses a star-ground topology, where every major power branch returns directly to a common grounding point instead of letting return currents wander through one another — this cuts ground loops and keeps large propulsion currents away from sensitive electronics. Bulk electrolytic capacitors and smaller ceramic capacitors are used together throughout: electrolytics act as energy reservoirs for sudden load changes, ceramics suppress high-frequency switching noise the electrolytics can't respond to fast enough. In the noisiest spots, inductors were added alongside local decoupling to form a simple low-pass filter.",
+        "Placement mattered more than expected — a capacitor a few centimetres from the component it protects is often far less effective than one placed right across the supply pins, since even short wires add enough inductance to blunt the decoupling. Building on perf boards made this obvious: more than once, fixing a noise issue meant physically moving two modules apart rather than changing the schematic. The biggest takeaway was that electrical noise is rarely one bad component — it's usually several good components interacting in ways nobody intended.",
+        "On Safety",
+        "Underwater robotics teaches you quickly that failure is a question of when, not if. From the start, we wanted the electrical subsystem to follow one philosophy: fail safe rather than fail operational. That led to two independent safety mechanisms.",
+        "The first is an external magnetic kill switch — a common competition requirement — that lets a diver disable all actuation from outside the hull without opening the vehicle. Removing the magnet cuts power to propulsion and actuation while the compute domain stays alive, so the vehicle can still log data, communicate and shut down in an orderly way, and returns to a safe, non-moving state once the kill switch is re-engaged.",
+        "The second layer handles water ingress. Once a leak is detected, preserving computation is no longer the priority — preventing further damage is. The system performs a master shutdown of both compute and actuation domains, keeping only a small always-on controller alive to manage and confirm the shutdown sequence. The implementation is still evolving, but the underlying philosophy hasn't changed: safety should never depend on a single point of failure.",
+        "What Is Next?",
+        "Building the first revision entirely on perf boards was a deliberate choice — slower than a custom PCB, but it made every wire, capacitor placement and routing decision a visible lesson. The PSDS is far from finished; future revisions will move toward dedicated PCBs, improved telemetry, per-rail current monitoring and smarter diagnostics.",
+        "Though this article focused on the PSDS, it really tells a larger story: every subsystem on the vehicle depends on another, and very little gets built in isolation. Countless discussions with the Mechanical and Software teams shaped the final design — routing cables through an already crowded hull, finding room for one more converter, or making sure the electrical architecture supported the software rather than fighting it.",
+        "For now, the Power Supply Distribution System has grown from a rough collection of sketches into the electrical backbone of our AUV — quietly delivering power, keeping subsystems from arguing with each other, and hopefully ensuring the only surprises we meet underwater are the ones we planned for."
+      ]
+    },
     {
       title: "Empowering Student Initiatives: A Faculty Perspective",
       excerpt: "A short memoir by Dr. Manasa Kongot on the Team's journey from building small prototypes to now cometing in RoboSub 2026, during her time heading the Developments Office at MIT-Bengaluru.",
@@ -265,6 +468,7 @@ export function MediaPage() {
         post.date,
         post.author,
         Array.isArray(post.content) ? post.content.join(" ") : "",
+        post.markdown ?? "",
       ]
         .join(" ")
         .toLowerCase();
@@ -568,7 +772,9 @@ export function MediaPage() {
                   </h2>
 
                   <div className="space-y-4 text-slate-300 leading-relaxed md:text-lg">
-                    {Array.isArray(activePost.content) ? (
+                    {activePost.markdown ? (
+                      <MarkdownContent text={activePost.markdown} />
+                    ) : Array.isArray(activePost.content) ? (
                       activePost.content.map((para: any, idx: number) => {
                         // Check for bullet points
                         if (para.startsWith("●") || para.startsWith("-")) {
