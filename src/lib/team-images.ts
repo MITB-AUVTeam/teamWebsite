@@ -3,6 +3,7 @@ const personalPhotoModules = import.meta.glob([
   "../assets/Personal_photo/*.jpeg",
   "../assets/Personal_photo/*.jpg",
   "../assets/Personal_photo/*.png",
+  "../assets/Personal_photo/*.svg",
 ], {
   eager: true,
   import: "default",

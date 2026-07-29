@@ -1,5 +1,4 @@
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Footer } from "@/components/Footer";
 import {
@@ -21,11 +20,12 @@ import { useState } from "react";
 
 const teamCategories = [
   {
-    "title": "Faculty Advisors and Mentor",
+    "title": "Faculty Advisors",
     "members": [
       {
         "name": "Dr. Adithya G.S.S",
-        "role": "Mechanical Dept. (MIT-BLR)",
+        "role": "Faculty Advisor",
+        "department": "School of Basic Sciences, Humanities and Management (MIT-BLR)",
         "bio": "",
         "image": "src/assets/Personal_photo/gss.jpg",
         "location": "MIT-BLR",
@@ -39,7 +39,8 @@ const teamCategories = [
       },
       {
         "name": "Dr. Manasa Kongot",
-        "role": "Development Office (MIT-BLR)",
+        "role": "Assistant Director - MSP",
+        "department": "School of Basic Sciences, Humanities and Management (MIT-BLR)",
         "bio": "",
         "image": "src/assets/Personal_photo/manasa.jpeg",
         "location": "MIT-BLR",
@@ -53,7 +54,8 @@ const teamCategories = [
       },
       {
         "name": "Dr. Ujjwal Verma",
-        "role": "ECE Dept. (MIT-Manipal)",
+        "role": "Faculty Advisor",
+        "department": "Electronics & Communication Engineering Dept (MIT-M)",
         "bio": "",
         "image": "src/assets/Personal_photo/ujwal.jpeg",
         "location": "MIT-Manipal",
@@ -64,10 +66,58 @@ const teamCategories = [
           "linkedin": "https://www.linkedin.com/in/ujjwalverma/",
           "github": null
         }
+      }
+    ]
+  },
+  {
+    "title": "Founding Team / Team Advisors and Mentor",
+    "members": [
+      {
+        "name": "Animesh Mishra",
+        "role": "Team Advisor",
+        "department": "Computer Science Engineering 27'",
+        "bio": "There is no place like 127.0.0.1",
+        "image": "src/assets/Personal_photo/placeholder.svg",
+        "location": "4th Year",
+        "skills": ["Software", "Leadership"],
+        "gradient": "from-indigo-500/20 via-indigo-500/5 to-transparent",
+        "social": {
+          "linkedin": "https://www.linkedin.com/in/animesh-mishra-79028a231/",
+          "github": "https://github.com/AnimeshM21"
+        }
+      },
+      {
+        "name": "Arunava Maiti",
+        "role": "Team Advisor",
+        "department": "Electronics and Communication Engineering 27'",
+        "bio": "No Risk No Story",
+        "image": "/src/assets/Personal_photo/arunava.webp",
+        "location": "4th Year",
+        "skills": ["Electrical", "Mechanical", "Leadership"],
+        "gradient": "from-indigo-500/20 via-indigo-500/5 to-transparent",
+        "social": {
+          "linkedin": "https://www.linkedin.com/in/arunava-maiti/",
+          "github": "https://github.com/arunavamaiti19"
+        }
+      },
+      {
+        "name": "Azad Roy",
+        "role": "Team Advisor",
+        "department": "Electronics and Communication Engineering 27'",
+        "bio": "For the last time: there's more to controls than PID",
+        "image": "src/assets/Personal_photo/azad.jpeg",
+        "location": "4th Year",
+        "skills": ["Electrical", "Mechanical", "Leadership"],
+        "gradient": "from-indigo-500/20 via-indigo-500/5 to-transparent",
+        "social": {
+          "linkedin": "https://www.linkedin.com/in/azad-roy-43329b376",
+          "github": "https://github.com/Luke5273"
+        }
       },
       {
         "name": "Pritha Jaipal",
-        "role": "Project Mentor (MIT-BLR 25')",
+        "role": "Project Mentor",
+        "department": "Electronics and Communication Engineering 25'",
         "bio": "",
         "image": "src/assets/Personal_photo/pritha.jpeg",
         "location": "MIT-BLR",
@@ -79,62 +129,18 @@ const teamCategories = [
           "github": null
         }
       }
-
     ]
   },
   {
-    "title": "Founding Team and Current Leadership",
-    "members": [
-      {
-        "name": "Animesh Mishra",
-        "role": "Team Co-Lead / Software and Automation Subsystem",
-        "bio": "There is no place like 127.0.0.1",
-        "image": "src/assets/Personal_photo/animesh.jpeg",
-        "location": "3rd Year",
-        "skills": ["Software", "Leadership"],
-        "gradient": "from-indigo-500/20 via-indigo-500/5 to-transparent",
-        "social": {
-          "linkedin": "https://www.linkedin.com/in/animesh-mishra-79028a231/",
-          "github": "https://github.com/AnimeshM21"
-        }
-      },
-      {
-        "name": "Arunava Maiti",
-        "role": "Team Co-Lead / Electrical and Mechanical Subsystem",
-        "bio": "No Risk No Story",
-        "image": "/src/assets/Personal_photo/arunava.webp",
-        "location": "3rd Year",
-        "skills": ["Electrical", "Mechanical", "Leadership"],
-        "gradient": "from-indigo-500/20 via-indigo-500/5 to-transparent",
-        "social": {
-          "linkedin": "https://www.linkedin.com/in/arunava-maiti/",
-          "github": "https://github.com/arunavamaiti19"
-        }
-      },
-      {
-        "name": "Azad Roy",
-        "role": "Technical Lead / Electrical and Mechanical Subsystem",
-        "bio": "For the last time: there's more to controls than PID",
-        "image": "src/assets/Personal_photo/azad.jpeg",
-        "location": "3rd Year",
-        "skills": ["Electrical", "Mechanical", "Leadership"],
-        "gradient": "from-indigo-500/20 via-indigo-500/5 to-transparent",
-        "social": {
-          "linkedin": "https://www.linkedin.com/in/azad-roy-43329b376",
-          "github": "https://github.com/Luke5273"
-        }
-      }
-    ]
-  },
-  {
-    "title": "Mechanical Subsystem",
+    "title": "Current Leadership",
     "members": [
       {
         "name": "Chatur Vasireddy",
-        "role": "Mechanical Subsystem Lead",
+        "role": "Team Lead / Mechanical Subsystem Lead",
+        "department": "Electronics and Communication Engineering 28'",
         "bio": "meow",
         "image": "src/assets/Personal_photo/chatur.jpeg",
-        "location": "2nd Year",
+        "location": "3rd Year",
         "skills": ["Mechanical"],
         "gradient": "from-cyan-500/20 via-cyan-500/5 to-transparent",
         "social": {
@@ -143,11 +149,45 @@ const teamCategories = [
         }
       },
       {
+        "name": "Siddharth P S",
+        "role": "Team Manager",
+        "department": "Electronics and Communication Engineering 28'",
+        "bio": "Float like cadillac, sting like a beamer",
+        "image": "/src/assets/Personal_photo/siddarth.webp",
+        "location": "3rd Year",
+        "skills": ["Management"],
+        "gradient": "from-cyan-500/20 via-cyan-500/5 to-transparent",
+        "social": {
+          "linkedin": "https://www.linkedin.com/in/siddharth-ps-27ba76350/",
+          "github": "https://github.com/siddharthps2005"
+        }
+      },
+      {
+        "name": "Adwait Bhardwaj",
+        "role": "Technical Lead",
+        "department": "Computer Science Engineering 28'",
+        "bio": "aquamariner",
+        "image": "src/assets/Personal_photo/adwait.jpeg",
+        "location": "3rd Year",
+        "skills": ["Electrical"],
+        "gradient": "from-cyan-500/20 via-cyan-500/5 to-transparent",
+        "social": {
+          "linkedin": "https://www.linkedin.com/in/adwaitbhardwaj",
+          "github": "https://github.com/vt-abt"
+        }
+      }
+    ]
+  },
+  {
+    "title": "Mechanical Subsystem",
+    "members": [
+      {
         "name": "Kshithij Jaitly",
         "role": "Mechanical Subsystem Member",
+        "department": "Electronics and Communication Engineering 29'",
         "bio": "Fusion pls dont crash !!!",
         "image": "/src/assets/Personal_photo/kshitij.webp",
-        "location": "1st Year",
+        "location": "2nd Year",
         "skills": ["Mechanical"],
         "gradient": "from-teal-500/20 via-teal-500/5 to-transparent",
         "social": {
@@ -156,11 +196,12 @@ const teamCategories = [
         }
       },
       {
-        "name": "Kanishk Thoguluva Ramesh Babu",
+        "name": "Kanishk T R Babu",
         "role": "Mechanical Subsystem Member",
+        "department": "Electronics and Communication Engineering 29'",
         "bio": "All you have to do is just try.",
         "image": "/src/assets/Personal_photo/kanishk.webp",
-        "location": "1st Year",
+        "location": "2nd Year",
         "skills": ["Mechanical"],
         "gradient": "from-teal-500/20 via-teal-500/5 to-transparent",
         "social": {
@@ -171,9 +212,10 @@ const teamCategories = [
       {
         "name": "Shaurya Veer Singh",
         "role": "Mechanical Subsystem Member",
+        "department": "Computer Science Engineering 29'",
         "bio": "Peace",
         "image": "/src/assets/Personal_photo/shaurya.webp",
-        "location": "1st Year",
+        "location": "2nd Year",
         "skills": ["Mechanical"],
         "gradient": "from-teal-500/20 via-teal-500/5 to-transparent",
         "social": {
@@ -188,10 +230,11 @@ const teamCategories = [
     "members": [
       {
         "name": "Faizal Yusuf Baig",
-        "role": "Electrical Subsystem Member",
+        "role": "Electrical Subsystem Lead",
+        "department": "Electronics and Communication Engineering 28'",
         "bio": "Time you enjoy wasting is not wasted time.",
         "image": "src/assets/Personal_photo/faizal.jpeg",
-        "location": "2nd Year",
+        "location": "3rd Year",
         "skills": ["Electrical"],
         "gradient": "from-cyan-500/20 via-cyan-500/5 to-transparent",
         "social": {
@@ -200,34 +243,9 @@ const teamCategories = [
         }
       },
       {
-        "name": "Adwait Bhardwaj",
-        "role": "Electrical Subsystem Member",
-        "bio": "aquamariner",
-        "image": "src/assets/Personal_photo/adwait.jpeg",
-        "location": "2nd Year",
-        "skills": ["Electrical"],
-        "gradient": "from-cyan-500/20 via-cyan-500/5 to-transparent",
-        "social": {
-          "linkedin": "https://www.linkedin.com/in/adwaitbhardwaj",
-          "github": "https://github.com/vt-abt"
-        }
-      },
-      {
-        "name": "Chatur Vasireddy",
-        "role": "Electrical Subsystem Member",
-        "bio": "meow",
-        "image": "src/assets/Personal_photo/chatur.jpeg",
-        "location": "2nd Year",
-        "skills": ["Electrical"],
-        "gradient": "from-cyan-500/20 via-cyan-500/5 to-transparent",
-        "social": {
-          "linkedin": "https://www.linkedin.com/in/chatur-vasireddy-4845621a5/",
-          "github": "https://github.com/ChaturVasireddy"
-        }
-      },
-      {
         "name": "Serah Saju Jacob",
         "role": "Electrical Subsystem Member",
+        "department": "Electronics and Communication Engineering 28'",
         "bio": "reach for the stars",
         "image": "src/assets/Personal_photo/serah.png",
         "location": "2nd Year",
@@ -241,9 +259,10 @@ const teamCategories = [
       {
         "name": "Aryan Sharma",
         "role": "Electrical Subsystem Member",
+        "department": "Electronics and Communication Engineering 29'",
         "bio": "Plugged in.",
         "image": "/src/assets/Personal_photo/aryan.webp",
-        "location": "1st Year",
+        "location": "2nd Year",
         "skills": ["Electrical"],
         "gradient": "from-teal-500/20 via-teal-500/5 to-transparent",
         "social": {
@@ -254,9 +273,10 @@ const teamCategories = [
       {
         "name": "Kopal Agrawal",
         "role": "Electrical Subsystem Member",
+        "department": "Electronics and Communication Engineering 29'",
         "bio": "It's not that deep",
         "image": "/src/assets/Personal_photo/kopal.webp",
-        "location": "1st Year",
+        "location": "2nd Year",
         "skills": ["Electrical"],
         "gradient": "from-teal-500/20 via-teal-500/5 to-transparent",
         "social": {
@@ -270,24 +290,12 @@ const teamCategories = [
     "title": "Software and Automation Subsystem",
     "members": [
       {
-        "name": "Advithiya Duddu",
-        "role": "Software and Automation Subsystem Lead",
-        "bio": "you miss 100% of the shots you don't take",
-        "image": "/src/assets/Personal_photo/advithiya.webp",
-        "location": "2nd Year",
-        "skills": ["Software"],
-        "gradient": "from-cyan-500/20 via-cyan-500/5 to-transparent",
-        "social": {
-          "linkedin": "https://www.linkedin.com/in/advithiya-duddu",
-          "github": "https://github.com/codewithadvi"
-        }
-      },
-      {
         "name": "Aditya R Jemshetty",
-        "role": "Software and Automation Subsystem Member",
+        "role": "Software Subsystem Lead",
+        "department": "Computer Science Engineering 28'",
         "bio": "Life is short— skip DFS, do BFS :)",
         "image": "/src/assets/Personal_photo/aditya.webp",
-        "location": "2nd Year",
+        "location": "3rd Year",
         "skills": ["Software"],
         "gradient": "from-cyan-500/20 via-cyan-500/5 to-transparent",
         "social": {
@@ -296,11 +304,26 @@ const teamCategories = [
         }
       },
       {
+        "name": "Advithiya Duddu",
+        "role": "Software Subsystem Senior Member",
+        "department": "Computer Science Engineering 28'",
+        "bio": "you miss 100% of the shots you don't take",
+        "image": "/src/assets/Personal_photo/advithiya.webp",
+        "location": "3rd Year",
+        "skills": ["Software"],
+        "gradient": "from-cyan-500/20 via-cyan-500/5 to-transparent",
+        "social": {
+          "linkedin": "https://www.linkedin.com/in/advithiya-duddu",
+          "github": "https://github.com/codewithadvi"
+        }
+      },
+      {
         "name": "Farha P K",
-        "role": "Software and Automation Subsystem Member",
+        "role": "Software Subsystem Member",
+        "department": "Computer Science Engineering 29'",
         "bio": "Do it scared",
         "image": "/src/assets/Personal_photo/farha.webp",
-        "location": "1st Year",
+        "location": "2nd Year",
         "skills": ["Software"],
         "gradient": "from-teal-500/20 via-teal-500/5 to-transparent",
         "social": {
@@ -311,27 +334,19 @@ const teamCategories = [
     ]
   },
   {
+    "title": "Research Subsystem",
+    "members": []
+  },
+  {
     "title": "Management and Design Team",
     "members": [
       {
-        "name": "Siddharth P S",
-        "role": "Management Team Member",
-        "bio": "Float like cadillac, sting like a beamer",
-        "image": "/src/assets/Personal_photo/siddarth.webp",
-        "location": "2nd Year",
-        "skills": ["Management"],
-        "gradient": "from-cyan-500/20 via-cyan-500/5 to-transparent",
-        "social": {
-          "linkedin": "https://www.linkedin.com/in/siddharth-ps-27ba76350/",
-          "github": "https://github.com/siddharthps2005"
-        }
-      },
-      {
         "name": "Kaushiki Gupta",
         "role": "Management Team Member",
+        "department": "Computer Science Engineering 29'",
         "bio": "I wish I could, but I don't want to.",
         "image": "src/assets/Personal_photo/kaushiki.jpeg",
-        "location": "1st Year",
+        "location": "2nd Year",
         "skills": ["Management"],
         "gradient": "from-teal-500/20 via-teal-500/5 to-transparent",
         "social": {
@@ -342,9 +357,10 @@ const teamCategories = [
       {
         "name": "Sourish Sri Vignesh S",
         "role": "Design Team Member",
+        "department": "Computer Science Engineering 28'",
         "bio": "NAH, I'D WIN.",
         "image": "/src/assets/Personal_photo/sourish.webp",
-        "location": "2nd Year",
+        "location": "3rd Year",
         "skills": ["Design"],
         "gradient": "from-indigo-500/20 via-indigo-500/5 to-transparent",
         "social": {
@@ -355,9 +371,10 @@ const teamCategories = [
       {
         "name": "Pritisha Kakati",
         "role": "Design Team Member",
+        "department": "Computer Science Engineering'",
         "bio": "Professional pixel perfectionist.",
         "image": "/src/assets/Personal_photo/prithisha.webp",
-        "location": "2nd Year",
+        "location": "3rd Year",
         "skills": ["Design"],
         "gradient": "from-indigo-500/20 via-indigo-500/5 to-transparent",
         "social": {
@@ -486,127 +503,89 @@ function TeamMemberCard({ member }: { member: any }) {
             }
           />
 
-          <div className="relative z-10 px-6 pt-6 pb-4 flex flex-col h-full">
-            {/* Avatar Section */}
-            <div className="mb-4 flex justify-center">
-              <motion.div
-                className="relative"
-                whileHover={isMobile ? undefined : { scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              >
-                <motion.div
-                  className="absolute -inset-2 rounded-full opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100"
-                  style={{
-                    background: `linear-gradient(135deg, rgba(59,130,246,0.5), rgba(59,130,246,0))`,
-                  }}
-                  animate={
-                    !isMobile && isHovered
-                      ? {
-                        rotate: shouldReduceMotion ? 0 : 360,
-                        scale: shouldReduceMotion ? 1 : [1, 1.08, 1],
-                      }
-                      : { rotate: 0, scale: 1 }
-                  }
-                  transition={{
-                    duration: shouldReduceMotion ? 0.6 : 3,
-                    repeat: shouldReduceMotion ? 0 : Infinity,
-                    ease: "linear",
-                  }}
-                />
-                <div className="relative h-28 w-28 overflow-hidden rounded-full border border-white/20 bg-[#0a1128] p-1">
-                  <motion.img
-                    src={member.image}
-                    alt={member.name}
-                    className="h-full w-full rounded-full object-cover"
-                    loading="lazy"
-                    whileHover={isMobile ? undefined : { scale: 1.1 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                </div>
-              </motion.div>
-            </div>
-
-            {/* Info Section */}
-            <div className="text-center flex-grow flex flex-col gap-3">
+          <div className="relative z-10 flex flex-col h-full">
+            {/* Identity — the photo is its own full-bleed panel with the name
+                lettered directly onto it, so name+photo read as one distinct
+                unit set apart from the plain card surface below. */}
+            <div className="relative w-full aspect-square overflow-hidden">
+              <motion.img
+                src={member.image}
+                alt={member.name}
+                className="absolute inset-0 h-full w-full object-cover"
+                loading="lazy"
+                whileHover={isMobile ? undefined : { scale: 1.08 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+              />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-black/95 via-black/50 to-transparent" />
               <motion.h3
-                className="text-xl font-semibold tracking-tight text-white"
-                animate={!isMobile && isHovered ? { scale: 1.05 } : { scale: 1 }}
+                className="absolute inset-x-0 bottom-0 px-5 pb-4 text-xl md:text-2xl font-extrabold tracking-tight text-white text-center leading-snug [text-shadow:0_2px_10px_rgba(0,0,0,0.9)]"
+                animate={!isMobile && isHovered ? { y: -3 } : { y: 0 }}
                 transition={{ duration: 0.2 }}
               >
                 {member.name}
               </motion.h3>
-              <div>
+            </div>
+
+            {/* Details — plain card surface, clearly separate from the photo above */}
+            <div className="text-center flex-grow flex flex-col gap-2.5 px-6 pt-5 pb-4">
+              <div className="flex flex-col items-center gap-1">
                 <Badge
                   variant="secondary"
-                  className="bg-blue-500/10 text-xs uppercase tracking-[0.2em] text-blue-200 border border-blue-500/20 backdrop-blur"
+                  className="bg-blue-500/10 text-[0.65rem] uppercase tracking-[0.2em] text-blue-200/80 border border-blue-500/20 backdrop-blur font-medium"
                 >
                   {member.role}
                 </Badge>
+                {member.department ? (
+                  <p className="text-xs font-semibold tracking-tight text-orange-400/90">
+                    {member.department}
+                  </p>
+                ) : null}
               </div>
 
               {/* Location removed */}
 
               {hasBio ? (
-                <p className="text-sm text-slate-300 flex-grow">
+                <p className="text-sm text-slate-400 flex-grow">
                   {member.bio}
                 </p>
               ) : null}
 
 
-              {/* Social Links */}
-              <motion.div
-                className={`flex justify-center gap-2 ${hasBio ? "mt-auto" : "mt-0"}`}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-              >
-                {[
-                  { icon: Linkedin, label: "LinkedIn", href: member.social?.linkedin },
-                  { icon: Github, label: "GitHub", href: member.social?.github },
-                  { icon: Mail, label: "Email", href: member.social?.email },
-                ].map((social, idx) => {
-                  if (!social.href) return null;
+              {/* Social Links — a clearly-clickable action row, kept small and
+                  neutral at rest so it never competes with the name or role;
+                  the accent color only shows up on interaction. */}
+              <div className={`flex justify-center ${hasBio ? "mt-auto" : "mt-0"} pt-1`}>
+                <div className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/[0.05] p-1 shadow-sm">
+                  {[
+                    { icon: Linkedin, label: "LinkedIn", href: member.social?.linkedin },
+                    { icon: Github, label: "GitHub", href: member.social?.github },
+                    { icon: Mail, label: "Email", href: member.social?.email },
+                  ].map((social) => {
+                    if (!social.href) return null;
 
-                  let formattedHref = social.href;
-                  if (!formattedHref.startsWith('http') && !formattedHref.startsWith('mailto:')) {
-                    formattedHref = `https://${formattedHref}`;
-                  }
+                    let formattedHref = social.href;
+                    if (!formattedHref.startsWith('http') && !formattedHref.startsWith('mailto:')) {
+                      formattedHref = `https://${formattedHref}`;
+                    }
 
-                  return (
-                    <motion.div
-                      key={social.label}
-                      initial={{ scale: 0, rotate: -180 }}
-                      animate={
-                        !isMobile && isHovered
-                          ? { scale: 1, rotate: shouldReduceMotion ? 0 : 0 }
-                          : { scale: 0.85, rotate: 0 }
-                      }
-                      transition={{
-                        delay: !isMobile && isHovered ? 0.1 * idx : 0,
-                        type: "spring",
-                        stiffness: 300,
-                        damping: 20,
-                      }}
-                    >
-                      <a href={formattedHref} target="_blank" rel="noopener noreferrer">
-                        <Button
-                          size="icon"
-                          variant="ghost"
-                          className="h-8 w-8 rounded-full border border-white/10 bg-white/5 text-slate-400 transition-colors hover:text-white hover:bg-white/10"
-                        >
-                          <motion.div
-                            transition={{
-                              duration: shouldReduceMotion ? 0.25 : 0.4,
-                            }}
-                          >
-                            <social.icon className="h-4 w-4" aria-hidden />
-                          </motion.div>
-                        </Button>
+                    return (
+                      <a
+                        key={social.label}
+                        href={formattedHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${member.name} on ${social.label}`}
+                        className="group/social flex h-9 w-9 items-center justify-center rounded-full text-slate-400 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-blue-500/15 hover:text-blue-300 hover:shadow-[0_0_14px_-2px_rgba(59,130,246,0.6)] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/60"
+                      >
+                        <social.icon
+                          className="h-4 w-4 transition-transform duration-200 group-hover/social:scale-110"
+                          aria-hidden
+                        />
                       </a>
-                    </motion.div>
-                  )
-                })}
-              </motion.div>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
           </div>
         </Card>
@@ -671,100 +650,133 @@ export function TeamSectionBlock() {
               </h2>
               <p className="text-slate-400 text-lg md:text-xl tracking-[0.06em] font-medium ml-1">
                 A diverse team of talented (and extremely fun) individuals working together to build
-                amazing products and delivering exceptional results.
+                amazing and sometimes functional robots.
               </p>
             </div>
           </motion.div>
 
           {/* Team Categories */}
-          <div className="space-y-24">
-            {resolvedTeamCategories.map((category, catIdx) => (
-              <div key={category.title}>
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.6 }}
-                  className="mb-10 flex items-center gap-4"
-                >
-                  <h3 className="text-3xl font-bold text-white tracking-tight">
-                    {category.title}
-                  </h3>
-                  <div className="h-[1px] flex-grow bg-gradient-to-r from-white/20 to-transparent" />
-                </motion.div>
+          <div>
+            {resolvedTeamCategories.map((category, idx) => {
+              // Categories that place their lead on a row of their own, with
+              // the remaining members on the line below.
+              const leadLayoutTitles = [
+                "Founding Team / Team Advisors and Mentor",
+                "Current Leadership",
+                "Electrical Subsystem",
+                "Software and Automation Subsystem",
+              ];
+              // Explicitly pin the top-row member for categories where it isn't
+              // simply the "lead" by role.
+              const topMemberByTitle: Record<string, string> = {
+                "Founding Team / Team Advisors and Mentor": "Pritha Jaipal",
+              };
+              const isLeadLayout = leadLayoutTitles.includes(category.title);
+              const pinnedName = topMemberByTitle[category.title];
+              const foundLeadIndex = pinnedName
+                ? category.members.findIndex((m) => m.name === pinnedName)
+                : isLeadLayout
+                  ? category.members.findIndex((m) => /lead/i.test(m.role))
+                  : -1;
+              // When a subsystem has no explicit "lead", fall back to the first
+              // member so it still gets the top-row-then-rest layout.
+              const leadIndex =
+                isLeadLayout && foundLeadIndex < 0 && category.members.length > 0
+                  ? 0
+                  : foundLeadIndex;
 
-                {category.title === "Software and Automation Subsystem" ? (
-                  <div className="space-y-8">
-                    <motion.div
-                      variants={containerVariants}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: true, margin: "-100px" }}
-                      className="flex flex-wrap justify-center gap-8"
-                    >
-                      {category.members.slice(0, 2).map((member, index) => (
-                        <TeamMemberCard
-                          key={`software-top-${index}`}
-                          member={member}
-                        />
-                      ))}
-                    </motion.div>
+              // Every category gets its own distinct, boxed panel. The advisors
+              // and current-leadership boxes sit closer together than the rest
+              // so the two still read as one connected group.
+              const marginTop =
+                idx === 0
+                  ? ""
+                  : category.title === "Current Leadership"
+                    ? "mt-6"
+                    : "mt-20";
+              const panel =
+                "rounded-3xl border border-white/10 bg-white/[0.02] p-6 md:p-8 lg:p-10";
 
-                    <motion.div
-                      variants={containerVariants}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: true, margin: "-100px" }}
-                      className="flex flex-wrap justify-center gap-8"
-                    >
-                      {category.members.slice(2).map((member, index) => (
-                        <TeamMemberCard key={`software-bottom-${index}`} member={member} />
-                      ))}
-                    </motion.div>
-                  </div>
-                ) : category.title === "Mechanical Subsystem" ? (
-                  <div className="space-y-8">
-                    {/* First row: center Chatur's card */}
-                    <motion.div
-                      variants={containerVariants}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: true, margin: "-100px" }}
-                      className="flex flex-wrap justify-center gap-8"
-                    >
-                      {category.members.slice(0, 1).map((member, index) => (
-                        <TeamMemberCard key={`mech-top-${index}`} member={member} />
-                      ))}
-                    </motion.div>
-
-                    {/* Second row: next three members */}
-                    <motion.div
-                      variants={containerVariants}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: true, margin: "-100px" }}
-                      className="flex flex-wrap justify-center gap-8"
-                    >
-                      {category.members.slice(1, 4).map((member, index) => (
-                        <TeamMemberCard key={`mech-bottom-${index}`} member={member} />
-                      ))}
-                    </motion.div>
-                  </div>
-                ) : (
+              return (
+                <div key={category.title} className={`${marginTop} ${panel}`.trim()}>
                   <motion.div
-                    variants={containerVariants}
-                    initial="hidden"
-                    whileInView="visible"
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
-                    className="flex flex-wrap justify-center gap-8"
+                    transition={{ duration: 0.6 }}
+                    className="mb-10 flex items-center gap-4"
                   >
-                    {category.members.map((member, index) => (
-                      <TeamMemberCard key={index} member={member} />
-                    ))}
+                    <h3 className="text-3xl font-bold text-white tracking-tight">
+                      {category.title}
+                    </h3>
+                    <div className="h-[1px] flex-grow bg-gradient-to-r from-white/20 to-transparent" />
                   </motion.div>
-                )}
-              </div>
-            ))}
+
+                  {category.members.length === 0 ? (
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-100px" }}
+                      transition={{ duration: 0.6 }}
+                      className="flex flex-col items-center justify-center gap-3 rounded-3xl border border-dashed border-white/10 bg-[#0a1128]/40 py-16 text-center"
+                    >
+                      <span className="text-2xl md:text-3xl font-bold tracking-tight text-white">
+                        Coming Soon
+                      </span>
+                      <span className="text-sm text-slate-400">
+                        This subsystem is being assembled — stay tuned.
+                      </span>
+                    </motion.div>
+                  ) : leadIndex >= 0 ? (
+                    <div className="space-y-8">
+                      {/* First row: subsystem lead on its own line */}
+                      <motion.div
+                        variants={containerVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-100px" }}
+                        className="flex flex-wrap justify-center gap-8"
+                      >
+                        <TeamMemberCard
+                          key={`${category.title}-lead`}
+                          member={category.members[leadIndex]}
+                        />
+                      </motion.div>
+
+                      {/* Second row: remaining members */}
+                      <motion.div
+                        variants={containerVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-100px" }}
+                        className="flex flex-wrap justify-center gap-8"
+                      >
+                        {category.members
+                          .filter((_, i) => i !== leadIndex)
+                          .map((member, index) => (
+                            <TeamMemberCard
+                              key={`${category.title}-member-${index}`}
+                              member={member}
+                            />
+                          ))}
+                      </motion.div>
+                    </div>
+                  ) : (
+                    <motion.div
+                      variants={containerVariants}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true, margin: "-100px" }}
+                      className="flex flex-wrap justify-center gap-8"
+                    >
+                      {category.members.map((member, index) => (
+                        <TeamMemberCard key={index} member={member} />
+                      ))}
+                    </motion.div>
+                  )}
+                </div>
+              );
+            })}
           </div>
 
         </div>
