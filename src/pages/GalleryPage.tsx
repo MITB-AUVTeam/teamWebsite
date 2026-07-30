@@ -87,8 +87,26 @@ import galleryWorking from "@/assets/Gallery/gallery_working.jpg";
 import galleryAward from "@/assets/Gallery/gallery_award.jpg";
 import galleryPressureTest from "@/assets/Gallery/gallery_pressure_test.jpg";
 import galleryPoolTest2 from "@/assets/Gallery/gallery_pool_test_2.mov";
+import robosubDepartureBengaluru from "@/assets/Gallery/robosub_departure_bengaluru.jpg";
+import robosubFlightToLa from "@/assets/Gallery/robosub_flight_to_la.jpg";
+import robosubArrivalAirport from "@/assets/Gallery/robosub_arrival_airport.jpg";
+import robosubHotelHullPrep from "@/assets/Gallery/robosub_hotel_hull_prep.jpg";
+import robosubHotelElectronics from "@/assets/Gallery/robosub_hotel_electronics.jpg";
+import robosubOpeningBriefing from "@/assets/Gallery/robosub_opening_briefing.jpg";
+import robosubWoollettAquaticsCenter from "@/assets/Gallery/robosub_woollett_aquatics_center.jpg";
+import robosubTeamVillage from "@/assets/Gallery/robosub_team_village.jpg";
 
 const archiveImages = [
+  // RoboSub 2026 — Irvine, California
+  { src: robosubDepartureBengaluru, category: "robosub", alt: "Team departing from Bengaluru airport with the AUV and equipment" },
+  { src: robosubFlightToLa, category: "robosub", alt: "Inflight map on the way to Los Angeles" },
+  { src: robosubArrivalAirport, category: "robosub", alt: "Team arriving in California with all the luggage" },
+  { src: robosubHotelHullPrep, category: "robosub", alt: "Prepping the hull in the hotel room" },
+  { src: robosubHotelElectronics, category: "robosub", alt: "Late-night electronics work on the vehicle before competition" },
+  { src: robosubOpeningBriefing, category: "robosub", alt: "RoboSub 2026 opening briefing at the venue" },
+  { src: robosubWoollettAquaticsCenter, category: "robosub", alt: "Team at the William Woollett Jr. Aquatics Center" },
+  { src: robosubTeamVillage, category: "robosub", alt: "Team with Deuterium at the RoboSub team village" },
+
   { src: aryanImg, category: "team", alt: "Aryan" },
   { src: cam1Img, category: "testing", alt: "Camera View" },
   { src: internalImg, category: "vehicles", alt: "Internal Vehicle View" },
@@ -417,6 +435,12 @@ export function GalleryPage() {
               className="rounded-full px-6 py-2 text-sm font-semibold text-slate-300 transition-colors hover:text-blue-400 hover:bg-white/5 data-[state=on]:bg-white/5 data-[state=on]:text-blue-400"
             >
               Testing
+            </ToggleGroupItem>
+            <ToggleGroupItem
+              value="robosub"
+              className="rounded-full px-6 py-2 text-sm font-semibold text-slate-300 transition-colors hover:text-blue-400 hover:bg-white/5 data-[state=on]:bg-white/5 data-[state=on]:text-blue-400"
+            >
+              RoboSub 26'
             </ToggleGroupItem>
 
           </ToggleGroup>
