@@ -1,10 +1,15 @@
 import { useState, useEffect, useMemo } from "react";
 import type { ReactNode } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Calendar, User, ArrowRight, Tag, X, Search } from "lucide-react";
 import { Footer } from "@/components/Footer";
 import communicationBlog from "@/assets/blogs/communication-is-everything.md?raw";
+import sonarBlog from "@/assets/blogs/passive-sonar-acoustic-localization.md?raw";
+import pcbBlog from "@/assets/blogs/perfboard-to-pcb.md?raw";
+import gripperBlog from "@/assets/blogs/cad-novice-to-worm-driven-gripper.md?raw";
 import teamTreeLookup from "@/assets/Gallery/team_tree_lookup.jpg";
+import pcbBoardPhoto from "@/assets/Gallery/pcb_rp2350_board.jpg";
+import galleryCad from "@/assets/Gallery/gallery_cad.jpg";
 import azadLockedIn from "@/assets/Gallery/azad_lockedin.webp";
 import img_2816 from "@/assets/Gallery/IMG_2816.webp";
 import hull_inside from "@/assets/Gallery/hull_inside.jpg";
@@ -25,6 +30,56 @@ interface Post {
   content?: string[];
   markdown?: string;
   externalLink?: string;
+  /** Overlays an animated sonar "ping" on the card — for acoustics posts. */
+  sonarPing?: boolean;
+}
+
+/**
+ * Expanding concentric rings that mimic an acoustic pinger pulsing underwater.
+ * Purely decorative, so it is hidden from assistive tech and stands down when
+ * the visitor prefers reduced motion.
+ */
+function SonarPing() {
+  const shouldReduceMotion = useReducedMotion();
+  const rings = [0, 1, 2];
+
+  return (
+    <div className="pointer-events-none absolute inset-0 z-10 overflow-hidden" aria-hidden>
+      <div className="absolute bottom-8 left-8 h-0 w-0 sm:bottom-10 sm:left-10">
+        {/* Emitter core */}
+        <motion.span
+          className="absolute -left-1.5 -top-1.5 block h-3 w-3 rounded-full bg-cyan-300 shadow-[0_0_12px_2px_rgba(103,232,249,0.9)]"
+          animate={
+            shouldReduceMotion
+              ? { opacity: 0.9 }
+              : { opacity: [0.45, 1, 0.45], scale: [0.85, 1.15, 0.85] }
+          }
+          transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        {/* Outgoing pulses */}
+        {rings.map((i) => (
+          <motion.span
+            key={i}
+            className="absolute block rounded-full border border-cyan-300/70"
+            style={{ left: 0, top: 0, height: 24, width: 24, x: "-50%", y: "-50%" }}
+            initial={{ scale: 0.4, opacity: 0 }}
+            animate={
+              shouldReduceMotion
+                ? { scale: 1, opacity: 0.25 }
+                : { scale: [0.4, 7], opacity: [0.7, 0] }
+            }
+            transition={{
+              duration: 2.4,
+              repeat: Infinity,
+              delay: i * 0.8,
+              ease: "easeOut",
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
 }
 
 // --- Lightweight markdown renderer (headings, bold/italic, inline code,
@@ -204,18 +259,47 @@ export function MediaPage() {
 
   const featuredPost: Post = {
     title: "'Maxxxing' Deuterium: Integrating Custom HYDROPHONES",
-    excerpt: "Coming Soon....",
+    excerpt: "Building a complete passive sonar pipeline from $6 piezo transducers — hydrophone design, an unruly analog front-end, Goertzel detection on four RP2350s, and PIO-synchronised TDOA to find an underwater pinger.",
     category: "Technical / Electrical Subsystem",
-    date: "Coming Soon....",
-    author: "Chatur Vasireddy",
+    date: "July 21, 2026",
+    author: "Chatur Vasireddy - Top Dogg Jnr",
     image: pcb,
+    markdown: sonarBlog,
+    sonarPing: true,
   };
 
   const recentPosts: Post[] = [
     {
+      title: "Everything Lies: Gyro Drift",
+      excerpt: "Why gyroscopes steadily lie to you, and the filtering ladder — calibration, complementary filters, Kalman — that lets a robot still know which way is up.",
+      category: "Technical / Electrical Subsystem",
+      date: "July 28, 2026",
+      author: "Azad Roy - Top Dogg",
+      image: azadLockedIn,
+      externalLink: "https://azadroy.com/2026/07/28/everything-lies-1-gyro-drift.html",
+    },
+    {
+      title: "From CAD Novice to Designing a Worm-Driven Parallel Gripper",
+      excerpt: "A year of learning mechanical design the hard way: three iterations, a discouraging torque budget, backlash that only showed up in print, and the 3 AM realisation that the motor didn't have to stand upright.",
+      category: "Technical / Mechanical Subsystem",
+      date: "June 23, 2026",
+      author: "Shaurya Veer Singh",
+      image: galleryCad,
+      markdown: gripperBlog,
+    },
+    {
+      title: "Perfboard to PCB: Or, How I Learned to Stop Taping Wires and Love Fabrication",
+      excerpt: "Every AUV needs a brain, but a brain is useless without a nervous system. Going from a masking-tape rat's nest to a fabricated board — via a ghosting RP2040, a hand-drawn schematic, and three days of KiCad.",
+      category: "Technical / Electrical Subsystem",
+      date: "June 16, 2026",
+      author: "Aryan Sharma",
+      image: pcbBoardPhoto,
+      markdown: pcbBlog,
+    },
+    {
       title: "Communication Issues: Teaching a Robot to Talk Better Than I Do",
       excerpt: "I'm terrible at conversations — yet I somehow got a hull full of electronics talking to each other. A lighthearted tour through the protocols that keep Deuterium's Jetson, Pico, sensors and thrusters in sync.",
-      category: "Technical / Software and Automation Subsystem",
+      category: "Technical / Software Subsystem",
       date: "June 9, 2026",
       author: "Aditya R Jemshetty",
       image: teamTreeLookup,
@@ -264,7 +348,7 @@ export function MediaPage() {
     },
     {
       title: "Empowering Student Initiatives: A Faculty Perspective",
-      excerpt: "A short memoir by Dr. Manasa Kongot on the Team's journey from building small prototypes to now cometing in RoboSub 2026, during her time heading the Developments Office at MIT-Bengaluru.",
+      excerpt: "A short memoir by Dr. Manasa Kongot on the Team's journey from building small prototypes to now competing in RoboSub 2026, during her time as the Assitant Director - Major Student Projects at MIT-Bengaluru.",
       category: "Personal Memoir",
       date: "May 30, 2026",
       author: "Dr. Manasa Kongot",
@@ -296,7 +380,7 @@ export function MediaPage() {
     {
       title: "RTAB-Map or RTAB-Maybe: Navigating the Deep Without Lying to Yourself",
       excerpt: "A deep dive into the trial and error with one of the core stacks the Software Team worked on to overcome the challange of not having a DVL.",
-      category: "Technical / Software and Automation Subsystem",
+      category: "Technical / Software Subsystem",
       date: "May 19, 2026",
       author: "Advithiya Duddu",
       image: rtab,
@@ -520,13 +604,14 @@ export function MediaPage() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="group relative rounded-3xl overflow-hidden bg-white/5 border border-white/10 flex flex-col lg:flex-row cursor-pointer hover:border-white/20 transition-colors"
           >
-            <div className="w-full lg:w-3/5 h-[220px] sm:h-[300px] lg:h-[500px] overflow-hidden">
-              <img 
-                src={featuredPost.image} 
+            <div className="relative w-full lg:w-3/5 h-[220px] sm:h-[300px] lg:h-[500px] overflow-hidden">
+              <img
+                src={featuredPost.image}
                 alt={featuredPost.title}
                 loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
+              {featuredPost.sonarPing && <SonarPing />}
             </div>
             <div className="w-full lg:w-2/5 p-8 lg:p-12 flex flex-col justify-center">
               <div className="flex flex-wrap items-center gap-y-2 gap-x-4 mb-6 text-slate-400 text-xs font-medium">
