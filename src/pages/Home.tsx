@@ -34,7 +34,6 @@ import { AnimatePresence, motion } from "framer-motion";
 
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { PhotoGallery } from "@/components/ui/gallery";
-import confetti from "canvas-confetti";
 
 const features = [
   {
@@ -263,37 +262,6 @@ const subsystemImages: Record<string, string> = {
 export function Home() {
   const [scrollY, setScrollY] = useState(0);
   const [activeTeam, setActiveTeam] = useState<string | null>(null);
-  const [showBanner, setShowBanner] = useState(false);
-  useEffect(() => {
-    if (sessionStorage.getItem("robosub-banner-dismissed") !== "true") {
-      const hasSeenPreloader = sessionStorage.getItem("preloader-seen") === "true";
-      const delay = hasSeenPreloader ? 800 : 2800;
-
-      const t = setTimeout(() => {
-        setShowBanner(true);
-        // Staggered corner confetti cannons using canvas-confetti directly
-        confetti({
-          particleCount: 80,
-          angle: 60,
-          spread: 55,
-          origin: { x: 0, y: 1 },
-          colors: ['#3b82f6', '#06b6d4', '#ec4899', '#eab308', '#a855f7'],
-          zIndex: 18000
-        });
-        confetti({
-          particleCount: 80,
-          angle: 120,
-          spread: 55,
-          origin: { x: 1, y: 1 },
-          colors: ['#3b82f6', '#06b6d4', '#ec4899', '#eab308', '#a855f7'],
-          zIndex: 18000
-        });
-      }, delay);
-      return () => clearTimeout(t);
-    }
-  }, []);
-  
-
 
   // Preload hero parallax images
   useEffect(() => {
@@ -647,74 +615,6 @@ export function Home() {
       <div className="order-8 md:order-8">
         <Footer />
       </div>
-
-      <AnimatePresence>
-        {showBanner && (
-          <motion.div
-            initial={{ y: 24, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 16, opacity: 0 }}
-            transition={{ type: "spring", duration: 0.5, bounce: 0.25 }}
-            className="fixed bottom-16 left-1/2 -translate-x-1/2 z-[9000] pointer-events-auto"
-          >
-            <div className="relative flex items-center justify-center">
-              {/* Burst particles — fire once on mount */}
-              {[...Array(16)].map((_, i) => {
-                const angle = (i / 16) * 360;
-                const dist = 55 + Math.random() * 30;
-                const rad = (angle * Math.PI) / 180;
-                const colors = ["bg-blue-400","bg-cyan-300","bg-white","bg-blue-300","bg-sky-400"];
-                const color = colors[i % colors.length];
-                return (
-                  <motion.div
-                    key={i}
-                    className={`absolute rounded-full ${color} ${i % 3 === 0 ? "w-1.5 h-1.5" : "w-1 h-1"}`}
-                    initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
-                    animate={{
-                      x: Math.cos(rad) * dist,
-                      y: Math.sin(rad) * dist,
-                      opacity: 0,
-                      scale: 0,
-                    }}
-                    transition={{ duration: 0.9, ease: [0.2, 0.8, 0.4, 1], delay: 0.5 }}
-                  />
-                );
-              })}
-
-              {/* Continuous floating particles */}
-              {[...Array(8)].map((_, i) => (
-                <motion.div
-                  key={`float-${i}`}
-                  className={`absolute bottom-0 w-px h-px rounded-full ${i % 2 === 0 ? "bg-blue-400" : "bg-cyan-300"}`}
-                  style={{ left: `${10 + i * 11}%` }}
-                  animate={{ y: [-4, -28], opacity: [0, 0.7, 0], scale: [0.5, 1.5, 0.5] }}
-                  transition={{ duration: 1.8 + i * 0.3, repeat: Infinity, delay: i * 0.4, ease: "easeOut" }}
-                />
-              ))}
-
-              {/* Pill */}
-              <div
-                className="flex items-center justify-between sm:justify-start gap-2 sm:gap-3 px-3.5 sm:pl-4 sm:pr-3 py-2.5 rounded-full bg-slate-950/90 backdrop-blur-xl border border-blue-500/25 shadow-[0_0_24px_-4px_rgba(59,130,246,0.3)] select-none w-[92vw] sm:w-auto"
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse shrink-0" />
-                <span className="flex-1 sm:flex-none text-xs sm:text-sm text-slate-200 font-medium text-center leading-tight">
-                  Team AUV MIT-B prequalified to the <span className="text-white font-bold">Semi-Final Round</span> at <span className="text-blue-300 font-semibold">RoboSub 2026</span>
-                </span>
-                <button
-                  onClick={() => {
-                    setShowBanner(false);
-                    sessionStorage.setItem("robosub-banner-dismissed", "true");
-                  }}
-                  className="ml-1 w-5 h-5 rounded-full flex items-center justify-center text-slate-500 hover:text-slate-200 transition-colors cursor-pointer shrink-0"
-                  aria-label="Dismiss"
-                >
-                  <X className="w-3 h-3" />
-                </button>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       <AnimatePresence>
         {activeTeam && subsystemDetails[activeTeam] && (() => {
