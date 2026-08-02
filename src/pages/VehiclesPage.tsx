@@ -73,33 +73,38 @@ export function VehiclesPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-50 pb-0 font-sans">
+    <div className="min-h-screen bg-transparent text-slate-50 pb-0 font-sans">
       
-      <section className="max-w-7xl mx-auto px-6 pt-12 md:pt-20 mb-20">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6"
-        >
-          <div className="space-y-4">
-            <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-black uppercase tracking-tighter leading-none">
-              Our Vehicles
-            </h1>
-            <p className="text-slate-400 text-sm md:text-base tracking-[0.2em] uppercase font-medium ml-1">
-              Engineering the Deep
+      <section className="max-w-7xl mx-auto px-6 pt-12 md:pt-20 mb-16 w-full">
+        <div className="bg-[#0a1128] border border-slate-800/60 rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden">
+          <div className="absolute inset-0 border border-slate-800/50 rounded-[2.5rem] pointer-events-none z-20 m-2" />
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 relative z-10"
+          >
+            <div className="space-y-4">
+              <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-black uppercase tracking-tighter leading-none">
+                Our Vehicles
+              </h1>
+              <p className="text-slate-400 text-sm md:text-base tracking-[0.2em] uppercase font-medium ml-1">
+                Engineering the Deep
+              </p>
+            </div>
+            <p className="text-slate-300 max-w-md md:text-right text-sm md:text-base leading-relaxed">
+              Discover the engineering marvels that power our underwater exploration. From our initial proof-of-concept to our advanced autonomous systems.
             </p>
-          </div>
-          <p className="text-slate-300 max-w-md md:text-right text-sm md:text-base leading-relaxed">
-            Discover the engineering marvels that power our underwater exploration. From our initial proof-of-concept to our advanced autonomous systems.
-          </p>
-        </motion.div>
+          </motion.div>
+        </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-6 space-y-32 pb-24 md:pb-32">
+      <div className="max-w-7xl mx-auto px-6 space-y-16 pb-24 md:pb-32">
         {vehicles.map((vehicle, index) => (
-          <section key={vehicle.name} className="relative">
-            <div className={`flex flex-col ${index % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-12 lg:gap-20 items-center`}>
+          <section key={vehicle.name} className="relative bg-[#0a1128] border border-slate-700 rounded-[2.5rem] p-6 md:p-10 lg:p-12 shadow-2xl relative overflow-hidden w-full">
+            <div className="absolute inset-0 border border-slate-800/50 rounded-[2.5rem] pointer-events-none z-20 m-2" />
+            
+            <div className={`flex flex-col ${index % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-8 lg:gap-16 items-center relative z-10`}>
 
               <motion.div 
                 initial={{ opacity: 0, x: index % 2 === 1 ? 30 : -30 }}
@@ -135,7 +140,7 @@ export function VehiclesPage() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="w-full lg:w-1/2 flex flex-col justify-center"
               >
-                <p className="text-slate-300 text-lg leading-relaxed mb-10">
+                <p className="text-slate-300 text-lg leading-relaxed mb-8">
                   {vehicle.description}
                 </p>
 
@@ -179,83 +184,87 @@ export function VehiclesPage() {
         ))}
 
         {/* Technical Design Report Section */}
-        <section className="border-t border-slate-800/50 pt-24 mt-24">
-          <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 mb-12">
-            <div className="space-y-4 max-w-xl">
-              <span className="w-8 h-[2px] bg-blue-500 rounded-full inline-block"></span>
-              <h2 className="text-xs font-bold tracking-widest text-blue-400 uppercase block">Documentation</h2>
-              <h3 className="text-3xl md:text-5xl font-black text-white tracking-tight uppercase leading-none">
-                Technical Design Report
-              </h3>
-              <p className="text-slate-400 text-sm md:text-base leading-relaxed">
-                Our official Technical Design Report (TDR) details the engineering decisions, hardware architecture, and software autonomy methodologies behind our competition vehicle.
-              </p>
-            </div>
+        <section className="mt-24 w-full">
+          <div className="relative w-full rounded-[2.5rem] overflow-hidden border border-slate-700 bg-[#0a1128] p-6 md:p-10 lg:p-12 shadow-2xl flex flex-col gap-10">
+            <div className="absolute inset-0 border border-slate-800/50 rounded-[2.5rem] pointer-events-none z-20 m-2" />
             
-            <LiquidButton 
-              variant="blueToWhite" 
-              asChild 
-              className="px-6 py-3.5 shadow-lg shadow-blue-900/30 hover:scale-105 group/dl z-10 rounded-full cursor-pointer text-sm"
-            >
-              <a 
-                href={tdrPdf} 
-                download="RoboSub_2026_TDR.pdf"
-                className="flex items-center gap-2 font-bold text-sm"
-              >
-                <Download className="w-4 h-4 transition-transform duration-300 group-hover/dl:translate-y-0.5" />
-                Download Report PDF
-              </a>
-            </LiquidButton>
-          </div>
-
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="relative w-full rounded-[2.5rem] overflow-hidden border border-slate-800/85 bg-slate-950/40 backdrop-blur-xl p-4 md:p-6 lg:p-8 shadow-2xl flex flex-col gap-6"
-          >
-            {/* Visual ambient glows inside panel */}
-            <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl pointer-events-none z-0" />
-            <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none z-0" />
-            
-            {isMobile ? (
-              /* High-Tech Technical PDF Card Mockup for Mobile */
-              <div className="relative z-10 w-full p-6 sm:p-8 bg-[#0b0f19]/90 border border-blue-500/20 rounded-2xl flex flex-col items-center text-center shadow-inner gap-6">
-                <div className="w-16 h-16 rounded-2xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.2)]">
-                  <FileText className="w-8 h-8" />
-                </div>
-                <div className="space-y-2">
-                  <h4 className="text-lg font-bold text-white uppercase tracking-tight">
-                    RoboSub 2026 TDR
-                  </h4>
-                  <p className="text-slate-400 text-xs tracking-wider uppercase font-mono">
-                    Format: PDF • 12 Pages • IEEE Standard
-                  </p>
-                </div>
-                <p className="text-slate-300 text-sm leading-relaxed max-w-sm">
-                  The document includes comprehensive details on vehicle hull structures, thruster placement logic, electrical architecture, sensor listing and specs, and modelled behavior trees for autonomy.
+            <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 relative z-10 border-b border-slate-800/60 pb-8">
+              <div className="space-y-4 max-w-xl">
+                <span className="w-8 h-[2px] bg-blue-500 rounded-full inline-block"></span>
+                <h2 className="text-xs font-bold tracking-widest text-blue-400 uppercase block">Documentation</h2>
+                <h3 className="text-3xl md:text-5xl font-black text-white tracking-tight uppercase leading-none">
+                  Technical Design Report
+                </h3>
+                <p className="text-slate-300 text-sm md:text-base leading-relaxed">
+                  Our official Technical Design Report (TDR) details the engineering decisions, hardware architecture, and software autonomy methodologies behind our competition vehicle.
                 </p>
+              </div>
+              
+              <LiquidButton 
+                variant="blueToWhite" 
+                asChild 
+                className="px-6 py-3.5 shadow-lg shadow-blue-900/30 hover:scale-105 group/dl z-10 rounded-full cursor-pointer text-sm"
+              >
                 <a 
                   href={tdrPdf} 
                   download="RoboSub_2026_TDR.pdf"
-                  className="w-full flex items-center justify-center gap-2 py-3 px-6 bg-blue-600 hover:bg-blue-500 active:scale-95 text-white font-bold text-sm rounded-xl transition-all shadow-md shadow-blue-950"
+                  className="flex items-center gap-2 font-bold text-sm"
                 >
-                  <Download className="w-4 h-4" />
-                  Download Document
+                  <Download className="w-4 h-4 transition-transform duration-300 group-hover/dl:translate-y-0.5" />
+                  Download Report PDF
                 </a>
-              </div>
-            ) : (
-              /* Interactive Embedded PDF Viewer container for Desktop */
-              <div className="relative w-full h-[650px] md:h-[750px] lg:h-[800px] bg-[#0b0f19] rounded-2xl overflow-hidden shadow-inner border border-blue-500/20 flex flex-col z-10">
-                <iframe 
-                  src={`${tdrPdf}#toolbar=1&navpanes=0`} 
-                  className="w-full h-full border-none rounded-2xl" 
-                  title="RoboSub 2026 Technical Design Report" 
-                />
-              </div>
-            )}
-          </motion.div>
+              </LiquidButton>
+            </div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="relative w-full z-10 flex flex-col gap-6"
+            >
+              {/* Visual ambient glows inside panel */}
+              <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl pointer-events-none z-0" />
+              <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none z-0" />
+              
+              {isMobile ? (
+                /* High-Tech Technical PDF Card Mockup for Mobile */
+                <div className="relative z-10 w-full p-6 sm:p-8 bg-[#0b0f19] border border-blue-500/20 rounded-2xl flex flex-col items-center text-center shadow-inner gap-6">
+                  <div className="w-16 h-16 rounded-2xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.2)]">
+                    <FileText className="w-8 h-8" />
+                  </div>
+                  <div className="space-y-2">
+                    <h4 className="text-lg font-bold text-white uppercase tracking-tight">
+                      RoboSub 2026 TDR
+                    </h4>
+                    <p className="text-slate-400 text-xs tracking-wider uppercase font-mono">
+                      Format: PDF • 12 Pages • IEEE Standard
+                    </p>
+                  </div>
+                  <p className="text-slate-300 text-sm leading-relaxed max-w-sm">
+                    The document includes comprehensive details on vehicle hull structures, thruster placement logic, electrical architecture, sensor listing and specs, and modelled behavior trees for autonomy.
+                  </p>
+                  <a 
+                    href={tdrPdf} 
+                    download="RoboSub_2026_TDR.pdf"
+                    className="w-full flex items-center justify-center gap-2 py-3 px-6 bg-blue-600 hover:bg-blue-500 active:scale-95 text-white font-bold text-sm rounded-xl transition-all shadow-md shadow-blue-950"
+                  >
+                    <Download className="w-4 h-4" />
+                    Download Document
+                  </a>
+                </div>
+              ) : (
+                /* Interactive Embedded PDF Viewer container for Desktop */
+                <div className="relative w-full h-[650px] md:h-[750px] lg:h-[800px] bg-[#0b0f19] rounded-2xl overflow-hidden shadow-inner border border-blue-500/20 flex flex-col z-10">
+                  <iframe 
+                    src={`${tdrPdf}#toolbar=1&navpanes=0`} 
+                    className="w-full h-full border-none rounded-2xl" 
+                    title="RoboSub 2026 Technical Design Report" 
+                  />
+                </div>
+              )}
+            </motion.div>
+          </div>
         </section>
       </div>
 

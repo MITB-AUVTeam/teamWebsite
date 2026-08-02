@@ -492,7 +492,7 @@ function TeamMemberCard({ member }: { member: any }) {
         onMouseLeave={isMobile ? undefined : handleMouseLeave}
         className="group relative h-full"
       >
-        <Card className="relative h-full overflow-hidden rounded-3xl border border-white/10 bg-[#0a1128]/80 backdrop-blur-xl transition-shadow duration-500 hover:shadow-[0_0_30px_-5px_rgba(59,130,246,0.3)]">
+        <Card className="relative h-full overflow-hidden rounded-3xl border border-white/10 bg-[#0a1128] transition-shadow duration-500 hover:shadow-[0_0_30px_-5px_rgba(59,130,246,0.3)]">
           {/* Animated gradient overlay */}
           <motion.div
             className={`absolute inset-0 bg-gradient-to-br ${member.gradient} opacity-0 transition-opacity duration-500 group-hover:opacity-100`}
@@ -599,7 +599,7 @@ export function TeamSectionBlock() {
   const isMobile = useIsMobile();
 
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-50 pb-0 font-sans">
+    <div className="min-h-screen bg-transparent text-slate-50 pb-0 font-sans">
       <section
         aria-labelledby="team-section-heading"
         className="relative w-full overflow-hidden px-4 py-20 sm:px-6 lg:px-10"
@@ -695,55 +695,75 @@ export function TeamSectionBlock() {
                     ? "mt-6"
                     : "mt-20";
               const panel =
-                "rounded-3xl border border-white/10 bg-white/[0.02] p-6 md:p-8 lg:p-10";
+                "rounded-[2.5rem] border border-slate-700 bg-[#0a1128] p-6 md:p-8 lg:p-10 shadow-2xl relative overflow-hidden";
 
               return (
                 <div key={category.title} className={`${marginTop} ${panel}`.trim()}>
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.6 }}
-                    className="mb-10 flex items-center gap-4"
-                  >
-                    <h3 className="text-3xl font-bold text-white tracking-tight">
-                      {category.title}
-                    </h3>
-                    <div className="h-[1px] flex-grow bg-gradient-to-r from-white/20 to-transparent" />
-                  </motion.div>
-
-                  {category.members.length === 0 ? (
+                  <div className="absolute inset-0 border border-slate-800/50 rounded-[2.5rem] pointer-events-none z-20 m-2" />
+                  <div className="relative z-10">
                     <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true, margin: "-100px" }}
                       transition={{ duration: 0.6 }}
-                      className="flex flex-col items-center justify-center gap-3 rounded-3xl border border-dashed border-white/10 bg-[#0a1128]/40 py-16 text-center"
+                      className="mb-10 flex items-center gap-4"
                     >
-                      <span className="text-2xl md:text-3xl font-bold tracking-tight text-white">
-                        Coming Soon
-                      </span>
-                      <span className="text-sm text-slate-400">
-                        This subsystem is being assembled — stay tuned.
-                      </span>
+                      <h3 className="text-3xl font-bold text-white tracking-tight">
+                        {category.title}
+                      </h3>
+                      <div className="h-[1px] flex-grow bg-gradient-to-r from-white/20 to-transparent" />
                     </motion.div>
-                  ) : leadIndex >= 0 ? (
-                    <div className="space-y-8">
-                      {/* First row: subsystem lead on its own line */}
-                      <motion.div
-                        variants={containerVariants}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true, margin: "-100px" }}
-                        className="flex flex-wrap justify-center gap-8"
-                      >
-                        <TeamMemberCard
-                          key={`${category.title}-lead`}
-                          member={category.members[leadIndex]}
-                        />
-                      </motion.div>
 
-                      {/* Second row: remaining members */}
+                    {category.members.length === 0 ? (
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.6 }}
+                        className="flex flex-col items-center justify-center gap-3 rounded-3xl border border-dashed border-white/10 bg-[#0a1128] py-16 text-center"
+                      >
+                        <span className="text-2xl md:text-3xl font-bold tracking-tight text-white">
+                          Coming Soon
+                        </span>
+                        <span className="text-sm text-slate-400">
+                          This subsystem is being assembled — stay tuned.
+                        </span>
+                      </motion.div>
+                    ) : leadIndex >= 0 ? (
+                      <div className="space-y-8">
+                        {/* First row: subsystem lead on its own line */}
+                        <motion.div
+                          variants={containerVariants}
+                          initial="hidden"
+                          whileInView="visible"
+                          viewport={{ once: true, margin: "-100px" }}
+                          className="flex flex-wrap justify-center gap-8"
+                        >
+                          <TeamMemberCard
+                            key={`${category.title}-lead`}
+                            member={category.members[leadIndex]}
+                          />
+                        </motion.div>
+
+                        {/* Second row: remaining members */}
+                        <motion.div
+                          variants={containerVariants}
+                          initial="hidden"
+                          whileInView="visible"
+                          viewport={{ once: true, margin: "-100px" }}
+                          className="flex flex-wrap justify-center gap-8"
+                        >
+                          {category.members
+                            .filter((_, i) => i !== leadIndex)
+                            .map((member, index) => (
+                              <TeamMemberCard
+                                key={`${category.title}-member-${index}`}
+                                member={member}
+                              />
+                            ))}
+                        </motion.div>
+                      </div>
+                    ) : (
                       <motion.div
                         variants={containerVariants}
                         initial="hidden"
@@ -751,29 +771,12 @@ export function TeamSectionBlock() {
                         viewport={{ once: true, margin: "-100px" }}
                         className="flex flex-wrap justify-center gap-8"
                       >
-                        {category.members
-                          .filter((_, i) => i !== leadIndex)
-                          .map((member, index) => (
-                            <TeamMemberCard
-                              key={`${category.title}-member-${index}`}
-                              member={member}
-                            />
-                          ))}
+                        {category.members.map((member, index) => (
+                          <TeamMemberCard key={index} member={member} />
+                        ))}
                       </motion.div>
-                    </div>
-                  ) : (
-                    <motion.div
-                      variants={containerVariants}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: true, margin: "-100px" }}
-                      className="flex flex-wrap justify-center gap-8"
-                    >
-                      {category.members.map((member, index) => (
-                        <TeamMemberCard key={index} member={member} />
-                      ))}
-                    </motion.div>
-                  )}
+                    )}
+                  </div>
                 </div>
               );
             })}

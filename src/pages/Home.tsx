@@ -375,7 +375,7 @@ export function Home() {
         </div>
 
         <div
-          className="absolute inset-0 pointer-events-none z-20"
+          className="absolute inset-0 pointer-events-none z-[2]"
           style={{
             transform: `translate3d(0px, ${scrollY * 0.6}px, 0)`,
             willChange: 'transform'
@@ -392,7 +392,7 @@ export function Home() {
           </div>
         </div>
 
-        <div className="absolute inset-0 flex items-center justify-center z-10 pt-16">
+        <div className="absolute inset-0 flex items-center justify-center z-[10] pt-16">
           <div className="relative flex flex-col items-center gap-[20px] scale-[0.85] sm:scale-75 md:scale-100">
 
             <div className="relative w-[290px] h-[290px] sm:w-[500px] sm:h-[500px] md:w-[600px] md:h-[600px]">
@@ -448,89 +448,94 @@ export function Home() {
           </div>
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 h-[300px] bg-gradient-to-t from-[#020617] via-[#020617]/80 to-transparent pointer-events-none z-30" />
+        <div className="absolute bottom-[-1px] left-0 right-0 h-[25vh] bg-gradient-to-t from-[#020617] via-[#020617]/85 to-transparent pointer-events-none z-[5]" />
       </section>
 
-      <section className="py-24 px-6 max-w-7xl mx-auto relative z-10 order-2 md:order-2">
-        {/* Sleek, master high-tech panel container */}
-        <div className="relative overflow-hidden bg-slate-950/40 backdrop-blur-xl border border-slate-800/80 rounded-[2.5rem] p-8 md:p-12 lg:p-14 shadow-2xl group/panel">
-          {/* Subtle decorative grid lines / tech styling */}
-          <div className="absolute inset-0 border border-slate-850 rounded-[2.5rem] pointer-events-none z-20 m-2" />
+      <section className="w-full relative order-2 md:order-2">
+        {/* Full-width gradient overlay to fade in the background caustics */}
+        <div className="absolute top-0 left-0 right-0 h-[25vh] bg-gradient-to-b from-[#020617] via-[#020617]/85 to-transparent pointer-events-none z-0" />
 
-          {/* Faint blue glows placed dynamically under the hood */}
-          <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none z-0" />
-          <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none z-0" />
+        <div className="py-24 px-6 max-w-7xl mx-auto relative z-10">
+          {/* Sleek, master high-tech panel container */}
+          <div className="relative overflow-hidden bg-slate-950/40 backdrop-blur-xl border border-slate-800/80 rounded-[2.5rem] p-8 md:p-12 lg:p-14 shadow-2xl group/panel">
+            {/* Subtle decorative grid lines / tech styling */}
+            <div className="absolute inset-0 border border-slate-850 rounded-[2.5rem] pointer-events-none z-20 m-2" />
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
+            {/* Faint blue glows placed dynamically under the hood */}
+            <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none z-0" />
+            <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none z-0" />
 
-            {/* Left Content Column */}
-            <div className="lg:col-span-7 flex flex-col justify-center text-left">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
 
-              <h3 className="text-4xl md:text-5xl font-black mb-6 tracking-tight leading-[1.1] text-white">
-                Pushing the boundaries of <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-300">marine robotics.</span>
-              </h3>
+              {/* Left Content Column */}
+              <div className="lg:col-span-7 flex flex-col justify-center text-left">
 
-              <p className="text-slate-300 text-base md:text-lg leading-relaxed mb-8">
-                We are a team of passionate engineers and researchers dedicated to developing effective and affordable autonomous underwater vehicles. Our mission is to create robust, intelligent systems capable of performing complex tasks in the harsh underwater environment, from environmental monitoring to underwater inspection.
-              </p>
+                <h3 className="text-4xl md:text-5xl font-black mb-6 tracking-tight leading-[1.1] text-white">
+                  Pushing the boundaries of <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-300">marine robotics.</span>
+                </h3>
 
-              {/* High-Tech Stats Telemetry Grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8 w-full">
-                {/* Stat 1 */}
-                <div className="flex flex-col p-5 bg-slate-950/40 backdrop-blur-md border border-slate-900 rounded-2xl relative overflow-hidden group/cell transition-all duration-300 hover:border-blue-500/20 hover:bg-slate-950/60 shadow-inner">
-                  <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-blue-500 to-cyan-400 group-hover/cell:w-full transition-all duration-300" />
-                  <span className="text-3xl font-black text-white tracking-tight mb-1 drop-shadow-[0_0_10px_rgba(59,130,246,0.2)]">2</span>
-                  <span className="text-[9px] text-slate-500 font-bold uppercase tracking-wider font-mono">Vehicles Built</span>
+                <p className="text-slate-300 text-base md:text-lg leading-relaxed mb-8">
+                  We are a team of passionate engineers and researchers dedicated to developing effective and affordable autonomous underwater vehicles. Our mission is to create robust, intelligent systems capable of performing complex tasks in the harsh underwater environment, from environmental monitoring to underwater inspection.
+                </p>
+
+                {/* High-Tech Stats Telemetry Grid */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8 w-full">
+                  {/* Stat 1 */}
+                  <div className="flex flex-col p-5 bg-slate-950/40 backdrop-blur-md border border-slate-900 rounded-2xl relative overflow-hidden group/cell transition-all duration-300 hover:border-blue-500/20 hover:bg-slate-950/60 shadow-inner">
+                    <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-blue-500 to-cyan-400 group-hover/cell:w-full transition-all duration-300" />
+                    <span className="text-3xl font-black text-white tracking-tight mb-1 drop-shadow-[0_0_10px_rgba(59,130,246,0.2)]">2</span>
+                    <span className="text-[9px] text-slate-500 font-bold uppercase tracking-wider font-mono">Vehicles Built</span>
+                  </div>
+
+                  {/* Stat 2 */}
+                  <div className="flex flex-col p-5 bg-slate-950/40 backdrop-blur-md border border-slate-900 rounded-2xl relative overflow-hidden group/cell transition-all duration-300 hover:border-blue-500/20 hover:bg-slate-950/60 shadow-inner">
+                    <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-blue-500 to-cyan-400 group-hover/cell:w-full transition-all duration-300" />
+                    <span className="text-3xl font-black text-white tracking-tight mb-1 drop-shadow-[0_0_10px_rgba(59,130,246,0.2)]">20+</span>
+                    <span className="text-[9px] text-slate-500 font-bold uppercase tracking-wider font-mono">Team Members</span>
+                  </div>
+
+                  {/* Stat 3 */}
+                  <div className="flex flex-col p-5 bg-slate-950/40 backdrop-blur-md border border-slate-900 rounded-2xl relative overflow-hidden group/cell transition-all duration-300 hover:border-blue-500/20 hover:bg-slate-950/60 shadow-inner">
+                    <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-blue-500 to-cyan-400 group-hover/cell:w-full transition-all duration-300" />
+                    <span className="text-3xl font-black text-white tracking-tight mb-1 drop-shadow-[0_0_10px_rgba(59,130,246,0.2)]">1</span>
+                    <span className="text-[9px] text-slate-500 font-bold uppercase tracking-wider font-mono">Awards Won</span>
+                  </div>
+
+                  {/* Stat 4 */}
+                  <div className="flex flex-col p-5 bg-slate-950/40 backdrop-blur-md border border-slate-900 rounded-2xl relative overflow-hidden group/cell transition-all duration-300 hover:border-blue-500/20 hover:bg-slate-950/60 shadow-inner">
+                    <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-blue-500 to-cyan-400 group-hover/cell:w-full transition-all duration-300" />
+                    <span className="text-3xl font-black text-white tracking-tight mb-1 drop-shadow-[0_0_10px_rgba(59,130,246,0.2)]">2025</span>
+                    <span className="text-[9px] text-slate-500 font-bold uppercase tracking-wider font-mono">Established</span>
+                  </div>
                 </div>
 
-                {/* Stat 2 */}
-                <div className="flex flex-col p-5 bg-slate-950/40 backdrop-blur-md border border-slate-900 rounded-2xl relative overflow-hidden group/cell transition-all duration-300 hover:border-blue-500/20 hover:bg-slate-950/60 shadow-inner">
-                  <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-blue-500 to-cyan-400 group-hover/cell:w-full transition-all duration-300" />
-                  <span className="text-3xl font-black text-white tracking-tight mb-1 drop-shadow-[0_0_10px_rgba(59,130,246,0.2)]">20+</span>
-                  <span className="text-[9px] text-slate-500 font-bold uppercase tracking-wider font-mono">Team Members</span>
-                </div>
+                <LiquidButton variant="blueToWhite" className="w-fit rounded-full px-8 py-6 shadow-lg shadow-blue-900/30 font-bold text-sm hover:scale-105 group z-10" asChild>
+                  <Link to="/about">
+                    Read our full story
+                    <ArrowRight className="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  </Link>
+                </LiquidButton>
+              </div>
 
-                {/* Stat 3 */}
-                <div className="flex flex-col p-5 bg-slate-950/40 backdrop-blur-md border border-slate-900 rounded-2xl relative overflow-hidden group/cell transition-all duration-300 hover:border-blue-500/20 hover:bg-slate-950/60 shadow-inner">
-                  <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-blue-500 to-cyan-400 group-hover/cell:w-full transition-all duration-300" />
-                  <span className="text-3xl font-black text-white tracking-tight mb-1 drop-shadow-[0_0_10px_rgba(59,130,246,0.2)]">1</span>
-                  <span className="text-[9px] text-slate-500 font-bold uppercase tracking-wider font-mono">Awards Won</span>
-                </div>
+              {/* Right Picture Column */}
+              <div className="lg:col-span-5 relative w-full flex justify-center mt-12 lg:mt-0 select-none">
+                <div className="relative z-10 w-[95%] md:w-[90%] aspect-[16/9] rounded-[2rem] overflow-hidden border border-slate-800/80 bg-slate-950 shadow-2xl group/img transition-all duration-700 hover:border-blue-500/40 hover:shadow-[0_0_40px_rgba(59,130,246,0.15)]">
+                  <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 via-transparent to-cyan-500/5 opacity-40 z-0 pointer-events-none" />
+                  <img
+                    src={hullPoolTesting}
+                    alt="AUV Hull Pool Testing"
+                    className="w-full h-full object-cover grayscale-[10%] group-hover/img:grayscale-0 group-hover/img:scale-[1.03] transition-all duration-700 ease-out z-10"
+                    loading="lazy"
+                  />
 
-                {/* Stat 4 */}
-                <div className="flex flex-col p-5 bg-slate-950/40 backdrop-blur-md border border-slate-900 rounded-2xl relative overflow-hidden group/cell transition-all duration-300 hover:border-blue-500/20 hover:bg-slate-950/60 shadow-inner">
-                  <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-blue-500 to-cyan-400 group-hover/cell:w-full transition-all duration-300" />
-                  <span className="text-3xl font-black text-white tracking-tight mb-1 drop-shadow-[0_0_10px_rgba(59,130,246,0.2)]">2025</span>
-                  <span className="text-[9px] text-slate-500 font-bold uppercase tracking-wider font-mono">Established</span>
+                  {/* HUD border frame overlay */}
+                  <div className="absolute inset-0 border border-slate-800/40 rounded-[2rem] pointer-events-none z-20 m-1.5" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-60 z-10 pointer-events-none" />
+
                 </div>
               </div>
 
-              <LiquidButton variant="blueToWhite" className="w-fit rounded-full px-8 py-6 shadow-lg shadow-blue-900/30 font-bold text-sm hover:scale-105 group z-10" asChild>
-                <Link to="/about">
-                  Read our full story
-                  <ArrowRight className="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </Link>
-              </LiquidButton>
             </div>
-
-            {/* Right Picture Column */}
-            <div className="lg:col-span-5 relative w-full flex justify-center mt-12 lg:mt-0 select-none">
-              <div className="relative z-10 w-[95%] md:w-[90%] aspect-[16/9] rounded-[2rem] overflow-hidden border border-slate-800/80 bg-slate-950 shadow-2xl group/img transition-all duration-700 hover:border-blue-500/40 hover:shadow-[0_0_40px_rgba(59,130,246,0.15)]">
-                <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 via-transparent to-cyan-500/5 opacity-40 z-0 pointer-events-none" />
-                <img
-                  src={hullPoolTesting}
-                  alt="AUV Hull Pool Testing"
-                  className="w-full h-full object-cover grayscale-[10%] group-hover/img:grayscale-0 group-hover/img:scale-[1.03] transition-all duration-700 ease-out z-10"
-                  loading="lazy"
-                />
-
-                {/* HUD border frame overlay */}
-                <div className="absolute inset-0 border border-slate-800/40 rounded-[2rem] pointer-events-none z-20 m-1.5" />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-60 z-10 pointer-events-none" />
-
-              </div>
-            </div>
-
           </div>
         </div>
       </section>
@@ -568,46 +573,51 @@ export function Home() {
         <PhotoGallery />
       </section>
 
-      <section className="py-24 border-t border-slate-800/50 bg-[#020617] order-7 md:order-7">
+      <section className="py-24 border-t border-slate-800/50 bg-transparent order-7 md:order-7 w-full">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-sm font-bold tracking-widest text-blue-500 uppercase mb-3">Thank You To</h2>
-            <h3 className="text-3xl md:text-4xl font-bold text-white tracking-tight">Our Proud Sponsors</h3>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-8 items-center justify-items-center max-w-5xl mx-auto">
-            {sponsorItems.map((sponsor, idx) => {
-              const CardContent = (
-                <>
-                  <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(96,165,250,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(96,165,250,0.08)_1px,transparent_1px)] bg-[size:14px_14px] opacity-30 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
-                  <div className="absolute h-[180px] w-[180px] rounded-full bg-blue-300/10 blur-[40px] opacity-70 transition-all duration-700 group-hover:bg-cyan-300/15 group-hover:opacity-100 pointer-events-none" />
-                  <div className="relative flex max-h-full max-w-full items-center justify-center transition-all duration-300 [&_img]:max-h-20 [&_img]:w-auto [&_img]:object-contain [&_img]:drop-shadow-lg [&_img]:transition-transform [&_img]:duration-500 group-hover:[&_img]:scale-105 md:[&_img]:max-h-28">
-                    <img src={sponsor.logo} alt={sponsor.alt} />
-                  </div>
-                </>
-              );
+          <div className="bg-[#0a1128] border border-slate-800/60 rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden">
+            <div className="absolute inset-0 border border-slate-800/50 rounded-[2.5rem] pointer-events-none z-20 m-2" />
+            <div className="relative z-10">
+              <div className="text-center mb-12">
+                <h2 className="text-sm font-bold tracking-widest text-blue-500 uppercase mb-3">Thank You To</h2>
+                <h3 className="text-3xl md:text-4xl font-bold text-white tracking-tight">Our Proud Sponsors</h3>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-8 items-center justify-items-center max-w-5xl mx-auto">
+                {sponsorItems.map((sponsor, idx) => {
+                  const CardContent = (
+                    <>
+                      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(96,165,250,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(96,165,250,0.08)_1px,transparent_1px)] bg-[size:14px_14px] opacity-30 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
+                      <div className="absolute h-[180px] w-[180px] rounded-full bg-blue-300/10 blur-[40px] opacity-70 transition-all duration-700 group-hover:bg-cyan-300/15 group-hover:opacity-100 pointer-events-none" />
+                      <div className="relative flex max-h-full max-w-full items-center justify-center transition-all duration-300 [&_img]:max-h-20 [&_img]:w-auto [&_img]:object-contain [&_img]:drop-shadow-lg [&_img]:transition-transform [&_img]:duration-500 group-hover:[&_img]:scale-105 md:[&_img]:max-h-28">
+                        <img src={sponsor.logo} alt={sponsor.alt} />
+                      </div>
+                    </>
+                  );
 
-              const cardClasses = "group relative flex h-32 w-full items-center justify-center overflow-hidden rounded-2xl border border-blue-900/60 bg-gradient-to-br from-[#0c1f4a] via-[#0b1a3d] to-[#08142f] p-3 transition-all duration-300 hover:border-blue-400/30 md:h-40 md:p-4 last:col-span-2 last:max-w-[calc(50%-12px)] md:last:col-span-1 md:last:max-w-full cursor-pointer";
+                  const cardClasses = "group relative flex h-32 w-full items-center justify-center overflow-hidden rounded-2xl border border-blue-900/60 bg-gradient-to-br from-[#0c1f4a] via-[#0b1a3d] to-[#08142f] p-3 transition-all duration-300 hover:border-blue-400/30 md:h-40 md:p-4 last:col-span-2 last:max-w-[calc(50%-12px)] md:last:col-span-1 md:last:max-w-full cursor-pointer";
 
-              if (sponsor.href) {
-                return (
-                  <a
-                    key={idx}
-                    href={sponsor.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={cardClasses}
-                  >
-                    {CardContent}
-                  </a>
-                );
-              }
+                  if (sponsor.href) {
+                    return (
+                      <a
+                        key={idx}
+                        href={sponsor.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={cardClasses}
+                      >
+                        {CardContent}
+                      </a>
+                    );
+                  }
 
-              return (
-                <div key={idx} className={cardClasses.replace("cursor-pointer", "cursor-default")}>
-                  {CardContent}
-                </div>
-              );
-            })}
+                  return (
+                    <div key={idx} className={cardClasses.replace("cursor-pointer", "cursor-default")}>
+                      {CardContent}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
       </section>

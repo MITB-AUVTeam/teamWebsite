@@ -49,25 +49,28 @@ const sponsors = [
 
 export function SponsorsPage() {
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-50 selection:bg-blue-500/30">
+    <div className="min-h-screen bg-transparent text-slate-50 selection:bg-blue-500/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 min-h-[calc(100vh-400px)]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-20"
+          className="text-center mb-20 bg-[#0a1128] border border-slate-800/60 rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden"
         >
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-            Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Sponsors</span>
-          </h1>
-          <p className="text-slate-400 text-lg max-w-2xl mx-auto leading-relaxed">
-            We are deeply grateful for the generous support of our sponsors. Their contributions empower our team to push the boundaries of marine robotics and autonomous underwater vehicles.
-          </p>
+          <div className="absolute inset-0 border border-slate-800/50 rounded-[2.5rem] pointer-events-none z-20 m-2" />
+          <div className="relative z-10">
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+              Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Sponsors</span>
+            </h1>
+            <p className="text-slate-300 text-lg max-w-2xl mx-auto leading-relaxed">
+              We are deeply grateful for the generous support of our sponsors. Their contributions empower our team to push the boundaries of marine robotics and autonomous underwater vehicles.
+            </p>
+          </div>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
           {sponsors.map((sponsor, index) => {
-            const cardClassName = `bg-gradient-to-b from-slate-950/60 to-slate-900/20 backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-slate-800/80 hover:bg-slate-900/40 hover:border-blue-500/20 transition-all duration-300 group flex flex-col items-center text-center ${
+            const cardClassName = `bg-[#0a1128] rounded-[2.5rem] p-8 md:p-12 border border-slate-700 hover:border-blue-500/50 hover:shadow-[0_0_15px_rgba(59,130,246,0.15)] transition-all duration-300 group flex flex-col items-center text-center relative overflow-hidden ${
               sponsor.name === "Manipal Institute of Technology, Bengaluru" ? "md:col-span-2 md:max-w-4xl md:w-full md:mx-auto" : ""
             }`;
 
@@ -79,7 +82,9 @@ export function SponsorsPage() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className={cardClassName}
               >
-                <div className="relative h-40 md:h-48 w-full flex items-center justify-center mb-8 p-6 bg-gradient-to-br from-[#0c1f4a] via-[#0b1a3d] to-[#08142f] rounded-2xl border border-blue-900/60 shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)] overflow-hidden group-hover:border-blue-400/30 transition-all duration-300">
+                <div className="absolute inset-0 border border-slate-800/40 rounded-[2.5rem] pointer-events-none z-20 m-2" />
+                
+                <div className="relative h-40 md:h-48 w-full flex items-center justify-center mb-8 p-6 bg-gradient-to-br from-[#0c1f4a] via-[#0b1a3d] to-[#08142f] rounded-2xl border border-blue-900/60 shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)] overflow-hidden group-hover:border-blue-400/30 transition-all duration-300 z-10">
                   {/* Tech blueprint grid pattern */}
                   <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(96,165,250,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(96,165,250,0.08)_1px,transparent_1px)] bg-[size:14px_14px] opacity-30 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
 
@@ -92,7 +97,7 @@ export function SponsorsPage() {
                     className={`max-h-full max-w-full object-contain filter drop-shadow-lg transition-transform duration-500 ${sponsor.logoClass || ""} ${sponsor.hoverLogoClass || "group-hover:scale-105"}`}
                   />
                 </div>
-                <h3 className="text-2xl font-bold text-slate-100 mb-4">
+                <h3 className="text-2xl font-bold text-slate-100 mb-4 z-10">
                   {sponsor.href ? (
                     <a
                       href={sponsor.href}
@@ -106,7 +111,7 @@ export function SponsorsPage() {
                     sponsor.name
                   )}
                 </h3>
-                <p className="text-slate-400 leading-relaxed text-sm md:text-base">
+                <p className="text-slate-300 leading-relaxed text-sm md:text-base z-10">
                   {sponsor.description}
                 </p>
               </motion.div>
@@ -118,24 +123,27 @@ export function SponsorsPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="mt-24 text-center bg-blue-900/20 rounded-3xl p-10 lg:p-16 border border-blue-500/20"
+          className="mt-24 text-center bg-[#0a1128] rounded-[2.5rem] p-10 lg:p-16 border border-slate-700 shadow-2xl relative overflow-hidden"
         >
-          <h2 className="text-3xl font-bold text-white mb-6">Become a Sponsor</h2>
-          <p className="text-slate-300 text-lg max-w-2xl mx-auto mb-8">
-            Join us in shaping the future of underwater technology. Partnering with our team provides visibility among top engineering talent and demonstrates your commitment to innovation.
-          </p>
-          <LiquidButton 
-            variant="blueToWhite" 
-            asChild 
-            className="shadow-sm rounded-full cursor-pointer hover:scale-105 transition-transform font-bold text-base"
-          >
-            <Link
-              to="/contact#contact-form"
-              className="inline-flex items-center justify-center px-8 py-4 text-base font-bold"
+          <div className="absolute inset-0 border border-slate-800/50 rounded-[2.5rem] pointer-events-none z-20 m-2" />
+          <div className="relative z-10">
+            <h2 className="text-3xl font-bold text-white mb-6">Become a Sponsor</h2>
+            <p className="text-slate-300 text-lg max-w-2xl mx-auto mb-8">
+              Join us in shaping the future of underwater technology. Partnering with our team provides visibility among top engineering talent and demonstrates your commitment to innovation.
+            </p>
+            <LiquidButton 
+              variant="blueToWhite" 
+              asChild 
+              className="shadow-sm rounded-full cursor-pointer hover:scale-105 transition-transform font-bold text-base"
             >
-              Contact Us for Sponsorship
-            </Link>
-          </LiquidButton>
+              <Link
+                to="/contact#contact-form"
+                className="inline-flex items-center justify-center px-8 py-4 text-base font-bold"
+              >
+                Contact Us for Sponsorship
+              </Link>
+            </LiquidButton>
+          </div>
         </motion.div>
       </div>
       <Footer />

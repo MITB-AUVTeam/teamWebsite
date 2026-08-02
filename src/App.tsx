@@ -14,6 +14,7 @@ import { SponsorsPage } from "@/pages/SponsorsPage";
 import ScrollToTop from "@/components/ScrollToTop";
 import { Analytics } from "@vercel/analytics/react";
 import { Preloader } from "@/components/ui/Preloader/Preloader";
+import WaterCaustic from "@/components/ui/water-caustic";
 
 export default function App() {
   const location = useLocation();
@@ -26,25 +27,33 @@ export default function App() {
   const isHome = location.pathname === "/";
 
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-50 selection:bg-blue-500/30">
+    <div className="min-h-screen bg-gradient-to-b from-[#020617] via-[#071330] to-[#020617] text-slate-50 selection:bg-blue-500/30 relative overflow-x-hidden">
       {isPreloaderActive && (
         <Preloader onFinished={() => setIsPreloaderActive(false)} />
       )}
-      <ScrollToTop watch={location.pathname} />
-      <Navbar />
-      <main className={isHome ? "" : "pt-24"}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/vehicles" element={<VehiclesPage />} />
-          <Route path="/team" element={<TeamSectionBlock />} />
-          <Route path="/contact" element={<ContactUs />} />
-          <Route path="/gallery" element={<GalleryPage />} />
-          <Route path="/media" element={<MediaPage />} />
-          <Route path="/sponsors" element={<SponsorsPage />} />
-        </Routes>
-      </main>
-      <Analytics />
+      
+      {/* Global water caustics background */}
+      <div className="fixed inset-0 z-0 pointer-events-none opacity-40">
+        <WaterCaustic color="#38bdf8" />
+      </div>
+
+      <div className="relative z-10 flex flex-col min-h-screen">
+        <ScrollToTop watch={location.pathname} />
+        <Navbar />
+        <main className={isHome ? "" : "pt-24 flex-1"}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/vehicles" element={<VehiclesPage />} />
+            <Route path="/team" element={<TeamSectionBlock />} />
+            <Route path="/contact" element={<ContactUs />} />
+            <Route path="/gallery" element={<GalleryPage />} />
+            <Route path="/media" element={<MediaPage />} />
+            <Route path="/sponsors" element={<SponsorsPage />} />
+          </Routes>
+        </main>
+        <Analytics />
+      </div>
     </div>
   );
 }

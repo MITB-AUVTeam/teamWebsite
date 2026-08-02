@@ -218,7 +218,7 @@ export function ContactUs() {
               </div>
             </div>
 
-            <div id="contact-form" className="bg-slate-900/40 backdrop-blur-xl border border-slate-800/60 p-8 rounded-3xl shadow-2xl relative overflow-hidden">
+            <div id="contact-form" className="bg-[#0a1128] border border-slate-800/60 p-8 rounded-3xl shadow-2xl relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none"></div>
               
               <form className="space-y-6 relative z-10" onSubmit={handleSubmit}>
@@ -231,7 +231,7 @@ export function ContactUs() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Animesh Mishra"
-                    className="w-full bg-slate-950/50 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all disabled:opacity-50"
+                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all disabled:opacity-50"
                   />
                 </div>
                 <div className="space-y-3">
@@ -243,7 +243,7 @@ export function ContactUs() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="animesh@company.com"
-                    className="w-full bg-slate-950/50 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all disabled:opacity-50"
+                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all disabled:opacity-50"
                   />
                 </div>
                 <div className="space-y-3">
@@ -255,7 +255,7 @@ export function ContactUs() {
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Tell us about your request..."
-                    className="w-full bg-slate-950/50 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all resize-none disabled:opacity-50"
+                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all resize-none disabled:opacity-50"
                   />
                 </div>
 
@@ -302,26 +302,31 @@ export function ContactUs() {
           </div>
         </div>
 
-        <div className="w-full h-[400px] md:h-[500px] relative border-t border-slate-800/50 mt-12">
-          <iframe
-            src="https://www.google.com/maps?q=13.1251035,77.5906235&z=19&output=embed"
-            width="100%"
-            height="100%"
-            style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg) contrast(100%) opacity(80%)' }}
-            allowFullScreen={false}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
-          <a
-            href={workshopLocationUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="absolute top-6 left-6 z-10 inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-slate-950/85 px-4 py-2 text-sm font-medium text-slate-100 backdrop-blur hover:border-blue-400/50 hover:text-blue-300 transition-colors"
-          >
-            <MapPin className="w-4 h-4" />
-            Open pinned location
-          </a>
-          <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_100px_rgba(2,6,23,1)]"></div>
+        <div className="max-w-7xl mx-auto px-6 w-full mt-12 mb-20">
+          <div className="bg-[#0a1128] border border-slate-700 rounded-[2.5rem] p-4 md:p-6 shadow-2xl relative overflow-hidden h-[400px] md:h-[500px]">
+            <div className="absolute inset-0 border border-slate-800/50 rounded-[2.5rem] pointer-events-none z-20 m-2" />
+            <div className="relative w-full h-full rounded-2xl overflow-hidden z-10">
+              <iframe
+                src="https://www.google.com/maps?q=13.1251035,77.5906235&z=19&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg) contrast(100%)' }}
+                allowFullScreen={false}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+              <a
+                href={workshopLocationUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute top-6 left-6 z-10 inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-slate-950/85 px-4 py-2 text-sm font-medium text-slate-100 backdrop-blur hover:border-blue-400/50 hover:text-blue-300 transition-colors"
+              >
+                <MapPin className="w-4 h-4" />
+                Open pinned location
+              </a>
+              <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_60px_rgba(10,17,40,0.8)]"></div>
+            </div>
+          </div>
         </div>
 
         <Footer />

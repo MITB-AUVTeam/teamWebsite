@@ -131,7 +131,7 @@ const BentoCard = ({
       className={cn(
         "group relative col-span-1 md:col-span-3 flex flex-col justify-between overflow-hidden rounded-xl",
         "bg-white [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)]",
-        "transform-gpu dark:bg-slate-900/40 dark:[border:1px_solid_rgba(59,130,246,0.25)] dark:[box-shadow:0_0_18px_-4px_rgba(59,130,246,0.2)] dark:hover:[border:1px_solid_rgba(59,130,246,0.55)] dark:hover:[box-shadow:0_0_28px_-4px_rgba(59,130,246,0.35)]",
+        "transform-gpu dark:bg-[#0a1128] dark:[border:1px_solid_rgba(59,130,246,0.25)] dark:[box-shadow:0_0_18px_-4px_rgba(59,130,246,0.2)] dark:hover:[border:1px_solid_rgba(59,130,246,0.55)] dark:hover:[box-shadow:0_0_28px_-4px_rgba(59,130,246,0.35)]",
         
         // Old desktop focus rings
         onClick && "cursor-pointer focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2",

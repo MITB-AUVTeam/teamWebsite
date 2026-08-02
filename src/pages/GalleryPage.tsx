@@ -272,7 +272,7 @@ export function GalleryPage() {
   }, [animate])
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#020617] -mt-24">
+    <div className="flex flex-col min-h-screen bg-transparent -mt-24">
       <div
         className="relative flex w-full h-screen min-h-[600px] justify-center items-center overflow-hidden"
         ref={scope}

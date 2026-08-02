@@ -148,7 +148,6 @@ export const PhotoGallery = ({
 
   return (
     <div className="relative" ref={ref}>
-       <div className="absolute inset-0 max-md:hidden top-[200px] -z-10 h-[300px] w-full bg-transparent bg-[linear-gradient(to_right,#57534e_1px,transparent_1px),linear-gradient(to_bottom,#57534e_1px,transparent_1px)] bg-[size:3rem_3rem] opacity-20 [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)] dark:bg-[linear-gradient(to_right,#a8a29e_1px,transparent_1px),linear-gradient(to_bottom,#a8a29e_1px,transparent_1px)]"></div>
       
       <div className="flex flex-col items-center justify-center text-center mb-16 px-6 max-w-7xl mx-auto">
         <h2 className="text-sm font-bold tracking-widest text-blue-500 uppercase mb-3">Gallery</h2>

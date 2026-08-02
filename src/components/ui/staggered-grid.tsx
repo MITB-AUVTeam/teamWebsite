@@ -256,7 +256,7 @@ export function StaggeredGrid({
                                   }}
                               >
                                   <figure className="w-full h-full m-0">
-                                      <div className="grid__item-img w-full h-full [backface-visibility:hidden] will-change-transform rounded-xl overflow-hidden shadow-sm border border-slate-800 bg-slate-900/40 flex items-center justify-center transition-all duration-500 ease-out group-hover:scale-105 group-hover:shadow-xl group-hover:shadow-blue-900/20">
+                                      <div className="grid__item-img w-full h-full [backface-visibility:hidden] will-change-transform rounded-xl overflow-hidden shadow-sm border border-slate-800 bg-[#0a1128] flex items-center justify-center transition-all duration-500 ease-out group-hover:scale-105 group-hover:shadow-xl group-hover:shadow-blue-900/20">
                                           <div className="absolute inset-0 bg-gradient-to-b from-[#020617]/40 via-[#020617]/80 to-[#020617] backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
                                           <div className="relative z-10 flex flex-col items-center justify-center gap-3">
                                               <Icon className="w-8 h-8 text-slate-500 transition-all duration-300 group-hover:text-blue-400 group-hover:scale-110" />
@@ -287,10 +287,10 @@ export function StaggeredGrid({
                               key={bentoItem.id}
                               onClick={() => setActiveBento(index)}
                               className={cn(
-                                  "group relative cursor-pointer overflow-hidden rounded-3xl p-6 min-h-[220px] flex flex-col justify-between transition-all duration-500 border bg-slate-900/40 backdrop-blur-xl",
+                                  "group relative cursor-pointer overflow-hidden rounded-3xl p-6 min-h-[220px] flex flex-col justify-between transition-all duration-500 border bg-[#0a1128]",
                                   isActive 
-                                      ? "border-blue-500/50 shadow-lg shadow-blue-500/10 bg-slate-900/80 scale-[1.02]" 
-                                      : "border-slate-800/60 hover:border-slate-700/80 hover:bg-slate-900/60"
+                                      ? "border-blue-500/50 shadow-lg shadow-blue-500/10 bg-[#0a1128] scale-[1.02]" 
+                                      : "border-slate-800/60 hover:border-slate-700/80 hover:bg-[#0a1128]"
                               )}
                           >
                               {/* Background Image / Gradient Overlay */}

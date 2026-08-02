@@ -562,7 +562,7 @@ export function MediaPage() {
   }, [recentPosts, searchQuery]);
 
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-50 pb-0 font-sans">
+    <div className="min-h-screen bg-transparent text-slate-50 pb-0 font-sans">
       
       <section className="max-w-7xl mx-auto px-6 pt-12 md:pt-20 mb-16">
         <motion.div 
@@ -602,7 +602,7 @@ export function MediaPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="group relative rounded-3xl overflow-hidden bg-white/5 border border-white/10 flex flex-col lg:flex-row cursor-pointer hover:border-white/20 transition-colors"
+            className="group relative rounded-3xl overflow-hidden bg-[#0a1128] border border-white/10 flex flex-col lg:flex-row cursor-pointer hover:border-white/20 transition-colors"
           >
             <div className="relative w-full lg:w-3/5 h-[220px] sm:h-[300px] lg:h-[500px] overflow-hidden">
               <img
@@ -671,7 +671,7 @@ export function MediaPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group flex flex-col bg-white/5 border border-white/10 rounded-2xl overflow-hidden cursor-pointer hover:border-white/20 transition-colors"
+              className="group flex flex-col bg-[#0a1128] border border-white/10 rounded-2xl overflow-hidden cursor-pointer hover:border-white/20 transition-colors"
             >
               <div className="h-56 overflow-hidden relative">
                 <img 
@@ -727,7 +727,7 @@ export function MediaPage() {
             ))}
           </div>
         ) : (
-          <div className="rounded-2xl border border-white/10 bg-white/5 px-6 py-12 text-center">
+          <div className="rounded-2xl border border-white/10 bg-[#0a1128] px-6 py-12 text-center">
             <p className="text-lg font-semibold text-white">No articles found</p>
             <p className="mt-2 text-sm text-slate-400">
               Try searching by title, author, category, or topic.
@@ -763,7 +763,7 @@ export function MediaPage() {
           </div>
 
           {/* Video Information / Sidebar */}
-          <div className="flex flex-col justify-center bg-white/5 border border-white/10 rounded-3xl p-8 lg:p-10">
+          <div className="flex flex-col justify-center bg-[#0a1128] border border-white/10 rounded-3xl p-8 lg:p-10">
             <h4 className="text-2xl font-bold text-white mb-4 leading-tight">
              Team AUV MIT-B Introduction Video | 
              RoboSub 2026
