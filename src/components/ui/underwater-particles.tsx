@@ -18,16 +18,16 @@ export function UnderwaterParticles() {
     const list: Particle[] = [];
     let idCounter = 0;
 
-    // Density Target Distribution (Significantly Increased Frequency & Populated Atmosphere):
-    // - 80 Far atmospheric particles (tiny dots)
-    // - 60 Small bubbles (mix of tiny dots & bubbles)
-    // - 30 Medium bubbles (asymmetric refraction glass outlines)
-    // - 16 Large bubbles (highly transparent optical rim)
-    // - 10 Near blurry bubbles (cameras out of focus)
-    // - 12 Golden bioluminescent lights
-    // - 8 Cyan bokeh background light blobs
-    // - 12 Bubble clusters (groups of 2-4 tiny irregular bubbles)
-    // - 3 Rare "Hero Bubbles" (ultra premium, slow side spawn)
+    // Density Target Distribution (Balanced Frequency: 132 active items):
+    // - 45 Far atmospheric particles (tiny dots)
+    // - 36 Small bubbles (mix of tiny dots & bubbles)
+    // - 18 Medium bubbles (asymmetric refraction glass outlines)
+    // - 10 Large bubbles (highly transparent optical rim)
+    // - 6 Near blurry bubbles (cameras out of focus)
+    // - 6 Golden bioluminescent lights
+    // - 4 Cyan bokeh background light blobs
+    // - 6 Bubble clusters (groups of 2-4 tiny irregular bubbles)
+    // - 1 Rare "Hero Bubble" (ultra premium, slow side spawn)
 
     // Helper: Randomize opacity intensity scale
     const getIntensityMultiplier = (): number => {
@@ -80,8 +80,8 @@ export function UnderwaterParticles() {
       };
     };
 
-    // 1. FAR ATMOSPHERIC PARTICLES (80 count - tiny, slow, blurred dust)
-    for (let i = 0; i < 80; i++) {
+    // 1. FAR ATMOSPHERIC PARTICLES (45 count - tiny, slow, blurred dust)
+    for (let i = 0; i < 45; i++) {
       const id = idCounter++;
       let x = Math.random() * 100;
       if (Math.random() > 0.6) {
@@ -120,8 +120,8 @@ export function UnderwaterParticles() {
       list.push({ id, style, className: `underwater-particle ${colorClass} rounded-full` });
     }
 
-    // 2. SMALL BUBBLES (60 count - 4px-9px, mix of tiny dots & bubbles)
-    for (let i = 0; i < 60; i++) {
+    // 2. SMALL BUBBLES (36 count - 4px-9px, mix of tiny dots & bubbles)
+    for (let i = 0; i < 36; i++) {
       const id = idCounter++;
       let x = Math.random() * 100;
       if (Math.random() > 0.6) {
@@ -168,8 +168,8 @@ export function UnderwaterParticles() {
       list.push({ id, style, className });
     }
 
-    // 3. MEDIUM BUBBLES (30 count - 9px-18px, asymmetric refraction glass outlines)
-    for (let i = 0; i < 30; i++) {
+    // 3. MEDIUM BUBBLES (18 count - 9px-18px, asymmetric refraction glass outlines)
+    for (let i = 0; i < 18; i++) {
       const id = idCounter++;
       const x = Math.random() > 0.5 ? Math.random() * 25 : 75 + Math.random() * 25;
       const duration = 16 + Math.random() * 12; // 16s-28s
@@ -210,8 +210,8 @@ export function UnderwaterParticles() {
       list.push({ id, style, className });
     }
 
-    // 4. LARGE BUBBLES (16 count - 18px-32px, highly transparent optical rim)
-    for (let i = 0; i < 16; i++) {
+    // 4. LARGE BUBBLES (10 count - 18px-32px, highly transparent optical rim)
+    for (let i = 0; i < 10; i++) {
       const id = idCounter++;
       const x = Math.random() > 0.5 ? Math.random() * 25 : 75 + Math.random() * 25;
       const duration = 14 + Math.random() * 10; // 14s-24s
@@ -247,8 +247,8 @@ export function UnderwaterParticles() {
       list.push({ id, style, className });
     }
 
-    // 5. NEAR BLURRY BUBBLES (10 count - 25px-45px, cameras out of focus, faster)
-    for (let i = 0; i < 10; i++) {
+    // 5. NEAR BLURRY BUBBLES (6 count - 25px-45px, cameras out of focus, faster)
+    for (let i = 0; i < 6; i++) {
       const id = idCounter++;
       const x = Math.random() > 0.5 ? Math.random() * 20 : 80 + Math.random() * 20;
       const duration = 12 + Math.random() * 6; // Faster: 12s-18s
@@ -284,8 +284,8 @@ export function UnderwaterParticles() {
       list.push({ id, style, className });
     }
 
-    // 6. GOLDEN PARTICLES (12 count - tiny warm bokeh reflections)
-    for (let i = 0; i < 12; i++) {
+    // 6. GOLDEN PARTICLES (6 count - tiny warm bokeh reflections)
+    for (let i = 0; i < 6; i++) {
       const id = idCounter++;
       const x = Math.random() * 100;
       const duration = 22 + Math.random() * 13; // 22s-35s
@@ -319,8 +319,8 @@ export function UnderwaterParticles() {
       list.push({ id, style, className });
     }
 
-    // 7. SUBTLE CYAN BOKEH (8 count - very faint background light blobs)
-    for (let i = 0; i < 8; i++) {
+    // 7. SUBTLE CYAN BOKEH (4 count - very faint background light blobs)
+    for (let i = 0; i < 4; i++) {
       const id = idCounter++;
       const x = Math.random() * 100;
       const duration = 24 + Math.random() * 14; // 24s-38s
@@ -353,8 +353,8 @@ export function UnderwaterParticles() {
       list.push({ id, style, className });
     }
 
-    // 8. BUBBLE CLUSTERS (12 clusters - groups of 2-4 tiny irregular bubbles)
-    for (let i = 0; i < 12; i++) {
+    // 8. BUBBLE CLUSTERS (6 clusters - groups of 2-4 tiny irregular bubbles)
+    for (let i = 0; i < 6; i++) {
       const id = idCounter++;
       const x = Math.random() * 100;
       const duration = 20 + Math.random() * 8; // 20s-28s
@@ -434,8 +434,8 @@ export function UnderwaterParticles() {
       list.push({ id, style, className: "bg-transparent", isCluster: true, clusterBubbles });
     }
 
-    // 9. RARE "HERO BUBBLES" (3 count - 38px-48px, ultra premium, slow side spawn)
-    for (let i = 0; i < 3; i++) {
+    // 9. RARE "HERO BUBBLE" (1 count - 38px-48px, ultra premium, slow side spawn)
+    {
       const id = idCounter++;
       const x = Math.random() > 0.5 ? Math.random() * 20 : 80 + Math.random() * 20;
       const duration = 28 + Math.random() * 14;
