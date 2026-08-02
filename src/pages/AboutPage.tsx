@@ -6,95 +6,84 @@ import { Timeline } from "@/components/ui/timeline";
 
 const timelineData = [
   {
-    title: "2025",
-    content: (
-      <div className="space-y-6">
-        <p className="text-slate-300 text-sm md:text-base font-normal leading-relaxed">
-          Our founding year. We assembled our multi-disciplinary team, designed our first mechanical prototypes, and secured our initial sponsorships.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="p-5 rounded-2xl border border-slate-700 bg-[#0a1128] hover:border-blue-500/50 hover:shadow-[0_0_15px_rgba(59,130,246,0.15)] transition-all duration-300">
-            <span className="text-blue-400 font-mono text-xs block mb-1">JANUARY 2025</span>
-            <h4 className="text-white text-lg font-bold">Team Created</h4>
-            <p className="text-slate-400 text-sm mt-2">Team AUV MIT-B was founded with students from Mechanical, Electrical, and Software domains.</p>
-          </div>
-          <div className="p-5 rounded-2xl border border-slate-700 bg-[#0a1128] hover:border-blue-500/50 hover:shadow-[0_0_15px_rgba(59,130,246,0.15)] transition-all duration-300">
-            <span className="text-blue-400 font-mono text-xs block mb-1">FEBRUARY 2025</span>
-            <h4 className="text-white text-lg font-bold">1st Task Phase</h4>
-            <p className="text-slate-400 text-sm mt-2">Completed initial task phase aligning goals and designing subsystem components.</p>
-          </div>
-          <div className="p-5 rounded-2xl border border-slate-700 bg-[#0a1128] hover:border-blue-500/50 hover:shadow-[0_0_15px_rgba(59,130,246,0.15)] transition-all duration-300">
-            <span className="text-blue-400 font-mono text-xs block mb-1">JUNE 2025</span>
-            <h4 className="text-white text-lg font-bold">1st Prototype Build</h4>
-            <p className="text-slate-400 text-sm mt-2">Assembled our first physical prototype to test basic buoyancy and drive controls.</p>
-          </div>
-          <div className="p-5 rounded-2xl border border-slate-700 bg-[#0a1128] hover:border-blue-500/50 hover:shadow-[0_0_15px_rgba(59,130,246,0.15)] transition-all duration-300">
-            <span className="text-blue-400 font-mono text-xs block mb-1">AUGUST 2025</span>
-            <h4 className="text-white text-lg font-bold">Won Vidyashilp Competition</h4>
-            <p className="text-slate-400 text-sm mt-2">Won 1st place in the Vidyashilp competition, validating our initial architecture.</p>
-          </div>
-          <div className="p-5 rounded-2xl border border-slate-700 bg-[#0a1128] hover:border-blue-500/50 hover:shadow-[0_0_15px_rgba(59,130,246,0.15)] transition-all duration-300">
-            <span className="text-blue-400 font-mono text-xs block mb-1">OCTOBER 2025</span>
-            <h4 className="text-white text-lg font-bold">Prototype Testing</h4>
-            <p className="text-slate-400 text-sm mt-2">Conducted rigorous pool tests to evaluate sealing, thruster responses, and telemetry.</p>
-          </div>
-          <div className="p-5 rounded-2xl border border-slate-700 bg-[#0a1128] hover:border-blue-500/50 hover:shadow-[0_0_15px_rgba(59,130,246,0.15)] transition-all duration-300">
-            <span className="text-blue-400 font-mono text-xs block mb-1">OCTOBER 28, 2025</span>
-            <h4 className="text-white text-lg font-bold">Vicharak Sponsorship</h4>
-            <p className="text-slate-400 text-sm mt-2">Partnered with Vicharak as our hardware sponsor, acquiring high-performance single-board computers.</p>
-          </div>
-          <div className="p-5 rounded-2xl border border-slate-700 bg-[#0a1128] hover:border-blue-500/50 hover:shadow-[0_0_15px_rgba(59,130,246,0.15)] transition-all duration-300 md:col-span-2">
-            <span className="text-blue-400 font-mono text-xs block mb-1">NOVEMBER 2025</span>
-            <h4 className="text-white text-lg font-bold">2nd Prototype Build & Testing</h4>
-            <p className="text-slate-400 text-sm mt-2">Began building our 2nd prototype incorporating advanced sensor suites and refined hull dynamics, followed by testing.</p>
-          </div>
-        </div>
-      </div>
-    )
+    year: "2025",
+    intro: "Our founding year. We assembled our multi-disciplinary team, designed our first mechanical prototypes, and secured our initial sponsorships.",
+    events: [
+      {
+        date: "JANUARY 2025",
+        title: "Team Created",
+        description: "Team AUV MIT-B was founded with students from Mechanical, Electrical, and Software domains."
+      },
+      {
+        date: "FEBRUARY 2025",
+        title: "1st Task Phase",
+        description: "Completed initial task phase aligning goals and designing subsystem components."
+      },
+      {
+        date: "JUNE 2025",
+        title: "1st Prototype Build",
+        description: "Assembled our first physical prototype to test basic buoyancy and drive controls."
+      },
+      {
+        date: "AUGUST 2025",
+        title: "Won Vidyashilp Competition",
+        description: "Won 1st place in the Vidyashilp competition, validating our initial architecture."
+      },
+      {
+        date: "OCTOBER 2025",
+        title: "Prototype Testing",
+        description: "Conducted rigorous pool tests to evaluate sealing, thruster responses, and telemetry."
+      },
+      {
+        date: "OCTOBER 28, 2025",
+        title: "Vicharak Sponsorship",
+        description: "Partnered with Vicharak as our hardware sponsor, acquiring high-performance single-board computers."
+      },
+      {
+        date: "NOVEMBER 2025",
+        title: "2nd Prototype Build & Testing",
+        description: "Began building our 2nd prototype incorporating advanced sensor suites and refined hull dynamics, followed by testing."
+      }
+    ]
   },
   {
-    title: "2026",
-    content: (
-      <div className="space-y-6">
-        <p className="text-slate-300 text-sm md:text-base font-normal leading-relaxed">
-          The year of deployment. From manufacturing our main hull to registering and competing on the global stage.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="p-5 rounded-2xl border border-slate-700 bg-[#0a1128] hover:border-blue-500/50 hover:shadow-[0_0_15px_rgba(59,130,246,0.15)] transition-all duration-300">
-            <span className="text-blue-400 font-mono text-xs block mb-1">FEBRUARY 2026</span>
-            <h4 className="text-white text-lg font-bold">Main Hull Build</h4>
-            <p className="text-slate-400 text-sm mt-2">Manufactured the primary waterproof carbon fiber/acrylic hull for our competition AUV.</p>
-          </div>
-          <div className="p-5 rounded-2xl border border-slate-700 bg-[#0a1128] hover:border-blue-500/50 hover:shadow-[0_0_15px_rgba(59,130,246,0.15)] transition-all duration-300">
-            <span className="text-blue-400 font-mono text-xs block mb-1">MARCH 2026</span>
-            <h4 className="text-white text-lg font-bold">Main AUV Hardware Testing</h4>
-            <p className="text-slate-400 text-sm mt-2">Integrated the power distribution boards, sensors, and computer systems for full-system dry tests.</p>
-          </div>
-          <div className="p-5 rounded-2xl border border-slate-700 bg-[#0a1128] hover:border-blue-500/50 hover:shadow-[0_0_15px_rgba(59,130,246,0.15)] transition-all duration-300">
-            <span className="text-blue-400 font-mono text-xs block mb-1">APRIL 1, 2026</span>
-            <h4 className="text-white text-lg font-bold">Robosub Registration</h4>
-            <p className="text-slate-400 text-sm mt-2">Officially registered for the international RoboSub Competition in California.</p>
-          </div>
-          <div className="p-5 rounded-2xl border border-slate-700 bg-[#0a1128] hover:border-blue-500/50 hover:shadow-[0_0_15px_rgba(59,130,246,0.15)] transition-all duration-300">
-            <span className="text-blue-400 font-mono text-xs block mb-1">JUNE 2026</span>
-            <h4 className="text-white text-lg font-bold">AUV Fully Developed</h4>
-            <p className="text-slate-400 text-sm mt-2">Finalized autonomous navigation algorithms, object detection, and path planning pipelines.</p>
-          </div>
-          <div className="p-5 rounded-2xl border border-slate-700 bg-[#0a1128] hover:border-blue-500/50 hover:shadow-[0_0_15px_rgba(59,130,246,0.15)] transition-all duration-300">
-            <span className="text-blue-400 font-mono text-xs block mb-1">JULY 11 - 17, 2026</span>
-            <h4 className="text-white text-lg font-bold">RoboSub Competition</h4>
-            <p className="text-slate-400 text-sm mt-2">Competed at the international RoboSub Arena, demonstrating autonomous tasks underwater.</p>
-          </div>
-          <div className="p-5 rounded-2xl border border-slate-700 bg-[#0a1128] hover:border-blue-500/50 hover:shadow-[0_0_15px_rgba(59,130,246,0.15)] transition-all duration-300">
-            <span className="text-blue-400 font-mono text-xs block mb-1">AUGUST 2026</span>
-            <h4 className="text-white text-lg font-bold">Collab Hackathon with Vicharak</h4>
-            <p className="text-slate-400 text-sm mt-2">Co-hosted a specialized marine robotics hackathon in partnership with Vicharak.</p>
-          </div>
-        </div>
-      </div>
-    )
+    year: "2026",
+    intro: "The year of deployment. From manufacturing our main hull to registering and competing on the global stage.",
+    events: [
+      {
+        date: "FEBRUARY 2026",
+        title: "Main Hull Build",
+        description: "Manufactured the primary waterproof carbon fiber/acrylic hull for our competition AUV."
+      },
+      {
+        date: "MARCH 2026",
+        title: "Main AUV Hardware Testing",
+        description: "Integrated the power distribution boards, sensors, and computer systems for full-system dry tests."
+      },
+      {
+        date: "APRIL 1, 2026",
+        title: "Robosub Registration",
+        description: "Officially registered for the international RoboSub Competition in California."
+      },
+      {
+        date: "JUNE 2026",
+        title: "AUV Fully Developed",
+        description: "Finalized autonomous navigation algorithms, object detection, and path planning pipelines."
+      },
+      {
+        date: "JULY 11 - 17, 2026",
+        title: "RoboSub Competition",
+        description: "Competed at the international RoboSub Arena, demonstrating autonomous tasks underwater."
+      },
+      {
+        date: "AUGUST 2026",
+        title: "Collab Hackathon with Vicharak",
+        description: "Co-hosted a specialized marine robotics hackathon in partnership with Vicharak."
+      }
+    ]
   }
 ];
+
 
 export function AboutPage() {
   return (

@@ -14,7 +14,7 @@ import { SponsorsPage } from "@/pages/SponsorsPage";
 import ScrollToTop from "@/components/ScrollToTop";
 import { Analytics } from "@vercel/analytics/react";
 import { Preloader } from "@/components/ui/Preloader/Preloader";
-import WaterCaustic from "@/components/ui/water-caustic";
+import { UnderwaterParticles } from "@/components/ui/underwater-particles";
 
 export default function App() {
   const location = useLocation();
@@ -32,9 +32,9 @@ export default function App() {
         <Preloader onFinished={() => setIsPreloaderActive(false)} />
       )}
       
-      {/* Global water caustics background */}
-      <div className="fixed inset-0 z-0 pointer-events-none opacity-40">
-        <WaterCaustic color="#38bdf8" />
+      {/* Global underwater ambient particles background */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <UnderwaterParticles />
       </div>
 
       <div className="relative z-10 flex flex-col min-h-screen">
