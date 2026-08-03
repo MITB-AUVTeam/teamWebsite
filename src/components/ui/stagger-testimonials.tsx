@@ -8,9 +8,13 @@ import { useNavigate } from 'react-router-dom';
 
 const SQRT_5000 = Math.sqrt(5000);
 
+// The home page carousel showcases the working team only — faculty advisors and
+// project mentors live on the Team page instead. Matching the category by
+// prefix keeps this working if "Faculty Advisors" is ever retitled.
 const nonFacultyMembers = resolvedTeamCategories
-  .filter((category) => category.title !== "Faculty Advisors and Mentor")
-  .flatMap((category) => category.members);
+  .filter((category) => !category.title.startsWith("Faculty"))
+  .flatMap((category) => category.members)
+  .filter((member) => !/mentor/i.test(member.role));
 
 const animeshIndex = nonFacultyMembers.findIndex((member) => member.name === "Animesh Mishra");
 const centerIndex = Math.floor(nonFacultyMembers.length / 2);
