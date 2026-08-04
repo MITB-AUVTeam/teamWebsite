@@ -15,6 +15,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import { Analytics } from "@vercel/analytics/react";
 import { Preloader } from "@/components/ui/Preloader/Preloader";
 import { UnderwaterParticles } from "@/components/ui/underwater-particles";
+import { AuvBackground } from "@/components/ui/auv-background";
 
 export default function App() {
   const location = useLocation();
@@ -35,6 +36,7 @@ export default function App() {
       {/* Global underwater ambient particles background */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <UnderwaterParticles />
+        <AuvBackground />
       </div>
 
       <div className="relative z-10 flex flex-col min-h-screen">
