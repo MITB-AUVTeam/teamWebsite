@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 const SQRT_5000 = Math.sqrt(5000);
 
-// The home page carousel showcases the working team only — faculty advisors and
+// The home page carousel showcases the working team only: faculty advisors and
 // project mentors live on the Team page instead. Matching the category by
 // prefix keeps this working if "Faculty Advisors" is ever retitled.
 const nonFacultyMembers = resolvedTeamCategories

@@ -1,6 +1,6 @@
 When I joined the mechanical subsystem of our RoboSub team, I was assigned the task of designing the AUV's manipulator. At the time, I had little experience with CAD and virtually no background in mechanical design. What followed was nearly a year of learning through research, prototyping, failures, and countless design iterations.
 
-Like most engineering projects, the first step wasn't opening Fusion 360—it was understanding how others had approached the same problem.
+Like most engineering projects, the first step wasn't opening Fusion 360; it was understanding how others had approached the same problem.
 
 I spent several days studying manipulator designs used by RoboSub teams from previous years, reading design reports, and watching maker videos on YouTube. One design, in particular, caught my attention: a **single-servo parallel jaw gripper**. Its simplicity, compactness, and ease of control made it an ideal starting point.
 
@@ -16,7 +16,7 @@ That became the central engineering challenge.
 
 ---
 
-# Iteration 1 — Gear-Assisted Parallel Gripper
+# Iteration 1: Gear-Assisted Parallel Gripper
 
 The first prototype used a simple gear reduction mechanism.
 
@@ -32,11 +32,11 @@ The second issue was structural rigidity.
 
 To minimize weight, I had designed the links with relatively thin cross-sections. While this looked acceptable in CAD, the printed prototype revealed that the mechanism could flex under modest bending loads, making it unsuitable for underwater manipulation.
 
-Although the first iteration did not meet the performance requirements, it served its purpose perfectly—it transformed assumptions into measurable engineering problems.
+Although the first iteration did not meet the performance requirements, it served its purpose perfectly; it transformed assumptions into measurable engineering problems.
 
 ---
 
-# Iteration 2 — Chasing Rigidity and Precision
+# Iteration 2: Chasing Rigidity and Precision
 
 The second design focused on solving the two biggest weaknesses of the original prototype:
 - improving structural stiffness,
@@ -60,7 +60,7 @@ The concept seemed promising, so I decided to redesign the entire mechanism arou
 
 ---
 
-# Iteration 3 — Designing Around Constraints
+# Iteration 3: Designing Around Constraints
 
 The new transmission solved one problem but immediately created another.
 
@@ -84,7 +84,7 @@ This arrangement achieved several objectives simultaneously:
 - improved positional stability due to the worm drive's self-locking behavior,
 - and a much more rigid mechanical architecture.
 
-The final mechanism evolved into what I later called the **Worm-Driven Parallel Jaw Gripper**—a design shaped not by following a textbook, but by repeatedly encountering constraints and engineering around them.
+The final mechanism evolved into what I later called the **Worm-Driven Parallel Jaw Gripper**, a design shaped not by following a textbook, but by repeatedly encountering constraints and engineering around them.
 
 ---
 
@@ -94,4 +94,4 @@ When I began this project, I barely knew how to create a CAD assembly. A year la
 
 More importantly, I learned that engineering is rarely about getting the first design right. It is about understanding why a design fails, questioning your assumptions, and using each iteration to move one step closer to a better solution.
 
-The gripper taught me far more than CAD or gear trains—it taught me how real engineering happens.
+The gripper taught me far more than CAD or gear trains; it taught me how real engineering happens.

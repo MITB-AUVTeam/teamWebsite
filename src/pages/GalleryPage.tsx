@@ -97,7 +97,7 @@ import robosubWoollettAquaticsCenter from "@/assets/Gallery/robosub_woollett_aqu
 import robosubTeamVillage from "@/assets/Gallery/robosub_team_village.jpg";
 
 const archiveImages = [
-  // RoboSub 2026 — Irvine, California
+  // RoboSub 2026: Irvine, California
   { src: robosubDepartureBengaluru, category: "robosub", alt: "Team departing from Bengaluru airport with the AUV and equipment" },
   { src: robosubFlightToLa, category: "robosub", alt: "Inflight map on the way to Los Angeles" },
   { src: robosubArrivalAirport, category: "robosub", alt: "Team arriving in California with all the luggage" },

@@ -1,6 +1,6 @@
 # System Overview
 
-One of the core tasks in RoboSub is locating an underwater acoustic pinger—a beacon that periodically emits ultrasonic pulses. The objective was to design a system capable of detecting these signals, rejecting environmental noise, and estimating the direction of arrival.
+One of the core tasks in RoboSub is locating an underwater acoustic pinger, a beacon that periodically emits ultrasonic pulses. The objective was to design a system capable of detecting these signals, rejecting environmental noise, and estimating the direction of arrival.
 
 This led to the development of a complete passive sonar pipeline spanning hydrophone design, analog signal conditioning, digital signal processing, and multi-sensor time synchronization.
 
@@ -14,7 +14,7 @@ This introduced several constraints.
 
 The piezoelectric elements exhibit a strong resonance around 24 kHz in air. Because they behave as high-Q resonators, their sensitivity varies sharply with frequency, producing narrow peaks of response and steep roll-offs outside those regions. This is particularly relevant in RoboSub, where the pinger operates between 25–40 kHz.
 
-In non-resonant regions, the output signal amplitude is extremely small—often in the microvolt range—requiring significant amplification and filtering before digitization. The mismatch between the sensor's natural response and the target frequency band necessitated a carefully designed analog front-end to condition the signal and extract usable information.
+In non-resonant regions, the output signal amplitude is extremely small, often in the microvolt range, requiring significant amplification and filtering before digitization. The mismatch between the sensor's natural response and the target frequency band necessitated a carefully designed analog front-end to condition the signal and extract usable information.
 
 Designing this analog front-end turned out to be one of the most difficult parts of the entire subsystem. Extensive iteration was required across different combinations of resistors and capacitors to stabilize the signal, control gain, and shape the frequency response. Small changes in component values would dramatically affect noise levels, bandwidth, and even whether the pinger signal was detectable at all. What initially looked like a straightforward amplification stage quickly became an iterative process of tuning, testing, and reworking the circuit until the hydrophone output was both stable and usable.
 
@@ -22,7 +22,7 @@ Designing this analog front-end turned out to be one of the most difficult parts
 
 While the analog front-end performs well in controlled testing, a significant reliability issue began appearing during extended real-world operation.
 
-A number of hydrophone PCBs would suddenly stop functioning after a period of time, even though no obvious physical damage was present. In some cases, the failure appeared intermittent—recovering after power cycling—while in others the board became permanently unresponsive.
+A number of hydrophone PCBs would suddenly stop functioning after a period of time, even though no obvious physical damage was present. In some cases, the failure appeared intermittent, recovering after power cycling, while in others the board became permanently unresponsive.
 
 After investigation, two primary contributing factors are suspected:
 
@@ -62,7 +62,7 @@ Each sensor requires continuous sampling and concurrent execution of the Goertze
 
 A conventional solution would be to use an FPGA, which naturally supports highly parallel signal processing. However, FPGAs introduce increased cost, development complexity, and longer iteration cycles.
 
-Instead, a distributed embedded architecture was implemented using four RP2350 microcontrollers—one per hydrophone.
+Instead, a distributed embedded architecture was implemented using four RP2350 microcontrollers, one per hydrophone.
 
 Each node operates independently:
 - **Core 0** is dedicated to deterministic ADC sampling, ensuring precise and stable acquisition timing.
