@@ -29,8 +29,7 @@ import {
   GlobeIcon,
   BellIcon,
 } from "@radix-ui/react-icons";
-import { ArrowRight, Cpu, Zap, Code, LayoutDashboard, X } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
+import { ArrowRight, Cpu, Zap, Code, LayoutDashboard } from "lucide-react";
 
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { PhotoGallery } from "@/components/ui/gallery";
@@ -40,7 +39,7 @@ const features = [
     Icon: Cpu,
     name: "Mechanical",
     description: "Structural integrity and fluid dynamics.",
-    href: "/team",
+    href: "/team#mechanical",
     cta: "Explore Subsystem",
     background: <img src={mechanicalBg} className="absolute inset-0 w-full h-full object-cover opacity-20 transition-transform duration-700 ease-out group-hover:scale-105" alt="Mechanical" />,
     className: "lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-3",
@@ -49,7 +48,7 @@ const features = [
     Icon: Zap,
     name: "Electrical",
     description: "Power systems and embedded electronics.",
-    href: "/team",
+    href: "/team#electrical",
     cta: "Explore Subsystem",
     background: <img src={electricalBg} className="absolute inset-0 w-full h-full object-cover opacity-20 transition-transform duration-700 ease-out group-hover:scale-105" alt="Electrical" />,
     className: "lg:col-start-2 lg:col-end-3 lg:row-start-1 lg:row-end-2",
@@ -58,7 +57,7 @@ const features = [
     Icon: Code,
     name: "Software",
     description: "Autonomous navigation and computer vision.",
-    href: "/team",
+    href: "/team#software",
     cta: "Explore Subsystem",
     background: <img src={softwareBg} className="absolute inset-0 w-full h-full object-cover opacity-20 transition-transform duration-700 ease-out group-hover:scale-105" alt="Software" />,
     className: "lg:col-start-2 lg:col-end-3 lg:row-start-2 lg:row-end-3",
@@ -67,7 +66,7 @@ const features = [
     Icon: LayoutDashboard,
     name: "Management & Design",
     description: "Sponsorships, branding, media production, and outreach.",
-    href: "/team",
+    href: "/team#management",
     cta: "Explore Subsystem",
     background: <img src={managementBg} className="absolute inset-0 w-full h-full object-cover opacity-20 transition-transform duration-700 ease-out group-hover:scale-105" alt="Management and Design" />,
     className: "lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-3",
@@ -93,175 +92,10 @@ const logos = [
   ...baseLogos.map((logo) => <img key={`13-${logo.key}`} src={logo.props.src} alt={logo.props.alt} />),
 ];
 
-interface HighlightItem {
-  title: string;
-  desc: string;
-  icon: any;
-}
 
-interface TeamDetail {
-  title: string;
-  subTitle: string;
-  description: string;
-  highlights: HighlightItem[];
-  colorClass: string;
-  borderColor: string;
-  glowColor: string;
-}
-
-const subsystemDetails: Record<string, TeamDetail> = {
-  "Mechanical": {
-    title: "Mechanical Team",
-    subTitle: "Physical design, hydrodynamic optimization, and structural fabrication",
-    description: "Building Deuterium meant constantly balancing waterproofing, stability, and the ability to tear things apart and rebuild quickly. Every mechanical decision came back to those three priorities.",
-    colorClass: "from-blue-500 to-indigo-600 shadow-blue-500/15",
-    borderColor: "border-blue-500/20 hover:border-blue-500/40",
-    glowColor: "bg-blue-500/10",
-    highlights: [
-      {
-        title: "Hull",
-        desc: "Rectangular aluminium mono-hull with a transparent acrylic lid and double O-rings for visual inspection.",
-        icon: Cpu,
-      },
-      {
-        title: "Penetrators",
-        desc: "All cable pass-throughs use 6.5mm Blue Robotics WetLink Penetrators for waterproof reliability.",
-        icon: Cpu,
-      },
-      {
-        title: "Thruster Placement",
-        desc: "Five T200 thrusters (three horizontal, two vertical) symmetrically placed to avoid unexpected rotation.",
-        icon: Cpu,
-      },
-      {
-        title: "Placement of Electronics",
-        desc: "Batteries mounted low and central for stability; other systems modular 3D print mounts.",
-        icon: Cpu,
-      },
-      {
-        title: "Torpedo Launcher",
-        desc: "Slot-guided barrel locked by servo; spring-driven launch with adjustable compression.",
-        icon: Cpu,
-      },
-      {
-        title: "Dropper",
-        desc: "SG90 servo spinning a disc for marble markers; mineral-oil filled and epoxy-sealed.",
-        icon: Cpu,
-      },
-    ]
-  },
-  "Electrical": {
-    title: "Electrical & Controls Team",
-    subTitle: "Power architecture, sensor integration, and real-time stabilization",
-    description: "The electrical subsystem ties everything together — it's what gets power where it needs to go and keeps data flowing between the sensors, actuators, and the brain of the vehicle.",
-    colorClass: "from-amber-500 to-orange-600 shadow-amber-500/15",
-    borderColor: "border-blue-500/20 hover:border-blue-500/40",
-    glowColor: "bg-blue-500/10",
-    highlights: [
-      {
-        title: "Single Board Computer",
-        desc: "All onboard computation runs on an NVIDIA Jetson Orin Nano Super.",
-        icon: Zap,
-      },
-      {
-        title: "Power Management",
-        desc: "4S Li-ion pack (18Ah) with custom distribution circuit isolating noise from sensitive chips.",
-        icon: Zap,
-      },
-      {
-        title: "Battery Management",
-        desc: "Dedicated BMS for balancing and telemetry over RS-485; RP2040 micro aggregates data.",
-        icon: Zap,
-      },
-      {
-        title: "Sensors",
-        desc: "Full suite: depth pressure sensor, BNO055 IMU, dual ZED2i stereo cameras, leak sensor, current sensor.",
-        icon: Zap,
-      },
-      {
-        title: "Actuators",
-        desc: "Five T200 thrusters driven by Basic ESCs running BLHeli_S for precise attitude adjustments.",
-        icon: Zap,
-      },
-      {
-        title: "Communication and Telemetry",
-        desc: "MCU communicates over DShot PIO, USB CDC to Jetson, and telemetry over high-speed Ethernet.",
-        icon: Zap,
-      },
-    ]
-  },
-  "Software": {
-    title: "Software & Automation Team",
-    subTitle: "Vehicle autonomy, visual object detection, and behavior control",
-    description: "The software stack is what actually makes Deuterium autonomous. Everything runs on Ubuntu 22.04 on the Jetson Orin Nano, written primarily in Python and C++, with ROS 2 Humble handling communication between all the moving parts.",
-    colorClass: "from-cyan-500 to-blue-600 shadow-cyan-500/15",
-    borderColor: "border-blue-500/20 hover:border-blue-500/40",
-    glowColor: "bg-blue-500/10",
-    highlights: [
-      {
-        title: "Vision Pipeline",
-        desc: "Task-specific YOLOv8 neural models with XFeat matching, RANSAC, HDBSCAN, and PnP for 3D pose extraction.",
-        icon: Code,
-      },
-      {
-        title: "Simulation",
-        desc: "Gazebo Fortress physics simulation incorporating Fossen hydrodynamics and tuned vehicle parameters.",
-        icon: Code,
-      },
-      {
-        title: "Mission Planner",
-        desc: "Modular Behavior Trees (BehaviorTree.CPP) replacing rigid FSMs for real-time adaptive logic.",
-        icon: Code,
-      },
-      {
-        title: "Testing Interface",
-        desc: "Custom GUI dashboard rendering AUV telemetry and diagnostics in real time during wet tests.",
-        icon: Code,
-      },
-    ]
-  },
-  "Management & Design": {
-    title: "Management and Design Team",
-    subTitle: "Web representation, corporate sponsorships, and campus administration",
-    description: "The Management, Business and Design subsystem handles the operational and outreach side of the project. Responsibilities include general administration, approaching companies for sponsorships, financial auditing and logistics support, designing and maintaining the team website, producing the team introduction video, and running both on-campus and off-campus promotional activities.",
-    colorClass: "from-fuchsia-500 to-pink-600 shadow-fuchsia-500/15",
-    borderColor: "border-blue-500/20 hover:border-blue-500/40",
-    glowColor: "bg-blue-500/10",
-    highlights: [
-      {
-        title: "Sponsorship & Finances",
-        desc: "Managing corporate outreach, sponsor packages, and financial auditing.",
-        icon: LayoutDashboard,
-      },
-      {
-        title: "Website & Branding",
-        desc: "Designing and developing this responsive platform, maintaining AUV identity.",
-        icon: LayoutDashboard,
-      },
-      {
-        title: "Media Production",
-        desc: "Filming, editing, and producing the official high-impact AUV introduction videos.",
-        icon: LayoutDashboard,
-      },
-      {
-        title: "Events & Promotion",
-        desc: "Organizing wet test events and on/off-campus promotion for general public.",
-        icon: LayoutDashboard,
-      },
-    ]
-  }
-};
-
-const subsystemImages: Record<string, string> = {
-  "Mechanical": mechanicalBg,
-  "Electrical": electricalBg,
-  "Software": softwareBg,
-  "Management & Design": managementBg,
-};
 
 export function Home() {
   const [scrollY, setScrollY] = useState(0);
-  const [activeTeam, setActiveTeam] = useState<string | null>(null);
 
   // Preload hero parallax images
   useEffect(() => {
@@ -301,28 +135,7 @@ export function Home() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Esc key listener to close modal
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setActiveTeam(null);
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
 
-  // Lock body scroll when modal is active
-  useEffect(() => {
-    if (activeTeam) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [activeTeam]);
 
   return (
     <div className="min-h-screen relative w-full overflow-x-hidden flex flex-col">
@@ -552,7 +365,6 @@ export function Home() {
               key={feature.name}
               {...feature}
               index={idx}
-              onClick={() => setActiveTeam(feature.name)}
             />
           ))}
         </BentoGrid>
@@ -626,106 +438,7 @@ export function Home() {
         <Footer />
       </div>
 
-      <AnimatePresence>
-        {activeTeam && subsystemDetails[activeTeam] && (() => {
-          const detail = subsystemDetails[activeTeam];
-          return (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setActiveTeam(null)}
-              className="fixed inset-0 z-[20000] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md overflow-y-auto"
-            >
-              <motion.div
-                initial={{ scale: 0.95, y: 20, opacity: 0 }}
-                animate={{ scale: 1, y: 0, opacity: 1 }}
-                exit={{ scale: 0.95, y: 20, opacity: 0 }}
-                transition={{ type: "spring", duration: 0.5, bounce: 0.15 }}
-                onClick={(e) => e.stopPropagation()}
-                className="relative w-full max-w-4xl h-auto md:h-[620px] bg-[#030712] border border-white/10 rounded-[2.5rem] overflow-hidden shadow-2xl flex flex-col md:flex-row my-8 select-none animate-in fade-in-50"
-              >
-                {/* Close Button */}
-                <button
-                  onClick={() => setActiveTeam(null)}
-                  className="absolute top-6 right-6 z-30 w-9 h-9 rounded-full bg-slate-950/80 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-800 transition-colors shadow-lg cursor-pointer"
-                >
-                  <X className="w-4 h-4" />
-                </button>
 
-                {/* Left Panel: Visual Hero */}
-                {subsystemImages[activeTeam] && (
-                  <div className="w-full md:w-[38%] h-56 md:h-full relative overflow-hidden shrink-0 border-b md:border-b-0 md:border-r border-white/5">
-                    <img
-                      src={subsystemImages[activeTeam]}
-                      alt={detail.title}
-                      className="w-full h-full object-cover opacity-60 md:opacity-75 transition-transform duration-1000"
-                    />
-                    {/* Multi-directional gradient mask */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-transparent to-transparent z-10" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#030712]/30 z-10 hidden md:block" />
-                    
-                    {/* Bottom-left title branding */}
-                    <div className="absolute bottom-8 left-8 right-8 z-20">
-                      <h2 className="text-3xl font-black text-white uppercase tracking-tight leading-none flex flex-wrap items-baseline gap-2">
-                        <span>{activeTeam}</span>
-                        <span className="text-blue-400 text-xs font-bold tracking-widest uppercase">Subsystem</span>
-                      </h2>
-                    </div>
-                  </div>
-                )}
-
-                {/* Right Panel: Content Details */}
-                <div className="w-full md:w-[62%] h-[400px] md:h-full overflow-y-auto p-6 md:p-10 flex flex-col justify-start relative scrollbar-thin scrollbar-thumb-slate-800 scrollbar-track-transparent">
-                  {/* Subtle top decoration */}
-                  <div className="hidden md:flex items-center gap-2 mb-6">
-                    <span className="w-6 h-[1px] bg-blue-500/30"></span>
-                    <span className="text-[10px] font-mono tracking-widest text-slate-500 uppercase">TELEMETRY & CAPABILITIES</span>
-                  </div>
-
-                  <div className="space-y-8 text-slate-300 leading-relaxed text-sm md:text-base">
-                    {/* Overview description */}
-                    <div className="relative">
-                      <span className="absolute left-0 top-0 bottom-0 w-[2px] bg-blue-500/40 rounded-full" />
-                      <p className="pl-4 text-slate-200 leading-relaxed text-base font-normal">
-                        {detail.description}
-                      </p>
-                    </div>
-
-                    {/* Timeline section */}
-                    <div className="space-y-6">
-                      <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 font-mono mb-2">
-                        Key Responsibilities & Domains
-                      </h3>
-                      
-                      <div className="relative pl-6 border-l border-white/5 space-y-6">
-                        {/* Glowy track indicator line */}
-                        <div className="absolute left-[-1px] top-2 bottom-2 w-[1px] bg-gradient-to-b from-blue-500/40 to-transparent pointer-events-none" />
-
-                        {detail.highlights.map((item, idx) => (
-                          <div key={idx} className="relative group transition-all duration-300">
-                            {/* Dot on the timeline */}
-                            <div className="absolute -left-[28px] top-[6px] w-2 h-2 rounded-full bg-slate-800 border border-slate-750 group-hover:bg-blue-400 group-hover:border-blue-300 group-hover:scale-125 transition-all duration-300 shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
-                            
-                            <div className="space-y-1">
-                              <h4 className="text-sm md:text-base font-bold text-slate-100 group-hover:text-blue-400 transition-colors duration-300 tracking-tight">
-                                {item.title}
-                              </h4>
-                              <p className="text-slate-400 text-xs md:text-sm leading-relaxed group-hover:text-slate-300 transition-colors duration-300">
-                                {item.desc}
-                              </p>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </motion.div>
-          );
-        })()}
-      </AnimatePresence>
 
 
     </div>

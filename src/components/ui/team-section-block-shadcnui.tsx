@@ -293,7 +293,7 @@ const teamCategories = [
         "name": "Aditya R Jemshetty",
         "role": "Software Subsystem Lead",
         "department": "Computer Science Engineering 28'",
-        "bio": "Life is short— skip DFS, do BFS :)",
+        "bio": "Life is short, skip DFS, do BFS :)",
         "image": "/src/assets/Personal_photo/aditya.webp",
         "location": "3rd Year",
         "skills": ["Software"],
@@ -340,20 +340,7 @@ const teamCategories = [
   {
     "title": "Management and Design Team",
     "members": [
-      {
-        "name": "Kaushiki Gupta",
-        "role": "Management Team Member",
-        "department": "Computer Science Engineering 29'",
-        "bio": "I wish I could, but I don't want to.",
-        "image": "src/assets/Personal_photo/kaushiki.jpeg",
-        "location": "2nd Year",
-        "skills": ["Management"],
-        "gradient": "from-teal-500/20 via-teal-500/5 to-transparent",
-        "social": {
-          "linkedin": "https://www.youtube.com/embed/dQw4w9WgXcQ",
-          "github": "https://www.youtube.com/embed/dQw4w9WgXcQ"
-        }
-      },
+
       {
         "name": "Sourish Sri Vignesh S",
         "role": "Design Team Member",
@@ -380,6 +367,20 @@ const teamCategories = [
         "social": {
           "linkedin": "https://www.linkedin.com/in/pritisha-kakati-243571339/",
           "github": "https://github.com/pclowdy"
+        }
+      },      
+      {
+        "name": "Kaushiki Gupta",
+        "role": "Management Team Member",
+        "department": "Computer Science Engineering 29'",
+        "bio": "I wish I could, but I don't want to.",
+        "image": "src/assets/Personal_photo/kaushiki.jpeg",
+        "location": "2nd Year",
+        "skills": ["Management"],
+        "gradient": "from-teal-500/20 via-teal-500/5 to-transparent",
+        "social": {
+          "linkedin": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+          "github": "https://www.youtube.com/embed/dQw4w9WgXcQ"
         }
       }
     ]
@@ -504,7 +505,7 @@ function TeamMemberCard({ member }: { member: any }) {
           />
 
           <div className="relative z-10 flex flex-col h-full">
-            {/* Identity — the photo is its own full-bleed panel with the name
+            {/* Identity: the photo is its own full-bleed panel with the name
                 lettered directly onto it, so name+photo read as one distinct
                 unit set apart from the plain card surface below. */}
             <div className="relative w-full aspect-square overflow-hidden">
@@ -526,7 +527,7 @@ function TeamMemberCard({ member }: { member: any }) {
               </motion.h3>
             </div>
 
-            {/* Details — plain card surface, clearly separate from the photo above */}
+            {/* Details: plain card surface, clearly separate from the photo above */}
             <div className="text-center flex-grow flex flex-col gap-2.5 px-6 pt-5 pb-4">
               <div className="flex flex-col items-center gap-1">
                 <Badge
@@ -551,7 +552,7 @@ function TeamMemberCard({ member }: { member: any }) {
               ) : null}
 
 
-              {/* Social Links — a clearly-clickable action row, kept small and
+              {/* Social Links: a clearly-clickable action row, kept small and
                   neutral at rest so it never competes with the name or role;
                   the accent color only shows up on interaction. */}
               <div className={`flex justify-center ${hasBio ? "mt-auto" : "mt-0"} pt-1`}>
@@ -594,9 +595,36 @@ function TeamMemberCard({ member }: { member: any }) {
   );
 }
 
+const getCategorySlug = (title: string) => {
+  const lower = title.toLowerCase();
+  if (lower.includes("mechanical")) return "mechanical";
+  if (lower.includes("electrical")) return "electrical";
+  if (lower.includes("software")) return "software";
+  if (lower.includes("management")) return "management";
+  return lower.replace(/[^a-z0-9]+/g, "-");
+};
+
 export function TeamSectionBlock() {
   const shouldReduceMotion = useReducedMotion();
   const isMobile = useIsMobile();
+
+  React.useEffect(() => {
+    const scrollToHash = () => {
+      const hash = window.location.hash.replace("#", "").toLowerCase();
+      if (hash) {
+        const element = document.getElementById(hash);
+        if (element) {
+          const yOffset = -90;
+          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: "smooth" });
+        }
+      }
+    };
+
+    scrollToHash();
+    const timer = setTimeout(scrollToHash, 250);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="min-h-screen bg-transparent text-slate-50 pb-0 font-sans">
@@ -696,9 +724,10 @@ export function TeamSectionBlock() {
                     : "mt-20";
               const panel =
                 "rounded-[2.5rem] border border-slate-700 bg-[#0a1128] p-6 md:p-8 lg:p-10 shadow-2xl relative overflow-hidden";
+              const categorySlug = getCategorySlug(category.title);
 
               return (
-                <div key={category.title} className={`${marginTop} ${panel}`.trim()}>
+                <div key={category.title} id={categorySlug} className={`${marginTop} ${panel}`.trim()}>
                   <div className="absolute inset-0 border border-slate-800/50 rounded-[2.5rem] pointer-events-none z-20 m-2" />
                   <div className="relative z-10">
                     <motion.div
@@ -726,7 +755,7 @@ export function TeamSectionBlock() {
                           Coming Soon
                         </span>
                         <span className="text-sm text-slate-400">
-                          This subsystem is being assembled — stay tuned.
+                          This subsystem is being assembled. Stay tuned.
                         </span>
                       </motion.div>
                     ) : leadIndex >= 0 ? (

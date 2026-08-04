@@ -1,6 +1,6 @@
 import { ReactNode, useState, useEffect, useRef } from "react";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Plus, ArrowUpRight } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -47,6 +47,7 @@ const BentoCard = ({
   index?: number;
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(false);
   const [shouldPulse, setShouldPulse] = useState(false);
   const [hasAnimatedViewport, setHasAnimatedViewport] = useState(false);
@@ -112,29 +113,31 @@ const BentoCard = ({
       } else {
         onClick();
       }
+    } else if (href) {
+      navigate(href);
     }
   };
 
   return (
     <div
       ref={cardRef}
-      onClick={onClick ? handleInteraction : undefined}
-      onKeyDown={onClick ? (e) => {
+      onClick={onClick || href ? handleInteraction : undefined}
+      onKeyDown={onClick || href ? (e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
           handleInteraction(e);
         }
       } : undefined}
-      tabIndex={onClick ? 0 : undefined}
-      role={onClick ? "button" : undefined}
-      aria-label={onClick ? `View details for ${name}` : undefined}
+      tabIndex={onClick || href ? 0 : undefined}
+      role={onClick || href ? "button" : undefined}
+      aria-label={onClick || href ? `Explore ${name}` : undefined}
       className={cn(
         "group relative col-span-1 md:col-span-3 flex flex-col justify-between overflow-hidden rounded-xl",
         "bg-white [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)]",
         "transform-gpu dark:bg-[#0a1128] dark:[border:1px_solid_rgba(59,130,246,0.25)] dark:[box-shadow:0_0_18px_-4px_rgba(59,130,246,0.2)] dark:hover:[border:1px_solid_rgba(59,130,246,0.55)] dark:hover:[box-shadow:0_0_28px_-4px_rgba(59,130,246,0.35)]",
         
         // Old desktop focus rings
-        onClick && "cursor-pointer focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2",
+        (onClick || href) && "cursor-pointer focus-visible:outline-2 focus-visible:outline-blue-500 focus-visible:outline-offset-2",
         
         // Mobile tap feedback animation
         isMobile && isTapping && "scale-[0.96] duration-[120ms] ease-out",
