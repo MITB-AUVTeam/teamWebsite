@@ -7,8 +7,10 @@ import communicationBlog from "@/assets/blogs/communication-is-everything.md?raw
 import sonarBlog from "@/assets/blogs/passive-sonar-acoustic-localization.md?raw";
 import pcbBlog from "@/assets/blogs/perfboard-to-pcb.md?raw";
 import gripperBlog from "@/assets/blogs/cad-novice-to-worm-driven-gripper.md?raw";
+import killSwitchBlog from "@/assets/blogs/engineering-the-kill-switch.md?raw";
 import teamTreeLookup from "@/assets/Gallery/team_tree_lookup.jpg";
 import pcbBoardPhoto from "@/assets/Gallery/pcb_rp2350_board.jpg";
+import wormGripperCad from "@/assets/Gallery/worm_gripper_cad.jpg";
 import galleryCad from "@/assets/Gallery/gallery_cad.jpg";
 import azadLockedIn from "@/assets/Gallery/azad_lockedin.webp";
 import img_2816 from "@/assets/Gallery/IMG_2816.webp";
@@ -30,7 +32,7 @@ interface Post {
   content?: string[];
   markdown?: string;
   externalLink?: string;
-  /** Overlays an animated sonar "ping" on the card — for acoustics posts. */
+  /** Overlays an animated sonar "ping" on the card, for acoustics posts. */
   sonarPing?: boolean;
 }
 
@@ -259,10 +261,10 @@ export function MediaPage() {
 
   const featuredPost: Post = {
     title: "'Maxxxing' Deuterium: Integrating Custom HYDROPHONES",
-    excerpt: "Building a complete passive sonar pipeline from $6 piezo transducers — hydrophone design, an unruly analog front-end, Goertzel detection on four RP2350s, and PIO-synchronised TDOA to find an underwater pinger.",
+    excerpt: "Building a complete passive sonar pipeline from $6 piezo transducers: hydrophone design, an unruly analog front-end, Goertzel detection on four RP2350s, and PIO-synchronised TDOA to find an underwater pinger.",
     category: "Technical / Electrical Subsystem",
     date: "July 21, 2026",
-    author: "Chatur Vasireddy - Top Dogg Jnr",
+    author: "Chatur Vasireddy",
     image: pcb,
     markdown: sonarBlog,
     sonarPing: true,
@@ -271,12 +273,21 @@ export function MediaPage() {
   const recentPosts: Post[] = [
     {
       title: "Everything Lies: Gyro Drift",
-      excerpt: "Why gyroscopes steadily lie to you, and the filtering ladder — calibration, complementary filters, Kalman — that lets a robot still know which way is up.",
+      excerpt: "Why gyroscopes steadily lie to you, and the filtering ladder (calibration, complementary filters, Kalman) that lets a robot still know which way is up.",
       category: "Technical / Electrical Subsystem",
       date: "July 28, 2026",
-      author: "Azad Roy - Top Dogg",
+      author: "Azad Roy",
       image: azadLockedIn,
       externalLink: "https://azadroy.com/2026/07/28/everything-lies-1-gyro-drift.html",
+    },
+    {
+      title: "Engineering the Kill Switch: Magnetics, MOSFETs, and Mechanical Relays",
+      excerpt: "If a sensor fails underwater, software can compensate; if the kill switch fails, you can't stop the vehicle. A deep dive into transitioning from microsecond MOSFET switching to a robust 30A mechanical relay with 50ms software debouncing.",
+      category: "Technical / Electrical Subsystem",
+      date: "June 30, 2026",
+      author: "Kopal Agrawal",
+      image: galleryBoard,
+      markdown: killSwitchBlog,
     },
     {
       title: "From CAD Novice to Designing a Worm-Driven Parallel Gripper",
@@ -284,12 +295,12 @@ export function MediaPage() {
       category: "Technical / Mechanical Subsystem",
       date: "June 23, 2026",
       author: "Shaurya Veer Singh",
-      image: galleryCad,
+      image: wormGripperCad,
       markdown: gripperBlog,
     },
     {
-      title: "Perfboard to PCB: Or, How I Learned to Stop Taping Wires and Love Fabrication",
-      excerpt: "Every AUV needs a brain, but a brain is useless without a nervous system. Going from a masking-tape rat's nest to a fabricated board — via a ghosting RP2040, a hand-drawn schematic, and three days of KiCad.",
+      title: "Perfboard to PCB: Or, How I Learned to Stop Taping Wires and Love KiCad",
+      excerpt: "Every AUV needs a brain, but a brain is useless without a nervous system. Going from a masking-tape rat's nest to a fabricated board, via a ghosting RP2040, a hand-drawn schematic, and three days of KiCad.",
       category: "Technical / Electrical Subsystem",
       date: "June 16, 2026",
       author: "Aryan Sharma",
@@ -298,7 +309,7 @@ export function MediaPage() {
     },
     {
       title: "Communication Issues: Teaching a Robot to Talk Better Than I Do",
-      excerpt: "I'm terrible at conversations — yet I somehow got a hull full of electronics talking to each other. A lighthearted tour through the protocols that keep Deuterium's Jetson, Pico, sensors and thrusters in sync.",
+      excerpt: "I'm terrible at conversations, yet I somehow got a hull full of electronics talking to each other. A lighthearted tour through the protocols that keep Deuterium's Jetson, Pico, sensors and thrusters in sync.",
       category: "Technical / Software Subsystem",
       date: "June 9, 2026",
       author: "Aditya R Jemshetty",
@@ -307,43 +318,43 @@ export function MediaPage() {
     },
     {
       title: "Current Affairs: Powering Deuterium from the Inside Out",
-      excerpt: "A look inside the Power Supply Distribution System (PSDS) — the electrical backbone that quietly keeps every subsystem on the AUV alive, and the lessons learned building it by hand on perf boards.",
+      excerpt: "A look inside the Power Supply Distribution System (PSDS), the electrical backbone that quietly keeps every subsystem on the AUV alive, and the lessons learned building it by hand on perf boards.",
       category: "Technical / Electrical Subsystem",
       date: "June 2, 2026",
       author: "Adwait Bhardwaj",
       image: galleryBoard,
       content: [
-        "Power distribution probably isn't the first thing people notice when they look at an Autonomous Underwater Vehicle (AUV). The cameras, thrusters and software usually steal the spotlight. But beneath all of that sits a subsystem that quietly keeps everything alive — and it's also one of the few systems that nobody notices until it fails.",
+        "Power distribution probably isn't the first thing people notice when they look at an Autonomous Underwater Vehicle (AUV). The cameras, thrusters and software usually steal the spotlight. But beneath all of that sits a subsystem that quietly keeps everything alive, and it's also one of the few systems that nobody notices until it fails.",
         "A poorly designed power system rarely fails spectacularly. Instead, it causes problems that are much harder to track down: a voltage rail dips for a fraction of a second and the onboard computer silently reboots, electrical noise from a motor controller creeps into a sensor line, or a connector heats up under load and starts affecting everything downstream. Individually trivial, together these issues can turn the AUV into a dead boat.",
-        "For us, designing the electrical subsystem was never about simply getting power from the battery to the components. It was about ensuring every component received the right power, at the right voltage, with as little interference as possible — which eventually evolved into the Power Supply Distribution System (PSDS), responsible for distribution, voltage regulation, electrical isolation, noise suppression and safety.",
-        "The challenge grows underwater. Our propulsion system consists of multiple thrusters driven by Electronic Speed Controllers (ESCs), while the compute side houses a Jetson Orin Nano Super, RPi Pico-based controllers and a collection of sensors. All draw from the same battery but expect completely different things from it. The propulsion side is electrically noisy by nature — ESCs switch large currents using PWM, generating ripple and EMI that tries to propagate through shared power lines. The compute side is far less tolerant: even small disturbances can cause communication errors or unexpected resets.",
-        "That wasn't just theory — we learned it the hard way, retiring more than a few RPi Picos over multiple iterations before realising the common thread was power integrity: high-current switching noise leaking into places it didn't belong. Being a relatively new team, we also chose to build the first revision of the PSDS by hand on perf boards rather than jumping straight to custom PCBs — considerably more soldering and frustration, but it forced us to understand every connection we made.",
+        "For us, designing the electrical subsystem was never about simply getting power from the battery to the components. It was about ensuring every component received the right power, at the right voltage, with as little interference as possible, which eventually evolved into the Power Supply Distribution System (PSDS), responsible for distribution, voltage regulation, electrical isolation, noise suppression and safety.",
+        "The challenge grows underwater. Our propulsion system consists of multiple thrusters driven by Electronic Speed Controllers (ESCs), while the compute side houses a Jetson Orin Nano Super, RPi Pico-based controllers and a collection of sensors. All draw from the same battery but expect completely different things from it. The propulsion side is electrically noisy by nature: ESCs switch large currents using PWM, generating ripple and EMI that tries to propagate through shared power lines. The compute side is far less tolerant: even small disturbances can cause communication errors or unexpected resets.",
+        "That wasn't just theory: we learned it the hard way, retiring more than a few RPi Picos over multiple iterations before realising the common thread was power integrity: high-current switching noise leaking into places it didn't belong. Being a relatively new team, we also chose to build the first revision of the PSDS by hand on perf boards rather than jumping straight to custom PCBs, considerably more soldering and frustration, but it forced us to understand every connection we made.",
         "Designing the Power Architecture",
-        "Every subsystem wants power, but not every subsystem wants the same kind of power. Feeding everything from a common supply would have been the easiest build — and the quickest way to introduce noise and instability. So the first decision was to split the vehicle into two electrical domains: compute and actuation.",
-        "The compute domain — Jetson Orin Nano, RPi Pico controllers, sensors and supporting electronics — consumes comparatively little power but demands a clean, well-regulated supply, since the Jetson handles vision and navigation. The actuation domain — thrusters and servos — draws heavy, rapidly changing current, and every ESC happily injects switching noise back into the supply while doing its job. These two domains should not share the same electrical environment.",
-        "At the very beginning sits a 4S Lithium-Ion battery pack (roughly 12–16.2 V), followed by a Battery Management System (BMS) that protects the battery itself against over-current, over-charge and excessive discharge — it does not protect the vehicle; everything past that point is the PSDS's job. From the BMS, power enters the main distribution bus, which carries battery voltage to the different power branches without stepping it up or down, keeping fault isolation simple.",
+        "Every subsystem wants power, but not every subsystem wants the same kind of power. Feeding everything from a common supply would have been the easiest build, and the quickest way to introduce noise and instability. So the first decision was to split the vehicle into two electrical domains: compute and actuation.",
+        "The compute domain (Jetson Orin Nano, RPi Pico controllers, sensors and supporting electronics) consumes comparatively little power but demands a clean, well-regulated supply, since the Jetson handles vision and navigation. The actuation domain (thrusters and servos) draws heavy, rapidly changing current, and every ESC happily injects switching noise back into the supply while doing its job. These two domains should not share the same electrical environment.",
+        "At the very beginning sits a 4S Lithium-Ion battery pack (roughly 12–16.2 V), followed by a Battery Management System (BMS) that protects the battery itself against over-current, over-charge and excessive discharge. It does not protect the vehicle; everything past that point is the PSDS's job. From the BMS, power enters the main distribution bus, which carries battery voltage to the different power branches without stepping it up or down, keeping fault isolation simple.",
         "The first major branch feeds the PDB-Kill/PSDC-I, where battery voltage is converted into the various rails the vehicle needs. Instead of one shared regulator, dedicated converters generate each voltage, so high-current loads, compute hardware and auxiliary electronics all get a rail sized to their needs.",
         "Building the PSDS",
         "The Jetson rail got by far the most attention. Running variable workloads, the Jetson's power draw can change almost instantaneously, and small voltage dips that would go unnoticed elsewhere can cause brownouts here. The rail was built with a dedicated boost converter, bulk electrolytic capacitors for sudden load changes, ceramic capacitors for high-frequency noise, and Schottky diodes to block backfeed into the converter during power-down. None of these components is exciting on its own; together they make a resilient rail.",
-        "The servo rail follows a different philosophy. Servos tolerate supply disturbances far better than compute hardware but produce sharp current spikes whenever they move, so the rail is locally regulated and filtered to keep those spikes from travelling across the vehicle. Across every rail, capacitors are placed as physically close as possible to the device they support — longer wires add inductance that fast-changing currents don't have time to fight, so local decoupling shortens that path.",
-        "Perf boards made all of this harder than a textbook would suggest. There are no ground planes or controlled trace widths — every high-current connection had to be planned manually with heavier-gauge wire, and converter placement mattered as much as the schematic. It was also one of the biggest learning experiences of the project: every routing and grounding decision had a visible effect on the system, for better or worse.",
+        "The servo rail follows a different philosophy. Servos tolerate supply disturbances far better than compute hardware but produce sharp current spikes whenever they move, so the rail is locally regulated and filtered to keep those spikes from travelling across the vehicle. Across every rail, capacitors are placed as physically close as possible to the device they support: longer wires add inductance that fast-changing currents don't have time to fight, so local decoupling shortens that path.",
+        "Perf boards made all of this harder than a textbook would suggest. There are no ground planes or controlled trace widths: every high-current connection had to be planned manually with heavier-gauge wire, and converter placement mattered as much as the schematic. It was also one of the biggest learning experiences of the project: every routing and grounding decision had a visible effect on the system, for better or worse.",
         "Every Watt Counts",
-        "Efficiency isn't just about battery runtime — every watt that doesn't reach the electronics becomes heat, and inside a sealed pressure hull with limited airflow, unnecessary heat is as undesirable as unnecessary current draw. The figures below are engineering estimates from datasheets and our own testing rather than lab-grade measurements, but they're accurate enough to justify the design choices.",
-        "The propulsion system is the largest consumer: five Blue Robotics T200 thrusters, each drawing roughly 8 A under sustained operation, put the actuation system near 40 A before transient peaks — though thrusters spend little time at max thrust in a typical mission. The Jetson draws far less current but needs a far steadier supply, so reliability took priority over squeezing out the last few points of efficiency.",
-        "Take the Jetson rail: at roughly 30 W of load and about 88% converter efficiency, the converter draws close to 34.1 W, dissipating just over 4 W as heat — continuously, whenever the Jetson is under load. Add up similar losses across every converter and the subsystem produces a noticeable amount of heat inside an enclosed hull, so cutting unnecessary losses helps both runtime and thermal stability. That's why buck converters were used wherever voltage needed stepping down, and boost converters only where a rail genuinely needed to go up — there's no point boosting a voltage only to cut it back down later. Schottky diodes were preferred over silicon rectifiers for the same reason: their lower forward-voltage drop adds up across a whole mission.",
-        "The more important lesson was knowing when not to optimise for efficiency. Extra filtering, bulk capacitance and local protection all cost a little power, weight and space, but they buy real robustness — a rail that's 2% less efficient but significantly more reliable is almost always the right call in an underwater robot.",
+        "Efficiency isn't just about battery runtime: every watt that doesn't reach the electronics becomes heat, and inside a sealed pressure hull with limited airflow, unnecessary heat is as undesirable as unnecessary current draw. The figures below are engineering estimates from datasheets and our own testing rather than lab-grade measurements, but they're accurate enough to justify the design choices.",
+        "The propulsion system is the largest consumer: five Blue Robotics T200 thrusters, each drawing roughly 8 A under sustained operation, put the actuation system near 40 A before transient peaks, though thrusters spend little time at max thrust in a typical mission. The Jetson draws far less current but needs a far steadier supply, so reliability took priority over squeezing out the last few points of efficiency.",
+        "Take the Jetson rail: at roughly 30 W of load and about 88% converter efficiency, the converter draws close to 34.1 W, dissipating just over 4 W as heat, continuously, whenever the Jetson is under load. Add up similar losses across every converter and the subsystem produces a noticeable amount of heat inside an enclosed hull, so cutting unnecessary losses helps both runtime and thermal stability. That's why buck converters were used wherever voltage needed stepping down, and boost converters only where a rail genuinely needed to go up: there's no point boosting a voltage only to cut it back down later. Schottky diodes were preferred over silicon rectifiers for the same reason: their lower forward-voltage drop adds up across a whole mission.",
+        "The more important lesson was knowing when not to optimise for efficiency. Extra filtering, bulk capacitance and local protection all cost a little power, weight and space, but they buy real robustness: a rail that's 2% less efficient but significantly more reliable is almost always the right call in an underwater robot.",
         "Harmony Between the Subsystems",
-        "Giving every subsystem its own rail is only half the battle — the harder part is keeping each one well-behaved once everything is switched on. With thrusters, converters, microcontrollers, sensors and an embedded GPU all sharing one battery, some electrical noise is inevitable; the goal was to stop it from spreading rather than eliminate it entirely.",
-        "The PSDS uses a star-ground topology, where every major power branch returns directly to a common grounding point instead of letting return currents wander through one another — this cuts ground loops and keeps large propulsion currents away from sensitive electronics. Bulk electrolytic capacitors and smaller ceramic capacitors are used together throughout: electrolytics act as energy reservoirs for sudden load changes, ceramics suppress high-frequency switching noise the electrolytics can't respond to fast enough. In the noisiest spots, inductors were added alongside local decoupling to form a simple low-pass filter.",
-        "Placement mattered more than expected — a capacitor a few centimetres from the component it protects is often far less effective than one placed right across the supply pins, since even short wires add enough inductance to blunt the decoupling. Building on perf boards made this obvious: more than once, fixing a noise issue meant physically moving two modules apart rather than changing the schematic. The biggest takeaway was that electrical noise is rarely one bad component — it's usually several good components interacting in ways nobody intended.",
+        "Giving every subsystem its own rail is only half the battle: the harder part is keeping each one well-behaved once everything is switched on. With thrusters, converters, microcontrollers, sensors and an embedded GPU all sharing one battery, some electrical noise is inevitable; the goal was to stop it from spreading rather than eliminate it entirely.",
+        "The PSDS uses a star-ground topology, where every major power branch returns directly to a common grounding point instead of letting return currents wander through one another; this cuts ground loops and keeps large propulsion currents away from sensitive electronics. Bulk electrolytic capacitors and smaller ceramic capacitors are used together throughout: electrolytics act as energy reservoirs for sudden load changes, ceramics suppress high-frequency switching noise the electrolytics can't respond to fast enough. In the noisiest spots, inductors were added alongside local decoupling to form a simple low-pass filter.",
+        "Placement mattered more than expected: a capacitor a few centimetres from the component it protects is often far less effective than one placed right across the supply pins, since even short wires add enough inductance to blunt the decoupling. Building on perf boards made this obvious: more than once, fixing a noise issue meant physically moving two modules apart rather than changing the schematic. The biggest takeaway was that electrical noise is rarely one bad component: it's usually several good components interacting in ways nobody intended.",
         "On Safety",
         "Underwater robotics teaches you quickly that failure is a question of when, not if. From the start, we wanted the electrical subsystem to follow one philosophy: fail safe rather than fail operational. That led to two independent safety mechanisms.",
-        "The first is an external magnetic kill switch — a common competition requirement — that lets a diver disable all actuation from outside the hull without opening the vehicle. Removing the magnet cuts power to propulsion and actuation while the compute domain stays alive, so the vehicle can still log data, communicate and shut down in an orderly way, and returns to a safe, non-moving state once the kill switch is re-engaged.",
-        "The second layer handles water ingress. Once a leak is detected, preserving computation is no longer the priority — preventing further damage is. The system performs a master shutdown of both compute and actuation domains, keeping only a small always-on controller alive to manage and confirm the shutdown sequence. The implementation is still evolving, but the underlying philosophy hasn't changed: safety should never depend on a single point of failure.",
+        "The first is an external magnetic kill switch (a common competition requirement) that lets a diver disable all actuation from outside the hull without opening the vehicle. Removing the magnet cuts power to propulsion and actuation while the compute domain stays alive, so the vehicle can still log data, communicate and shut down in an orderly way, and returns to a safe, non-moving state once the kill switch is re-engaged.",
+        "The second layer handles water ingress. Once a leak is detected, preserving computation is no longer the priority: preventing further damage is. The system performs a master shutdown of both compute and actuation domains, keeping only a small always-on controller alive to manage and confirm the shutdown sequence. The implementation is still evolving, but the underlying philosophy hasn't changed: safety should never depend on a single point of failure.",
         "What Is Next?",
-        "Building the first revision entirely on perf boards was a deliberate choice — slower than a custom PCB, but it made every wire, capacitor placement and routing decision a visible lesson. The PSDS is far from finished; future revisions will move toward dedicated PCBs, improved telemetry, per-rail current monitoring and smarter diagnostics.",
-        "Though this article focused on the PSDS, it really tells a larger story: every subsystem on the vehicle depends on another, and very little gets built in isolation. Countless discussions with the Mechanical and Software teams shaped the final design — routing cables through an already crowded hull, finding room for one more converter, or making sure the electrical architecture supported the software rather than fighting it.",
-        "For now, the Power Supply Distribution System has grown from a rough collection of sketches into the electrical backbone of our AUV — quietly delivering power, keeping subsystems from arguing with each other, and hopefully ensuring the only surprises we meet underwater are the ones we planned for."
+        "Building the first revision entirely on perf boards was a deliberate choice, slower than a custom PCB, but it made every wire, capacitor placement and routing decision a visible lesson. The PSDS is far from finished; future revisions will move toward dedicated PCBs, improved telemetry, per-rail current monitoring and smarter diagnostics.",
+        "Though this article focused on the PSDS, it really tells a larger story: every subsystem on the vehicle depends on another, and very little gets built in isolation. Countless discussions with the Mechanical and Software teams shaped the final design: routing cables through an already crowded hull, finding room for one more converter, or making sure the electrical architecture supported the software rather than fighting it.",
+        "For now, the Power Supply Distribution System has grown from a rough collection of sketches into the electrical backbone of our AUV, quietly delivering power, keeping subsystems from arguing with each other, and hopefully ensuring the only surprises we meet underwater are the ones we planned for."
       ]
     },
     {
@@ -365,15 +376,15 @@ export function MediaPage() {
     },
     {
       title: "The Long Dive: Starting an AUV Team at MIT Bengaluru",
-      excerpt: "A reflection by team mentor Pritha Jaipal on the journey of AUV MIT-B—from a spark of an idea in August 2024 to the team taking part in RoboSub 2026.",
+      excerpt: "A reflection by team mentor Pritha Jaipal on the journey of AUV MIT-B, from a spark of an idea in August 2024 to the team taking part in RoboSub 2026.",
       category: "Personal Memoir",
       date: "May 26, 2026",
       author: "Pritha Jaipal",
       image: prithaPhoto,
       content: [
         "Back in August 2024, I found myself seated across two second-year undergraduate students, Animesh and Arunava, who were brimming with the kind of energy and enthusiasm that hinted at the herculean task they were about to undertake. They wanted to start an Autonomous Underwater Vehicle student team at our university, MIT Bengaluru, and they were starting from scratch. It would be one of the first projects of its kind on our campus, and they had neither a blueprint nor a roadmap to follow. What they did have was a request that I mentor them as they set out to bring their vision to life.",
-        "With over three years of experience at a major student project, Mars Rover Manipal, I had witnessed firsthand how large, well-established student projects operated behind the scenes. In addition, founding my university’s astronomy club from scratch as a first-year undergraduate had taught me something equally important—how beginnings really look.",
-        "Our initial meet-ups, after class hours, proved momentous. We talked endlessly about where to begin, how to structure the team, how to find and recruit the right set of people, how and what to self-learn, and many other considerations that arise when embarking on such an endeavour. I was glad to see how steadily they kept at it—they often returned with many more questions and updates on their progress.",
+        "With over three years of experience at a major student project, Mars Rover Manipal, I had witnessed firsthand how large, well-established student projects operated behind the scenes. In addition, founding my university’s astronomy club from scratch as a first-year undergraduate had taught me something equally important: how beginnings really look.",
+        "Our initial meet-ups, after class hours, proved momentous. We talked endlessly about where to begin, how to structure the team, how to find and recruit the right set of people, how and what to self-learn, and many other considerations that arise when embarking on such an endeavour. I was glad to see how steadily they kept at it; they often returned with many more questions and updates on their progress.",
         "Knowing the gargantuan effort it took the team to get from navigating uncharted waters to becoming completely submerged in the project makes me incredibly proud. What started as two students with an idea and the unwavering support of faculty advisors, Dr.Ujjwal, Dr. Adithya and Dr. Manasa, has grown into a fully fledged effort with real momentum today! I am truly excited for AUV-MITB’s participation as one of the two teams from India to compete in the RoboSub 2026 at the Woollett Aquatics Center in Irvine, California."
       ]
     },
@@ -421,38 +432,8 @@ export function MediaPage() {
         "Abyss-mal Navigation? Not on Our Watch",
         "At the end of the day, we are not just building a robot that swims; we are building one that can survive its own confusion. In a world with zero GPS and a featureless blue void, knowing where you are is the ultimate engineering hurdle.",
         "By merging the raw speed of the IMU, the depth perception of the ZED, and the long term memory of RTAB-Map, we turn a drifting hunk of metal into a precise explorer. It is a constant battle against entropy and bad math, but it is the only way to ensure that when we send our AUV into the deep, it actually has a plan to come back.",
-        "Because at the end of the day, the ocean doesn't care about your algorithms—it only cares if you're smart enough to remember the way back out.",
+        "Because at the end of the day, the ocean doesn't care about your algorithms; it only cares if you're smart enough to remember the way back out.",
         "Out there in the blue void, the difference between being lost and being home is just one good memory."
-      ]
-    },
-    {
-      title: "Building a Leak Detection System That We Hope Never Triggers",
-      excerpt: "A peek into how we build safe systems keeping in mind all the electronics inside using a water-leak sensor and a Kill Switch.",
-      category: "Technical / Electrical Subsystem",
-      date: "May 12, 2026",
-      author: "Harshika Devarasetty",
-      image: hull_inside,
-      content: [
-        "Water inside an AUV hull is one of those things nobody really worries about until it happens once. And once it does, you immediately realize how unforgiving underwater systems can be. A single droplet in the wrong place is enough to short a regulator, kill a communication line, or silently end an entire mission. So while most subsystems on the vehicle are designed around performance, the leak detection system is built entirely around paranoia.",
-        "The original idea sounded simple enough: if water enters the hull, detect it immediately and shut everything down before anything expensive dies. But after the first few prototypes, it became obvious that “detecting water” was actually the easy part. The difficult part was making the system reliable inside an electrically noisy underwater robot filled with ESCs, motors, switching regulators, long wire runs, and conductive saltwater.",
-        "Sensor Placement and Design",
-        "The final system uses distributed copper-electrode sensing zones positioned along the upper perimeter of the hull, around camera ports, and near critical sealing interfaces. Each sensing section consists of paired copper electrodes separated by a very small gap. Under normal dry conditions the circuit remains open, but once water bridges the electrodes, conductivity between the strips changes and the onboard controller detects the voltage drop almost instantly.",
-        "One of the earliest design decisions was sensor placement. Initially, placing the sensors near the bottom of the hull seemed logical since water eventually pools there anyway. But that approach only detects leaks after water accumulation has already started near sensitive electronics. Instead, the sensors were moved closer to the upper hull perimeter and sealing regions so seepage could be detected as early as possible, ideally before water ever reaches critical components.",
-        "Electrode geometry also turned out to matter far more than expected. Larger gaps between electrodes required visible pooling before triggering, while sub-millimeter spacing could detect isolated droplets almost immediately. Wider copper strips improved sensitivity further by allowing droplets to spread more easily across the sensing gap.",
-        "The Sensing Network",
-        "The sensing network itself operates using a high-impedance voltage-divider configuration. Early prototypes used low-value pull-up resistors, but those required a significant amount of water before the system responded. Increasing the pull-up resistance into the hundreds of kilo-ohms dramatically improved sensitivity, allowing even small droplets to trigger detection while keeping current through the electrodes extremely low.",
-        "At roughly I = 3.3V / 300kΩ ≈ 11μA per sensing channel, the current draw becomes practically negligible while also minimizing long-term electrode corrosion. Since the sensing method relies on conductivity, reducing electrochemical degradation of the copper electrodes became surprisingly important during repeated testing.",
-        "Localization and Noise Mitigation",
-        "Initially, the system used one continuous sensing line routed around the hull perimeter. While electrically simple, this quickly created two major problems. First, it became impossible to determine where the leak originated. Second, the long sensing line behaved like an antenna once the thrusters and ESCs became active, introducing false triggers from electrical noise.",
-        "Dividing the hull into multiple independent sensing zones solved both problems simultaneously. Each zone could now be monitored independently, improving both localization and stability.",
-        "Software Validation and Response",
-        "The sensing zones interface directly with the onboard controller using pull-up based digital inputs. Under dry conditions, the controller reads a stable HIGH signal. Once water bridges the electrodes, the signal is pulled LOW and a leak event is registered.",
-        "Since the vehicle operates in a high-noise electrical environment, software-side validation was added to prevent transient EMI spikes from triggering false leak events. Multiple consecutive LOW readings are required before a leak is confirmed.",
-        "One unexpected observation during testing was how dramatically the sensor behavior changed between freshwater and saltwater. Saltwater conductivity is significantly higher, which made the sensors considerably more sensitive during underwater testing compared to initial bench tests using tap water. A sensor configuration that barely reacted to small droplets in air became highly responsive once exposed to seawater conditions.",
-        "Once a leak is confirmed, the onboard controller generates an interrupt and activates the kill-switch mechanism. Critical power rails are sequentially disabled to protect sensitive electronics from short circuits and irreversible damage. The kill-switch remains latched until manually reset, preventing repeated power cycling in situations where intermittent water contact occurs during operation.",
-        "Conclusion",
-        "One of the more interesting parts of building this subsystem was realizing how different hardware engineering feels compared to software. Software bugs are usually deterministic. Hardware failures are not. Things fail because of humidity, wire routing, EMI, grounding, corrosion, tolerances, or because a single droplet happened to land in exactly the wrong place. Designing for underwater robotics ends up being less about perfection and more about anticipating failure before it happens.",
-        "Hopefully, this is one subsystem that never actually has to do its job during a competition run. But if it ever does, it will probably save the vehicle."
       ]
     },
     {
@@ -460,7 +441,7 @@ export function MediaPage() {
       excerpt: "Demistifying the concept of Kalman Filters, building from the ground up in an intuitive form.",
       category: "Technical / Electrical Subsystem",
       date: "March 20, 2026",
-      author: "Azad Roy - Top Dogg",
+      author: "Azad Roy",
       image: azadLockedIn,
       externalLink: "https://azadroy.com/2026/03/20/but-what-is-the-kalman-filter.html",
     },
@@ -469,7 +450,7 @@ export function MediaPage() {
       excerpt: "Moving from simple Arduino-level code to real production level embedded code.",
       category: "Technical / Electrical Subsystem",
       date: "January 11, 2026",
-      author: "Azad Roy - Top Dogg",
+      author: "Azad Roy",
       image: img_2816,
       externalLink: "https://azadroy.com/2026/01/11/hobby-to-real-firmware.html",
     },
@@ -526,10 +507,10 @@ export function MediaPage() {
       // Standard date parsing
       const timeA = Date.parse(a.date);
       const timeB = Date.parse(b.date);
-      
+
       const validA = !isNaN(timeA);
       const validB = !isNaN(timeB);
-      
+
       if (!validA && validB) return 1;
       if (validA && !validB) return -1;
       if (!validA && !validB) return 0;
@@ -563,9 +544,9 @@ export function MediaPage() {
 
   return (
     <div className="min-h-screen bg-transparent text-slate-50 pb-0 font-sans">
-      
+
       <section className="max-w-7xl mx-auto px-6 pt-12 md:pt-20 mb-16">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -597,7 +578,7 @@ export function MediaPage() {
 
       {!searchQuery.trim() && (
         <section className="max-w-7xl mx-auto px-6 mb-20">
-          <motion.div 
+          <motion.div
             onClick={() => setActivePost(featuredPost)}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -625,24 +606,24 @@ export function MediaPage() {
                   <span>{featuredPost.date}</span>
                 </div>
               </div>
-              
+
               <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight group-hover:text-blue-400 transition-colors">
                 {featuredPost.title}
               </h2>
-              
+
               <p className="text-slate-300 leading-relaxed mb-8">
                 {featuredPost.excerpt}
               </p>
-              
+
               <div className="flex items-center justify-between mt-auto">
-                 <div className="flex items-center gap-1.5 text-slate-400 text-xs font-medium">
-                   <User className="w-3.5 h-3.5 text-blue-400" />
-                   <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-300">{featuredPost.author}</span>
-                 </div>
-                 <span className="flex items-center gap-2 text-sm font-bold text-white group-hover:text-blue-400 transition-colors">
-                   Read Article <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                 </span>
-               </div>
+                <div className="flex items-center gap-1.5 text-slate-400 text-xs font-medium">
+                  <User className="w-3.5 h-3.5 text-blue-400" />
+                  <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-300">{featuredPost.author}</span>
+                </div>
+                <span className="flex items-center gap-2 text-sm font-bold text-white group-hover:text-blue-400 transition-colors">
+                  Read Article <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </span>
+              </div>
             </div>
           </motion.div>
         </section>
@@ -654,76 +635,76 @@ export function MediaPage() {
             Recent Articles
           </h3>
         </div>
-        
+
         {filteredPosts.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredPosts.map((post, index) => (
-            <motion.div
-              key={post.title}
-              onClick={() => {
-                if (post.externalLink) {
-                  window.open(post.externalLink, "_blank", "noopener,noreferrer");
-                } else {
-                  setActivePost(post);
-                }
-              }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group flex flex-col bg-[#0a1128] border border-white/10 rounded-2xl overflow-hidden cursor-pointer hover:border-white/20 transition-colors"
-            >
-              <div className="h-56 overflow-hidden relative">
-                <img 
-                  src={post.image} 
-                  alt={post.title}
-                  loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-white text-[10px] font-bold tracking-wider uppercase">
-                    {post.category}
-                  </span>
-                </div>
-              </div>
-              
-              <div className="p-6 flex flex-col flex-1">
-                <div className="flex items-center gap-4 mb-4 text-slate-400 text-xs font-medium">
-                  <div className="flex items-center gap-1.5">
-                    <Calendar className="w-3.5 h-3.5" />
-                    {post.date}
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <User className="w-3.5 h-3.5 text-blue-400" />
-                    <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-300">{post.author}</span>
+              <motion.div
+                key={post.title}
+                onClick={() => {
+                  if (post.externalLink) {
+                    window.open(post.externalLink, "_blank", "noopener,noreferrer");
+                  } else {
+                    setActivePost(post);
+                  }
+                }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group flex flex-col bg-[#0a1128] border border-white/10 rounded-2xl overflow-hidden cursor-pointer hover:border-white/20 transition-colors"
+              >
+                <div className="h-56 overflow-hidden relative">
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-white text-[10px] font-bold tracking-wider uppercase">
+                      {post.category}
+                    </span>
                   </div>
                 </div>
-                
-                <h4 className="text-xl font-bold text-white mb-3 leading-snug group-hover:text-blue-400 transition-colors">
-                  {post.title}
-                </h4>
-                
-                <div className="text-slate-400 text-sm leading-relaxed mb-6 flex-1">
-                  {post.excerpt}
-                </div>
-                
-                {post.externalLink ? (
-                  <a
-                    href={post.externalLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="mt-auto pt-4 border-t border-white/10 flex items-center text-sm font-bold text-blue-400 hover:text-blue-300 transition-colors"
-                  >
-                    Check it out here <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                  </a>
-                ) : (
-                  <div className="mt-auto pt-4 border-t border-white/10 flex items-center text-sm font-bold text-white group-hover:text-blue-400 transition-colors">
-                    Read More <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+
+                <div className="p-6 flex flex-col flex-1">
+                  <div className="flex items-center gap-4 mb-4 text-slate-400 text-xs font-medium">
+                    <div className="flex items-center gap-1.5 shrink-0">
+                      <Calendar className="w-3.5 h-3.5" />
+                      {post.date}
+                    </div>
+                    <div className="ml-auto flex items-center gap-1.5 min-w-0">
+                      <User className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+                      <span className="text-right font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-300">{post.author}</span>
+                    </div>
                   </div>
-                )}
-              </div>
-            </motion.div>
+
+                  <h4 className="text-xl font-bold text-white mb-3 leading-snug group-hover:text-blue-400 transition-colors">
+                    {post.title}
+                  </h4>
+
+                  <div className="text-slate-400 text-sm leading-relaxed mb-6 flex-1">
+                    {post.excerpt}
+                  </div>
+
+                  {post.externalLink ? (
+                    <a
+                      href={post.externalLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="mt-auto pt-4 border-t border-white/10 flex items-center text-sm font-bold text-blue-400 hover:text-blue-300 transition-colors"
+                    >
+                      Check it out here <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </a>
+                  ) : (
+                    <div className="mt-auto pt-4 border-t border-white/10 flex items-center text-sm font-bold text-white group-hover:text-blue-400 transition-colors">
+                      Read More <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  )}
+                </div>
+              </motion.div>
             ))}
           </div>
         ) : (
@@ -765,8 +746,8 @@ export function MediaPage() {
           {/* Video Information / Sidebar */}
           <div className="flex flex-col justify-center bg-[#0a1128] border border-white/10 rounded-3xl p-8 lg:p-10">
             <h4 className="text-2xl font-bold text-white mb-4 leading-tight">
-             Team AUV MIT-B Introduction Video | 
-             RoboSub 2026
+              Team AUV MIT-B Introduction Video |
+              RoboSub 2026
             </h4>
 
             <p className="text-slate-300 text-sm leading-relaxed mb-6">
@@ -871,11 +852,11 @@ export function MediaPage() {
                         }
 
                         // Check for subheadings (short lines without sentence-ending periods, or specific patterns)
-                        const isHeading = 
-                          (para.length < 85 && !para.endsWith(".")) || 
-                          para.startsWith("1. ") || 
-                          para.startsWith("2. ") || 
-                          para.startsWith("3. ") || 
+                        const isHeading =
+                          (para.length < 85 && !para.endsWith(".")) ||
+                          para.startsWith("1. ") ||
+                          para.startsWith("2. ") ||
+                          para.startsWith("3. ") ||
                           para.startsWith("Upcoming Events");
 
                         if (isHeading) {
