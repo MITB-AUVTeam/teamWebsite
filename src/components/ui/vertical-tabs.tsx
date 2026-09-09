@@ -1,208 +1,160 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { cn } from "@/lib/utils";
+import React from "react";
+import { Badge } from "@/components/ui/badge";
+import { Marquee } from "@/components/ui/marquee";
 
 import ABOUT_TAB_1 from "@/assets/Gallery/about us page 1.jpeg";
 import ABOUT_TAB_2 from "@/assets/Gallery/about us page 2.jpeg";
 import ABOUT_TAB_3 from "@/assets/Gallery/about us page 3.jpeg";
 
-const SERVICES = [
+const marqueeData = [
+  "How do we localize using passive acoustics?",
+  "What's the best thruster configuration for pitch control?",
+  "How do we prevent leak-induced short circuits?",
+  "Which IMU filter handles magnetic noise best?",
+  "How does YOLO run real-time on a Jetson Orin?",
+  "Why carbon fiber over acrylic for the main AUV hull?",
+  "How do we coordinate mechanical, electrical, and software?",
+  "What is the team structure of AUV MIT-B?",
+  "How do we secure sponsorships for marine tech?",
+  "How do we tune thruster response telemetry?",
+  "What's the best way to handle battery thermal stability?",
+  "How do we test buoyancy in a pool?",
+];
+
+const features = [
   {
-    id: "01",
     title: "Why",
     description:
-      "To create an environment where young students learn engineering through real systems, real problems, with real teamwork, and real responsibility, in the face of budget and time constraints. An environment that’s larger than any one person and where hard work and talent are taken for granted. With the added benefit of developing cost-effective and efficient AUVs in India, for the world.",
+      "To create an environment where young students learn engineering through real systems, real problems, with real teamwork, and real responsibility under budget and time constraints, while developing cost-effective AUVs in India, for the world.",
     image: ABOUT_TAB_1,
+    id: "01",
   },
   {
-    id: "02",
     title: "How",
     description:
-      "Students from different engineering fields coming together after late nights to work even later nights full of rapid prototyping, frequent fixes, and more time than we’d like to admit with our heads in our hands. All for the purpose of bringing that bot to life.",
+      "Students from different engineering fields coming together after late nights to work even later nights full of rapid prototyping, frequent fixes, and more time than we’d like to admit with our heads in our hands to bring the bot to life.",
     image: ABOUT_TAB_2,
+    id: "02",
   },
   {
-    id: "03",
     title: "What",
     description:
       "An autonomous underwater vehicle designed, built, broken, rebuilt, and tested almost entirely in-house. From the electronics that keep it running, to the frame that keeps it safe, to the software that brings it to life.",
     image: ABOUT_TAB_3,
+    id: "03",
   },
 ];
 
-const AUTO_PLAY_DURATION = 12000;
-
 export default function VerticalTabs() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [direction, setDirection] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-
-  const handleNext = useCallback(() => {
-    setDirection(1);
-    setActiveIndex((prev) => (prev + 1) % SERVICES.length);
-  }, []);
-
-  const handlePrev = useCallback(() => {
-    setDirection(-1);
-    setActiveIndex((prev) => (prev - 1 + SERVICES.length) % SERVICES.length);
-  }, []);
-
-  const handleTabClick = (index: number) => {
-    if (index === activeIndex) return;
-    setDirection(index > activeIndex ? 1 : -1);
-    setActiveIndex(index);
-    setIsPaused(false);
-  };
-
-  useEffect(() => {
-    if (isPaused) return;
-
-    const interval = setInterval(() => {
-      handleNext();
-    }, AUTO_PLAY_DURATION);
-
-    return () => clearInterval(interval);
-  }, [activeIndex, isPaused, handleNext]);
-
-  const variants = {
-    enter: () => ({
-      opacity: 0,
-    }),
-    center: {
-      zIndex: 1,
-      opacity: 1,
-    },
-    exit: () => ({
-      zIndex: 0,
-      opacity: 0,
-    }),
-  };
+  const m1 = marqueeData.slice(0, marqueeData.length / 3);
+  const m2 = marqueeData.slice(
+    marqueeData.length / 3,
+    (marqueeData.length / 3) * 2
+  );
+  const m3 = marqueeData.slice((marqueeData.length / 3) * 2);
 
   return (
-    <section className="w-full bg-transparent pt-4 pb-12 md:pb-24 lg:pb-32">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-12 items-start">
-          {/* Left Column: Content */}
-          <div className="lg:col-span-5 flex flex-col justify-center order-2 lg:order-1 pt-2">
-            <div className="space-y-2 mb-12">
-              <h2 className="tracking-tight text-balance text-3xl font-bold md:text-5xl lg:text-6xl text-white">
-                Mission & Vision
-              </h2>
-            </div>
+    <section className="relative bg-transparent pt-12 pb-24 md:pb-32 w-full overflow-hidden">
+      <div className="mx-auto max-w-7xl px-4 md:px-6">
+        
+        {/* Unified Card Container Panel (Matches the 'About Us' panel styling) */}
+        <div className="bg-[#0a1128] border border-slate-800/60 rounded-[2.5rem] p-6 md:p-12 shadow-2xl relative overflow-hidden">
+          <div className="absolute inset-0 border border-slate-800/50 rounded-[2.5rem] pointer-events-none z-20 m-2" />
+          
+          {/* Section Header */}
+          <div className="mx-auto flex max-w-5xl flex-col items-center justify-center space-y-4 px-5 text-center md:px-10 mb-12 relative z-10">
+            <h2 className="max-w-3xl font-black text-4xl sm:text-5xl lg:text-6xl uppercase tracking-tighter leading-none bg-gradient-to-b from-white via-slate-100 to-slate-400 bg-clip-text text-transparent">
+              Mission & Vision
+            </h2>
+            <p className="max-w-2xl text-slate-400 text-sm md:text-base leading-relaxed tracking-tight">
+              Pioneering the future of marine robotics through hands-on engineering and continuous iteration.
+            </p>
+            
+            {/* Scrolling Badges Container */}
+            <div className="relative mx-auto max-w-4xl overflow-hidden w-full pt-6">
+              <div className="absolute left-0 z-50 h-full w-24 bg-gradient-to-r from-[#0a1128] to-transparent pointer-events-none" />
+              <div className="absolute right-0 z-50 h-full w-24 bg-gradient-to-l from-[#0a1128] to-transparent pointer-events-none" />
 
-            <div className="flex flex-col space-y-0">
-              {SERVICES.map((service, index) => {
-                const isActive = activeIndex === index;
-                return (
-                  <button
-                    key={service.id}
-                    onClick={() => handleTabClick(index)}
-                    className={cn(
-                      "group relative flex items-start gap-6 py-6 md:py-10 text-left transition-all duration-500 border-t border-white/10 first:border-0 pl-6 md:pl-0",
-                      isActive
-                        ? "text-white"
-                        : "text-slate-500 hover:text-slate-300"
-                    )}
-                  >
-                    <div className="absolute left-0 md:left-[-32px] top-0 bottom-0 w-[2px] bg-white/10">
-                      {isActive && (
-                        <motion.div
-                          key={`progress-${index}-${isPaused}`}
-                          className="absolute top-0 left-0 w-full bg-blue-500 origin-top"
-                          initial={{ height: "0%" }}
-                          animate={
-                            isPaused ? { height: "0%" } : { height: "100%" }
-                          }
-                          transition={{
-                            duration: AUTO_PLAY_DURATION / 1000,
-                            ease: "linear",
-                          }}
-                        />
-                      )}
-                    </div>
+              <div className="flex flex-col space-y-3 w-full">
+                <Marquee className="[--duration:35s] [--gap:0.75rem]" repeat={3}>
+                  {m1.map((q) => (
+                    <Badge
+                      className="rounded-full border-slate-850 bg-slate-950/60 px-4 py-1.5 font-mono text-xs text-cyan-400 hover:border-slate-700/50 hover:bg-slate-900/60 transition-colors"
+                      key={q}
+                      variant="outline"
+                    >
+                      {q}
+                    </Badge>
+                  ))}
+                </Marquee>
 
-                    <span className="text-xs md:text-sm font-medium mt-1.5 tabular-nums opacity-50">
-                      /{service.id}
-                    </span>
-
-                    <div className="flex flex-col gap-3 flex-1">
-                      <span
-                        className={cn(
-                          "text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight transition-colors duration-500",
-                          isActive ? "text-white" : ""
-                        )}
-                      >
-                        {service.title}
-                      </span>
-
-                      <AnimatePresence mode="wait">
-                        {isActive && (
-                          <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: "auto" }}
-                            exit={{ opacity: 0, height: 0 }}
-                            transition={{
-                              duration: 1.5,
-                              ease: [0.23, 1, 0.32, 1],
-                            }}
-                            className="overflow-hidden"
-                          >
-                            <p className="text-slate-400 text-base md:text-lg font-normal leading-relaxed max-w-md pb-4">
-                              {service.description}
-                            </p>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Right Column: Image Gallery */}
-          <div className="lg:col-span-7 flex flex-col justify-center h-full order-1 lg:order-2">
-            <div
-              className="relative group/gallery w-full lg:max-w-[85%] lg:mx-auto transform lg:translate-x-6"
-              onMouseEnter={() => setIsPaused(true)}
-              onMouseLeave={() => setIsPaused(false)}
-            >
-              <div className="relative aspect-[16/9] rounded-[2rem] md:rounded-[3rem] overflow-hidden bg-slate-900 border border-slate-800/80 shadow-2xl">
-                <AnimatePresence
-                  initial={false}
-                  custom={direction}
-                  mode="wait"
+                <Marquee
+                  className="[--duration:40s] [--gap:0.75rem]"
+                  repeat={3}
+                  reverse
                 >
-                  <motion.div
-                    key={activeIndex}
-                    custom={direction}
-                    variants={variants}
-                    initial="enter"
-                    animate="center"
-                    exit="exit"
-                    transition={{
-                      opacity: { duration: 0.4 },
-                    }}
-                    className="absolute inset-0 w-full h-full cursor-pointer"
-                    onClick={handleNext}
-                  >
-                    <img
-                      src={SERVICES[activeIndex].image}
-                      alt={SERVICES[activeIndex].title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover/gallery:scale-105"
-                    />
+                  {m2.map((q) => (
+                    <Badge
+                      className="rounded-full border-slate-850 bg-slate-950/60 px-4 py-1.5 font-mono text-xs text-cyan-400 hover:border-slate-700/50 hover:bg-slate-900/60 transition-colors"
+                      key={q}
+                      variant="outline"
+                    >
+                      {q}
+                    </Badge>
+                  ))}
+                </Marquee>
 
-                    {/* Subtle gradient overlay for better text contrast if needed */}
-                    <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover/gallery:opacity-100 transition-opacity duration-500" />
-                  </motion.div>
-                </AnimatePresence>
-
+                <Marquee className="[--duration:32s] [--gap:0.75rem]" repeat={3}>
+                  {m3.map((q) => (
+                    <Badge
+                      className="rounded-full border-slate-850 bg-slate-950/60 px-4 py-1.5 font-mono text-xs text-cyan-400 hover:border-slate-700/50 hover:bg-slate-900/60 transition-colors"
+                      key={q}
+                      variant="outline"
+                    >
+                      {q}
+                    </Badge>
+                  ))}
+                </Marquee>
               </div>
             </div>
           </div>
+
+          {/* Features Pillars Grid */}
+          <div className="mt-12 grid grid-cols-1 divide-y divide-slate-800/60 divide-dashed border-slate-800/60 border-t border-dashed md:grid-cols-3 md:divide-y-0 md:divide-x relative z-10">
+            {features.map((feature) => (
+              <div
+                className="flex flex-col gap-6 px-4 py-8 md:py-12 hover:bg-slate-900/[0.04] transition-all duration-300"
+                key={feature.title}
+              >
+                {/* Premium Image Container */}
+                <div className="relative aspect-video w-full rounded-2xl overflow-hidden border border-slate-800/80 shadow-2xl group">
+                  <div className="absolute inset-0 bg-slate-950/15 group-hover:bg-transparent transition-colors duration-500 z-10" />
+                  <img
+                    src={feature.image}
+                    alt={feature.title}
+                    className="w-full h-full object-cover transition-transform duration-500 scale-100 group-hover:scale-105"
+                  />
+                </div>
+
+                {/* Text Content */}
+                <div className="flex flex-col gap-3 pt-4">
+                  <span className="font-mono text-xs text-cyan-400 font-bold tracking-widest block">
+                    /{feature.id}
+                  </span>
+                  <h3 className="font-black text-3xl md:text-4xl text-white uppercase tracking-tight">
+                    {feature.title}
+                  </h3>
+                  <p className="leading-relaxed text-slate-400 text-sm md:text-base tracking-tight">
+                    {feature.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
+
       </div>
     </section>
   );

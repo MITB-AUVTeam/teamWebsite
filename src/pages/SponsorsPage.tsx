@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Footer } from "@/components/Footer";
-import { LiquidButton } from "@/components/animate-ui/components/buttons/liquid";
+import { PulsatingButton } from "@/components/ui/pulsating-button";
 import ansysLogo from "../assets/Background - less sponsors logos/Ansys.png";
 import dassaultLogo from "../assets/Background - less sponsors logos/Dassault Systemes.png";
 import vicharakLogo from "../assets/Background - less sponsors logos/Vicharak.png";
@@ -131,10 +131,10 @@ export function SponsorsPage() {
             <p className="text-slate-300 text-lg max-w-2xl mx-auto mb-8">
               Join us in shaping the future of underwater technology. Partnering with our team provides visibility among top engineering talent and demonstrates your commitment to innovation.
             </p>
-            <LiquidButton 
-              variant="blueToWhite" 
+            <PulsatingButton 
               asChild 
-              className="shadow-sm rounded-full cursor-pointer hover:scale-105 transition-transform font-bold text-base"
+              className="shadow-sm rounded-full cursor-pointer hover:scale-105 transition-transform font-bold text-base bg-[#2563eb] hover:bg-[#1d4ed8] border border-blue-400/20 text-white"
+              pulseColor="rgba(37, 99, 235, 0.6)"
             >
               <Link
                 to="/contact#contact-form"
@@ -142,7 +142,7 @@ export function SponsorsPage() {
               >
                 Contact Us for Sponsorship
               </Link>
-            </LiquidButton>
+            </PulsatingButton>
           </div>
         </motion.div>
       </div>

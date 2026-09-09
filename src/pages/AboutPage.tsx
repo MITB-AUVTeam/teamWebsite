@@ -2,7 +2,33 @@ import { motion } from "framer-motion";
 import VerticalTabs from "@/components/ui/vertical-tabs";
 import AUV_GROUP_PIC from "@/assets/Group_photo/AUV_GROUP_PIC.webp";
 import { Footer } from "@/components/Footer";
-import { Timeline } from "@/components/ui/timeline";
+import HowItWorks from "@/components/ui/how-it-works";
+
+const getShortDate = (dateStr: string) => {
+  const parts = dateStr.split(" ");
+  const year = parts[parts.length - 1]; // "2025" or "2026"
+  const month = parts[0]; // "JANUARY", "FEBRUARY", etc.
+  
+  const shortMonths: Record<string, string> = {
+    JANUARY: "JAN",
+    FEBRUARY: "FEB",
+    MARCH: "MAR",
+    APRIL: "APR",
+    MAY: "MAY",
+    JUNE: "JUN",
+    JULY: "JUL",
+    AUGUST: "AUG",
+    SEPTEMBER: "SEP",
+    OCTOBER: "OCT",
+    NOVEMBER: "NOV",
+    DECEMBER: "DEC"
+  };
+
+  const cleanMonth = shortMonths[month.toUpperCase()] || month.substring(0, 3).toUpperCase();
+  const shortYear = year.substring(2); // "25" or "26"
+  
+  return `${cleanMonth} '${shortYear}`;
+};
 
 const timelineData = [
   {
@@ -86,6 +112,21 @@ const timelineData = [
 
 
 export function AboutPage() {
+  // Flatten milestones and construct Step array
+  const timelineFeatures = timelineData.flatMap((yearBlock) =>
+    yearBlock.events.map((event, idx) => {
+      const themeColors: ("blue" | "orange" | "purple")[] = ["blue", "orange", "purple"];
+      const theme = themeColors[idx % 3];
+      
+      return {
+        title: event.title,
+        description: event.description,
+        number: getShortDate(event.date),
+        colorTheme: theme,
+      };
+    })
+  );
+
   return (
     <div className="min-h-screen bg-transparent text-slate-50 pb-0 font-sans flex flex-col">
 
@@ -137,7 +178,27 @@ export function AboutPage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-6 mt-16 md:mt-20 lg:mt-24 order-3 md:order-3 w-full">
-        <Timeline data={timelineData} />
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="max-w-7xl mx-auto py-12 md:py-16 px-4 md:px-8 lg:px-10 relative z-10 flex flex-col items-center justify-center text-center"
+        >
+          <span className="text-xs font-mono uppercase tracking-[0.25em] text-cyan-400 mb-4 block">
+            Timeline & Milestones
+          </span>
+          <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none bg-gradient-to-b from-white via-slate-100 to-slate-400 bg-clip-text text-transparent mb-6">
+            Our Journey
+          </h2>
+          <p className="text-slate-400 text-sm md:text-base max-w-xl leading-relaxed tracking-tight">
+            From a group of enthusiastic students to building state-of-the-art autonomous underwater vehicles, here is a chronological look at our milestones.
+          </p>
+        </motion.div>
+
+        {/* Connective Wave Timeline Visuals */}
+        <HowItWorks features={timelineFeatures} />
       </section>
 
       <section className="max-w-7xl mx-auto px-6 mt-16 md:mt-20 lg:mt-24 order-3 md:order-4">
