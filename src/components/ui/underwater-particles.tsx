@@ -18,16 +18,25 @@ export function UnderwaterParticles() {
     const list: Particle[] = [];
     let idCounter = 0;
 
-    // Density Target Distribution (Balanced Frequency: 132 active items):
-    // - 45 Far atmospheric particles (tiny dots)
-    // - 36 Small bubbles (mix of tiny dots & bubbles)
-    // - 18 Medium bubbles (asymmetric refraction glass outlines)
-    // - 10 Large bubbles (highly transparent optical rim)
-    // - 6 Near blurry bubbles (cameras out of focus)
-    // - 6 Golden bioluminescent lights
-    // - 4 Cyan bokeh background light blobs
-    // - 6 Bubble clusters (groups of 2-4 tiny irregular bubbles)
-    // - 1 Rare "Hero Bubble" (ultra premium, slow side spawn)
+    const isMobile = 
+      typeof window !== "undefined" && (
+        window.innerWidth < 768 ||
+        window.matchMedia("(any-hover: none)").matches || 
+        ("ontouchstart" in window) || 
+        (navigator.maxTouchPoints > 0)
+      );
+
+    // Density Target Distribution:
+    // Desktop: 132 items (rich multi-layer particles)
+    // Mobile: 25 items (super lightweight, 0 scroll lag)
+    const farCount = isMobile ? 12 : 45;
+    const smallCount = isMobile ? 8 : 36;
+    const medCount = isMobile ? 3 : 18;
+    const largeCount = isMobile ? 2 : 10;
+    const nearCount = isMobile ? 0 : 6;
+    const bioCount = isMobile ? 0 : 6;
+    const bokehCount = isMobile ? 0 : 4;
+    const clusterCount = isMobile ? 0 : 6;
 
     // Helper: Randomize opacity intensity scale
     const getIntensityMultiplier = (): number => {
@@ -40,7 +49,7 @@ export function UnderwaterParticles() {
 
     // Helper: Generate randomized border radius for organic shape deformation
     const getOrganicBorderRadius = (): string => {
-      const r1 = 46 + Math.floor(Math.random() * 9); // 46% - 55%
+      const r1 = 46 + Math.floor(Math.random() * 9);
       const r2 = 100 - r1;
       const r3 = 46 + Math.floor(Math.random() * 9);
       const r4 = 100 - r3;
@@ -49,15 +58,14 @@ export function UnderwaterParticles() {
 
     // Helper: Generate organic curved path checkpoints
     const getOrganicDriftPoints = (startX: number) => {
-      const driftStart = (Math.random() - 0.5) * 40; // Starting horizontal drift offset (px)
-      const driftEnd = driftStart + (Math.random() - 0.5) * 60; // Ending horizontal drift offset (px)
+      const driftStart = (Math.random() - 0.5) * 40;
+      const driftEnd = driftStart + (Math.random() - 0.5) * 60;
       const drift1 = driftStart + (Math.random() - 0.5) * 20;
       const drift2 = drift1 + (Math.random() - 0.5) * 20;
       const drift3 = drift2 + (Math.random() - 0.5) * 20;
       const drift4 = drift3 + (Math.random() - 0.5) * 20;
 
-      // Rotation angles for shift-reflections
-      const rot0 = Math.floor((Math.random() - 0.5) * 15); // -7deg to 7deg
+      const rot0 = Math.floor((Math.random() - 0.5) * 15);
       const rot1 = rot0 + Math.floor((Math.random() - 0.5) * 4);
       const rot2 = rot1 + Math.floor((Math.random() - 0.5) * 4);
       const rot3 = rot2 + Math.floor((Math.random() - 0.5) * 4);
@@ -80,8 +88,8 @@ export function UnderwaterParticles() {
       };
     };
 
-    // 1. FAR ATMOSPHERIC PARTICLES (45 count - tiny, slow, blurred dust)
-    for (let i = 0; i < 45; i++) {
+    // 1. FAR ATMOSPHERIC PARTICLES
+    for (let i = 0; i < farCount; i++) {
       const id = idCounter++;
       let x = Math.random() * 100;
       if (Math.random() > 0.6) {
@@ -120,24 +128,24 @@ export function UnderwaterParticles() {
       list.push({ id, style, className: `underwater-particle ${colorClass} rounded-full` });
     }
 
-    // 2. SMALL BUBBLES (36 count - 4px-9px, mix of tiny dots & bubbles)
-    for (let i = 0; i < 36; i++) {
+    // 2. SMALL BUBBLES
+    for (let i = 0; i < smallCount; i++) {
       const id = idCounter++;
       let x = Math.random() * 100;
       if (Math.random() > 0.6) {
         x = Math.random() > 0.5 ? 15 + Math.random() * 10 : 70 + Math.random() * 15;
       }
-      const duration = 18 + Math.random() * 14; // 18s-32s
+      const duration = 18 + Math.random() * 14;
       const delay = -(Math.random() * duration);
       const driftVariables = getOrganicDriftPoints(x);
 
-      const size = 4 + Math.random() * 5; // 4px-9px
-      const baseOpacity = 0.15 + Math.random() * 0.20; // 0.15-0.35
+      const size = 4 + Math.random() * 5;
+      const baseOpacity = 0.15 + Math.random() * 0.20;
       const maxOpacity = baseOpacity * getIntensityMultiplier();
       const blur = Math.random() > 0.8 ? 0.4 : 0;
       const borderRadius = getOrganicBorderRadius();
 
-      const isBubble = Math.random() > 0.3; // 70% bubbles, 30% dots
+      const isBubble = Math.random() > 0.3;
       let className = "underwater-particle ";
       if (isBubble) {
         className += "border border-sky-300/35 bg-gradient-to-br from-white/10 to-transparent shadow-[inset_1px_1px_1.5px_rgba(255,255,255,0.45)]";
@@ -168,16 +176,16 @@ export function UnderwaterParticles() {
       list.push({ id, style, className });
     }
 
-    // 3. MEDIUM BUBBLES (18 count - 9px-18px, asymmetric refraction glass outlines)
-    for (let i = 0; i < 18; i++) {
+    // 3. MEDIUM BUBBLES
+    for (let i = 0; i < medCount; i++) {
       const id = idCounter++;
       const x = Math.random() > 0.5 ? Math.random() * 25 : 75 + Math.random() * 25;
-      const duration = 16 + Math.random() * 12; // 16s-28s
+      const duration = 16 + Math.random() * 12;
       const delay = -(Math.random() * duration);
       const driftVariables = getOrganicDriftPoints(x);
 
-      const size = 9 + Math.random() * 9; // 9px-18px
-      const baseOpacity = 0.20 + Math.random() * 0.25; // 0.20-0.45
+      const size = 9 + Math.random() * 9;
+      const baseOpacity = 0.20 + Math.random() * 0.25;
       const maxOpacity = baseOpacity * getIntensityMultiplier();
       const blur = Math.random() > 0.85 ? 0.4 : 0;
       const borderRadius = getOrganicBorderRadius();
@@ -210,16 +218,16 @@ export function UnderwaterParticles() {
       list.push({ id, style, className });
     }
 
-    // 4. LARGE BUBBLES (10 count - 18px-32px, highly transparent optical rim)
-    for (let i = 0; i < 10; i++) {
+    // 4. LARGE BUBBLES
+    for (let i = 0; i < largeCount; i++) {
       const id = idCounter++;
       const x = Math.random() > 0.5 ? Math.random() * 25 : 75 + Math.random() * 25;
-      const duration = 14 + Math.random() * 10; // 14s-24s
+      const duration = 14 + Math.random() * 10;
       const delay = -(Math.random() * duration);
       const driftVariables = getOrganicDriftPoints(x);
 
-      const size = 18 + Math.random() * 14; // 18px-32px
-      const baseOpacity = 0.15 + Math.random() * 0.20; // 0.15-0.35
+      const size = 18 + Math.random() * 14;
+      const baseOpacity = 0.15 + Math.random() * 0.20;
       const maxOpacity = baseOpacity * getIntensityMultiplier();
       const blur = Math.random() > 0.75 ? 0.5 : 0;
       const borderRadius = getOrganicBorderRadius();
@@ -247,16 +255,16 @@ export function UnderwaterParticles() {
       list.push({ id, style, className });
     }
 
-    // 5. NEAR BLURRY BUBBLES (6 count - 25px-45px, cameras out of focus, faster)
-    for (let i = 0; i < 6; i++) {
+    // 5. NEAR BLURRY BUBBLES
+    for (let i = 0; i < nearCount; i++) {
       const id = idCounter++;
       const x = Math.random() > 0.5 ? Math.random() * 20 : 80 + Math.random() * 20;
-      const duration = 12 + Math.random() * 6; // Faster: 12s-18s
+      const duration = 12 + Math.random() * 6;
       const delay = -(Math.random() * duration);
       const driftVariables = getOrganicDriftPoints(x);
 
-      const size = 25 + Math.random() * 20; // 25px-45px
-      const baseOpacity = 0.10 + Math.random() * 0.15; // 0.10-0.25 (faint, out of focus)
+      const size = 25 + Math.random() * 20;
+      const baseOpacity = 0.10 + Math.random() * 0.15;
       const maxOpacity = baseOpacity * getIntensityMultiplier();
       const blur = 1.5 + Math.random() * 1.5;
       const borderRadius = getOrganicBorderRadius();
@@ -284,8 +292,8 @@ export function UnderwaterParticles() {
       list.push({ id, style, className });
     }
 
-    // 6. GOLDEN PARTICLES (6 count - tiny warm bokeh reflections)
-    for (let i = 0; i < 6; i++) {
+    // 6. GOLDEN PARTICLES
+    for (let i = 0; i < bioCount; i++) {
       const id = idCounter++;
       const x = Math.random() * 100;
       const duration = 22 + Math.random() * 13; // 22s-35s
