@@ -66,32 +66,32 @@ const Card = ({
 
   return (
     <m.div
-      className={`relative w-full md:w-[280px] hover:z-30 z-20 ${rotate} ${className}`}
+      className={`relative w-full max-w-sm mx-auto md:max-w-none md:w-[280px] hover:z-30 z-20 ${rotate} ${className}`}
       style={style}
-      initial={isRevealed ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.75, y: 45 }}
-      animate={isRevealed ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.75, y: 45 }}
+      initial={isRevealed ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.85, y: 30 }}
+      animate={isRevealed ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.85, y: 30 }}
       transition={{
         type: "spring",
         stiffness: 90,
         damping: 14,
       }}
-      whileHover={isRevealed ? { scale: 1.05, transition: { duration: 0.2 } } : undefined}
+      whileHover={isRevealed ? { scale: 1.03, transition: { duration: 0.2 } } : undefined}
     >
-      <div className="bg-[#0a1128] p-2 rounded-[25px] border border-slate-700 shadow-2xl relative overflow-hidden">
+      <div className="bg-[#0a1128] p-2 rounded-[22px] sm:rounded-[25px] border border-slate-700 shadow-2xl relative overflow-hidden">
         {/* Inner HUD Overlay border */}
-        <div className="absolute inset-0 border border-slate-800/40 rounded-[25px] pointer-events-none z-20 m-1.5" />
+        <div className="absolute inset-0 border border-slate-800/40 rounded-[22px] sm:rounded-[25px] pointer-events-none z-20 m-1.5" />
         
-        <Pin className={`w-8 h-8 ${textColor} z-20 mb-6 mx-auto relative`} />
+        <Pin className={`w-6 h-6 sm:w-8 sm:h-8 ${textColor} z-20 mb-3 sm:mb-6 mx-auto relative`} />
         <div
-          className={`${bgColor} border ${borderColor} rounded-[15px] p-[15px] h-full flex flex-col relative overflow-hidden z-10`}
+          className={`${bgColor} border ${borderColor} rounded-[14px] sm:rounded-[15px] p-3.5 sm:p-[15px] h-full flex flex-col relative overflow-hidden z-10`}
         >
-          <span className={`${textColor} text-3xl font-mono font-bold tracking-tighter mb-4 block`}>
+          <span className={`${textColor} text-2xl sm:text-3xl font-mono font-bold tracking-tighter mb-2 sm:mb-4 block`}>
             {number}
           </span>
-          <h3 className="text-xl font-bold text-white leading-tight mb-[10px]">
+          <h3 className="text-lg sm:text-xl font-bold text-white leading-tight mb-2 sm:mb-[10px]">
             {title}
           </h3>
-          <p className="text-slate-300 text-sm leading-relaxed tracking-tight">
+          <p className="text-slate-300 text-xs sm:text-sm leading-relaxed tracking-tight">
             {description}
           </p>
         </div>
@@ -160,6 +160,16 @@ export default function HowItWorks({
   stepPositions,
 }: HowItWorksProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const defaultFeatures: Step[] = [
     {
@@ -204,7 +214,7 @@ export default function HowItWorks({
     return lastTop + 380;
   }, [data]);
 
-  // Positions mapped programmatically
+  // Positions mapped programmatically (desktop uses absolute grid, mobile uses clean flex column)
   const positions = React.useMemo(() => {
     if (stepPositions && stepPositions.length >= data.length) {
       return stepPositions;
@@ -212,6 +222,15 @@ export default function HowItWorks({
     return data.map((_, idx) => {
       const topVal = Math.floor(idx / 2) * 360 + (idx % 2 === 1 ? 160 : 0);
       const isEven = idx % 2 === 0;
+
+      if (isMobile) {
+        return {
+          className: "w-full mb-6 relative",
+          rotate: "rotate-0",
+          style: {} as React.CSSProperties,
+        };
+      }
+
       return {
         className: "md:absolute",
         rotate: isEven ? "rotate-6" : "-rotate-6",
@@ -222,7 +241,7 @@ export default function HowItWorks({
         } as React.CSSProperties,
       };
     });
-  }, [data, stepPositions]);
+  }, [data, stepPositions, isMobile]);
 
   // Setup scroll-linked path drawing (reaches 100% when timeline bottom hits 90% of screen)
   const { scrollYProgress } = useScroll({
@@ -245,21 +264,20 @@ export default function HowItWorks({
 
   // Calculate coordinates and path dynamically relative to the container size
   const calculatePath = () => {
-    if (!containerRef.current) return;
+    if (!containerRef.current || isMobile) return;
 
     const containerRect = containerRef.current.getBoundingClientRect();
     const width = containerRect.width;
-    const height = staticHeight; // Use static height to avoid layout measurement feedback loops
+    const height = staticHeight;
     setContainerSize({ width, height });
 
-    // Map card positions mathematically to prevent transforms (scale/translate) from warping the measurements
+    // Map card positions mathematically to prevent transforms from warping measurements
     const activeCoords = data.map((_, idx) => {
       const topVal = Math.floor(idx / 2) * 360 + (idx % 2 === 1 ? 160 : 0);
       const isEven = idx % 2 === 0;
       
-      // Pin center coordinates computed from timeline geometry: 280px wide card at 15% margin
       const x = isEven ? (0.15 * width + 140) : (width - 0.15 * width - 140);
-      const y = topVal + 24; // 24px matches Pin center offset
+      const y = topVal + 24;
       
       return { x, y };
     });
@@ -303,7 +321,6 @@ export default function HowItWorks({
       for (let i = 0; i < idx; i++) {
         cumSum += segmentLengths[i];
       }
-      // Trigger card just as the rope fully lands
       return Math.min(1.0, (cumSum / totalLen) + 0.015);
     });
 
@@ -312,7 +329,6 @@ export default function HowItWorks({
   };
 
   useEffect(() => {
-    // Initial measurement
     calculatePath();
 
     const handleResize = () => {
@@ -320,7 +336,6 @@ export default function HowItWorks({
     };
     window.addEventListener("resize", handleResize);
 
-    // Dynamic resize observation to monitor container width shifts
     let observer: ResizeObserver | null = null;
     if (typeof ResizeObserver !== "undefined" && containerRef.current) {
       observer = new ResizeObserver(() => {
@@ -337,7 +352,6 @@ export default function HowItWorks({
       };
     }
 
-    // Recalculate once system fonts settle loading
     if (typeof document !== "undefined" && document.fonts) {
       document.fonts.ready.then(() => {
         calculatePath();
@@ -348,11 +362,18 @@ export default function HowItWorks({
       window.removeEventListener("resize", handleResize);
       if (observer) observer.disconnect();
     };
-  }, [data]);
+  }, [data, isMobile]);
 
-  // Sync scroll position immediately once layout settles
+  // On mobile, reveal all cards directly or on viewport enter
   useEffect(() => {
-    if (layoutSettled && cardThresholds.length === data.length) {
+    if (isMobile) {
+      setRevealedIndices(new Array(data.length).fill(true));
+    }
+  }, [isMobile, data.length]);
+
+  // Sync scroll position immediately once layout settles (desktop)
+  useEffect(() => {
+    if (!isMobile && layoutSettled && cardThresholds.length === data.length) {
       const latest = scrollYProgress.get();
       setRevealedIndices((prev) => {
         let changed = false;
@@ -369,11 +390,11 @@ export default function HowItWorks({
         return changed ? next : prev;
       });
     }
-  }, [layoutSettled, cardThresholds, scrollYProgress, data.length]);
+  }, [layoutSettled, cardThresholds, scrollYProgress, data.length, isMobile]);
 
-  // Listen for scroll updates to permanently trigger reveal
+  // Listen for scroll updates to permanently trigger reveal (desktop)
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    if (layoutSettled && cardThresholds.length === data.length) {
+    if (!isMobile && layoutSettled && cardThresholds.length === data.length) {
       setRevealedIndices((prev) => {
         let changed = false;
         const next = [...prev];
@@ -398,7 +419,7 @@ export default function HowItWorks({
     <LazyMotion features={domAnimation}>
       <div 
         ref={containerRef}
-        className={`bg-transparent max-md:pt-10 max-md:pb-25 md:py-20 px-8 relative ${className}`}
+        className={`bg-transparent max-md:py-4 md:py-20 px-3 sm:px-8 relative ${className}`}
       >
         
         {/* Tech Blueprint Grid Background Accent */}
@@ -413,10 +434,10 @@ export default function HowItWorks({
 
         <div className="max-w-6xl mx-auto relative z-10">
           <div
-            className="relative w-full mx-auto flex flex-col space-y-8 md:space-y-0 md:block"
-            style={{ height: `${containerSize.height}px` }}
+            className="relative w-full mx-auto flex flex-col space-y-4 md:space-y-0 md:block"
+            style={isMobile ? {} : { height: `${containerSize.height}px` }}
           >
-            {data.length > 1 && pathD && (
+            {!isMobile && data.length > 1 && pathD && (
               <svg
                 className="absolute inset-0 w-full h-full pointer-events-none hidden md:block z-0"
                 viewBox={`0 0 ${containerSize.width} ${containerSize.height}`}

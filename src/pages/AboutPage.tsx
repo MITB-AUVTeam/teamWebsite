@@ -1,84 +1,43 @@
-import { motion } from "framer-motion";
-import VerticalTabs from "@/components/ui/vertical-tabs";
-import AUV_GROUP_PIC from "@/assets/Group_photo/AUV_GROUP_PIC.webp";
-import { Footer } from "@/components/Footer";
-import HowItWorks from "@/components/ui/how-it-works";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Footer } from '../components/Footer';
+import HowItWorks, { Step } from '../components/ui/how-it-works';
+import VerticalTabs from '../components/ui/vertical-tabs';
+import AUV_GROUP_PIC from '@/assets/Group_photo/AUV_GROUP_PIC.webp';
 
-const getShortDate = (dateStr: string) => {
-  const parts = dateStr.split(" ");
-  const year = parts[parts.length - 1]; // "2025" or "2026"
-  const month = parts[0]; // "JANUARY", "FEBRUARY", etc.
-  
-  const shortMonths: Record<string, string> = {
-    JANUARY: "JAN",
-    FEBRUARY: "FEB",
-    MARCH: "MAR",
-    APRIL: "APR",
-    MAY: "MAY",
-    JUNE: "JUN",
-    JULY: "JUL",
-    AUGUST: "AUG",
-    SEPTEMBER: "SEP",
-    OCTOBER: "OCT",
-    NOVEMBER: "NOV",
-    DECEMBER: "DEC"
-  };
-
-  const cleanMonth = shortMonths[month.toUpperCase()] || month.substring(0, 3).toUpperCase();
-  const shortYear = year.substring(2); // "25" or "26"
-  
-  return `${cleanMonth} '${shortYear}`;
-};
-
+// Timeline Data Structure
 const timelineData = [
   {
     year: "2025",
-    intro: "Our founding year. We assembled our multi-disciplinary team, designed our first mechanical prototypes, and secured our initial sponsorships.",
     events: [
       {
         date: "JANUARY 2025",
-        title: "Team Created",
-        description: "Team AUV MIT-B was founded with students from Mechanical, Electrical, and Software domains."
+        title: "Team Formation",
+        description: "Founded Team AUV MIT-B with passionate students across mechanical, electrical, and software domains."
       },
       {
         date: "FEBRUARY 2025",
-        title: "1st Task Phase",
-        description: "Completed initial task phase aligning goals and designing subsystem components."
+        title: "First Prototype Design",
+        description: "Completed initial CAD modeling and acoustic simulation for our baseline underwater vehicle."
       },
       {
-        date: "JUNE 2025",
-        title: "1st Prototype Build",
-        description: "Assembled our first physical prototype to test basic buoyancy and drive controls."
+        date: "APRIL 2025",
+        title: "Electronics & Sensor Integration",
+        description: "Assembled power distribution boards, thrusters, and hydrophone array test rigs."
       },
       {
         date: "AUGUST 2025",
-        title: "Won Vidyashilp Competition",
-        description: "Won 1st place in the Vidyashilp competition, validating our initial architecture."
-      },
-      {
-        date: "OCTOBER 2025",
-        title: "Prototype Testing",
-        description: "Conducted rigorous pool tests to evaluate sealing, thruster responses, and telemetry."
-      },
-      {
-        date: "OCTOBER 28, 2025",
-        title: "Vicharak Sponsorship",
-        description: "Partnered with Vicharak as our hardware sponsor, acquiring high-performance single-board computers."
-      },
-      {
-        date: "NOVEMBER 2025",
-        title: "2nd Prototype Build & Testing",
-        description: "Began building our 2nd prototype incorporating advanced sensor suites and refined hull dynamics, followed by testing."
+        title: "In-Pool Autonomous Testing",
+        description: "Successfully executed first pool trials demonstrating autonomous depth hold and buoy detection."
       }
     ]
   },
   {
     year: "2026",
-    intro: "The year of deployment. From manufacturing our main hull to registering and competing on the global stage.",
     events: [
       {
-        date: "FEBRUARY 2026",
-        title: "Main Hull Build",
+        date: "JANUARY 2026",
+        title: "Hull Fabrication & Assembly",
         description: "Manufactured the primary waterproof carbon fiber/acrylic hull for our competition AUV."
       },
       {
@@ -110,36 +69,38 @@ const timelineData = [
   }
 ];
 
-
 export function AboutPage() {
   // Flatten milestones and construct Step array
-  const timelineFeatures = timelineData.flatMap((yearBlock) =>
-    yearBlock.events.map((event, idx) => {
-      const themeColors: ("blue" | "orange" | "purple")[] = ["blue", "orange", "purple"];
-      const theme = themeColors[idx % 3];
-      
-      return {
-        title: event.title,
-        description: event.description,
-        number: getShortDate(event.date),
-        colorTheme: theme,
-      };
-    })
-  );
+  const timelineFeatures = React.useMemo(() => {
+    return timelineData.flatMap((yearBlock) =>
+      yearBlock.events.map((event, idx) => {
+        const themeColors: ("blue" | "orange" | "purple")[] = ["blue", "orange", "purple"];
+        const theme = themeColors[idx % 3];
+        
+        return {
+          title: event.title,
+          description: event.description,
+          number: event.date,
+          colorTheme: theme,
+        };
+      })
+    );
+  }, []);
 
   return (
     <div className="min-h-screen bg-transparent text-slate-50 pb-0 font-sans flex flex-col">
 
-      <section className="max-w-7xl mx-auto px-6 pt-12 md:pt-20 order-1 md:order-1 w-full">
-        <div className="bg-[#0a1128] border border-slate-800/60 rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden">
-          <div className="absolute inset-0 border border-slate-800/50 rounded-[2.5rem] pointer-events-none z-20 m-2" />
+      {/* 1. About Us Panel */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-8 sm:pt-12 md:pt-20 order-1 md:order-1 w-full">
+        <div className="bg-[#0a1128] border border-slate-800/60 rounded-[1.8rem] sm:rounded-[2.5rem] p-5 sm:p-8 md:p-12 shadow-2xl relative overflow-hidden">
+          <div className="absolute inset-0 border border-slate-800/50 rounded-[1.8rem] sm:rounded-[2.5rem] pointer-events-none z-20 m-1.5 sm:m-2" />
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="flex flex-col md:flex-row justify-start items-start gap-6 w-full"
+            className="flex flex-col md:flex-row justify-start items-start gap-4 sm:gap-6 w-full"
           >
-            <h1 className="text-left mx-0 pl-0 text-5xl md:text-7xl lg:text-[5.5rem] font-black uppercase tracking-tighter leading-none">
+            <h1 className="text-left mx-0 pl-0 text-3xl sm:text-5xl md:text-7xl lg:text-[5.5rem] font-black uppercase tracking-tighter leading-none">
               About Us
             </h1>
           </motion.div>
@@ -148,9 +109,9 @@ export function AboutPage() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="w-full mt-6"
+            className="w-full mt-4 sm:mt-6"
           >
-            <div className="text-slate-300 text-base md:text-lg leading-relaxed space-y-4 max-w-full w-full">
+            <div className="text-slate-300 text-sm sm:text-base md:text-lg leading-relaxed space-y-3 sm:space-y-4 max-w-full w-full">
               <p>
                 We are Team AUV MIT-B, a student-led team passionate about underwater robotics, innovation, and hands-on engineering. Bringing together students from mechanical, electrical, and software domains, we collaboratively design and build autonomous underwater vehicles completely in-house.
               </p>
@@ -162,12 +123,13 @@ export function AboutPage() {
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-6 mt-16 md:mt-8 order-4 md:order-2 w-full">
+      {/* 2. Group Photo Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 mt-8 md:mt-8 order-2 md:order-2 w-full">
         <motion.div
           initial={{ opacity: 0, scale: 1 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="relative w-full aspect-[16/8.2] rounded-[2rem] overflow-hidden border border-slate-800/80 bg-slate-950 shadow-2xl"
+          className="relative w-full aspect-[16/10] sm:aspect-[16/9] md:aspect-[16/8.2] rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden border border-slate-800/80 bg-slate-950 shadow-2xl"
         >
           <img
             src={AUV_GROUP_PIC}
@@ -177,22 +139,23 @@ export function AboutPage() {
         </motion.div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-6 mt-16 md:mt-20 lg:mt-24 order-3 md:order-3 w-full">
+      {/* 3. Our Journey Timeline */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 mt-10 md:mt-20 lg:mt-24 order-3 md:order-3 w-full">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="max-w-7xl mx-auto py-12 md:py-16 px-4 md:px-8 lg:px-10 relative z-10 flex flex-col items-center justify-center text-center"
+          className="max-w-7xl mx-auto py-6 sm:py-12 md:py-16 px-2 sm:px-8 relative z-10 flex flex-col items-center justify-center text-center"
         >
-          <span className="text-xs font-mono uppercase tracking-[0.25em] text-cyan-400 mb-4 block">
+          <span className="text-xs font-mono uppercase tracking-[0.25em] text-cyan-400 mb-2 sm:mb-4 block">
             Timeline & Milestones
           </span>
-          <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none bg-gradient-to-b from-white via-slate-100 to-slate-400 bg-clip-text text-transparent mb-6">
+          <h2 className="text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tighter leading-none bg-gradient-to-b from-white via-slate-100 to-slate-400 bg-clip-text text-transparent mb-4 sm:mb-6">
             Our Journey
           </h2>
-          <p className="text-slate-400 text-sm md:text-base max-w-xl leading-relaxed tracking-tight">
+          <p className="text-slate-400 text-xs sm:text-sm md:text-base max-w-xl leading-relaxed tracking-tight">
             From a group of enthusiastic students to building state-of-the-art autonomous underwater vehicles, here is a chronological look at our milestones.
           </p>
         </motion.div>
@@ -201,15 +164,17 @@ export function AboutPage() {
         <HowItWorks features={timelineFeatures} />
       </section>
 
-      <section className="max-w-7xl mx-auto px-6 mt-16 md:mt-20 lg:mt-24 order-3 md:order-4">
+      {/* 4. Mission & Vision */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 mt-10 md:mt-20 lg:mt-24 order-4 md:order-4 w-full">
         <VerticalTabs />
       </section>
 
       <div className="order-5 md:order-5">
         <Footer />
       </div>
+
     </div>
   );
 }
 
-
+export default AboutPage;
