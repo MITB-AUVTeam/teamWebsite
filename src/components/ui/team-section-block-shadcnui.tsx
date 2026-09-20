@@ -23,21 +23,6 @@ const teamCategories = [
     "title": "Faculty Advisors",
     "members": [
       {
-        "name": "Dr. Adithya G.S.S",
-        "role": "Faculty Advisor",
-        "department": "School of Basic Sciences, Humanities and Management (MIT-BLR)",
-        "bio": "",
-        "image": "src/assets/Personal_photo/gss.jpg",
-        "location": "MIT-BLR",
-        "skills": ["Faculty Advisor"],
-        "gradient": "from-indigo-500/20 via-indigo-500/5 to-transparent",
-        "social": {
-          "email": "mailto:srinivas.adithya@manipal.edu",
-          "linkedin": "https://www.linkedin.com/in/dr-adithya-garimella-696353138/",
-          "github": null
-        }
-      },
-      {
         "name": "Dr. Manasa Kongot",
         "role": "Assistant Director - MSP",
         "department": "School of Basic Sciences, Humanities and Management (MIT-BLR)",
@@ -135,8 +120,22 @@ const teamCategories = [
     "title": "Current Leadership",
     "members": [
       {
+        "name": "Siddharth P S",
+        "role": "Team Lead",
+        "department": "Electronics and Communication Engineering 28'",
+        "bio": "Float like cadillac, sting like a beamer",
+        "image": "/src/assets/Personal_photo/siddarth.webp",
+        "location": "3rd Year",
+        "skills": ["Leadership"],
+        "gradient": "from-cyan-500/20 via-cyan-500/5 to-transparent",
+        "social": {
+          "linkedin": "https://www.linkedin.com/in/siddharth-ps-27ba76350/",
+          "github": "https://github.com/siddharthps2005"
+        }
+      },
+      {
         "name": "Chatur Vasireddy",
-        "role": "Team Lead / Mechanical Subsystem Lead",
+        "role": "Technical Lead / Mechanical Subsystem Lead",
         "department": "Electronics and Communication Engineering 28'",
         "bio": "meow",
         "image": "src/assets/Personal_photo/chatur.jpeg",
@@ -146,20 +145,6 @@ const teamCategories = [
         "social": {
           "linkedin": "https://www.linkedin.com/in/chatur-vasireddy-4845621a5/",
           "github": "https://github.com/ChaturVasireddy"
-        }
-      },
-      {
-        "name": "Siddharth P S",
-        "role": "Team Manager",
-        "department": "Electronics and Communication Engineering 28'",
-        "bio": "Float like cadillac, sting like a beamer",
-        "image": "/src/assets/Personal_photo/siddarth.webp",
-        "location": "3rd Year",
-        "skills": ["Management"],
-        "gradient": "from-cyan-500/20 via-cyan-500/5 to-transparent",
-        "social": {
-          "linkedin": "https://www.linkedin.com/in/siddharth-ps-27ba76350/",
-          "github": "https://github.com/siddharthps2005"
         }
       },
       {
