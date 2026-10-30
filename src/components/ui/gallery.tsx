@@ -1,306 +1,50 @@
-import { forwardRef, useState, useEffect, useRef } from "react";
-import { motion, useMotionValue, useInView } from "framer-motion";
+import { useRef, useState } from "react";
+import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { LiquidButton } from "@/components/animate-ui/components/buttons/liquid";
-import { Link } from "react-router-dom";
 
-const imageModules = import.meta.glob<{ default: string }>(
-  "../../assets/Gallery/*.{webp,png,jpg,jpeg}",
-  { eager: true }
-);
+const imageModules = import.meta.glob<{ default: string }>("../../assets/Gallery/*.{webp,png,jpg,jpeg}", { eager: true });
 const allImages = Object.values(imageModules).map((mod) => mod.default);
 
-export const PhotoGallery = ({
-  animationDelay = 0.2,
-}: {
-  animationDelay?: number;
-}) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  const [randomImages] = useState<string[]>(() => {
-    if (allImages.length === 0) return [];
-    // Shuffle allImages and slice first 5
-    const shuffled = [...allImages].sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, 5);
-  });
-
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  useEffect(() => {
-    if (isInView) {
-      // First make the container visible with a fade-in
-      const visibilityTimer = setTimeout(() => {
-        setIsVisible(true);
-      }, animationDelay * 1000);
-
-      // Then start the photo animations after a short delay
-      const animationTimer = setTimeout(
-        () => {
-          setIsLoaded(true);
-        },
-        (animationDelay + 0.4) * 1000
-      ); // Add 0.4s for the opacity transition
-
-      return () => {
-        clearTimeout(visibilityTimer);
-        clearTimeout(animationTimer);
-      };
-    }
-  }, [isInView, animationDelay]);
-
-  // Animation variants for the container
-  const containerVariants = {
-    hidden: { opacity: 1 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.1, // Reduced from 0.3 to 0.1 since we already have the fade-in delay
-      },
-    },
-  };
-
-  // Animation variants for each photo
-  const photoVariants: any = {
-    hidden: () => ({
-      x: 0,
-      y: 0,
-      rotate: 0,
-      scale: 1,
-      // Keep the same z-index throughout animation
-    }),
-    visible: (custom: { x: any; y: any; order: number }) => ({
-      x: custom.x,
-      y: custom.y,
-      rotate: 0, // No rotation
-      scale: 1,
-      transition: {
-        type: "spring",
-        stiffness: 70,
-        damping: 12,
-        mass: 1,
-        delay: custom.order * 0.15, // Explicit delay based on order
-      },
-    }),
-  };
-
-  // Photo positions - horizontal layout with random y offsets
-  const photos = [
-    {
-      id: 1,
-      order: 0,
-      x: isMobile ? "-100px" : "-320px",
-      y: "15px",
-      zIndex: 50, // Highest z-index (on top)
-      direction: "left" as Direction,
-      src: randomImages[0] || "",
-    },
-    {
-      id: 2,
-      order: 1,
-      x: isMobile ? "-50px" : "-160px",
-      y: "32px",
-      zIndex: 40,
-      direction: "left" as Direction,
-      src: randomImages[1] || "",
-    },
-    {
-      id: 3,
-      order: 2,
-      x: "0px",
-      y: "8px",
-      zIndex: 30,
-      direction: "right" as Direction,
-      src: randomImages[2] || "",
-    },
-    {
-      id: 4,
-      order: 3,
-      x: isMobile ? "50px" : "160px",
-      y: "22px",
-      zIndex: 20,
-      direction: "right" as Direction,
-      src: randomImages[3] || "",
-    },
-    {
-      id: 5,
-      order: 4,
-      x: isMobile ? "100px" : "320px",
-      y: "44px",
-      zIndex: 10, // Lowest z-index (at bottom)
-      direction: "left" as Direction,
-      src: randomImages[4] || "",
-    },
-  ];
-
+function Row({ images, x, className }: { images: string[]; x: MotionValue<string>; className?: string }) {
   return (
-    <div className="relative" ref={ref}>
-      
-      <div className="flex flex-col items-center justify-center text-center mb-16 px-6 max-w-7xl mx-auto">
-        <h2 className="text-sm font-bold tracking-widest text-blue-500 uppercase mb-3">Gallery</h2>
-        <h3 className="text-4xl md:text-5xl font-bold tracking-tight text-white">A journey through the depths</h3>
-      </div>
-
-      <div className="relative mb-8 h-[350px] w-full items-center justify-center lg:flex">
-        <motion.div
-          className="relative mx-auto flex w-full max-w-7xl justify-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: isVisible ? 1 : 0 }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
+    <motion.div style={{ x }} className={cn("flex w-max gap-4 md:gap-6", className)}>
+      {images.map((src, i) => (
+        <div
+          key={src}
+          className={cn(
+            "group relative h-[200px] shrink-0 overflow-hidden rounded-2xl bg-white/[0.04] md:h-[320px]",
+            i % 3 === 0 ? "w-[300px] md:w-[480px]" : "w-[220px] md:w-[340px]",
+          )}
         >
-          <motion.div
-            className="relative flex w-full justify-center"
-            variants={containerVariants}
-            initial="hidden"
-            animate={isLoaded ? "visible" : "hidden"}
-          >
-            <div className="relative h-[220px] w-[220px]">
-              {/* Render photos in reverse order so that higher z-index photos are rendered later in the DOM */}
-              {[...photos].reverse().map((photo) => (
-                <motion.div
-                  key={photo.id}
-                  className="absolute left-0 top-0"
-                  style={{ zIndex: photo.zIndex }} // Apply z-index directly in style
-                  variants={photoVariants}
-                  custom={{
-                    x: photo.x,
-                    y: photo.y,
-                    order: photo.order,
-                  }}
-                >
-                  <Photo
-                    width={220}
-                    height={220}
-                    src={photo.src}
-                    alt="Gallery photo"
-                    direction={photo.direction}
-                  />
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </motion.div>
-      </div>
-      <div className="flex w-full justify-center">
-      <LiquidButton variant="blueToWhite" asChild className="rounded-full px-8 font-bold text-sm">
-        <Link to="/gallery">View All Photos</Link>
-      </LiquidButton>
-      </div>
-    </div>
-  );
-};
-
-function getRandomNumberInRange(min: number, max: number): number {
-  if (min >= max) {
-    throw new Error("Min value should be less than max value");
-  }
-  return Math.random() * (max - min) + min;
-}
-
-const MotionImage = motion.img;
-
-type Direction = "left" | "right";
-
-export const Photo = ({
-  src,
-  alt,
-  className,
-  direction,
-  width,
-  height,
-  ...props
-}: {
-  src: string;
-  alt: string;
-  className?: string;
-  direction?: Direction;
-  width: number;
-  height: number;
-}) => {
-  const [rotation, setRotation] = useState<number>(0);
-  const x = useMotionValue(200);
-  const y = useMotionValue(200);
-
-  useEffect(() => {
-    const randomRotation =
-      getRandomNumberInRange(1, 4) * (direction === "left" ? -1 : 1);
-    setRotation(randomRotation);
-  }, []);
-
-  function handleMouse(event: {
-    currentTarget: { getBoundingClientRect: () => any };
-    clientX: number;
-    clientY: number;
-  }) {
-    const rect = event.currentTarget.getBoundingClientRect();
-    x.set(event.clientX - rect.left);
-    y.set(event.clientY - rect.top);
-  }
-
-  const resetMouse = () => {
-    x.set(200);
-    y.set(200);
-  };
-
-  return (
-    <motion.div
-      drag
-      dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-      whileTap={{ scale: 1.2, zIndex: 9999 }}
-      whileHover={{
-        scale: 1.1,
-        rotateZ: 2 * (direction === "left" ? -1 : 1),
-        zIndex: 9999,
-      }}
-      whileDrag={{
-        scale: 1.1,
-        zIndex: 9999,
-      }}
-      initial={{ rotate: 0 }}
-      animate={{ rotate: rotation }}
-      style={{
-        width,
-        height,
-        perspective: 400,
-        transform: `rotate(0deg) rotateX(0deg) rotateY(0deg)`,
-        zIndex: 1,
-        WebkitTouchCallout: "none",
-        WebkitUserSelect: "none",
-        userSelect: "none",
-        touchAction: "none",
-      }}
-      className={cn(
-        className,
-        "relative mx-auto shrink-0 cursor-grab active:cursor-grabbing"
-      )}
-      onMouseMove={handleMouse}
-      onMouseLeave={resetMouse}
-      draggable={false}
-      tabIndex={0}
-    >
-      <div className="relative h-full w-full overflow-hidden rounded-3xl shadow-sm">
-        <MotionImage
-          className={cn("rounded-3xl object-cover w-full h-full")}
-          src={src}
-          alt={alt}
-          loading="lazy"
-          {...props}
-          draggable={false}
-        />
-      </div>
+          <img
+            src={src}
+            alt="Team AUV at work"
+            loading="lazy"
+            draggable={false}
+            className="h-full w-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+          />
+        </div>
+      ))}
     </motion.div>
   );
-};
+}
+
+/**
+ * Two rows of photos that slide in opposite directions as the section scrolls
+ * past. Fourteen photos are picked at random from the gallery on each visit.
+ */
+export function PhotoGallery() {
+  const ref = useRef<HTMLDivElement>(null);
+  const reduced = useReducedMotion();
+  const [picks] = useState(() => [...allImages].sort(() => Math.random() - 0.5).slice(0, 14));
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const left = useTransform(scrollYProgress, [0, 1], reduced ? ["-10%", "-10%"] : ["0%", "-22%"]);
+  const right = useTransform(scrollYProgress, [0, 1], reduced ? ["-20%", "-20%"] : ["-30%", "-8%"]);
+
+  return (
+    <div ref={ref} className="flex flex-col gap-4 overflow-hidden md:gap-6" aria-label="Photos from the team" role="group">
+      <Row images={picks.slice(0, 7)} x={left} />
+      <Row images={picks.slice(7, 14)} x={right} />
+    </div>
+  );
+}

@@ -179,7 +179,15 @@ body {
 }
 
 @theme inline {
-  --font-sans: 'Geist Variable', sans-serif;
+  /* Faintest text shade, lifted from #64748b so it clears WCAG AA (4.5:1) on the near-black page */
+  --color-slate-500: #7c8ba1;
+  --font-sans: 'Geist', 'Geist Variable', system-ui, sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --color-tone: var(--t1);
+  --color-tone-soft: var(--t2);
+  --color-tone-deep: var(--t3);
+  --color-abyss: #020617;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -322,13 +330,314 @@ body {
   }
 }
 
+/* ---------- Page tones ----------
+   Wrap a page in .tone-<name>; text-tone / bg-tone/10 / border-tone/30,
+   .text-water, .glass-water and .hud-corners all follow it. */
+:root, .tone-cyan { --t1: #7dd3fc; --t2: #e0f2fe; --t3: #3b82f6; }
+.tone-aqua    { --t1: #2dd4bf; --t2: #99f6e4; --t3: #0ea5e9; }
+.tone-violet  { --t1: #a78bfa; --t2: #67e8f9; --t3: #7c3aed; }
+.tone-magenta { --t1: #e879f9; --t2: #f5d0fe; --t3: #8b5cf6; }
+.tone-indigo  { --t1: #818cf8; --t2: #c7d2fe; --t3: #22d3ee; }
+.tone-gold    { --t1: #fbbf24; --t2: #fef3c7; --t3: #f97316; }
+.tone-emerald { --t1: #34d399; --t2: #a7f3d0; --t3: #22d3ee; }
+
+/* ---------- Clean surface system ---------- */
+
+/* Quiet glass surface: hairline border, soft fill, no rim gradients. No backdrop blur:
+   over the near-black page it was invisible but re-blurred on every scroll frame. */
+@layer components {
+.glass-water,
+.surface {
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+.hairline {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+}
+
+/* Legacy HUD decorations, retired for the clean look */
+.hud-corners,
+.grid-backdrop,
+.scan-beam,
+.sonar-blip { display: none !important; }
+
+/* Accent gradient text (static, no shimmer). The gradient only paints inside the
+   element's box, so italic overhang (the tail of "?", "f", "y") would vanish; pad the
+   box out past the glyphs and pull the layout back with matching negative margins. */
+.text-water {
+  background: linear-gradient(100deg, var(--t2) 0%, var(--t1) 55%, var(--t3) 110%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding: 0.04em 0.16em 0.14em 0.06em;
+  margin: -0.04em -0.16em -0.14em -0.06em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* SplitText wraps words/chars in their own boxes; repaint the gradient on each piece */
+.text-water * {
+  background: inherit;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* SplitText line masks: leave room for descenders and italic overhang */
+.gsap-line-mask {
+  padding: 0 0.16em 0.14em 0;
+  margin: 0 -0.16em -0.14em 0;
+}
+
+/* Scroll cue */
+.scroll-drop {
+  animation: scroll-drop 2.4s cubic-bezier(0.5, 0, 0.3, 1) infinite;
+}
+@keyframes scroll-drop {
+  0% { transform: translateY(-6px); opacity: 0; }
+  30% { opacity: 1; }
+  100% { transform: translateY(22px); opacity: 0; }
+}
+
+/* Soft flowing waterline divider */
+.waterline {
+  height: 24px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='24' viewBox='0 0 240 24'%3E%3Cpath d='M0 12 Q30 4 60 12 T120 12 T180 12 T240 12' fill='none' stroke='%23ffffff' stroke-opacity='0.12' stroke-width='1'/%3E%3C/svg%3E") repeat-x;
+  background-size: 240px 24px;
+  animation: waterline-flow 14s linear infinite;
+  -webkit-mask: linear-gradient(90deg, transparent, #000 20% 80%, transparent);
+  mask: linear-gradient(90deg, transparent, #000 20% 80%, transparent);
+}
+@keyframes waterline-flow {
+  to { background-position: 240px 0; }
+}
+
+/* Gentle lift on hover */
+.glow-hover {
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.4s ease;
+}
+.glow-hover:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+/* Slow drifting light behind page headers */
+.aurora {
+  background:
+    radial-gradient(28% 55% at 30% 30%, color-mix(in srgb, var(--t1) 22%, transparent), transparent),
+    radial-gradient(25% 50% at 72% 22%, color-mix(in srgb, var(--t3) 20%, transparent), transparent);
+  animation: aurora-drift 18s ease-in-out infinite alternate;
+}
+@keyframes aurora-drift {
+  0% { transform: translate3d(-3%, 0, 0) scale(1); }
+  100% { transform: translate3d(3%, 4%, 0) scale(1.08); }
+}
+
+/* Seamless ticker: content is rendered twice, so slide by half */
+.ticker {
+  animation: ticker var(--duration, 40s) linear infinite;
+}
+@keyframes ticker {
+  to { transform: translateX(-50%); }
+}
+
+/* Fine film grain over the whole page, keeps flat gradients from banding */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Looping decorations stop while their section is off screen */
+.fx-paused,
+.fx-paused * { animation-play-state: paused !important; }
+
+/* Custom cursor replaces the native one on fine pointers (text fields keep the caret) */
+html.has-cursor,
+html.has-cursor * { cursor: none !important; }
+html.has-cursor input,
+html.has-cursor textarea,
+html.has-cursor [contenteditable] { cursor: text !important; }
+html.has-cursor iframe { cursor: auto !important; }
+
+/* Lenis smooth scroll */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* ---------- HUD / sonar layer ---------- */
+.hud-corner {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border-color: rgba(125, 211, 252, 0.55);
+  filter: drop-shadow(0 0 6px rgba(103, 232, 249, 0.5));
+}
+.hud-scan { animation: hud-scan 6s cubic-bezier(0.45, 0, 0.55, 1) infinite; }
+@keyframes hud-scan {
+  0% { transform: translateY(8vh); opacity: 0; }
+  10%, 85% { opacity: 1; }
+  100% { transform: translateY(92vh); opacity: 0; }
+}
+.hud-blink { animation: hud-blink 1.2s steps(2, jump-none) infinite; }
+@keyframes hud-blink { 50% { opacity: 0.15; } }
+.hud-bar { transform-origin: bottom; animation: hud-bar 1.6s ease-in-out infinite alternate; }
+@keyframes hud-bar { from { transform: scaleY(0.35); opacity: 0.4; } to { transform: scaleY(1); opacity: 1; } }
+
+.sonar-sweep {
+  background: conic-gradient(from 0deg, rgba(103, 232, 249, 0.28), rgba(103, 232, 249, 0) 70deg, transparent 360deg);
+  -webkit-mask: radial-gradient(circle, #000 0 69%, transparent 70%);
+          mask: radial-gradient(circle, #000 0 69%, transparent 70%);
+  animation: sonar-sweep 5s linear infinite;
+}
+@keyframes sonar-sweep { to { transform: rotate(-360deg); } }
+
+/* Holographic brackets that lock on to a card when hovered */
+.hud-lock { position: relative; }
+.hud-lock::before,
+.hud-lock::after {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  z-index: 3;
+  pointer-events: none;
+  border: 1px solid rgba(125, 211, 252, 0.8);
+  border-radius: 14px;
+  opacity: 0;
+  transform: scale(1.08);
+  transition: opacity 0.5s, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  -webkit-mask: conic-gradient(#000 0 0) top left / 26px 26px no-repeat, conic-gradient(#000 0 0) bottom right / 26px 26px no-repeat;
+          mask: conic-gradient(#000 0 0) top left / 26px 26px no-repeat, conic-gradient(#000 0 0) bottom right / 26px 26px no-repeat;
+}
+.hud-lock::after {
+  -webkit-mask: conic-gradient(#000 0 0) top right / 26px 26px no-repeat, conic-gradient(#000 0 0) bottom left / 26px 26px no-repeat;
+          mask: conic-gradient(#000 0 0) top right / 26px 26px no-repeat, conic-gradient(#000 0 0) bottom left / 26px 26px no-repeat;
+}
+.hud-lock:hover::before,
+.hud-lock:hover::after,
+/* One visible keyboard focus ring everywhere; mouse clicks don't show it */
+:focus-visible {
+  outline: 2px solid var(--t1);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+[tabindex="-1"]:focus-visible { outline: none; }
+
+/* Scroll-linked animations measure against the root, which must not be position: static */
+html { position: relative; }
+
+/* Skip link: hidden until a keyboard user tabs to it */
+.skip-link {
+  position: fixed;
+  left: 16px;
+  top: 12px;
+  z-index: 100001;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: #f8fafc;
+  color: #020617;
+  font-size: 14px;
+  font-weight: 500;
+  transform: translateY(-150%);
+  transition: transform 0.2s;
+}
+.skip-link:focus-visible { transform: none; }
+
+.hud-lock:focus-visible::before,
+.hud-lock:focus-visible::after { opacity: 1; transform: scale(1); }
+
+.rule-glint { animation: rule-glint 4.5s cubic-bezier(0.65, 0, 0.35, 1) infinite; }
+@keyframes rule-glint { from { transform: translateX(-100%); } to { transform: translateX(400%); } }
+
+/* Faint blueprint grid for section backdrops */
+.holo-grid {
+  background-image:
+    linear-gradient(rgba(125, 211, 252, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(125, 211, 252, 0.06) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask: radial-gradient(ellipse at center, #000 20%, transparent 75%);
+          mask: radial-gradient(ellipse at center, #000 20%, transparent 75%);
+}
+
+/* Marine snow: specks drifting down, denser on deeper pages. One tiled layer that
+   moves by transform, so it never repaints. */
+.marine-snow { overflow: hidden; }
+.marine-snow::before {
+  content: "";
+  position: absolute;
+  inset: -50% 0 0;
+  background-image:
+    radial-gradient(1px 1px at 12% 18%, rgba(186, 230, 253, 0.55), transparent),
+    radial-gradient(1.5px 1.5px at 38% 62%, rgba(186, 230, 253, 0.4), transparent),
+    radial-gradient(1px 1px at 67% 31%, rgba(186, 230, 253, 0.5), transparent),
+    radial-gradient(1px 1px at 84% 77%, rgba(186, 230, 253, 0.35), transparent),
+    radial-gradient(1.5px 1.5px at 23% 88%, rgba(186, 230, 253, 0.3), transparent),
+    radial-gradient(1px 1px at 55% 8%, rgba(186, 230, 253, 0.45), transparent);
+  background-size: 340px 340px;
+  animation: snow-fall 60s linear infinite;
+}
+@keyframes snow-fall { to { transform: translate3d(0, 340px, 0); } }
+
+/* Page dive transition */
+.dive-bubble {
+  animation: dive-bubble 1.3s cubic-bezier(0.3, 0, 0.6, 1) both;
+}
+@keyframes dive-bubble {
+  from { transform: translate3d(0, 0, 0); opacity: 0; }
+  20% { opacity: 1; }
+  to { transform: translate3d(0, -95vh, 0); opacity: 0; }
+}
+.dive-bar { animation: dive-bar 1.35s cubic-bezier(0.65, 0, 0.35, 1) both; }
+@keyframes dive-bar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* Vehicle systems scan: the callout's leader line draws out to its label */
+.vs-callout { animation: vs-lock 0.5s ease-out both; }
+.vs-callout > span:first-child { animation: vs-line 0.45s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes vs-lock { from { opacity: 0; } to { opacity: 1; } }
+@keyframes vs-line { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* Sound toggle equaliser */
+.sound-bar { height: 3px; transition: height 0.3s; }
+.text-tone.sound-bar { animation: sound-bar 0.9s ease-in-out infinite alternate; }
+@keyframes sound-bar { from { height: 3px; } to { height: 12px; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .marine-snow::before,
+  .dive-bubble,
+  .dive-bar,
+  .vs-callout,
+  .vs-callout > span:first-child,
+  .text-tone.sound-bar,
+  .ticker,
+  .aurora,
+  .scroll-drop,
+  .hud-scan,
+  .hud-blink,
+  .hud-bar,
+  .sonar-sweep,
+  .rule-glint,
+  .waterline { animation: none !important; }
+}
+
 /* Mobile GPU performance optimizations for silky smooth scrolling across all devices */
 @media (max-width: 767px) {
+  .grain::after { display: none; }
+  .marine-snow { display: none; }
   .backdrop-blur-md,
   .backdrop-blur-lg,
   .backdrop-blur-xl,
   .backdrop-blur-2xl,
-  .backdrop-blur {
+  .backdrop-blur,
+  .glass-water,
+  .surface {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
   }

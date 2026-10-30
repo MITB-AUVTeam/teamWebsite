@@ -1,24 +1,27 @@
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
+import { useLenis } from "@/components/ui/smooth-scroll";
+
+// Same hazard on reload: don't let the browser restore a deep scroll position under fresh triggers.
+if (typeof history !== "undefined" && "scrollRestoration" in history) history.scrollRestoration = "manual";
 
 interface ScrollToTopProps {
-  
-  watch: any;
+  watch: unknown;
 }
 
+/**
+ * Jumps to the top on every page change. It is a layout effect rendered before
+ * <main>, so it runs before the new page's GSAP setup: building ScrollTriggers
+ * while still scrolled to the old page's bottom makes `once` triggers fire and
+ * kill themselves mid-refresh, which crashes ScrollTrigger. Pages with a #hash
+ * (e.g. /team#mechanical) scroll on to their target themselves afterwards.
+ */
 export default function ScrollToTop({ watch }: ScrollToTopProps) {
-  useEffect(() => {
-    
-    window.scrollTo(0, 0);
+  const lenis = useLenis();
 
-    const scrollContainer = document.querySelector('.overflow-y-auto');
-    if (scrollContainer) {
-      scrollContainer.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "auto" 
-      });
-    }
-  }, [watch]);
+  useLayoutEffect(() => {
+    if (lenis) lenis.scrollTo(0, { immediate: true, force: true });
+    window.scrollTo(0, 0);
+  }, [watch]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return null;
 }

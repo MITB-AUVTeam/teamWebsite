@@ -1,22 +1,16 @@
-import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
 import { Footer } from "@/components/Footer";
-import {
-  motion,
-  useMotionValue,
-  useReducedMotion,
-  useSpring,
-  useTransform,
-  type Variants,
-} from "framer-motion";
-import {
-  Github,
-  Linkedin,
-  Mail,
-} from "lucide-react";
+import { PageHeader } from "@/components/ui/page-header";
+import { useLenis } from "@/components/ui/smooth-scroll";
 import { resolveTeamImage } from "@/lib/team-images";
 import * as React from "react";
 import { useState } from "react";
+import { cn } from "@/lib/utils";
+import { gsap, ScrollTrigger, SplitText, useGSAP, prefersReducedMotion } from "@/lib/gsap";
+import { CrewCard, CrewSpotlight } from "@/components/team/crew-card";
+import { CrewDossier, type DossierEntry } from "@/components/team/crew-dossier";
+import { JoinCrew } from "@/components/team/join-crew";
+import { ManifestNav } from "@/components/team/manifest-nav";
+import { crewCode } from "@/components/team/types";
 
 const teamCategories = [
   {
@@ -386,199 +380,10 @@ export function getTeamMemberByName(name: string) {
     .find((member) => member.name === name);
 }
 
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.3,
-    },
-  },
-};
+type Member = (typeof resolvedTeamCategories)[number]["members"][number];
 
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 30, scale: 0.9 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.6,
-      ease: [0.6, 0.05, 0.01, 0.9],
-    },
-  },
-};
-
-function useIsMobile() {
-  const [isMobile, setIsMobile] = React.useState(false);
-
-  React.useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  return isMobile;
-}
-
-function TeamMemberCard({ member }: { member: any }) {
-  const [isHovered, setIsHovered] = useState(false);
-  const isMobile = useIsMobile();
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const shouldReduceMotion = useReducedMotion();
-  const hasBio = Boolean(member.bio?.trim());
-
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [5, -5]), {
-    stiffness: 300,
-    damping: 30,
-  });
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-5, 5]), {
-    stiffness: 300,
-    damping: 30,
-  });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const x = (e.clientX - rect.left - width / 2) / (width / 2);
-    const y = (e.clientY - rect.top - height / 2) / (height / 2);
-    mouseX.set(x);
-    mouseY.set(y);
-  };
-
-  const handleMouseLeave = () => {
-    mouseX.set(0);
-    mouseY.set(0);
-    setIsHovered(false);
-  };
-
-  return (
-    <motion.div
-      variants={itemVariants}
-      className="perspective-1000 w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)]"
-    >
-      <motion.div
-        style={
-          isMobile
-            ? { transformStyle: "flat" }
-            : {
-                rotateX,
-                rotateY,
-                transformStyle: "preserve-3d",
-              }
-        }
-        onMouseMove={isMobile ? undefined : handleMouseMove}
-        onMouseEnter={isMobile ? undefined : () => setIsHovered(true)}
-        onMouseLeave={isMobile ? undefined : handleMouseLeave}
-        className="group relative h-full"
-      >
-        <Card className="relative h-full overflow-hidden rounded-3xl border border-white/10 bg-[#0a1128] transition-shadow duration-500 hover:shadow-[0_0_30px_-5px_rgba(59,130,246,0.3)]">
-          {/* Animated gradient overlay */}
-          <motion.div
-            className={`absolute inset-0 bg-gradient-to-br ${member.gradient} opacity-0 transition-opacity duration-500 group-hover:opacity-100`}
-            animate={
-              !isMobile && isHovered
-                ? { opacity: 1 }
-                : { opacity: shouldReduceMotion ? 0.05 : 0 }
-            }
-          />
-
-          <div className="relative z-10 flex flex-col h-full">
-            {/* Identity: the photo is its own full-bleed panel with the name
-                lettered directly onto it, so name+photo read as one distinct
-                unit set apart from the plain card surface below. */}
-            <div className="relative w-full aspect-square overflow-hidden">
-              <motion.img
-                src={member.image}
-                alt={member.name}
-                className="absolute inset-0 h-full w-full object-cover"
-                loading="lazy"
-                whileHover={isMobile ? undefined : { scale: 1.08 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-              />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-black/95 via-black/50 to-transparent" />
-              <motion.h3
-                className="absolute inset-x-0 bottom-0 px-5 pb-4 text-xl md:text-2xl font-extrabold tracking-tight text-white text-center leading-snug [text-shadow:0_2px_10px_rgba(0,0,0,0.9)]"
-                animate={!isMobile && isHovered ? { y: -3 } : { y: 0 }}
-                transition={{ duration: 0.2 }}
-              >
-                {member.name}
-              </motion.h3>
-            </div>
-
-            {/* Details: plain card surface, clearly separate from the photo above */}
-            <div className="text-center flex-grow flex flex-col gap-2.5 px-6 pt-5 pb-4">
-              <div className="flex flex-col items-center gap-1">
-                <Badge
-                  variant="secondary"
-                  className="bg-blue-500/10 text-[0.65rem] uppercase tracking-[0.2em] text-blue-200/80 border border-blue-500/20 backdrop-blur font-medium"
-                >
-                  {member.role}
-                </Badge>
-                {member.department ? (
-                  <p className="text-xs font-semibold tracking-tight text-orange-400/90">
-                    {member.department}
-                  </p>
-                ) : null}
-              </div>
-
-              {/* Location removed */}
-
-              {hasBio ? (
-                <p className="text-sm text-slate-400 flex-grow">
-                  {member.bio}
-                </p>
-              ) : null}
-
-
-              {/* Social Links: a clearly-clickable action row, kept small and
-                  neutral at rest so it never competes with the name or role;
-                  the accent color only shows up on interaction. */}
-              <div className={`flex justify-center ${hasBio ? "mt-auto" : "mt-0"} pt-1`}>
-                <div className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/[0.05] p-1 shadow-sm">
-                  {[
-                    { icon: Linkedin, label: "LinkedIn", href: member.social?.linkedin },
-                    { icon: Github, label: "GitHub", href: member.social?.github },
-                    { icon: Mail, label: "Email", href: member.social?.email },
-                  ].map((social) => {
-                    if (!social.href) return null;
-
-                    let formattedHref = social.href;
-                    if (!formattedHref.startsWith('http') && !formattedHref.startsWith('mailto:')) {
-                      formattedHref = `https://${formattedHref}`;
-                    }
-
-                    return (
-                      <a
-                        key={social.label}
-                        href={formattedHref}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`${member.name} on ${social.label}`}
-                        className="group/social flex h-9 w-9 items-center justify-center rounded-full text-slate-400 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-blue-500/15 hover:text-blue-300 hover:shadow-[0_0_14px_-2px_rgba(59,130,246,0.6)] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/60"
-                      >
-                        <social.icon
-                          className="h-4 w-4 transition-transform duration-200 group-hover/social:scale-110"
-                          aria-hidden
-                        />
-                      </a>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-          </div>
-        </Card>
-      </motion.div>
-    </motion.div>
-  );
-}
+// Floating navbar (~80px) plus the sticky manifest bar, with a little air.
+const NAV_OFFSET = -170;
 
 const getCategorySlug = (title: string) => {
   const lower = title.toLowerCase();
@@ -589,215 +394,290 @@ const getCategorySlug = (title: string) => {
   return lower.replace(/[^a-z0-9]+/g, "-");
 };
 
-export function TeamSectionBlock() {
-  const shouldReduceMotion = useReducedMotion();
-  const isMobile = useIsMobile();
+const getShortTitle = (title: string) =>
+  title.split(/[/(]/)[0].replace(/subsystem/i, "").trim();
 
-  React.useEffect(() => {
-    const scrollToHash = () => {
-      const hash = window.location.hash.replace("#", "").toLowerCase();
-      if (hash) {
-        const element = document.getElementById(hash);
-        if (element) {
-          const yOffset = -90;
-          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-          window.scrollTo({ top: y, behavior: "smooth" });
-        }
+/** Scrolls to an element below the fixed navbar, through Lenis when it is running. */
+function useScrollToId() {
+  const lenis = useLenis();
+  return React.useCallback(
+    (id: string, immediate = false) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (lenis) {
+        lenis.scrollTo(el, { offset: NAV_OFFSET, immediate, force: true });
+      } else {
+        const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const y = el.getBoundingClientRect().top + window.scrollY + NAV_OFFSET;
+        window.scrollTo({ top: y, behavior: immediate || reduce ? "auto" : "smooth" });
       }
-    };
+    },
+    [lenis],
+  );
+}
 
-    scrollToHash();
-    const timer = setTimeout(scrollToHash, 250);
-    return () => clearTimeout(timer);
+// Groups that feature one member above the rest.
+const FEATURED_LAYOUT_TITLES = [
+  "Founding Team / Team Advisors and Mentor",
+  "Current Leadership",
+  "Electrical Subsystem",
+  "Software and Automation Subsystem",
+];
+// Groups whose featured member isn't simply the one with "lead" in their role.
+const FEATURED_BY_TITLE: Record<string, string> = {
+  "Founding Team / Team Advisors and Mentor": "Pritha Jaipal",
+};
+
+function featuredIndexFor(title: string, members: Member[]) {
+  if (!FEATURED_LAYOUT_TITLES.includes(title) || members.length === 0) return -1;
+  const pinned = FEATURED_BY_TITLE[title];
+  const found = pinned ? members.findIndex((m) => m.name === pinned) : members.findIndex((m) => /lead/i.test(m.role));
+  return found < 0 ? 0 : found;
+}
+
+// Hover scan, card preview and spotlight radar; scoped here so the page stays self-contained.
+const TEAM_CSS = `
+.cm-card:hover .cm-scan, .cm-spot:hover .cm-scan { animation: cm-scan 1.6s cubic-bezier(0.45,0,0.55,1) infinite; }
+.cm-scan-loop { animation: cm-scan 3.2s cubic-bezier(0.45,0,0.55,1) infinite; }
+@keyframes cm-scan { from { transform: translateY(-100%); } to { transform: translateY(700%); } }
+.cm-radar { animation: cm-radar 6s linear infinite; }
+@keyframes cm-radar { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .cm-card:hover .cm-scan, .cm-spot:hover .cm-scan, .cm-scan-loop, .cm-radar { animation: none; }
+}
+/* Card hover preview: desktop pointers only, opacity and transforms only. */
+.cm-peek { display: none; }
+@media (hover: hover) and (pointer: fine) and (min-width: 768px) {
+  .cm-peek { display: flex; opacity: 0; visibility: hidden; transition: opacity .3s ease, visibility 0s linear .3s; }
+  .cm-peek-line { opacity: 0; transform: translate3d(0,10px,0); transition: opacity .25s ease, transform .25s ease; }
+  .cm-peek-sweep { transform: translate3d(0,-100%,0); }
+  .cm-card:hover .cm-peek, .cm-card:has(:focus-visible) .cm-peek { opacity: 1; visibility: visible; transition: opacity .35s ease, visibility 0s; }
+  .cm-card:hover .cm-peek-line, .cm-card:has(:focus-visible) .cm-peek-line {
+    opacity: 1; transform: none;
+    transition: opacity .5s ease, transform .6s cubic-bezier(0.22,1,0.36,1);
+    transition-delay: calc(.12s + var(--i, 0) * .055s);
+  }
+  .cm-card:hover .cm-peek-sweep, .cm-card:has(:focus-visible) .cm-peek-sweep { animation: cm-peek-sweep .9s cubic-bezier(0.65,0,0.35,1) both; }
+}
+@keyframes cm-peek-sweep { from { transform: translate3d(0,-100%,0); } to { transform: translate3d(0,0,0); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .cm-peek, .cm-peek-line, .cm-card:hover .cm-peek-line, .cm-card:has(:focus-visible) .cm-peek-line { transition: none !important; transform: none !important; }
+  .cm-peek-sweep { display: none; }
+}`;
+
+export function TeamSectionBlock() {
+  const scrollToId = useScrollToId();
+  const root = React.useRef<HTMLDivElement>(null);
+  const [dossier, setDossier] = useState<DossierEntry | null>(null);
+  const opener = React.useRef<HTMLElement | null>(null);
+
+  const openDossier = React.useCallback((entry: DossierEntry, trigger: HTMLElement) => {
+    opener.current = trigger;
+    setDossier(entry);
+  }, []);
+  const closeDossier = React.useCallback(() => {
+    setDossier(null);
+    // Give the card its focus back once the drawer has gone.
+    window.setTimeout(() => opener.current?.focus({ preventScroll: true }), 0);
   }, []);
 
+  useGSAP(
+    () => {
+      if (prefersReducedMotion()) return;
+      const q = gsap.utils.selector(root);
+
+      // Header stats count up from zero.
+      q(".tm-count").forEach((el: HTMLElement) => {
+        const target = Number(el.dataset.count ?? 0);
+        const counter = { v: 0 };
+        gsap.to(counter, {
+          v: target,
+          duration: 2,
+          delay: 0.6,
+          ease: "power3.out",
+          onUpdate: () => {
+            el.textContent = String(Math.round(counter.v));
+          },
+        });
+      });
+
+      // Group headers: the big index rolls up, the title words rise, the rule draws across.
+      q(".cm-head").forEach((head: HTMLElement) => {
+        const title = head.querySelector(".cm-title");
+        const split = title ? SplitText.create(title, { type: "words", mask: "words" }) : null;
+        gsap
+          .timeline({ scrollTrigger: { trigger: head, start: "top 85%", once: true } })
+          .from(head.querySelector(".cm-num"), { yPercent: 110, duration: 1.1 })
+          .from(split?.words ?? [], { yPercent: 110, stagger: 0.05, duration: 1.1 }, 0.1)
+          .from(head.querySelector(".cm-rule"), { scaleX: 0, transformOrigin: "left", duration: 1.4, ease: "expo.inOut" }, 0.2)
+          .from(head.querySelectorAll(".cm-meta"), { autoAlpha: 0, y: 10, stagger: 0.08, duration: 0.8 }, 0.4);
+      });
+
+      // Badge cards: each rises in while its photo settles into the frame. Transform and
+      // opacity only, so a whole row can animate at once without repainting the photos.
+      gsap.set(q(".cm-card"), { y: 60, autoAlpha: 0 });
+      gsap.set(q(".cm-card .cm-shot"), { scale: 1.12, autoAlpha: 0 });
+      ScrollTrigger.batch(q(".cm-card"), {
+        start: "top 92%",
+        once: true,
+        onEnter: (batch) => {
+          const els = batch as HTMLElement[];
+          gsap.to(els, { y: 0, autoAlpha: 1, duration: 1.1, stagger: 0.08 });
+          gsap.to(els.map((c) => c.querySelector(".cm-shot")), { scale: 1, autoAlpha: 1, duration: 1.3, stagger: 0.08, ease: "expo.out" });
+        },
+      });
+
+      // Spotlights: the card lifts in, then the portrait drifts inside its frame while scrolling.
+      q(".cm-spot").forEach((card: HTMLElement) => {
+        gsap.from(card, { y: 80, autoAlpha: 0, duration: 1.3, scrollTrigger: { trigger: card, start: "top 88%", once: true } });
+        const img = card.querySelector(".cm-img");
+        if (img) {
+          gsap.fromTo(
+            img,
+            { yPercent: -6, scale: 1.15 },
+            { yPercent: 6, ease: "none", scrollTrigger: { trigger: card, start: "top bottom", end: "bottom top", scrub: 0.8 } },
+          );
+        }
+      });
+
+      q(".cm-soon").forEach((el: HTMLElement) =>
+        gsap.from(el, { autoAlpha: 0, scale: 0.94, duration: 1.2, scrollTrigger: { trigger: el, start: "top 88%", once: true } }),
+      );
+    },
+    { scope: root },
+  );
+
+  React.useEffect(() => {
+    const hash = window.location.hash.replace("#", "").toLowerCase();
+    if (!hash) return;
+    scrollToId(hash, true);
+    // Run again once images above have settled and the preloader has released scrolling.
+    const timers = [350, 2200].map((ms) => setTimeout(() => scrollToId(hash), ms));
+    return () => timers.forEach(clearTimeout);
+  }, [scrollToId]);
+
+  const totalMembers = resolvedTeamCategories.reduce((n, c) => n + c.members.length, 0);
+  const subsystemCount = resolvedTeamCategories.filter((c) => /subsystem/i.test(c.title)).length;
+  const groups = React.useMemo(
+    () => resolvedTeamCategories.map((c) => ({ slug: getCategorySlug(c.title), label: getShortTitle(c.title), count: c.members.length })),
+    [],
+  );
+
   return (
-    <div className="min-h-screen bg-transparent text-slate-50 pb-0 font-sans">
-      <section
-        aria-labelledby="team-section-heading"
-        className="relative w-full overflow-hidden px-4 py-20 sm:px-6 lg:px-10"
+    <div ref={root} className="min-h-screen text-white">
+      <style>{TEAM_CSS}</style>
+      <PageHeader
+        eyebrow="Team"
+        title="The people behind"
+        accent="the vehicles."
+        description="A diverse team of talented (and extremely fun) individuals working together to build amazing and sometimes functional robots."
       >
-        {/* Background decorative elements */}
-        {!isMobile && (
-          <div className="absolute inset-0 -z-10 overflow-hidden">
-            <motion.div
-              animate={{
-                scale: shouldReduceMotion ? 1 : [1, 1.18, 1],
-                rotate: shouldReduceMotion ? 0 : [0, 90, 0],
-                opacity: [0.12, 0.3, 0.12],
-              }}
-              transition={{
-                duration: shouldReduceMotion ? 0.6 : 18,
-                repeat: shouldReduceMotion ? 0 : Infinity,
-                ease: "linear",
-              }}
-              className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-blue-600/20 blur-[150px]"
-            />
-            <motion.div
-              animate={{
-                scale: shouldReduceMotion ? 1 : [1.1, 1, 1.1],
-                rotate: shouldReduceMotion ? 0 : [0, -90, 0],
-                opacity: [0.12, 0.32, 0.12],
-              }}
-              transition={{
-                duration: shouldReduceMotion ? 0.6 : 16,
-                repeat: shouldReduceMotion ? 0 : Infinity,
-                ease: "linear",
-              }}
-              className="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-cyan-600/20 blur-[150px]"
-            />
-          </div>
-        )}
-
-        <div className="mx-auto max-w-7xl">
-          {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-20"
-          >
-            <div className="space-y-4">
-              <h2 id="team-section-heading" className="text-5xl md:text-7xl lg:text-[5.5rem] font-black uppercase tracking-tighter leading-none text-white">
-                OUR TEAM
-              </h2>
-              <p className="text-slate-400 text-lg md:text-xl tracking-[0.06em] font-medium ml-1">
-                A diverse team of talented (and extremely fun) individuals working together to build
-                amazing and sometimes functional robots.
-              </p>
+        <dl className="flex gap-10 sm:gap-14">
+          {[
+            { value: totalMembers, label: "Members" },
+            { value: resolvedTeamCategories.length, label: "Groups" },
+            { value: subsystemCount, label: "Subsystems" },
+          ].map((stat) => (
+            <div key={stat.label} className="flex flex-col-reverse">
+              <dt className="mt-1 font-mono text-xs uppercase tracking-[0.18em] text-slate-400">{stat.label}</dt>
+              <dd data-count={stat.value} className="tm-count text-4xl font-semibold tabular-nums tracking-[-0.04em] text-white">{stat.value}</dd>
             </div>
-          </motion.div>
+          ))}
+        </dl>
+      </PageHeader>
 
-          {/* Team Categories */}
-          <div>
-            {resolvedTeamCategories.map((category, idx) => {
-              // Categories that place their lead on a row of their own, with
-              // the remaining members on the line below.
-              const leadLayoutTitles = [
-                "Founding Team / Team Advisors and Mentor",
-                "Current Leadership",
-                "Electrical Subsystem",
-                "Software and Automation Subsystem",
-              ];
-              // Explicitly pin the top-row member for categories where it isn't
-              // simply the "lead" by role.
-              const topMemberByTitle: Record<string, string> = {
-                "Founding Team / Team Advisors and Mentor": "Pritha Jaipal",
-              };
-              const isLeadLayout = leadLayoutTitles.includes(category.title);
-              const pinnedName = topMemberByTitle[category.title];
-              const foundLeadIndex = pinnedName
-                ? category.members.findIndex((m) => m.name === pinnedName)
-                : isLeadLayout
-                  ? category.members.findIndex((m) => /lead/i.test(m.role))
-                  : -1;
-              // When a subsystem has no explicit "lead", fall back to the first
-              // member so it still gets the top-row-then-rest layout.
-              const leadIndex =
-                isLeadLayout && foundLeadIndex < 0 && category.members.length > 0
-                  ? 0
-                  : foundLeadIndex;
+      {/* The group bar only sticks while the crew list is on screen, not over Join or the footer */}
+      <div className="relative">
+      <ManifestNav groups={groups} onJump={scrollToId} className="mt-10" />
 
-              // Every category gets its own distinct, boxed panel. The advisors
-              // and current-leadership boxes sit closer together than the rest
-              // so the two still read as one connected group.
-              const marginTop =
-                idx === 0
-                  ? ""
-                  : category.title === "Current Leadership"
-                    ? "mt-6"
-                    : "mt-20";
-              const panel =
-                "rounded-[2.5rem] border border-slate-700 bg-[#0a1128] p-6 md:p-8 lg:p-10 shadow-2xl relative overflow-hidden";
-              const categorySlug = getCategorySlug(category.title);
+      <section aria-labelledby="team-section-heading" className="mx-auto w-full max-w-7xl px-5 pb-28 pt-14 sm:px-8 md:pt-20">
+        <h2 id="team-section-heading" className="sr-only">
+          Team members by group
+        </h2>
 
-              return (
-                <div key={category.title} id={categorySlug} className={`${marginTop} ${panel}`.trim()}>
-                  <div className="absolute inset-0 border border-slate-800/50 rounded-[2.5rem] pointer-events-none z-20 m-2" />
-                  <div className="relative z-10">
-                    <motion.div
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true, margin: "-100px" }}
-                      transition={{ duration: 0.6 }}
-                      className="mb-10 flex items-center gap-4"
-                    >
-                      <h3 className="text-3xl font-bold text-white tracking-tight">
-                        {category.title}
-                      </h3>
-                      <div className="h-[1px] flex-grow bg-gradient-to-r from-white/20 to-transparent" />
-                    </motion.div>
+        {resolvedTeamCategories.map((category, idx) => {
+          const slug = getCategorySlug(category.title);
+          const featuredIndex = featuredIndexFor(category.title, category.members);
+          const featured = featuredIndex >= 0 ? category.members[featuredIndex] : null;
+          const rest = category.members.map((m, i) => ({ m, i })).filter(({ i }) => i !== featuredIndex);
+          const open = (member: Member, i: number) => (trigger: HTMLElement) =>
+            openDossier({ member, code: crewCode(idx, i), group: getShortTitle(category.title) }, trigger);
 
-                    {category.members.length === 0 ? (
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 0.6 }}
-                        className="flex flex-col items-center justify-center gap-3 rounded-3xl border border-dashed border-white/10 bg-[#0a1128] py-16 text-center"
-                      >
-                        <span className="text-2xl md:text-3xl font-bold tracking-tight text-white">
-                          Coming Soon
-                        </span>
-                        <span className="text-sm text-slate-400">
-                          This subsystem is being assembled. Stay tuned.
-                        </span>
-                      </motion.div>
-                    ) : leadIndex >= 0 ? (
-                      <div className="space-y-8">
-                        {/* First row: subsystem lead on its own line */}
-                        <motion.div
-                          variants={containerVariants}
-                          initial="hidden"
-                          whileInView="visible"
-                          viewport={{ once: true, margin: "-100px" }}
-                          className="flex flex-wrap justify-center gap-8"
-                        >
-                          <TeamMemberCard
-                            key={`${category.title}-lead`}
-                            member={category.members[leadIndex]}
-                          />
-                        </motion.div>
-
-                        {/* Second row: remaining members */}
-                        <motion.div
-                          variants={containerVariants}
-                          initial="hidden"
-                          whileInView="visible"
-                          viewport={{ once: true, margin: "-100px" }}
-                          className="flex flex-wrap justify-center gap-8"
-                        >
-                          {category.members
-                            .filter((_, i) => i !== leadIndex)
-                            .map((member, index) => (
-                              <TeamMemberCard
-                                key={`${category.title}-member-${index}`}
-                                member={member}
-                              />
-                            ))}
-                        </motion.div>
-                      </div>
-                    ) : (
-                      <motion.div
-                        variants={containerVariants}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true, margin: "-100px" }}
-                        className="flex flex-wrap justify-center gap-8"
-                      >
-                        {category.members.map((member, index) => (
-                          <TeamMemberCard key={index} member={member} />
-                        ))}
-                      </motion.div>
-                    )}
+          return (
+            <div key={category.title} id={slug} className={cn("scroll-mt-[170px]", idx > 0 && "mt-24 md:mt-32")}>
+              <header className="cm-head mb-8 md:mb-10">
+                <div className="flex items-end gap-5 md:gap-8">
+                  <span className="block overflow-hidden font-mono text-5xl font-light leading-none tabular-nums text-cyan-300/30 md:text-7xl">
+                    <span className="cm-num inline-block">{String(idx + 1).padStart(2, "0")}</span>
+                  </span>
+                  <div className="min-w-0 flex-1 pb-1">
+                    <p className="cm-meta mb-2 font-mono text-[10px] uppercase tracking-[0.22em] text-cyan-200/60">
+                      Sector {String(idx + 1).padStart(2, "0")} //{" "}
+                      {category.members.length === 0
+                        ? "assembling"
+                        : `${category.members.length} ${category.members.length === 1 ? "member" : "members"}`}
+                    </p>
+                    <h3 className="cm-title text-3xl font-semibold leading-[1.02] tracking-[-0.04em] text-white md:text-5xl">{category.title}</h3>
                   </div>
                 </div>
-              );
-            })}
-          </div>
+                <div className="cm-rule mt-6 h-px w-full bg-gradient-to-r from-cyan-300/50 via-white/10 to-transparent" />
+              </header>
 
-        </div>
+              {category.members.length === 0 ? (
+                // A group still forming: empty seats waiting for their crew, and a way to claim one
+                <div className="cm-soon grid items-center gap-8 md:grid-cols-12 md:gap-12">
+                  <div className="grid grid-cols-3 gap-3 sm:gap-5 md:col-span-7">
+                    {[1, 2, 3].map((n) => (
+                      <div
+                        key={n}
+                        className="relative flex aspect-[4/5] flex-col items-center justify-center gap-3 rounded-[1.25rem] border border-dashed border-cyan-300/20 bg-cyan-300/[0.02]"
+                      >
+                        <span className="absolute left-2.5 top-2.5 rounded-md border border-white/10 bg-[#020617]/85 px-2 py-1 font-mono text-[10px] tracking-[0.12em] text-cyan-100/60">
+                          {crewCode(idx, n - 1)}
+                        </span>
+                        <span aria-hidden="true" className="relative flex h-10 w-10 items-center justify-center sm:h-12 sm:w-12">
+                          <span className="absolute inset-0 rounded-full border border-cyan-300/25 motion-safe:animate-ping [animation-duration:3s]" style={{ animationDelay: `${n * 0.6}s` }} />
+                          <span className="absolute inset-0 rounded-full border border-cyan-300/30" />
+                          <span className="text-lg font-light text-cyan-200/80">+</span>
+                        </span>
+                        <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-slate-500 sm:text-[10px]">Open seat</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="md:col-span-5">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-cyan-200/70">Signal pending · now forming</span>
+                    <p className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-white md:text-3xl">These seats are still empty.</p>
+                    <p className="mt-3 text-sm leading-relaxed text-slate-400">
+                      We're putting this group together. If you'd like to explore new ideas for underwater robotics, there's room for you.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => scrollToId("join")}
+                      className="mt-6 inline-flex items-center gap-2 text-sm text-white underline decoration-cyan-300/40 underline-offset-4 transition-colors hover:text-cyan-200 hover:decoration-cyan-200"
+                    >
+                      Join the crew <span aria-hidden="true">↓</span>
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className="space-y-4 sm:space-y-6">
+                  {featured && <CrewSpotlight member={featured} code={crewCode(idx, featuredIndex)} onOpen={open(featured, featuredIndex)} />}
+                  {rest.length > 0 && (
+                    <div className="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 xl:grid-cols-4">
+                      {rest.map(({ m, i }) => (
+                        <CrewCard key={m.name} member={m} code={crewCode(idx, i)} group={getShortTitle(category.title)} onOpen={open(m, i)} />
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          );
+        })}
       </section>
+      </div>
+      <JoinCrew onPick={(slug) => scrollToId(slug)} />
+      <CrewDossier entry={dossier} onClose={closeDossier} />
       <Footer />
     </div>
   );

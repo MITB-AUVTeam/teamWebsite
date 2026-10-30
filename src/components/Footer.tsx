@@ -1,156 +1,156 @@
-import { Github, Instagram, Linkedin, Mail, Youtube, MapPin } from "lucide-react";
-import logoImg from "../assets/hero_parallax/b0b02181d3064ccfa838a5b7d18e44696ad67457.png";
+import type { ReactNode } from "react";
+import { Link } from "react-router-dom";
+import { useRef } from "react";
+import { ArrowUp } from "lucide-react";
+import { gsap, useGSAP, prefersReducedMotion } from "@/lib/gsap";
+import { useLenis } from "@/components/ui/smooth-scroll";
+import { PillButton } from "@/components/ui/pill-button";
+import { Reveal } from "@/components/ui/reveal";
+
+const socials = [
+  { href: "https://github.com/MITB-AUVTeam", label: "GitHub" },
+  { href: "https://www.linkedin.com/company/team-auv-mit-b/", label: "LinkedIn" },
+  { href: "https://www.instagram.com/auv_mitb?igsh=azA2d2N3eGlqdDlh", label: "Instagram" },
+  { href: "https://www.youtube.com/@TeamAUVMIT-B", label: "YouTube" },
+];
+
+const sitemap = [
+  { to: "/", label: "Home" },
+  { to: "/about", label: "About" },
+  { to: "/vehicles", label: "Vehicles" },
+  { to: "/team", label: "Team" },
+  { to: "/gallery", label: "Gallery" },
+  { to: "/media", label: "Media & Works" },
+  { to: "/sponsors", label: "Sponsors" },
+  { to: "/contact", label: "Contact Us" },
+];
+
+function Column({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <div>
+      <h4 className="mb-5 text-xs font-medium uppercase tracking-[0.2em] text-slate-500">{title}</h4>
+      {children}
+    </div>
+  );
+}
+
+const linkClass = "text-slate-300 transition-colors duration-300 hover:text-white";
 
 export function Footer() {
+  const lenis = useLenis();
+  const wordmark = useRef<HTMLDivElement>(null);
+
+  // GSAP: the wordmark's letters surface one by one as the footer scrolls in.
+  useGSAP(
+    () => {
+      if (prefersReducedMotion()) return;
+      gsap.from(".fw-letter", {
+        yPercent: 100,
+        rotate: 8,
+        stagger: 0.05,
+        ease: "none",
+        scrollTrigger: { trigger: wordmark.current, start: "top bottom", end: "bottom bottom", scrub: 0.8 },
+      });
+    },
+    { scope: wordmark },
+  );
+  const toTop = () => (lenis ? lenis.scrollTo(0, { duration: 1.6 }) : window.scrollTo({ top: 0, behavior: "smooth" }));
+
   return (
-    <>
-      <style>{`
-        @keyframes move-forever {
-          0% {
-            transform: translate3d(-90px, 0, 0);
-          }
-          100% {
-            transform: translate3d(85px, 0, 0);
-          }
-        }
-        .parallax > use {
-          animation: move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
-        }
-        .parallax > use:nth-child(1) {
-          animation-delay: -2s;
-          animation-duration: 7s;
-        }
-        .parallax > use:nth-child(2) {
-          animation-delay: -3s;
-          animation-duration: 10s;
-        }
-        .parallax > use:nth-child(3) {
-          animation-delay: -4s;
-          animation-duration: 13s;
-        }
-        .parallax > use:nth-child(4) {
-          animation-delay: -5s;
-          animation-duration: 20s;
-        }
-      `}</style>
+    <footer className="relative mt-auto w-full overflow-hidden border-t border-white/[0.06]">
+      <div aria-hidden="true" className="pointer-events-none absolute -bottom-1/2 left-1/2 h-[600px] w-[1200px] -translate-x-1/2 bg-[radial-gradient(closest-side,color-mix(in_srgb,var(--t1)_7%,transparent),transparent)]" />
 
-      <div className="w-full relative mt-auto block">
-        {/* Animated Parallax Waves */}
-        <svg
-          className="w-full h-10 md:h-36 min-h-[40px] max-h-[150px] block relative z-10 translate-y-[1px]"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlnsXlink="http://www.w3.org/1999/xlink"
-          viewBox="0 24 150 28"
-          preserveAspectRatio="none"
-          shapeRendering="auto"
-        >
-          <defs>
-            <path
-              id="gentle-wave"
-              d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"
-            />
-          </defs>
-          <g className="parallax">
-            <use xlinkHref="#gentle-wave" x="48" y="0" fill="rgba(56,189,248,0.7)" />
-            <use xlinkHref="#gentle-wave" x="48" y="3" fill="rgba(14,165,233,0.5)" />
-            <use xlinkHref="#gentle-wave" x="48" y="5" fill="rgba(3,105,161,0.3)" />
-            <use xlinkHref="#gentle-wave" x="48" y="7" fill="#020617" />
-          </g>
-        </svg>
-
-        <footer className="bg-[#020617] pt-16 pb-8 relative z-20">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-              
-              <div className="flex flex-col items-start">
-                <img 
-                  src={logoImg} 
-                  alt="AUV Logo" 
-                  className="h-[40px] w-auto object-contain mb-4" 
-                />
-                <p className="text-slate-400 mb-6 text-sm leading-relaxed max-w-xs">
-                  Building cool underwater robots everyday.
-                </p>
-                <div className="flex gap-4">
-                  <a href="https://github.com/MITB-AUVTeam" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition-colors border border-slate-800">
-                    <Github className="w-4 h-4" />
-                  </a>
-                  <a href="https://www.linkedin.com/company/team-auv-mit-b/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition-colors border border-slate-800">
-                    <Linkedin className="w-4 h-4" />
-                  </a>
-                  <a href="https://www.instagram.com/auv_mitb?igsh=azA2d2N3eGlqdDlh" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition-colors border border-slate-800">
-                    <Instagram className="w-4 h-4" />
-                  </a>
-                  <a href="https://www.youtube.com/@TeamAUVMIT-B" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition-colors border border-slate-800">
-                    <Youtube className="w-4 h-4" />
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex flex-col items-start">
-                <h4 className="text-white font-semibold mb-6 tracking-wide uppercase text-sm">Contact Us</h4>
-                <ul className="space-y-4">
-                  <li>
-                    <a href="mailto:auv.mitblr@manipal.edu" className="text-slate-400 hover:text-blue-400 transition-colors flex items-center gap-3 text-sm">
-                      <Mail className="w-4 h-4 text-slate-500" />
-                      auv.mitblr@manipal.edu
-                    </a>
-                  </li>
-                  <li>
-                    <a href="mailto:auv.mitb@gmail.com" className="text-slate-400 hover:text-blue-400 transition-colors flex items-center gap-3 text-sm">
-                      <Mail className="w-4 h-4 text-slate-500" />
-                      auv.mitb@gmail.com
-                    </a>
-                  </li>
-                  <li className="text-slate-400 text-sm flex items-center gap-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-500 shrink-0"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                    <span className="flex items-center gap-2">
-                      <a href="tel:+918210876521" className="hover:text-blue-400 transition-colors">
-                        +91 82108 76521
-                      </a>
-                      <span className="text-slate-500 text-xs font-normal">Animesh Mishra</span>
-                    </span>
-                  </li>
-                  <li className="text-slate-400 text-sm flex items-center gap-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-500 shrink-0"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                    <span className="flex items-center gap-2">
-                      <a href="tel:+919113095603" className="hover:text-blue-400 transition-colors">
-                        +91 91130 95603
-                      </a>
-                      <span className="text-slate-500 text-xs font-normal">Siddharth P S</span>
-                    </span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="flex flex-col items-start">
-                <h4 className="text-white font-semibold mb-6 tracking-wide uppercase text-sm">Location</h4>
-                <a 
-                  href="https://maps.app.goo.gl/FBcetpnuBDREDUjG7" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="flex items-start gap-3 group/map transition-colors"
-                >
-                  <MapPin className="w-5 h-5 text-slate-500 shrink-0 mt-0.5 group-hover/map:text-blue-400 transition-colors" />
-                  <p className="text-slate-400 group-hover/map:text-blue-400 text-sm leading-relaxed transition-colors">
-                    Team AUV Workshop <br/>
-                    Room 209, 210 AB-4<br/>
-                    Manipal Institute of Technology,<br />
-                    Manipal Academy of Higher Education,<br />
-                    Bengaluru, Karnataka, India
-                  </p>
-                </a>
-              </div>
-            </div>
-
-            <div className="border-t border-slate-800/50 pt-8 text-center">
-              <p className="text-slate-500 text-xs">
-                &copy; {new Date().getFullYear()} AUV Team. All rights reserved.
-              </p>
-            </div>
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-8 pt-24 md:pt-32">
+        <Reveal className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
+          <h2 className="max-w-3xl text-4xl sm:text-6xl md:text-7xl font-semibold leading-[1] tracking-[-0.03em] text-white">
+            Let's build what goes <span className="font-serif italic font-normal text-water">below.</span>
+          </h2>
+          <div className="flex flex-wrap gap-3">
+            <PillButton to="/contact">Contact us</PillButton>
+            <PillButton to="/sponsors" variant="ghost">Partner with us</PillButton>
           </div>
-        </footer>
+        </Reveal>
+
+        <div className="mt-20 grid grid-cols-2 gap-10 border-t border-white/[0.08] pt-14 md:grid-cols-12">
+          <div className="col-span-2 md:col-span-4">
+            <Column title="Write to us">
+              <ul className="space-y-3 text-sm">
+                <li><a href="mailto:auv.mitblr@manipal.edu" className={linkClass}>auv.mitblr@manipal.edu</a></li>
+                <li><a href="mailto:auv.mitb@gmail.com" className={linkClass}>auv.mitb@gmail.com</a></li>
+                <li className="pt-2">
+                  <a href="tel:+918210876521" className={linkClass}>+91 82108 76521</a>
+                  <span className="ml-2 text-slate-500">Animesh Mishra</span>
+                </li>
+                <li>
+                  <a href="tel:+919113095603" className={linkClass}>+91 91130 95603</a>
+                  <span className="ml-2 text-slate-500">Siddharth P S</span>
+                </li>
+              </ul>
+            </Column>
+          </div>
+
+          <div className="col-span-2 sm:col-span-1 md:col-span-3">
+            <Column title="Visit">
+              <a
+                href="https://maps.app.goo.gl/FBcetpnuBDREDUjG7"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-sm leading-relaxed text-slate-300 transition-colors hover:text-white"
+              >
+                Team AUV Workshop<br />
+                Room 209, 210 AB-4<br />
+                Manipal Institute of Technology<br />
+                Bengaluru, Karnataka, India
+              </a>
+            </Column>
+          </div>
+
+          <nav aria-label="Footer" className="col-span-2 sm:col-span-1 md:col-span-3">
+            <Column title="Pages">
+              <ul className="grid grid-cols-3 gap-x-6 gap-y-3 text-sm sm:grid-cols-2">
+                {sitemap.map(({ to, label }) => (
+                  <li key={to}><Link to={to} className={linkClass}>{label}</Link></li>
+                ))}
+              </ul>
+            </Column>
+          </nav>
+
+          <div className="md:col-span-2">
+            <Column title="Follow">
+              <ul className="space-y-3 text-sm">
+                {socials.map(({ href, label }) => (
+                  <li key={href}>
+                    <a href={href} target="_blank" rel="noopener noreferrer" className={linkClass}>{label}</a>
+                  </li>
+                ))}
+              </ul>
+            </Column>
+          </div>
+        </div>
+
+        <div ref={wordmark} className="mt-20 select-none overflow-hidden" aria-hidden="true">
+          <p className="flex translate-y-[18%] justify-center text-[18vw] md:text-[17vw] font-semibold leading-[0.8] tracking-[-0.06em]">
+            {/* The gradient only paints inside each letter's box, and the tight tracking makes
+                that box narrower than the glyph (the V's arm overhangs). Padding widens the
+                painted area; the matching negative margin keeps the spacing unchanged. */}
+            {"AUV·MITB".split("").map((ch, i) => (
+              <span key={i} className="fw-letter -mx-[0.12em] inline-block bg-gradient-to-b from-white/[0.14] to-white/0 bg-clip-text px-[0.12em] text-transparent">
+                {ch}
+              </span>
+            ))}
+          </p>
+        </div>
       </div>
-    </>
+
+      <div className="relative border-t border-white/[0.06]">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-5 py-6 text-xs text-slate-500 sm:flex-row sm:px-8">
+          <p>&copy; {new Date().getFullYear()} Team AUV, MIT Bengaluru</p>
+          <button type="button" onClick={toTop} className="group inline-flex items-center gap-2 transition-colors hover:text-white">
+            Back to top
+            <ArrowUp className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5" />
+          </button>
+        </div>
+      </div>
+    </footer>
   );
 }

@@ -1,207 +1,161 @@
-"use client"
+import { useCallback, useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useInView, useReducedMotion } from "framer-motion";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import { resolvedTeamCategories } from "@/components/ui/team-section-block-shadcnui";
+import { cn } from "@/lib/utils";
+import { NoPhoto, isPlaceholder } from "@/components/team/no-photo";
 
-import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { resolvedTeamCategories } from '@/components/ui/team-section-block-shadcnui';
-import { cn } from '@/lib/utils';
-import { useNavigate } from 'react-router-dom';
-
-const SQRT_5000 = Math.sqrt(5000);
-
-// The home page carousel showcases the working team only: faculty advisors and
-// project mentors live on the Team page instead. Matching the category by
-// prefix keeps this working if "Faculty Advisors" is ever retitled.
+// The home page showcases the working team only: faculty advisors and project
+// mentors live on the Team page instead. Matching the category by prefix keeps
+// this working if "Faculty Advisors" is ever retitled.
 const nonFacultyMembers = resolvedTeamCategories
   .filter((category) => !category.title.startsWith("Faculty"))
   .flatMap((category) => category.members)
   .filter((member) => !/mentor/i.test(member.role));
 
-const animeshIndex = nonFacultyMembers.findIndex((member) => member.name === "Animesh Mishra");
-const centerIndex = Math.floor(nonFacultyMembers.length / 2);
-
-const orderedMembers =
-  animeshIndex === -1
-    ? nonFacultyMembers
-    : nonFacultyMembers.map((_, index) => {
-      const sourceIndex =
-        (index - centerIndex + animeshIndex + nonFacultyMembers.length) % nonFacultyMembers.length;
-      return nonFacultyMembers[sourceIndex];
-    });
-
-const testimonials = orderedMembers.map((member, index) => ({
-  tempId: index,
-  testimonial: member.bio || member.role,
-  by: `${member.name} / ${member.role}`,
-  imgSrc: member.image,
+// Start the rotation on Animesh Mishra, as the old carousel did.
+const start = Math.max(0, nonFacultyMembers.findIndex((member) => member.name === "Animesh Mishra"));
+const voices = [...nonFacultyMembers.slice(start), ...nonFacultyMembers.slice(0, start)].map((member) => ({
+  name: member.name,
+  role: member.role,
+  quote: member.bio || member.role,
+  image: member.image,
 }));
 
-interface TestimonialCardProps {
-  position: number;
-  testimonial: typeof testimonials[0];
-  handleMove: (steps: number) => void;
-  cardSize: number;
-}
+const INTERVAL = 6000;
+const EASE = [0.22, 1, 0.36, 1] as const;
 
-const TestimonialCard: React.FC<TestimonialCardProps> = ({
-  position,
-  testimonial,
-  handleMove,
-  cardSize
-}) => {
-  const isCenter = position === 0;
-  const navigate = useNavigate();
+/**
+ * One crew member at a time: portrait on the left, their words set large on the
+ * right. Advances on its own while visible; arrows and the progress bar let you take over.
+ */
+export function TeamVoices() {
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { margin: "-20% 0px" });
+  const reduced = useReducedMotion();
+  const total = voices.length;
+  const voice = voices[index];
+  const playing = inView && !paused && !reduced;
 
-  return (
-    <div
-      onClick={() => {
-        if (isCenter) {
-          navigate('/team');
-        } else {
-          handleMove(position);
-        }
-      }}
-      className={cn(
-        "absolute left-1/2 top-1/2 cursor-pointer border-2 p-8 transition-all duration-700 ease-in-out",
-        isCenter
-          ? "z-10 bg-blue-600 text-white border-blue-500"
-          : "z-0 bg-slate-900 text-slate-300 border-slate-800 hover:border-blue-500/50"
-      )}
-      style={{
-        width: cardSize,
-        height: cardSize,
-        clipPath: `polygon(50px 0%, calc(100% - 50px) 0%, 100% 50px, 100% 100%, calc(100% - 50px) 100%, 50px 100%, 0 100%, 0 0)`,
-        transform: `
-          translate(-50%, -50%) 
-          translateX(${(cardSize / 1.5) * position}px)
-          translateY(${isCenter ? -65 : position % 2 ? 15 : -15}px)
-          rotate(${isCenter ? 0 : position % 2 ? 2.5 : -2.5}deg)
-        `,
-        boxShadow: isCenter ? "0px 8px 0px 4px rgba(59, 130, 246, 0.5)" : "0px 0px 0px 0px transparent"
-      }}
-    >
-      <span
-        className="absolute block origin-top-right rotate-45 bg-slate-800"
-        style={{
-          right: -2,
-          top: 48,
-          width: SQRT_5000,
-          height: 2
-        }}
-      />
-      <div className="mb-4 flex justify-center">
-        <div className="h-16 w-16 overflow-hidden rounded-full border border-white/20 bg-slate-800 p-1 shadow-none">
-          <img
-            src={testimonial.imgSrc}
-            alt={testimonial.by}
-            loading="lazy"
-            className="h-full w-full rounded-full object-cover"
-          />
-        </div>
-      </div>
-      <h3 className={cn(
-        "text-base sm:text-xl font-medium text-center",
-        isCenter ? "text-white" : "text-slate-200"
-      )}>
-        "{testimonial.testimonial}"
-      </h3>
-      <p className={cn(
-        "absolute bottom-8 left-8 right-8 mt-2 text-sm italic text-center",
-        isCenter ? "text-blue-100" : "text-slate-500"
-      )}>
-        - {testimonial.by}
-      </p>
-      {isCenter && (
-        <p className="absolute bottom-3 right-8 left-8 text-center text-xs font-bold text-blue-200 uppercase tracking-widest">
-          Click to view team &rarr;
-        </p>
-      )}
-    </div>
-  );
-};
-
-export const StaggerTestimonials: React.FC = () => {
-  const [cardSize, setCardSize] = useState(365);
-  const [testimonialsList, setTestimonialsList] = useState(testimonials);
-
-  const handleMove = (steps: number) => {
-    setTestimonialsList((currentList) => {
-      const newList = [...currentList];
-      if (steps > 0) {
-        for (let i = steps; i > 0; i--) {
-          const item = newList.shift();
-          if (!item) return currentList;
-          newList.push({ ...item, tempId: Math.random() });
-        }
-      } else {
-        for (let i = steps; i < 0; i++) {
-          const item = newList.pop();
-          if (!item) return currentList;
-          newList.unshift({ ...item, tempId: Math.random() });
-        }
-      }
-      return newList;
-    });
-  };
+  const go = useCallback((step: number) => setIndex((i) => (i + step + total) % total), [total]);
 
   useEffect(() => {
-    const updateSize = () => {
-      const { matches } = window.matchMedia("(min-width: 640px)");
-      setCardSize(matches ? 365 : 290);
-    };
+    if (!playing) return;
+    const id = window.setTimeout(() => go(1), INTERVAL);
+    return () => window.clearTimeout(id);
+  }, [playing, index, go]);
 
-    const autoAdvance = window.setInterval(() => {
-      handleMove(1);
-    }, 4000);
-
-    updateSize();
-    window.addEventListener("resize", updateSize);
-    return () => {
-      window.clearInterval(autoAdvance);
-      window.removeEventListener("resize", updateSize);
-    };
-  }, []);
+  if (!voice) return null;
+  const long = voice.quote.length > 140;
 
   return (
     <div
-      className="relative w-full overflow-hidden bg-transparent"
-      style={{ height: 600 }}
+      ref={ref}
+      className="grid items-center gap-10 md:grid-cols-12 md:gap-16"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={() => setPaused(false)}
     >
-      {testimonialsList.map((testimonial, index) => {
-        const position = index - Math.floor(testimonialsList.length / 2);
-        return (
-          <TestimonialCard
-            key={testimonial.tempId}
-            testimonial={testimonial}
-            handleMove={handleMove}
-            position={position}
-            cardSize={cardSize}
-          />
-        );
-      })}
-      <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2">
-        <button
-          onClick={() => handleMove(-1)}
-          className={cn(
-            "flex h-14 w-14 items-center justify-center rounded-full text-2xl transition-colors",
-            "bg-slate-900 border-2 border-slate-800 text-slate-400 hover:bg-blue-600 hover:text-white hover:border-blue-500",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+      <div className="relative aspect-[4/5] w-full max-w-[220px] overflow-hidden rounded-2xl bg-white/[0.04] md:col-span-5 md:max-w-none">
+        <AnimatePresence initial={false} mode="popLayout">
+          {isPlaceholder(voice.image) ? (
+            <motion.div
+              key={voice.name}
+              initial={reduced ? false : { opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.9, ease: EASE }}
+              className="absolute inset-0"
+            >
+              <NoPhoto name={voice.name} />
+            </motion.div>
+          ) : (
+            <motion.img
+              key={voice.name}
+              src={voice.image}
+              alt={voice.name}
+              loading="lazy"
+              initial={reduced ? false : { opacity: 0, scale: 1.06 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.9, ease: EASE }}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
           )}
-          aria-label="Previous testimonial"
+        </AnimatePresence>
+      </div>
+
+      <div className="md:col-span-7">
+        <div className="min-h-[220px] md:min-h-[260px]" aria-live="polite">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.figure
+              key={voice.name}
+              initial={reduced ? false : { opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.6, ease: EASE }}
+            >
+              <blockquote
+                className={cn(
+                  "font-normal leading-[1.15] tracking-[-0.03em] text-white",
+                  long ? "text-2xl md:text-3xl" : "text-3xl md:text-5xl",
+                )}
+              >
+                &ldquo;{voice.quote}&rdquo;
+              </blockquote>
+              <figcaption className="mt-8">
+                <p className="text-lg text-white">{voice.name}</p>
+                <p className="mt-1 font-mono text-xs text-slate-400">{voice.role}</p>
+              </figcaption>
+            </motion.figure>
+          </AnimatePresence>
+        </div>
+
+        <div className="mt-10 flex items-center gap-5">
+          <button
+            type="button"
+            onClick={() => go(-1)}
+            aria-label="Previous team member"
+            className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 text-white transition-colors hover:border-tone hover:text-tone focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tone"
+          >
+            <ArrowLeft className="h-4 w-4" />
+          </button>
+          <button
+            type="button"
+            onClick={() => go(1)}
+            aria-label="Next team member"
+            className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 text-white transition-colors hover:border-tone hover:text-tone focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tone"
+          >
+            <ArrowRight className="h-4 w-4" />
+          </button>
+
+          <div className="ml-2 flex flex-1 items-center gap-4">
+            <span className="font-mono text-xs tabular-nums text-white">
+              {String(index + 1).padStart(2, "0")} <span className="text-slate-500">/ {String(total).padStart(2, "0")}</span>
+            </span>
+            <div className="relative h-px flex-1 overflow-hidden bg-white/10">
+              <motion.div
+                key={`${index}-${playing}`}
+                className="absolute inset-y-0 left-0 w-full origin-left bg-tone"
+                initial={{ scaleX: playing ? 0 : (index + 1) / total }}
+                animate={{ scaleX: playing ? 1 : (index + 1) / total }}
+                transition={{ duration: playing ? INTERVAL / 1000 : 0.4, ease: "linear" }}
+              />
+            </div>
+          </div>
+        </div>
+
+        <Link
+          to="/team"
+          className="mt-8 inline-block text-sm text-slate-400 underline decoration-white/20 underline-offset-4 transition-colors hover:text-tone hover:decoration-tone"
         >
-          <ChevronLeft />
-        </button>
-        <button
-          onClick={() => handleMove(1)}
-          className={cn(
-            "flex h-14 w-14 items-center justify-center rounded-full text-2xl transition-colors",
-            "bg-slate-900 border-2 border-slate-800 text-slate-400 hover:bg-blue-600 hover:text-white hover:border-blue-500",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
-          )}
-          aria-label="Next testimonial"
-        >
-          <ChevronRight />
-        </button>
+          See the whole crew
+        </Link>
       </div>
     </div>
   );
-};
+}

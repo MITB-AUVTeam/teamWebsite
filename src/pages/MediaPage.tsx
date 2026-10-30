@@ -1,8 +1,21 @@
-import { useState, useEffect, useMemo } from "react";
-import type { ReactNode } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { Calendar, User, ArrowRight, Tag, X, Search } from "lucide-react";
+import { useCallback, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { Search, LayoutGrid, Rows3 } from "lucide-react";
+import { Flip } from "gsap/all";
 import { Footer } from "@/components/Footer";
+import { PageHeader } from "@/components/ui/page-header";
+import { SectionHeading } from "@/components/ui/section-heading";
+import { PillButton } from "@/components/ui/pill-button";
+import { cn } from "@/lib/utils";
+import { gsap, ScrollTrigger, useGSAP, prefersReducedMotion } from "@/lib/gsap";
+import { ArticleCard } from "@/components/media/article-card";
+import { EmbedFacade } from "@/components/ui/embed-facade";
+import { ArticleReader, type Post } from "@/components/media/article-reader";
+import { TransmissionHero } from "@/components/media/transmission-hero";
+import { LogIndex } from "@/components/media/log-index";
+import { CHANNEL_COLOR, channelOf, type Channel } from "@/components/media/media-utils";
+
+gsap.registerPlugin(Flip);
+
 import communicationBlog from "@/assets/blogs/communication-is-everything.md?raw";
 import sonarBlog from "@/assets/blogs/passive-sonar-acoustic-localization.md?raw";
 import pcbBlog from "@/assets/blogs/perfboard-to-pcb.md?raw";
@@ -22,242 +35,9 @@ import IMG_3923 from "@/assets/Gallery/IMG_3923.webp";
 import prithaPhoto from "@/assets/Personal_photo/pritha.jpeg";
 import faculty_group from "@/assets/Personal_photo/faculty_group.jpeg";
 
-interface Post {
-  title: string;
-  excerpt: string;
-  category: string;
-  date: string;
-  author: string;
-  image: string;
-  content?: string[];
-  markdown?: string;
-  externalLink?: string;
-  /** Overlays an animated sonar "ping" on the card, for acoustics posts. */
-  sonarPing?: boolean;
-}
-
-/**
- * Expanding concentric rings that mimic an acoustic pinger pulsing underwater.
- * Purely decorative, so it is hidden from assistive tech and stands down when
- * the visitor prefers reduced motion.
- */
-function SonarPing() {
-  const shouldReduceMotion = useReducedMotion();
-  const rings = [0, 1, 2];
-
-  return (
-    <div className="pointer-events-none absolute inset-0 z-10 overflow-hidden" aria-hidden>
-      <div className="absolute bottom-8 left-8 h-0 w-0 sm:bottom-10 sm:left-10">
-        {/* Emitter core */}
-        <motion.span
-          className="absolute -left-1.5 -top-1.5 block h-3 w-3 rounded-full bg-cyan-300 shadow-[0_0_12px_2px_rgba(103,232,249,0.9)]"
-          animate={
-            shouldReduceMotion
-              ? { opacity: 0.9 }
-              : { opacity: [0.45, 1, 0.45], scale: [0.85, 1.15, 0.85] }
-          }
-          transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
-        />
-
-        {/* Outgoing pulses */}
-        {rings.map((i) => (
-          <motion.span
-            key={i}
-            className="absolute block rounded-full border border-cyan-300/70"
-            style={{ left: 0, top: 0, height: 24, width: 24, x: "-50%", y: "-50%" }}
-            initial={{ scale: 0.4, opacity: 0 }}
-            animate={
-              shouldReduceMotion
-                ? { scale: 1, opacity: 0.25 }
-                : { scale: [0.4, 7], opacity: [0.7, 0] }
-            }
-            transition={{
-              duration: 2.4,
-              repeat: Infinity,
-              delay: i * 0.8,
-              ease: "easeOut",
-            }}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-// --- Lightweight markdown renderer (headings, bold/italic, inline code,
-// fenced code blocks, bullet lists and horizontal rules) ---
-
-function renderInline(text: string, keyPrefix: string): ReactNode[] {
-  // Inline code first so formatting markers inside code are left untouched.
-  return text.split(/(`[^`]+`)/g).flatMap<ReactNode>((part, i) => {
-    const key = `${keyPrefix}-${i}`;
-    if (/^`[^`]+`$/.test(part)) {
-      return [
-        <code
-          key={key}
-          className="rounded bg-slate-800 px-1.5 py-0.5 font-mono text-[0.85em] text-cyan-300"
-        >
-          {part.slice(1, -1)}
-        </code>,
-      ];
-    }
-    return renderBold(part, key);
-  });
-}
-
-function renderBold(text: string, keyPrefix: string): ReactNode[] {
-  return text.split(/(\*\*[^*]+\*\*)/g).flatMap<ReactNode>((part, i) => {
-    const key = `${keyPrefix}-b${i}`;
-    if (/^\*\*[^*]+\*\*$/.test(part)) {
-      return [
-        <strong key={key} className="font-bold text-white">
-          {renderItalic(part.slice(2, -2), key)}
-        </strong>,
-      ];
-    }
-    return renderItalic(part, key);
-  });
-}
-
-function renderItalic(text: string, keyPrefix: string): ReactNode[] {
-  return text.split(/(_[^_]+_|\*[^*]+\*)/g).flatMap<ReactNode>((part, i) => {
-    const key = `${keyPrefix}-i${i}`;
-    if (/^_[^_]+_$/.test(part) || /^\*[^*]+\*$/.test(part)) {
-      return [
-        <em key={key} className="italic">
-          {part.slice(1, -1)}
-        </em>,
-      ];
-    }
-    return part ? [<span key={key}>{part}</span>] : [];
-  });
-}
-
-function MarkdownContent({ text }: { text: string }) {
-  const lines = text.replace(/\r\n/g, "\n").split("\n");
-  const blocks: ReactNode[] = [];
-  let i = 0;
-  let key = 0;
-
-  const isBlockStart = (l: string) =>
-    /^\s*```/.test(l) || /^\s*---+\s*$/.test(l) || /^#{1,6}\s/.test(l) || /^\s*[-•]\s+/.test(l);
-
-  while (i < lines.length) {
-    const line = lines[i];
-
-    // Fenced code block
-    if (/^\s*```/.test(line)) {
-      const code: string[] = [];
-      i++;
-      while (i < lines.length && !/^\s*```/.test(lines[i])) {
-        code.push(lines[i]);
-        i++;
-      }
-      i++; // skip closing fence
-      blocks.push(
-        <pre
-          key={key++}
-          className="overflow-x-auto rounded-xl border border-white/10 bg-slate-950 p-4 text-sm"
-        >
-          <code className="font-mono whitespace-pre text-slate-200">{code.join("\n")}</code>
-        </pre>,
-      );
-      continue;
-    }
-
-    // Horizontal rule
-    if (/^\s*---+\s*$/.test(line)) {
-      blocks.push(<hr key={key++} className="my-8 border-white/10" />);
-      i++;
-      continue;
-    }
-
-    // Blank line
-    if (line.trim() === "") {
-      i++;
-      continue;
-    }
-
-    // Heading
-    const heading = line.match(/^(#{1,6})\s+(.*)$/);
-    if (heading) {
-      blocks.push(
-        <h4
-          key={key++}
-          className="border-b border-white/10 pt-6 pb-2 text-xl font-bold tracking-tight text-white md:text-2xl"
-        >
-          {renderInline(heading[2], `h${key}`)}
-        </h4>,
-      );
-      i++;
-      continue;
-    }
-
-    // Bullet list
-    if (/^\s*[-•]\s+/.test(line)) {
-      const items: string[] = [];
-      while (i < lines.length && /^\s*[-•]\s+/.test(lines[i])) {
-        items.push(lines[i].replace(/^\s*[-•]\s+/, ""));
-        i++;
-      }
-      blocks.push(
-        <ul key={key++} className="space-y-2">
-          {items.map((item, idx) => (
-            <li
-              key={idx}
-              className="relative pl-6 leading-relaxed text-slate-300 before:absolute before:left-2 before:text-blue-400 before:content-['•']"
-            >
-              {renderInline(item, `li${key}-${idx}`)}
-            </li>
-          ))}
-        </ul>,
-      );
-      continue;
-    }
-
-    // Paragraph (join soft-wrapped lines until a blank line or block start)
-    const para = [line];
-    i++;
-    while (i < lines.length && lines[i].trim() !== "" && !isBlockStart(lines[i])) {
-      para.push(lines[i]);
-      i++;
-    }
-    blocks.push(
-      <p key={key++} className="leading-relaxed text-slate-300">
-        {renderInline(para.join(" "), `p${key}`)}
-      </p>,
-    );
-  }
-
-  return <>{blocks}</>;
-}
-
 export function MediaPage() {
   const [activePost, setActivePost] = useState<Post | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
-
-  // Esc key listener to close modal
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setActivePost(null);
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
-
-  // Lock body scroll when modal is active
-  useEffect(() => {
-    if (activePost) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [activePost]);
 
   const featuredPost: Post = {
     title: "'Maxxxing' Deuterium: Integrating Custom HYDROPHONES",
@@ -480,408 +260,330 @@ export function MediaPage() {
     }
   ];
 
-  const filteredPosts = useMemo(() => {
-    const allPosts = [featuredPost, ...recentPosts];
-    const sortedAllPosts = [...allPosts].sort((a, b) => {
-      // Handle "Coming Soon...." as newest (placed at the top)
-      const aComing = a.date.toLowerCase().includes("coming soon");
-      const bComing = b.date.toLowerCase().includes("coming soon");
-      if (aComing && !bComing) return -1;
-      if (!aComing && bComing) return 1;
-      if (aComing && bComing) return 0;
+  // Built once so post identities stay stable for the reader's previous / next links.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const allPosts = useMemo(() => sortPosts([featuredPost, ...recentPosts]), []);
+  const featured = allPosts.find((p) => p.title === featuredPost.title)!;
+  const logNumbers = useMemo(() => new Map(allPosts.map((p, i) => [p.title, allPosts.length - i])), [allPosts]);
+  const logOf = useCallback((post: Post) => logNumbers.get(post.title) ?? 0, [logNumbers]);
 
-      // If a date is empty, treat it as newest
-      const aDateEmpty = !a.date;
-      const bDateEmpty = !b.date;
-      if (aDateEmpty && !bDateEmpty) return -1;
-      if (!aDateEmpty && bDateEmpty) return 1;
-      if (aDateEmpty && bDateEmpty) return 0;
+  const channels = useMemo(() => {
+    const counts = new Map<Channel, number>();
+    allPosts.forEach((p) => counts.set(channelOf(p), (counts.get(channelOf(p)) ?? 0) + 1));
+    return [...counts.entries()].sort((a, b) => b[1] - a[1]);
+  }, [allPosts]);
 
-      // Handle "Various Dates" as oldest (placed at the bottom)
-      const aVarious = a.date.toLowerCase() === "various dates";
-      const bVarious = b.date.toLowerCase() === "various dates";
-      if (aVarious && !bVarious) return 1;
-      if (!aVarious && bVarious) return -1;
-      if (aVarious && bVarious) return 0;
+  const [channel, setChannel] = useState<Channel | "All">("All");
+  const [view, setView] = useState<"grid" | "index">("grid");
+  const query = searchQuery.trim().toLowerCase();
+  const searching = query !== "";
+  const showFeatured = !searching && channel === "All";
 
-      // Standard date parsing
-      const timeA = Date.parse(a.date);
-      const timeB = Date.parse(b.date);
+  const filteredPosts = useMemo(
+    () =>
+      allPosts.filter((post) => {
+        if (showFeatured && post === featured) return false;
+        if (channel !== "All" && channelOf(post) !== channel) return false;
+        if (!query) return true;
+        return [post.title, post.excerpt, post.category, post.date, post.author, post.content?.join(" ") ?? "", post.markdown ?? ""]
+          .join(" ")
+          .toLowerCase()
+          .includes(query);
+      }),
+    [allPosts, featured, showFeatured, channel, query],
+  );
 
-      const validA = !isNaN(timeA);
-      const validB = !isNaN(timeB);
+  // The featured post sits above the list but still counts as a result.
+  const foundCount = filteredPosts.length + (showFeatured && featured ? 1 : 0);
 
-      if (!validA && validB) return 1;
-      if (validA && !validB) return -1;
-      if (!validA && !validB) return 0;
+  const openPost = useCallback((post: Post) => setActivePost(post), []);
+  const closePost = useCallback(() => setActivePost(null), []);
+  const results = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLDivElement>(null);
+  const flipState = useRef<Flip.FlipState | null>(null);
+  const listKey = filteredPosts.map((p) => p.title).join("|");
 
-      return timeB - timeA; // Descending (newest first)
-    });
-
-    const query = searchQuery.trim().toLowerCase();
-
-    if (!query) {
-      // Exclude the featured post from the grid when not searching (as it is shown in the hero section)
-      return sortedAllPosts.filter(post => post !== featuredPost);
+  // Snapshot the current layout before a filter change so the results can glide to their new spots.
+  const captureLayout = () => {
+    if (results.current && !prefersReducedMotion()) {
+      flipState.current = Flip.getState(results.current.querySelectorAll(".m-item"));
     }
+  };
+  const changeChannel = (next: Channel | "All") => {
+    captureLayout();
+    setChannel(next);
+  };
+  const changeQuery = (next: string) => {
+    captureLayout();
+    setSearchQuery(next);
+  };
 
-    return sortedAllPosts.filter((post) => {
-      const searchableText = [
-        post.title,
-        post.excerpt,
-        post.category,
-        post.date,
-        post.author,
-        Array.isArray(post.content) ? post.content.join(" ") : "",
-        post.markdown ?? "",
-      ]
-        .join(" ")
-        .toLowerCase();
+  // Scroll reveal for the results, rebuilt when the view changes. Items are only hidden
+  // once GSAP takes over, and anything already on screen is revealed immediately, so the
+  // archive can never sit there as an empty block.
+  useGSAP(
+    () => {
+      const el = results.current;
+      if (!el || prefersReducedMotion()) return;
+      const items = gsap.utils.toArray<HTMLElement>(".m-item", el);
+      gsap.set(items, { y: 60, autoAlpha: 0 });
+      ScrollTrigger.batch(items, {
+        start: "top 96%",
+        once: true,
+        onEnter: (batch) => gsap.to(batch, { y: 0, autoAlpha: 1, duration: 1.1, stagger: 0.08, overwrite: true }),
+      });
+      ScrollTrigger.refresh();
+    },
+    { scope: results, dependencies: [view], revertOnUpdate: true },
+  );
 
-      return searchableText.includes(query);
+  // Filter / search changes: kept items glide to their new place, new ones surface.
+  useLayoutEffect(() => {
+    const state = flipState.current;
+    flipState.current = null;
+    if (!state || !results.current) return;
+    const items = results.current.querySelectorAll<HTMLElement>(".m-item");
+    Flip.from(state, {
+      targets: items,
+      duration: 0.8,
+      ease: "expo.out",
+      stagger: 0.02,
+      onEnter: (els) => gsap.fromTo(els, { autoAlpha: 0, y: 30, scale: 0.96 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.8, stagger: 0.04 }),
+      onComplete: () => ScrollTrigger.refresh(),
     });
-  }, [recentPosts, searchQuery]);
+  }, [listKey]);
+
+  // Video: the player grows into place as it scrolls up, copy follows.
+  useGSAP(
+    () => {
+      const el = videoRef.current;
+      if (!el || prefersReducedMotion()) return;
+      gsap.fromTo(
+        el.querySelector(".m-video"),
+        { scale: 0.82, rotateX: 12, transformPerspective: 1200 },
+        { scale: 1, rotateX: 0, ease: "none", scrollTrigger: { trigger: el, start: "top bottom", end: "top 35%", scrub: 0.8 } },
+      );
+      gsap.from(el.querySelectorAll(".m-video-copy > *"), {
+        autoAlpha: 0,
+        y: 30,
+        stagger: 0.1,
+        duration: 1.1,
+        scrollTrigger: { trigger: el, start: "top 70%", once: true },
+      });
+    },
+    { scope: videoRef },
+  );
+
+  const chip = (active: boolean) =>
+    cn(
+      "inline-flex h-10 shrink-0 items-center gap-2 rounded-full border px-4 font-mono text-[11px] uppercase tracking-[0.15em] transition-colors duration-300",
+      active ? "border-tone bg-tone text-slate-950" : "border-white/10 bg-white/[0.02] text-slate-300 hover:border-white/25 hover:text-white",
+    );
 
   return (
-    <div className="min-h-screen bg-transparent text-slate-50 pb-0 font-sans">
-
-      <section className="max-w-7xl mx-auto px-6 pt-12 md:pt-20 mb-16">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6"
-        >
-          <div className="space-y-4">
-            <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-black uppercase tracking-tighter leading-none">
-              Media & Works
-            </h1>
-            <p className="text-slate-400 text-sm md:text-base tracking-[0.2em] uppercase font-medium ml-1">
-              Our Journey & Insights
-            </p>
+    <div className="flex min-h-screen flex-col">
+      <PageHeader
+        eyebrow="Media & works"
+        title="Notes from"
+        accent="the workshop."
+        description="Field notes, build logs and stories from the team: what we built, what broke, and what we learned along the way."
+      >
+        <dl className="flex flex-wrap gap-x-10 gap-y-4 font-mono text-[11px] uppercase tracking-[0.2em] text-slate-500">
+          <div>
+            <dt>Logs filed</dt>
+            <dd className="mt-1 text-2xl tracking-normal text-white tabular-nums">{String(allPosts.length).padStart(2, "0")}</dd>
           </div>
-          <div className="flex w-full max-w-md flex-col gap-4 md:items-end md:-translate-y-5">
-            <label className="relative w-full md:w-80">
+          <div>
+            <dt>Channels</dt>
+            <dd className="mt-1 text-2xl tracking-normal text-white tabular-nums">{String(channels.length).padStart(2, "0")}</dd>
+          </div>
+          <div>
+            <dt>Latest</dt>
+            <dd className="mt-1 text-2xl tracking-normal text-white">{allPosts[0]?.date}</dd>
+          </div>
+        </dl>
+      </PageHeader>
+
+      {showFeatured && <TransmissionHero post={featured} log={logOf(featured)} onOpen={openPost} />}
+
+      <section className="mx-auto w-full max-w-7xl px-5 sm:px-8 py-24 md:py-32">
+        <SectionHeading
+          eyebrow={searching ? "Search" : "Archive"}
+          title={searching ? "Results for" : "Mission"}
+          accent={searching ? `“${searchQuery.trim()}”` : "logs."}
+          key={searching ? "search" : "recent"}
+          action={
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-slate-400" aria-live="polite">
+              {String(foundCount).padStart(2, "0")} {foundCount === 1 ? "log" : "logs"} found
+            </p>
+          }
+        />
+
+        {/* Console: channel filters, search and view switch */}
+        <div className="mb-12 flex flex-col gap-4 rounded-3xl border border-white/10 bg-white/[0.02] p-3 md:mb-16 lg:flex-row lg:items-center">
+          <div role="group" aria-label="Filter by channel" className="-mx-3 flex gap-2 overflow-x-auto px-3 pb-1 [scrollbar-width:none] lg:mx-0 lg:flex-1 lg:flex-wrap lg:px-0 lg:pb-0">
+            <button type="button" aria-pressed={channel === "All"} onClick={() => changeChannel("All")} className={chip(channel === "All")}>
+              All <span className="opacity-60">{allPosts.length}</span>
+            </button>
+            {channels.map(([name, count]) => (
+              <button key={name} type="button" aria-pressed={channel === name} onClick={() => changeChannel(name)} className={chip(channel === name)}>
+                <span className="h-1.5 w-1.5 rounded-full" style={{ background: channel === name ? "#020617" : CHANNEL_COLOR[name] }} />
+                {name} <span className="opacity-60">{count}</span>
+              </button>
+            ))}
+          </div>
+          <div className="flex gap-2">
+            <label className="relative block flex-1 lg:w-72 lg:flex-none">
+              <span className="sr-only">Search articles</span>
               <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
               <input
                 type="search"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search articles"
-                aria-label="Search articles"
-                className="w-full rounded-full border border-white/10 bg-white/5 py-3 pl-11 pr-4 text-sm text-white outline-none transition-colors placeholder:text-slate-500 hover:border-white/20 focus:border-blue-400 focus:bg-white/10"
+                onChange={(e) => changeQuery(e.target.value)}
+                placeholder="Search logs"
+                className="h-10 w-full rounded-full border border-white/10 bg-[#020617]/60 pl-10 pr-4 text-sm text-white outline-none transition-colors placeholder:text-slate-500 hover:border-white/20 focus:border-tone"
               />
             </label>
-          </div>
-        </motion.div>
-      </section>
-
-      {!searchQuery.trim() && (
-        <section className="max-w-7xl mx-auto px-6 mb-20">
-          <motion.div
-            onClick={() => setActivePost(featuredPost)}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="group relative rounded-3xl overflow-hidden bg-[#0a1128] border border-white/10 flex flex-col lg:flex-row cursor-pointer hover:border-white/20 transition-colors"
-          >
-            <div className="relative w-full lg:w-3/5 h-[220px] sm:h-[300px] lg:h-[500px] overflow-hidden">
-              <img
-                src={featuredPost.image}
-                alt={featuredPost.title}
-                loading="lazy"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-              {featuredPost.sonarPing && <SonarPing />}
-            </div>
-            <div className="w-full lg:w-2/5 p-8 lg:p-12 flex flex-col justify-center">
-              <div className="flex flex-wrap items-center gap-y-2 gap-x-4 mb-6 text-slate-400 text-xs font-medium">
-                <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-                  <span className="font-semibold tracking-wider uppercase">{featuredPost.category}</span>
-                </div>
-                <div className="w-1 h-1 rounded-full bg-slate-700 hidden sm:block" />
-                <div className="flex items-center gap-1.5">
-                  <Calendar className="w-3.5 h-3.5 text-slate-500" />
-                  <span>{featuredPost.date}</span>
-                </div>
-              </div>
-
-              <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight group-hover:text-blue-400 transition-colors">
-                {featuredPost.title}
-              </h2>
-
-              <p className="text-slate-300 leading-relaxed mb-8">
-                {featuredPost.excerpt}
-              </p>
-
-              <div className="flex items-center justify-between mt-auto">
-                <div className="flex items-center gap-1.5 text-slate-400 text-xs font-medium">
-                  <User className="w-3.5 h-3.5 text-blue-400" />
-                  <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-300">{featuredPost.author}</span>
-                </div>
-                <span className="flex items-center gap-2 text-sm font-bold text-white group-hover:text-blue-400 transition-colors">
-                  Read Article <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </div>
-            </div>
-          </motion.div>
-        </section>
-      )}
-
-      <section className="max-w-7xl mx-auto px-6 pb-24">
-        <div className="flex items-center justify-between mb-10">
-          <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tight">
-            Recent Articles
-          </h3>
-        </div>
-
-        {filteredPosts.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredPosts.map((post, index) => (
-              <motion.div
-                key={post.title}
-                onClick={() => {
-                  if (post.externalLink) {
-                    window.open(post.externalLink, "_blank", "noopener,noreferrer");
-                  } else {
-                    setActivePost(post);
-                  }
-                }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group flex flex-col bg-[#0a1128] border border-white/10 rounded-2xl overflow-hidden cursor-pointer hover:border-white/20 transition-colors"
-              >
-                <div className="h-56 overflow-hidden relative">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-white text-[10px] font-bold tracking-wider uppercase">
-                      {post.category}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-6 flex flex-col flex-1">
-                  <div className="flex items-center gap-4 mb-4 text-slate-400 text-xs font-medium">
-                    <div className="flex items-center gap-1.5 shrink-0">
-                      <Calendar className="w-3.5 h-3.5" />
-                      {post.date}
-                    </div>
-                    <div className="ml-auto flex items-center gap-1.5 min-w-0">
-                      <User className="w-3.5 h-3.5 text-blue-400 shrink-0" />
-                      <span className="text-right font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-300">{post.author}</span>
-                    </div>
-                  </div>
-
-                  <h4 className="text-xl font-bold text-white mb-3 leading-snug group-hover:text-blue-400 transition-colors">
-                    {post.title}
-                  </h4>
-
-                  <div className="text-slate-400 text-sm leading-relaxed mb-6 flex-1">
-                    {post.excerpt}
-                  </div>
-
-                  {post.externalLink ? (
-                    <a
-                      href={post.externalLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className="mt-auto pt-4 border-t border-white/10 flex items-center text-sm font-bold text-blue-400 hover:text-blue-300 transition-colors"
-                    >
-                      Check it out here <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                    </a>
-                  ) : (
-                    <div className="mt-auto pt-4 border-t border-white/10 flex items-center text-sm font-bold text-white group-hover:text-blue-400 transition-colors">
-                      Read More <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                    </div>
+            <div role="group" aria-label="Layout" className="flex shrink-0 rounded-full border border-white/10 bg-[#020617]/60 p-1">
+              {(
+                [
+                  ["grid", LayoutGrid, "Grid view"],
+                  ["index", Rows3, "Index view"],
+                ] as const
+              ).map(([id, Icon, label]) => (
+                <button
+                  key={id}
+                  type="button"
+                  aria-label={label}
+                  aria-pressed={view === id}
+                  onClick={() => setView(id)}
+                  className={cn(
+                    "flex h-8 w-8 items-center justify-center rounded-full transition-colors",
+                    view === id ? "bg-white text-slate-950" : "text-slate-400 hover:text-white",
                   )}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        ) : (
-          <div className="rounded-2xl border border-white/10 bg-[#0a1128] px-6 py-12 text-center">
-            <p className="text-lg font-semibold text-white">No articles found</p>
-            <p className="mt-2 text-sm text-slate-400">
-              Try searching by title, author, category, or topic.
-            </p>
-          </div>
-        )}
-      </section>
-
-      {/* New Section: Creative Works - Videos */}
-      <section className="max-w-7xl mx-auto px-6 pb-24 border-t border-white/10 pt-16">
-        <div className="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4">
-          <div>
-            <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tight">
-              Team Introduction Video
-            </h3>
-            <p className="text-slate-400 text-sm mt-2">
-              Watch our team introduction video for RoboSub 2026. More updates coming soon....
-            </p>
+                >
+                  <Icon className="h-4 w-4" />
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Featured Video */}
-          <div className="lg:col-span-2 aspect-video rounded-3xl overflow-hidden border border-white/10 bg-slate-950 shadow-2xl relative group">
-            <iframe
-              src="https://www.youtube.com/embed/er7BXNt_4Kw"
-              title="Team AUV MIT-B Introduction Video | RoboSub 2026"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-              className="w-full h-full"
-            />
-          </div>
-
-          {/* Video Information / Sidebar */}
-          <div className="flex flex-col justify-center bg-[#0a1128] border border-white/10 rounded-3xl p-8 lg:p-10">
-            <h4 className="text-2xl font-bold text-white mb-4 leading-tight">
-              Team AUV MIT-B Introduction Video |
-              RoboSub 2026
-            </h4>
-
-            <p className="text-slate-300 text-sm leading-relaxed mb-6">
-              Get to know the team building and representing Manipal Institute of Technology, Bengaluru for the very first time at RoboSub 2026.
-            </p>
-
-            <p className="text-slate-300 text-sm leading-relaxed mb-6">
-              Built with the effort of all 23 members on the team, Deuterium is the culmination of our work over the last 1.5 years.
-            </p>
-
-            <div className="pt-6 border-t border-white/10 flex items-center justify-between mt-auto">
-              <span className="text-slate-400 text-xs font-medium">
-                Published by Team AUV MIT-B
+        <div ref={results}>
+          {filteredPosts.length === 0 ? (
+            <div className="relative flex flex-col items-center overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-20 text-center">
+              <span aria-hidden="true" className="relative mb-8 flex h-20 w-20 items-center justify-center">
+                <span className="absolute inset-0 animate-ping rounded-full border border-tone/40 motion-reduce:hidden" />
+                <span className="absolute inset-4 rounded-full border border-tone/30" />
+                <span className="h-2 w-2 rounded-full bg-tone shadow-[0_0_12px_var(--t1)]" />
               </span>
-              <a
-                href="https://www.youtube.com/@TeamAUVMIT-B"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-1.5"
-              >
-                Visit Channel <ArrowRight className="w-3.5 h-3.5" />
-              </a>
+              <p className="font-mono text-xs uppercase tracking-[0.25em] text-tone-soft">No signal</p>
+              <p className="mt-3 text-lg text-white">No logs match that search.</p>
+              <p className="mt-2 text-sm text-slate-400">Try a title, author, subsystem or topic.</p>
+            </div>
+          ) : view === "grid" ? (
+            <div className="grid gap-x-8 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
+              {filteredPosts.map((post) => (
+                <div key={post.title} className="m-item">
+                  <ArticleCard post={post} onOpen={openPost} log={logOf(post)} />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <LogIndex posts={filteredPosts} logOf={logOf} onOpen={openPost} />
+          )}
+        </div>
+      </section>
+
+      <section className="border-y border-white/10 bg-white/[0.02]">
+        <div className="mx-auto w-full max-w-7xl border-x border-white/10 px-5 sm:px-8 py-24 md:py-32">
+          <SectionHeading
+            eyebrow="Video"
+            title="Meet the team"
+            accent="on film."
+            description="Watch our team introduction video for RoboSub 2026. More updates coming soon."
+          />
+          <div ref={videoRef} className="grid gap-10 lg:grid-cols-12 lg:items-center">
+            <div className="lg:col-span-8">
+              <div className="m-video overflow-hidden rounded-2xl border border-white/10 bg-black/40">
+                <div className="flex items-center justify-between gap-4 border-b border-white/10 px-4 py-2.5 font-mono text-[10px] uppercase tracking-[0.2em] text-slate-400">
+                  <span className="flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-red-400 shadow-[0_0_8px_#f87171] motion-safe:animate-pulse" />
+                    Feed 01 // RoboSub 2026
+                  </span>
+                  <span className="hidden sm:inline">Team AUV MIT-B</span>
+                </div>
+                <div className="aspect-video">
+                  <EmbedFacade
+                    label="Play video: Team AUV MIT-B Introduction Video, RoboSub 2026"
+                    preview={
+                      <>
+                        <img
+                          src="https://i.ytimg.com/vi/er7BXNt_4Kw/hqdefault.jpg"
+                          alt=""
+                          loading="lazy"
+                          decoding="async"
+                          className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                        />
+                        <span className="absolute inset-0 bg-[#020617]/45 transition-colors duration-500 group-hover:bg-[#020617]/25" />
+                        <span className="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center">
+                          <span className="absolute inset-0 rounded-full border border-white/40 motion-safe:animate-ping" />
+                          <span className="relative flex h-16 w-16 items-center justify-center rounded-full bg-white text-slate-950 shadow-[0_0_40px_-6px_var(--t1)] transition-transform duration-500 group-hover:scale-110">
+                            <svg viewBox="0 0 24 24" className="ml-1 h-6 w-6" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" /></svg>
+                          </span>
+                        </span>
+                      </>
+                    }
+                    render={() => (
+                      <iframe
+                        src="https://www.youtube-nocookie.com/embed/er7BXNt_4Kw?autoplay=1&rel=0"
+                        title="Team AUV MIT-B Introduction Video | RoboSub 2026"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                        className="h-full w-full border-0"
+                      />
+                    )}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="m-video-copy lg:col-span-4">
+              <h3 className="text-2xl md:text-3xl font-semibold leading-tight tracking-[-0.03em] text-white">
+                Team AUV MIT-B Introduction Video | RoboSub 2026
+              </h3>
+              <p className="mt-4 text-slate-400 leading-relaxed">
+                Get to know the team building and representing Manipal Institute of Technology, Bengaluru for the very first time at RoboSub 2026.
+              </p>
+              <p className="mt-4 text-slate-400 leading-relaxed">
+                Built with the effort of all 23 members on the team, Deuterium is the culmination of our work over the last 1.5 years.
+              </p>
+              <p className="mt-6 font-mono text-xs text-slate-400">Published by Team AUV MIT-B</p>
+              <PillButton href="https://www.youtube.com/@TeamAUVMIT-B" variant="ghost" className="mt-6">
+                Visit channel
+              </PillButton>
             </div>
           </div>
         </div>
       </section>
 
-      <AnimatePresence>
-        {activePost && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setActivePost(null)}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md overflow-y-auto"
-          >
-            <motion.div
-              initial={{ scale: 0.95, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.95, y: 20 }}
-              onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-3xl bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl my-8 flex flex-col max-h-[85vh]"
-            >
-              {/* Close Button */}
-              <button
-                onClick={() => setActivePost(null)}
-                className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-slate-950/60 border border-white/10 flex items-center justify-center text-white hover:bg-slate-800 transition-colors"
-              >
-                <X className="w-4 h-4" />
-              </button>
-
-              {/* Scrollable Container */}
-              <div className="overflow-y-auto flex-1">
-                {/* Header Image */}
-                {activePost.image && (
-                  <div className="h-64 md:h-80 w-full overflow-hidden relative select-none">
-                    <img
-                      src={activePost.image}
-                      alt={activePost.title}
-                      loading="lazy"
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent" />
-                  </div>
-                )}
-
-                {/* Content Area */}
-                <div className="p-6 md:p-10">
-                  <div className="flex flex-wrap items-center gap-y-2 gap-x-4 mb-6 text-slate-400 text-xs font-medium">
-                    <div className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-                      <span className="font-semibold tracking-wider uppercase">{activePost.category}</span>
-                    </div>
-                    <div className="w-1 h-1 rounded-full bg-slate-700 hidden sm:block" />
-                    <div className="flex items-center gap-1.5">
-                      <Calendar className="w-3.5 h-3.5 text-slate-500" />
-                      <span>{activePost.date}</span>
-                    </div>
-                    <div className="w-1 h-1 rounded-full bg-slate-700 hidden sm:block" />
-                    <div className="flex items-center gap-1.5">
-                      <User className="w-3.5 h-3.5 text-blue-400" />
-                      <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-500 to-cyan-300">{activePost.author}</span>
-                    </div>
-                  </div>
-
-                  <h2 className="text-2xl md:text-4xl font-extrabold text-white mb-6 leading-tight">
-                    {activePost.title}
-                  </h2>
-
-                  <div className="space-y-4 text-slate-300 leading-relaxed md:text-lg">
-                    {activePost.markdown ? (
-                      <MarkdownContent text={activePost.markdown} />
-                    ) : Array.isArray(activePost.content) ? (
-                      activePost.content.map((para: any, idx: number) => {
-                        // Check for bullet points
-                        if (para.startsWith("●") || para.startsWith("-")) {
-                          return (
-                            <li key={idx} className="list-none pl-6 relative before:content-['•'] before:absolute before:left-2 before:text-blue-400 leading-relaxed text-slate-300 my-2">
-                              {para.replace(/^[●\-]\s*/, "")}
-                            </li>
-                          );
-                        }
-
-                        // Check for subheadings (short lines without sentence-ending periods, or specific patterns)
-                        const isHeading =
-                          (para.length < 85 && !para.endsWith(".")) ||
-                          para.startsWith("1. ") ||
-                          para.startsWith("2. ") ||
-                          para.startsWith("3. ") ||
-                          para.startsWith("Upcoming Events");
-
-                        if (isHeading) {
-                          return (
-                            <h4 key={idx} className="text-xl md:text-2xl font-bold text-white pt-6 pb-2 border-b border-white/10 tracking-tight mt-6 mb-3">
-                              {para}
-                            </h4>
-                          );
-                        }
-
-                        // Normal paragraph
-                        return <p key={idx} className="mb-4 leading-relaxed text-slate-300">{para}</p>;
-                      })
-                    ) : (
-                      <p>{activePost.excerpt}</p>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
+      <ArticleReader post={activePost} onClose={closePost} posts={allPosts} onNavigate={openPost} logOf={logOf} />
       <Footer />
     </div>
   );
+}
+
+/** Newest first; "Coming soon" and undated posts lead, "Various dates" trails. */
+function sortPosts(posts: Post[]) {
+  const rank = (p: Post) => {
+    const d = p.date.toLowerCase();
+    if (d.includes("coming soon") || !d) return Infinity;
+    if (d === "various dates") return -Infinity;
+    const t = Date.parse(p.date);
+    return isNaN(t) ? -Infinity : t;
+  };
+  return [...posts].sort((a, b) => {
+    const ra = rank(a);
+    const rb = rank(b);
+    return ra === rb ? 0 : rb > ra ? 1 : -1;
+  });
 }
