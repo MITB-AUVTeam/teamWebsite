@@ -19,7 +19,7 @@ const SUBTEAMS = [
   { name: "Mechanical", slug: "mechanical", work: "Hull and frame design in SolidWorks, Ansys simulation, pressure testing and 3D-printed parts like the dropper." },
   { name: "Electrical", slug: "electrical", work: "Power distribution boards, battery systems, sensor integration and in-house hydrophones." },
   { name: "Software", slug: "software", work: "ROS2 autonomy, computer vision on the Zed cameras, localisation and path planning." },
-  { name: "Management", slug: "management", work: "Sponsorships, outreach, events like our hackathon with Vicharak, and keeping the team running." },
+  { name: "Management", slug: "management", work: "Sponsorships, outreach, events, and keeping the team running." },
 ];
 
 /** Recruitment call at the foot of the Team page; `onPick` scrolls to a sub-team's crew. */

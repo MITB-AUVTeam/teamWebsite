@@ -90,7 +90,7 @@ const reasons: SponsorReason[] = [
   {
     icon: GraduationCap,
     title: "On the international stage",
-    body: "We registered for and competed at the international RoboSub Competition in California in July 2026, and co-host events like our hackathon with Vicharak.",
+    body: "We registered for and competed at the international RoboSub Competition in California in July 2026.",
   },
 ];
 

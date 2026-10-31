@@ -208,20 +208,6 @@ const teamCategories = [
     "title": "Electrical Subsystem",
     "members": [
       {
-        "name": "Faizal Yusuf Baig",
-        "role": "Electrical Subsystem Lead",
-        "department": "Electronics and Communication Engineering 28'",
-        "bio": "Time you enjoy wasting is not wasted time.",
-        "image": "src/assets/Personal_photo/faizal.jpeg",
-        "location": "3rd Year",
-        "skills": ["Electrical"],
-        "gradient": "from-cyan-500/20 via-cyan-500/5 to-transparent",
-        "social": {
-          "linkedin": "https://www.linkedin.com/in/faizal-baig-6583b7371?utm_source=share_via&utm_content=profile&utm_medium=member_android",
-          "github": "https://github.com/Raavan0105"
-        }
-      },
-      {
         "name": "Serah Saju Jacob",
         "role": "Electrical Subsystem Member",
         "department": "Electronics and Communication Engineering 28'",
@@ -322,7 +308,7 @@ const teamCategories = [
 
       {
         "name": "Sourish Sri Vignesh S",
-        "role": "Design Team Member",
+        "role": "Design Team Lead",
         "department": "Computer Science Engineering 28'",
         "bio": "NAH, I'D WIN.",
         "image": "/src/assets/Personal_photo/sourish.webp",
@@ -420,7 +406,6 @@ function useScrollToId() {
 const FEATURED_LAYOUT_TITLES = [
   "Founding Team / Team Advisors and Mentor",
   "Current Leadership",
-  "Electrical Subsystem",
   "Software and Automation Subsystem",
 ];
 // Groups whose featured member isn't simply the one with "lead" in their role.

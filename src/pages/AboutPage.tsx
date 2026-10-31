@@ -61,11 +61,6 @@ const timelineData: MilestoneYear[] = [
         date: "JULY 11 - 17, 2026",
         title: "RoboSub Competition",
         description: "Competed at the international RoboSub Arena, demonstrating autonomous tasks underwater."
-      },
-      {
-        date: "AUGUST 2026",
-        title: "Collab Hackathon with Vicharak",
-        description: "Co-hosted a specialized marine robotics hackathon in partnership with Vicharak."
       }
     ]
   }
