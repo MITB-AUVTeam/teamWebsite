@@ -552,6 +552,7 @@ export function TeamSectionBlock() {
     <div ref={root} className="min-h-screen text-white">
       <style>{TEAM_CSS}</style>
       <PageHeader
+        scramble
         eyebrow="Team"
         title="The people behind"
         accent="the vehicles."
@@ -596,7 +597,7 @@ export function TeamSectionBlock() {
                     <span className="cm-num inline-block">{String(idx + 1).padStart(2, "0")}</span>
                   </span>
                   <div className="min-w-0 flex-1 pb-1">
-                    <p className="cm-meta mb-2 font-mono text-[10px] uppercase tracking-[0.22em] text-cyan-200/60">
+                    <p className="cm-meta mb-2 font-mono text-[11px] uppercase tracking-[0.22em] text-cyan-200/60">
                       Sector {String(idx + 1).padStart(2, "0")} //{" "}
                       {category.members.length === 0
                         ? "assembling"
@@ -617,7 +618,7 @@ export function TeamSectionBlock() {
                         key={n}
                         className="relative flex aspect-[4/5] flex-col items-center justify-center gap-3 rounded-[1.25rem] border border-dashed border-cyan-300/20 bg-cyan-300/[0.02]"
                       >
-                        <span className="absolute left-2.5 top-2.5 rounded-md border border-white/10 bg-[#020617]/85 px-2 py-1 font-mono text-[10px] tracking-[0.12em] text-cyan-100/60">
+                        <span className="absolute left-2.5 top-2.5 rounded-md border border-white/10 bg-[#020617]/85 px-2 py-1 font-mono text-[11px] tracking-[0.12em] text-cyan-100/60">
                           {crewCode(idx, n - 1)}
                         </span>
                         <span aria-hidden="true" className="relative flex h-10 w-10 items-center justify-center sm:h-12 sm:w-12">
@@ -625,12 +626,12 @@ export function TeamSectionBlock() {
                           <span className="absolute inset-0 rounded-full border border-cyan-300/30" />
                           <span className="text-lg font-light text-cyan-200/80">+</span>
                         </span>
-                        <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-slate-500 sm:text-[10px]">Open seat</span>
+                        <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-slate-500 sm:text-[11px]">Open seat</span>
                       </div>
                     ))}
                   </div>
                   <div className="md:col-span-5">
-                    <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-cyan-200/70">Signal pending · now forming</span>
+                    <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-cyan-200/70">Signal pending · now forming</span>
                     <p className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-white md:text-3xl">These seats are still empty.</p>
                     <p className="mt-3 text-sm leading-relaxed text-slate-400">
                       We're putting this group together. If you'd like to explore new ideas for underwater robotics, there's room for you.

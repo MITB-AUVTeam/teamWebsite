@@ -58,6 +58,7 @@ export function DiveTransition({ phase, label, fromDepth, toDepth, onCovered, on
 
   return (
     <motion.div
+      data-cover
       aria-hidden="true"
       className="pointer-events-auto fixed inset-0 z-[99999] will-change-transform"
       initial={{ y: "105%" }}

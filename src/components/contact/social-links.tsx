@@ -27,7 +27,7 @@ export function SocialLinks({ links }: { links: SocialLink[] }) {
                 <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10">
                   <Icon className="h-5 w-5 text-tone" />
                 </span>
-                <ArrowUpRight className="h-5 w-5 text-slate-500 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-tone" />
+                <ArrowUpRight className="h-5 w-5 text-slate-500 transition duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-tone" />
               </div>
               <h3 className="text-xl font-semibold tracking-[-0.02em] text-white">{title}</h3>
               <p className="mb-3 font-mono text-xs text-slate-400">{subtitle}</p>

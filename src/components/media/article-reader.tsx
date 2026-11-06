@@ -141,7 +141,7 @@ export function ArticleReader({ post, onClose, posts = [], onNavigate, logOf }: 
           >
             {/* Header bar with reading progress */}
             <div className="relative z-10 flex items-center justify-between gap-4 border-b border-white/[0.07] bg-[#050d22] px-5 py-3 md:px-8">
-              <p className="flex min-w-0 items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-slate-400">
+              <p className="flex min-w-0 items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-slate-400">
                 <span
                   className="h-1.5 w-1.5 shrink-0 rounded-full"
                   style={{ background: CHANNEL_COLOR[channel], boxShadow: `0 0 8px ${CHANNEL_COLOR[channel]}` }}
@@ -210,7 +210,7 @@ export function ArticleReader({ post, onClose, posts = [], onNavigate, logOf }: 
                           onClick={() => onNavigate(older)}
                           className="group rounded-2xl border border-white/10 p-5 text-left transition-colors hover:border-tone/50 hover:bg-white/[0.03]"
                         >
-                          <span className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-slate-500">
+                          <span className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-slate-500">
                             <ArrowLeft className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-1" /> Previous log
                           </span>
                           <span className="mt-2 block font-semibold leading-snug text-white">{older.title}</span>
@@ -224,7 +224,7 @@ export function ArticleReader({ post, onClose, posts = [], onNavigate, logOf }: 
                           onClick={() => onNavigate(newer)}
                           className="group rounded-2xl border border-white/10 p-5 text-right transition-colors hover:border-tone/50 hover:bg-white/[0.03]"
                         >
-                          <span className="flex items-center justify-end gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-slate-500">
+                          <span className="flex items-center justify-end gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-slate-500">
                             Next log <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                           </span>
                           <span className="mt-2 block font-semibold leading-snug text-white">{newer.title}</span>

@@ -82,10 +82,10 @@ export function SponsorRow({ index, name, logo, logoClass, lightPlate, href, rol
             className="inline-flex items-start gap-2 rounded-sm transition-colors hover:text-tone focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tone"
           >
             {name}
-            {href && <ArrowUpRight className="mt-1.5 h-5 w-5 shrink-0 text-slate-500 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-tone" />}
+            {href && <ArrowUpRight className="mt-1.5 h-5 w-5 shrink-0 text-slate-500 transition duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-tone" />}
           </Title>
         </h3>
-        <p className="max-w-2xl text-base leading-relaxed text-slate-400">{description}</p>
+        <p className="max-w-xl text-base leading-relaxed text-slate-400">{description}</p>
       </div>
     </article>
   );

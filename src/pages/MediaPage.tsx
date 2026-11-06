@@ -9,6 +9,8 @@ import { cn } from "@/lib/utils";
 import { gsap, ScrollTrigger, useGSAP, prefersReducedMotion } from "@/lib/gsap";
 import { ArticleCard } from "@/components/media/article-card";
 import { EmbedFacade } from "@/components/ui/embed-facade";
+import { LineFigure } from "@/components/ui/line-figure";
+import { Query } from "@lucasmarkes/hairline/react";
 import { ArticleReader, type Post } from "@/components/media/article-reader";
 import { TransmissionHero } from "@/components/media/transmission-hero";
 import { LogIndex } from "@/components/media/log-index";
@@ -472,11 +474,7 @@ export function MediaPage() {
         <div ref={results}>
           {filteredPosts.length === 0 ? (
             <div className="relative flex flex-col items-center overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] px-6 py-20 text-center">
-              <span aria-hidden="true" className="relative mb-8 flex h-20 w-20 items-center justify-center">
-                <span className="absolute inset-0 animate-ping rounded-full border border-tone/40 motion-reduce:hidden" />
-                <span className="absolute inset-4 rounded-full border border-tone/30" />
-                <span className="h-2 w-2 rounded-full bg-tone shadow-[0_0_12px_var(--t1)]" />
-              </span>
+              <LineFigure figure={Query} label="A question mark that turns toward the pointer" plate="#080c17" intensity={0.8} className="mb-6 max-w-[220px]" />
               <p className="font-mono text-xs uppercase tracking-[0.25em] text-tone-soft">No signal</p>
               <p className="mt-3 text-lg text-white">No logs match that search.</p>
               <p className="mt-2 text-sm text-slate-400">Try a title, author, subsystem or topic.</p>
@@ -506,7 +504,7 @@ export function MediaPage() {
           <div ref={videoRef} className="grid gap-10 lg:grid-cols-12 lg:items-center">
             <div className="lg:col-span-8">
               <div className="m-video overflow-hidden rounded-2xl border border-white/10 bg-black/40">
-                <div className="flex items-center justify-between gap-4 border-b border-white/10 px-4 py-2.5 font-mono text-[10px] uppercase tracking-[0.2em] text-slate-400">
+                <div className="flex items-center justify-between gap-4 border-b border-white/10 px-4 py-2.5 font-mono text-[11px] uppercase tracking-[0.2em] text-slate-400">
                   <span className="flex items-center gap-2">
                     <span className="h-1.5 w-1.5 rounded-full bg-red-400 shadow-[0_0_8px_#f87171] motion-safe:animate-pulse" />
                     Feed 01 // RoboSub 2026

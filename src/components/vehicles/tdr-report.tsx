@@ -67,7 +67,7 @@ export function TdrReport() {
             {/* Light catching the paper */}
             <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/0 to-white/25 opacity-60 transition-opacity duration-700 group-hover:opacity-100" />
           </span>
-          <span className="absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-white/15 bg-[#020617]/90 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.25em] text-slate-300 transition-colors group-hover:border-tone/50 group-hover:text-white">
+          <span className="absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-white/15 bg-[#020617]/90 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.25em] text-slate-300 transition-colors group-hover:border-tone/50 group-hover:text-white">
             RoboSub 2026 · TDR
           </span>
         </a>
@@ -94,7 +94,7 @@ export function TdrReport() {
                 <span className="font-mono text-xs tabular-nums text-slate-500 transition-colors group-hover:text-white">
                   p.{String(c.page).padStart(2, "0")}
                 </span>
-                <ArrowUpRight aria-hidden="true" className="h-4 w-4 shrink-0 self-center text-slate-600 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white" />
+                <ArrowUpRight aria-hidden="true" className="h-4 w-4 shrink-0 self-center text-slate-600 transition duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white" />
               </a>
               {c.parts && (
                 <ul className="-mt-1 flex flex-wrap gap-2 pb-4 pl-[3.25rem]">
@@ -106,7 +106,7 @@ export function TdrReport() {
                         className="inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-1 text-xs text-slate-400 transition-colors hover:border-tone/50 hover:text-white"
                       >
                         {p.title}
-                        <span className="font-mono text-[10px] tabular-nums text-slate-500">p.{p.page}</span>
+                        <span className="font-mono text-[11px] tabular-nums text-slate-500">p.{p.page}</span>
                       </a>
                     </li>
                   ))}

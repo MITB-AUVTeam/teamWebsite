@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { ScrambleText } from "@/components/ui/scramble-text";
 
 interface SplitHeadingProps {
   text: string;
@@ -8,13 +9,16 @@ interface SplitHeadingProps {
   className?: string;
   as?: "h1" | "h2" | "h3";
   delay?: number;
+  /** The accent (gradient) words also decrypt from random glyphs as they rise. */
+  scramble?: boolean;
 }
 
 /** Headline whose words rise out of a mask one after another. */
-export function SplitHeading({ text, accent, className, as = "h2", delay = 0 }: SplitHeadingProps) {
+export function SplitHeading({ text, accent, className, as = "h2", delay = 0, scramble = false }: SplitHeadingProps) {
   const reduced = useReducedMotion();
   const Tag = motion[as];
   const words = text.split(" ").map((w) => ({ w, accent: false }));
+  const firstAccent = words.length;
   if (accent) words.push(...accent.split(" ").map((w) => ({ w, accent: true })));
 
   return (
@@ -35,7 +39,7 @@ export function SplitHeading({ text, accent, className, as = "h2", delay = 0 }: 
               show: { y: 0, transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] } },
             }}
           >
-            {w}
+            {scramble && isAccent ? <ScrambleText text={w} stable speed={55} delay={(i - firstAccent) * 90} /> : w}
           </motion.span>
           {i < words.length - 1 && " "}
         </span>

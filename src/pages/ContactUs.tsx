@@ -1,4 +1,6 @@
 import { useEffect, useRef, type ReactNode } from "react";
+import { LineFigure } from "@/components/ui/line-figure";
+import { Router } from "@lucasmarkes/hairline/react";
 import { gsap, useGSAP, prefersReducedMotion } from "@/lib/gsap";
 import { Github, Instagram, Linkedin, Mail, MapPin, Youtube } from "lucide-react";
 import { Footer } from "@/components/Footer";
@@ -164,10 +166,29 @@ export function ContactUs() {
                 </a>
               </DetailRow>
             </dl>
+            {/* Uplink panel, framed like the form beside it: antennas lean toward the pointer */}
+            <div className="mt-10 hidden overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] lg:block">
+              <div className="flex items-center justify-between border-b border-white/10 px-6 py-4 font-mono text-[11px] uppercase tracking-[0.2em]">
+                <span className="flex items-center gap-2.5 text-slate-300">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
+                  Uplink // open
+                </span>
+                <span className="text-slate-500">Workshop · AB-4</span>
+              </div>
+              <div className="grid grid-cols-[170px_1fr] items-center gap-4 pr-6">
+                {/* Plate: the panel's 3% white over the page */}
+                <LineFigure figure={Router} label="A router with its antennas leaning toward the pointer" plate="#0b0e19" />
+                <div>
+                  <p className="text-base font-medium tracking-[-0.01em] text-white">Signal's open.</p>
+                  <p className="mt-1.5 text-sm leading-relaxed text-slate-400">Call, write or use the form. Every message lands with the team.</p>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div className="lg:col-span-7">
-            <div id="contact-form" className="ct-card scroll-mt-28 rounded-2xl border border-white/10 bg-white/[0.03] p-6 sm:p-8 md:p-10">
+          {/* On desktop the form stretches to the foot of the details column; the message box takes the slack */}
+          <div className="lg:col-span-7 lg:flex lg:flex-col">
+            <div id="contact-form" className="ct-card scroll-mt-28 lg:flex lg:flex-1 lg:flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-6 sm:p-8 md:p-10">
               <h2 className="mb-2 text-2xl font-semibold tracking-[-0.03em] text-white md:text-3xl">Send a message</h2>
               <p className="mb-8 text-sm text-slate-400">Sponsorship, outreach sessions, collaborations or questions — it all lands with the team.</p>
               <ContactForm />

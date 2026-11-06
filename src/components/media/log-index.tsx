@@ -70,7 +70,7 @@ export function LogIndex({ posts, logOf, onOpen }: LogIndexProps) {
                 {post.date}
                 <span className="block text-slate-500">{readLabel(post)}</span>
               </span>
-              <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white transition-all duration-500 group-hover:rotate-45 group-hover:border-tone group-hover:bg-tone group-hover:text-slate-950">
+              <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white transition duration-300 group-hover:rotate-45 group-hover:border-tone group-hover:bg-tone group-hover:text-slate-950">
                 <ArrowUpRight className="h-4 w-4" />
               </span>
             </ArticleLink>
@@ -102,7 +102,7 @@ export function LogIndex({ posts, logOf, onOpen }: LogIndexProps) {
               )}
             />
           ))}
-          <span className="absolute left-3 top-3 font-mono text-[10px] uppercase tracking-[0.2em] text-cyan-100 drop-shadow">
+          <span className="absolute left-3 top-3 font-mono text-[11px] uppercase tracking-[0.2em] text-cyan-100 drop-shadow">
             {active !== null && posts[active] ? logId(logOf(posts[active])) : ""}
           </span>
         </div>

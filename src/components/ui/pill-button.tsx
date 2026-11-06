@@ -40,7 +40,7 @@ export function PillButton({
   className,
 }: PillButtonProps) {
   const classes = cn(
-    "group relative inline-flex h-12 items-center justify-center gap-2 rounded-full px-6 text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tone focus-visible:ring-offset-2 focus-visible:ring-offset-abyss disabled:pointer-events-none disabled:opacity-50",
+    "group relative inline-flex h-12 items-center justify-center gap-2 rounded-full px-6 text-sm font-medium transition duration-200 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tone focus-visible:ring-offset-2 focus-visible:ring-offset-abyss disabled:pointer-events-none disabled:opacity-50",
     variant === "solid"
       ? "bg-white text-slate-950 hover:bg-tone-soft"
       : "border border-white/15 text-white hover:border-white/40 hover:bg-white/[0.04]",

@@ -4,6 +4,8 @@ import { gsap, SplitText, useGSAP, prefersReducedMotion } from "@/lib/gsap";
 import { Footer } from "@/components/Footer";
 import { PageHeader } from "@/components/ui/page-header";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { LineFigure } from "@/components/ui/line-figure";
+import { Cabinet, Exploded, Lockers, Slow } from "@lucasmarkes/hairline/react";
 import { SpotlightCard } from "@/components/ui/spotlight-card";
 import { PillButton } from "@/components/ui/pill-button";
 import { LogoWall } from "@/components/sponsors/logo-wall";
@@ -149,10 +151,10 @@ const sponsors = [
 
 // The kinds of support our current partners give, summarised from the descriptions above.
 const supportKinds = [
-  { icon: Building2, title: "Space & mentorship", body: "A dedicated workshop with instruments and tools, direct funding for critical components, and faculty mentorship.", from: "MIT Bengaluru" },
-  { icon: Code2, title: "Engineering software", body: "Simulation and CAD tools to model fluid dynamics and structural loads, and to design every part before it is built.", from: "Ansys · Dassault Systèmes" },
-  { icon: Cpu, title: "Compute hardware", body: "Microcontroller boards that run autonomous navigation and real-time sensor processing on the vehicle.", from: "Vicharak" },
-  { icon: Wrench, title: "Fabrication", body: "Precision manufacturing of the watertight aluminium pressure hull that protects our electronics.", from: "Wisdom Technologies" },
+  { icon: Building2, figure: Lockers, title: "Space & mentorship", body: "A dedicated workshop with instruments and tools, direct funding for critical components, and faculty mentorship.", from: "MIT Bengaluru" },
+  { icon: Code2, figure: Exploded, title: "Engineering software", body: "Simulation and CAD tools to model fluid dynamics and structural loads, and to design every part before it is built.", from: "Ansys · Dassault Systèmes" },
+  { icon: Cpu, figure: Cabinet, title: "Compute hardware", body: "Microcontroller boards that run autonomous navigation and real-time sensor processing on the vehicle.", from: "Vicharak" },
+  { icon: Wrench, figure: Slow, title: "Fabrication", body: "Precision manufacturing of the watertight aluminium pressure hull that protects our electronics.", from: "Wisdom Technologies" },
 ];
 
 export function SponsorsPage() {
@@ -184,6 +186,7 @@ export function SponsorsPage() {
   return (
     <div className="flex min-h-screen flex-col">
       <PageHeader
+        scramble
         eyebrow="Sponsors"
         title="The partners behind"
         accent="every dive."
@@ -212,12 +215,12 @@ export function SponsorsPage() {
             description="Support takes many forms. These are the ways our current partners back the team."
           />
           <div data-gsap="batch" className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {supportKinds.map(({ icon: Icon, title, body, from }) => (
+            {supportKinds.map(({ icon: Icon, figure, title, body, from }) => (
               <SpotlightCard key={title} className="h-full">
                 <div className="flex h-full flex-col p-7">
-                  <div className="mb-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/10">
-                    <Icon className="h-5 w-5 text-tone" />
-                  </div>
+                  {/* Plate colour: the card's 2% white over the section's 2% white over the page */}
+                  <LineFigure figure={figure} label={title} plate="#0d111b" className="mx-auto -mt-3 mb-4 max-w-[240px] sm:-mx-3 sm:w-[calc(100%+1.5rem)] sm:max-w-none" />
+                  <Icon aria-hidden="true" className="mb-4 h-5 w-5 text-tone" />
                   <h3 className="mb-3 text-xl font-semibold tracking-[-0.02em] text-white">{title}</h3>
                   <p className="mb-8 flex-1 text-sm leading-relaxed text-slate-400">{body}</p>
                   <p className="font-mono text-xs text-slate-400">{from}</p>

@@ -1,6 +1,8 @@
 import { useLocation } from "react-router-dom";
 import { Eyebrow } from "@/components/ui/section-heading";
 import { PillButton } from "@/components/ui/pill-button";
+import { LineFigure } from "@/components/ui/line-figure";
+import { Plug } from "@lucasmarkes/hairline/react";
 
 /** Off the map: a sonar still sweeps for the lost page. */
 export function NotFound() {
@@ -14,6 +16,8 @@ export function NotFound() {
         className="sonar-sweep pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[min(640px,120vw)] w-[min(640px,120vw)] -translate-x-1/2 -translate-y-1/2 rounded-full border border-tone/10 opacity-50"
       />
 
+      {/* The plug reaches for the socket and never quite makes it */}
+      <LineFigure figure={Plug} label="A plug that falls short of its socket" intensity={0.8} className="mb-6 max-w-[260px]" />
       <Eyebrow className="mb-8 justify-center">Signal lost</Eyebrow>
       <p aria-hidden="true" className="font-mono text-sm tabular-nums tracking-[0.3em] text-tone/70">DEPTH 404.0 m</p>
       <h1 className="mt-6 text-6xl font-semibold leading-[0.95] tracking-[-0.05em] text-white sm:text-8xl">

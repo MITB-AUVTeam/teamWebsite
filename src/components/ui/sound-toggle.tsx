@@ -169,7 +169,7 @@ export function SoundToggle() {
       tabIndex={atFooter ? -1 : 0}
       aria-hidden={atFooter || undefined}
       className={cn(
-        "group fixed bottom-5 left-5 z-[60] flex h-10 items-center gap-2.5 rounded-full border border-white/10 bg-[#020617]/85 px-3.5 font-mono text-[10px] uppercase tracking-[0.2em] text-slate-400 transition-[opacity,transform,color,border-color] duration-500 hover:border-tone/40 hover:text-white md:bottom-6 md:left-6",
+        "group fixed bottom-5 left-5 z-[60] flex h-10 items-center gap-2.5 rounded-full border border-white/10 bg-[#020617]/85 px-3.5 font-mono text-[11px] uppercase tracking-[0.2em] text-slate-400 transition-[opacity,transform,color,border-color] duration-500 hover:border-tone/40 hover:text-white md:bottom-6 md:left-6",
         atFooter && "pointer-events-none translate-y-4 opacity-0",
       )}
     >

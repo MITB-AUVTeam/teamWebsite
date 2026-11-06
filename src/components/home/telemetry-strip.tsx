@@ -69,7 +69,7 @@ export function TelemetryStrip({ className }: { className?: string }) {
 
   return (
     <div ref={root} className={cn("relative overflow-hidden rounded-2xl border border-white/10 bg-[#020617]/60", className)}>
-      <div className="flex items-center gap-3 border-b border-white/[0.06] px-5 py-3 font-mono text-[10px] uppercase tracking-[0.3em] text-slate-400">
+      <div className="flex items-center gap-3 border-b border-white/[0.06] px-5 py-3 font-mono text-[11px] uppercase tracking-[0.3em] text-slate-400">
         <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
         Live telemetry
         <span className="ml-auto text-slate-500">IST · UTC+5:30</span>
@@ -77,7 +77,7 @@ export function TelemetryStrip({ className }: { className?: string }) {
       <dl data-gsap="batch" className="grid grid-cols-1 divide-y divide-white/[0.06] sm:grid-cols-2 sm:divide-y-0 lg:grid-cols-4 lg:divide-x">
         {cells.map((c) => (
           <div key={c.label} className="flex flex-col gap-2 px-5 py-6 sm:border-white/[0.06] sm:[&:nth-child(-n+2)]:border-b lg:[&:nth-child(-n+2)]:border-b-0">
-            <dt className="font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">{c.label}</dt>
+            <dt className="font-mono text-[11px] uppercase tracking-[0.25em] text-slate-500">{c.label}</dt>
             <dd className={cn("text-2xl font-semibold tracking-[-0.03em] md:text-3xl", c.live ? "text-tone-soft" : "text-white")}>{c.value}</dd>
             <dd className="text-sm text-slate-400">{c.note}</dd>
           </div>

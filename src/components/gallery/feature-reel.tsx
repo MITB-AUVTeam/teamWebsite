@@ -181,7 +181,7 @@ export function FeatureReel({ onOpen }: { onOpen: (index: number) => void }) {
           )}
         />
         <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#020617]/80 via-transparent to-transparent" />
-        <span className="pointer-events-none absolute left-4 top-4 font-mono text-[10px] uppercase tracking-[0.25em] text-cyan-200/90">
+        <span className="pointer-events-none absolute left-4 top-4 font-mono text-[11px] uppercase tracking-[0.25em] text-cyan-200/90">
           FRM {pad(i + 1)}
         </span>
       </button>

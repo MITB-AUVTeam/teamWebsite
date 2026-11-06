@@ -16,6 +16,7 @@ import { Preloader } from "@/components/ui/Preloader/Preloader";
 import { SmoothScroll } from "@/components/ui/smooth-scroll";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { CustomCursor } from "@/components/ui/custom-cursor";
+import { SonarClick } from "@/components/ui/sonar-click";
 import { DiveTransition, type DivePhase } from "@/components/ui/dive-transition";
 import { RouteErrorBoundary } from "@/components/route-error-boundary";
 import { GsapPageFx } from "@/components/ui/gsap-page-fx";
@@ -97,6 +98,7 @@ export default function App() {
 
         <ScrollProgress />
         <CustomCursor />
+        <SonarClick />
         <DepthGauge base={meta.depth} />
         <DiveTransition
           phase={phase}

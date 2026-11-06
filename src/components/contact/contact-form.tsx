@@ -219,7 +219,7 @@ export function ContactForm() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0, y: -12, transition: { duration: 0.35 } }}
-      className="space-y-6"
+      className="flex flex-col gap-6 lg:flex-1"
       onSubmit={handleSubmit}
       onFocus={(e) => onFocusChange(e, true)}
       onBlur={(e) => onFocusChange(e, false)}
@@ -256,7 +256,7 @@ export function ContactForm() {
           <FocusBar />
         </div>
       </div>
-      <div className="cf-field relative">
+      <div className="cf-field relative lg:flex lg:flex-1 lg:flex-col">
         <label htmlFor="contact-message" className={labelClass}>Message</label>
         <textarea
           id="contact-message"
@@ -266,7 +266,7 @@ export function ContactForm() {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Tell us about your request..."
-          className={`${fieldClass} resize-none`}
+          className={`${fieldClass} resize-none lg:flex-1`}
         />
         <FocusBar />
       </div>

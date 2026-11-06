@@ -70,10 +70,10 @@ export function ArticleCard({ post, onOpen, log }: { post: Post; onOpen: (post: 
           className="m-img h-full w-full object-cover transition-[scale,filter] duration-[1100ms] ease-[cubic-bezier(0.22,1,0.36,1)] [filter:saturate(0.85)] group-hover:scale-[1.07] group-hover:[filter:saturate(1.1)]"
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#020617]/80 via-transparent to-[#020617]/30" />
-        <span className="absolute left-4 top-4 rounded-full border border-white/15 bg-[#020617]/85 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-cyan-100">
+        <span className="absolute left-4 top-4 rounded-full border border-white/15 bg-[#020617]/85 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.2em] text-cyan-100">
           {logId(log)}
         </span>
-        <span className="absolute bottom-4 right-4 font-mono text-[10px] uppercase tracking-[0.2em] text-white/80">{readLabel(post)}</span>
+        <span className="absolute bottom-4 right-4 font-mono text-[11px] uppercase tracking-[0.2em] text-white/80">{readLabel(post)}</span>
         {/* Scan line passes over the photo on hover */}
         <span className="pointer-events-none absolute inset-0 -translate-y-full transition-transform duration-[1400ms] ease-[cubic-bezier(0.65,0,0.35,1)] group-hover:translate-y-full motion-reduce:hidden">
           <span className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-b from-transparent to-cyan-300/15" />
@@ -91,7 +91,7 @@ export function ArticleCard({ post, onOpen, log }: { post: Post; onOpen: (post: 
         <p className="mb-6 mt-3 line-clamp-3 text-sm leading-relaxed text-slate-400">{post.excerpt}</p>
         <div className="mt-auto flex items-center justify-between gap-4 border-t border-white/[0.07] pt-5 text-sm">
           <span className="text-slate-300">{post.author}</span>
-          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/15 text-white transition-all duration-500 group-hover:rotate-45 group-hover:border-tone group-hover:bg-tone group-hover:text-slate-950">
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/15 text-white transition duration-300 group-hover:rotate-45 group-hover:border-tone group-hover:bg-tone group-hover:text-slate-950">
             <ArrowUpRight className="h-4 w-4" />
           </span>
         </div>

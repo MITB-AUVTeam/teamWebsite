@@ -191,7 +191,7 @@ export function Lightbox({ images, index, onChange }: LightboxProps) {
                     aria-label={`Show image ${i + 1}: ${img.alt}`}
                     aria-current={i === index}
                     className={cn(
-                      "relative h-14 w-20 shrink-0 overflow-hidden rounded-lg border transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tone",
+                      "relative h-14 w-20 shrink-0 overflow-hidden rounded-lg border transition duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tone",
                       i === index ? "border-cyan-300 opacity-100" : "border-white/10 opacity-40 hover:opacity-80",
                     )}
                   >

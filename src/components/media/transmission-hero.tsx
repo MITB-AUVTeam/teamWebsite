@@ -62,7 +62,7 @@ export function TransmissionHero({ post, log, onOpen }: { post: Post; log: numbe
             <span className="t-corner absolute bottom-0 right-0 h-6 w-6 border-b border-r border-cyan-200/70" />
           </div>
 
-          <div className="t-signal absolute inset-x-8 top-8 flex flex-wrap items-center justify-between gap-3 font-mono text-[10px] uppercase tracking-[0.25em] text-cyan-100/80 md:inset-x-12 md:top-10">
+          <div className="t-signal absolute inset-x-8 top-8 flex flex-wrap items-center justify-between gap-3 font-mono text-[11px] uppercase tracking-[0.25em] text-cyan-100/80 md:inset-x-12 md:top-10">
             <span className="flex items-center gap-2">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inset-0 animate-ping rounded-full bg-red-400/70 motion-reduce:hidden" />
@@ -88,7 +88,7 @@ export function TransmissionHero({ post, log, onOpen }: { post: Post; log: numbe
             </div>
           </div>
 
-          <span className="absolute bottom-8 right-8 hidden h-16 w-16 items-center justify-center rounded-full border border-white/25 text-white backdrop-blur-sm transition-all duration-500 group-hover:rotate-45 group-hover:scale-110 group-hover:border-tone group-hover:bg-tone group-hover:text-slate-950 md:flex lg:bottom-12 lg:right-12">
+          <span className="absolute bottom-8 right-8 hidden h-16 w-16 items-center justify-center rounded-full border border-white/25 text-white backdrop-blur-sm transition duration-300 group-hover:rotate-45 group-hover:scale-110 group-hover:border-tone group-hover:bg-tone group-hover:text-slate-950 md:flex lg:bottom-12 lg:right-12">
             <ArrowUpRight className="h-6 w-6" />
           </span>
         </div>

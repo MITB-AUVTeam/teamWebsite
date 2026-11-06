@@ -1,3 +1,4 @@
+import { motion, useSpring } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import logoAnsys from "../assets/Background - less sponsors logos/Ansys.webp";
@@ -58,11 +59,31 @@ const stats = [
 const section = "mx-auto w-full max-w-7xl px-5 sm:px-8";
 
 function SubsystemCard({ item, index }: { item: (typeof subsystems)[number]; index: number }) {
+  // The card leans toward the pointer on a spring, so it has weight instead of snapping
+  const rx = useSpring(0, { stiffness: 150, damping: 18 });
+  const ry = useSpring(0, { stiffness: 150, damping: 18 });
+  const onMove = (e: React.PointerEvent<HTMLElement>) => {
+    if (e.pointerType !== "mouse") return;
+    const r = e.currentTarget.getBoundingClientRect();
+    ry.set(((e.clientX - r.left) / r.width - 0.5) * 10);
+    rx.set(-((e.clientY - r.top) / r.height - 0.5) * 8);
+  };
+  const onLeave = () => {
+    rx.set(0);
+    ry.set(0);
+  };
+
   return (
+    <motion.div
+      className="shrink-0 snap-start [perspective:1200px]"
+      onPointerMove={onMove}
+      onPointerLeave={onLeave}
+    >
+    <motion.div style={{ rotateX: rx, rotateY: ry }} className="will-change-transform">
     <Link
       to={item.href}
       data-cursor="Explore"
-      className="hud-lock group relative flex h-[62vh] min-h-[420px] w-[78vw] shrink-0 snap-start flex-col justify-end overflow-hidden rounded-3xl border border-white/10 md:h-[68vh] md:w-[40vw] lg:w-[32vw]"
+      className="hud-lock group relative flex h-[62vh] min-h-[420px] w-[78vw] flex-col justify-end overflow-hidden rounded-3xl border border-white/10 md:h-[68vh] md:w-[40vw] lg:w-[32vw]"
     >
       <img
         src={item.image}
@@ -72,7 +93,7 @@ function SubsystemCard({ item, index }: { item: (typeof subsystems)[number]; ind
       />
       <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/40 to-transparent" />
       <span className="absolute left-6 top-6 text-sm tabular-nums text-white/60">0{index + 1}</span>
-      <span className="absolute right-6 top-6 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white transition-all duration-500 group-hover:rotate-45 group-hover:border-tone group-hover:bg-tone group-hover:text-slate-950">
+      <span className="absolute right-6 top-6 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white transition duration-300 group-hover:rotate-45 group-hover:border-tone group-hover:bg-tone group-hover:text-slate-950">
         <ArrowUpRight className="h-5 w-5" />
       </span>
       <div className="relative p-6 md:p-8">
@@ -80,6 +101,8 @@ function SubsystemCard({ item, index }: { item: (typeof subsystems)[number]; ind
         <p className="mt-3 max-w-xs text-slate-300">{item.description}</p>
       </div>
     </Link>
+    </motion.div>
+    </motion.div>
   );
 }
 

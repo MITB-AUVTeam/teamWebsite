@@ -86,7 +86,7 @@ export function CrewDossier({ entry, onClose }: CrewDossierProps) {
             exit={{ x: "100%" }}
             transition={{ duration: 0.7, ease: EASE }}
           >
-            <header className="sticky top-0 z-10 flex items-center justify-between border-b border-white/[0.06] bg-[#030a1a]/90 px-6 py-4 font-mono text-[10px] uppercase tracking-[0.22em] text-cyan-200/80 backdrop-blur-xl sm:px-8">
+            <header className="sticky top-0 z-10 flex items-center justify-between border-b border-white/[0.06] bg-[#030a1a]/90 px-6 py-4 font-mono text-[11px] uppercase tracking-[0.22em] text-cyan-200/80 backdrop-blur-xl sm:px-8">
               <span className="flex items-center gap-2.5">
                 <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-cyan-300 shadow-[0_0_8px_#67e8f9]" />
                 Dossier // {entry.code}
@@ -150,7 +150,7 @@ export function CrewDossier({ entry, onClose }: CrewDossierProps) {
                 {!!entry.member.skills?.length && (
                   <ul className="mt-6 flex flex-wrap gap-2" aria-label="Focus areas">
                     {entry.member.skills.map((s) => (
-                      <li key={s} className="rounded-full border border-cyan-300/20 bg-cyan-300/[0.05] px-3 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-cyan-100">
+                      <li key={s} className="rounded-full border border-cyan-300/20 bg-cyan-300/[0.05] px-3 py-1 font-mono text-[11px] uppercase tracking-[0.16em] text-cyan-100">
                         {s}
                       </li>
                     ))}

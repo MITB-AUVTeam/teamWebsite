@@ -70,6 +70,24 @@ export function DriftMasonry({ items, frameOf, onOpen, revealKey }: DriftMasonry
           );
         });
       }
+      // Scroll speed shears the wall: a fast flick tilts the columns, then they spring
+      // back upright. The skew eases toward zero on its own once scrolling stops.
+      const cols = q(".dm-col") as HTMLElement[];
+      const skew = { v: 0 };
+      const setSkew = gsap.quickSetter(cols, "skewY", "deg");
+      ScrollTrigger.create({
+        trigger: el,
+        start: "top bottom",
+        end: "bottom top",
+        onUpdate: (self) => {
+          const v = gsap.utils.clamp(-3.5, 3.5, self.getVelocity() / -450);
+          if (Math.abs(v) > Math.abs(skew.v)) {
+            skew.v = v;
+            gsap.to(skew, { v: 0, duration: 0.9, ease: "power3.out", overwrite: true, onUpdate: () => setSkew(skew.v) });
+          }
+        },
+      });
+
       // Every tile reserves its height up front (aspect-ratio from the data), so lazy
       // images arriving mid-scroll never move anything; one refresh here is enough.
       ScrollTrigger.refresh();
@@ -102,20 +120,26 @@ export function DriftMasonry({ items, frameOf, onOpen, revealKey }: DriftMasonry
                 data-cursor="View"
                 className="dm-tile hud-lock group relative block w-full overflow-hidden rounded-2xl bg-white/[0.06] text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tone"
               >
+                {/* A light sweeps the empty frame until the photo arrives */}
+                <span aria-hidden="true" className="dm-shimmer pointer-events-none absolute inset-0" />
                 <img
+                  ref={(img) => {
+                    if (img?.complete) img.dataset.loaded = "";
+                  }}
+                  onLoad={(e) => (e.currentTarget.dataset.loaded = "")}
                   src={thumbOf(item.src)}
                   alt={item.alt}
                   loading="lazy"
                   decoding="async"
                   style={{ aspectRatio: `1 / ${item.ratio}` }}
-                  className="block w-full object-cover transition-[transform,filter] duration-[1.1s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06] group-hover:brightness-110"
+                  className="dm-img relative block w-full object-cover transition-[transform,filter,opacity] duration-[1.1s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06] group-hover:brightness-110"
                 />
                 <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#020617]/85 via-[#020617]/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100" />
-                <span className="pointer-events-none absolute inset-x-0 top-0 flex justify-between p-3 font-mono text-[10px] uppercase tracking-[0.2em] text-cyan-200 opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100 sm:p-4">
+                <span className="pointer-events-none absolute inset-x-0 top-0 flex justify-between p-3 font-mono text-[11px] uppercase tracking-[0.2em] text-cyan-200 opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100 sm:p-4">
                   <span>{frame}</span>
                   <span className="text-slate-300">{categoryLabel[item.category]}</span>
                 </span>
-                <span className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-2 p-3 text-xs text-white opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 sm:p-4 sm:text-sm">
+                <span className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-2 p-3 text-xs text-white opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 sm:p-4 sm:text-sm">
                   {item.alt}
                 </span>
               </button>

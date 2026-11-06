@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap, ScrollTrigger, useGSAP, prefersReducedMotion } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
+import { LineFigure } from "@/components/ui/line-figure";
+import { Phosphor } from "@lucasmarkes/hairline/react";
 
 export interface ScanPoint {
   /** Position on the photo, in percent of its width / height. */
@@ -112,7 +114,7 @@ export function VehicleScan({ name, image, scan }: { name: string; image: string
                 >
                   <span
                     className={cn(
-                      "absolute inset-0 rounded-full border transition-all duration-500",
+                      "absolute inset-0 rounded-full border transition duration-300",
                       on ? "scale-100 border-tone opacity-100" : "scale-50 border-white/40 opacity-60",
                     )}
                   />
@@ -141,19 +143,28 @@ export function VehicleScan({ name, image, scan }: { name: string; image: string
                 }}
               >
                 <span className="h-px w-8 bg-tone md:w-14" style={{ transformOrigin: point.x > 55 ? "right" : "left" }} />
-                <span className="whitespace-nowrap rounded-md border border-tone/40 bg-[#020617]/90 px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-tone-soft shadow-[0_0_18px_-4px_var(--t1)] md:text-xs">
+                <span className="whitespace-nowrap rounded-md border border-tone/40 bg-[#020617]/90 px-2.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-tone-soft shadow-[0_0_18px_-4px_var(--t1)] md:text-xs">
                   {point.label}
                 </span>
               </div>
             )}
 
-            <div aria-hidden="true" className="absolute bottom-3 left-3 font-mono text-[9px] uppercase tracking-[0.25em] text-white/50 md:bottom-4 md:left-4">
+            <div aria-hidden="true" className="absolute bottom-3 left-3 font-mono text-[11px] uppercase tracking-[0.25em] text-white/50 md:bottom-4 md:left-4">
               {name} · {point?.system}
             </div>
           </div>
         </div>
 
-        <ol className="vs-list lg:col-span-4 lg:py-[18vh]">
+        <div className="lg:col-span-4">
+        {/* Sonar display: a phosphor screen that keeps a fading trail wherever the pointer paints */}
+        <div className="hidden pt-[6vh] lg:block">
+          <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.25em] text-slate-400">
+            <span>Sonar // live</span>
+            <span className="text-tone/80">Paint it</span>
+          </div>
+          <LineFigure figure={Phosphor} label="A phosphor dot matrix that keeps a fading trail where the pointer paints" intensity={0.8} className="mt-3" />
+        </div>
+        <ol className="vs-list lg:py-[12vh]">
           {scan.points.map((p, i) => {
             const on = i === active;
             return (
@@ -162,8 +173,8 @@ export function VehicleScan({ name, image, scan }: { name: string; image: string
                   type="button"
                   onClick={() => setActive(i)}
                   className={cn(
-                    "w-full border-l py-2 pl-6 text-left transition-all duration-500",
-                    on ? "border-tone opacity-100" : "border-white/10 opacity-40 hover:opacity-70",
+                    "w-full border-l py-2 pl-6 text-left transition duration-300",
+                    on ? "border-tone opacity-100" : "border-white/10 opacity-60 hover:opacity-90",
                   )}
                 >
                   <span className={cn("font-mono text-xs tabular-nums transition-colors duration-500", on ? "text-tone" : "text-slate-500")}>
@@ -176,6 +187,7 @@ export function VehicleScan({ name, image, scan }: { name: string; image: string
             );
           })}
         </ol>
+        </div>
       </div>
     </div>
   );

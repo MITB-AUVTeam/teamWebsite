@@ -51,6 +51,27 @@ export function Footer() {
         ease: "none",
         scrollTrigger: { trigger: wordmark.current, start: "top bottom", end: "bottom bottom", scrub: 0.8 },
       });
+
+      // Letters near the pointer rise out of the floor, the nearest most, and sink back
+      // on a spring when it leaves. Rides on the inner span so it never fights the scrub.
+      if (!window.matchMedia("(pointer: fine)").matches) return;
+      const el = wordmark.current!;
+      const letters = gsap.utils.toArray<HTMLElement>(".fw-lift", el);
+      const lifts = letters.map((l) => gsap.quickTo(l, "yPercent", { duration: 0.6, ease: "power3.out" }));
+      const onMove = (e: PointerEvent) => {
+        letters.forEach((l, i) => {
+          const r = l.getBoundingClientRect();
+          const d = Math.abs(e.clientX - (r.left + r.width / 2)) / r.width;
+          lifts[i](-22 * Math.max(0, 1 - d / 1.6));
+        });
+      };
+      const onLeave = () => lifts.forEach((lift) => lift(0));
+      el.addEventListener("pointermove", onMove);
+      el.addEventListener("pointerleave", onLeave);
+      return () => {
+        el.removeEventListener("pointermove", onMove);
+        el.removeEventListener("pointerleave", onLeave);
+      };
     },
     { scope: wordmark },
   );
@@ -128,14 +149,14 @@ export function Footer() {
           </div>
         </div>
 
-        <div ref={wordmark} className="mt-20 select-none overflow-hidden" aria-hidden="true">
+        <div ref={wordmark} className="mt-16 select-none overflow-hidden pt-[3vw]" aria-hidden="true">
           <p className="flex translate-y-[18%] justify-center text-[18vw] md:text-[17vw] font-semibold leading-[0.8] tracking-[-0.06em]">
             {/* The gradient only paints inside each letter's box, and the tight tracking makes
                 that box narrower than the glyph (the V's arm overhangs). Padding widens the
                 painted area; the matching negative margin keeps the spacing unchanged. */}
             {"AUV·MITB".split("").map((ch, i) => (
-              <span key={i} className="fw-letter -mx-[0.12em] inline-block bg-gradient-to-b from-white/[0.14] to-white/0 bg-clip-text px-[0.12em] text-transparent">
-                {ch}
+              <span key={i} className="fw-letter -mx-[0.12em] inline-block">
+                <span className="fw-lift inline-block bg-gradient-to-b from-white/[0.14] to-white/0 bg-clip-text px-[0.12em] text-transparent">{ch}</span>
               </span>
             ))}
           </p>

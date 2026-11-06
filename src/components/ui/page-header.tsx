@@ -14,6 +14,8 @@ interface PageHeaderProps {
   description?: ReactNode;
   /** Slot under the description: buttons, stats, filters. */
   children?: ReactNode;
+  /** Decrypt the headline's gradient accent words from random glyphs (on by default). */
+  scramble?: boolean;
   className?: string;
 }
 
@@ -21,7 +23,7 @@ interface PageHeaderProps {
  * Page header: drifting light over a blueprint grid, a sonar scope that turns as you
  * scroll, a word-reveal headline and an intro that settles onto a glinting hairline.
  */
-export function PageHeader({ eyebrow, title, accent, description, children, className }: PageHeaderProps) {
+export function PageHeader({ eyebrow, title, accent, description, children, scramble = true, className }: PageHeaderProps) {
   const root = useRef<HTMLElement>(null);
 
   // GSAP: the hairline draws in, then the whole intro sinks and dims as you scroll past.
@@ -72,7 +74,7 @@ export function PageHeader({ eyebrow, title, accent, description, children, clas
           <div className="sonar-sweep absolute inset-0 rounded-full opacity-70" />
           <span className="hud-blink absolute left-[68%] top-[30%] h-1.5 w-1.5 rounded-full bg-cyan-300 shadow-[0_0_10px_#67e8f9]" />
         </div>
-        <div className="absolute -bottom-6 right-12 font-mono text-[10px] uppercase tracking-[0.25em] text-cyan-200/60">
+        <div className="absolute -bottom-6 right-12 font-mono text-[11px] uppercase tracking-[0.25em] text-cyan-200/60">
           <ScrambleText text={`Sector // ${eyebrow}`} />
         </div>
       </div>
@@ -85,6 +87,7 @@ export function PageHeader({ eyebrow, title, accent, description, children, clas
           as="h1"
           text={title}
           accent={accent}
+          scramble={scramble}
           className="max-w-5xl text-[2.9rem] leading-[0.98] sm:text-7xl md:text-8xl lg:text-[7.5rem] font-semibold tracking-[-0.04em]"
         />
         {(description || children) && (

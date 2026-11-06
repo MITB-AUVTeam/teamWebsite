@@ -5,6 +5,8 @@ import AUV_GROUP_PIC from "@/assets/Group_photo/AUV_GROUP_PIC.webp";
 import { PageHeader } from "@/components/ui/page-header";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { ParallaxImage } from "@/components/ui/parallax-image";
+import { LineFigure } from "@/components/ui/line-figure";
+import { Settle } from "@lucasmarkes/hairline/react";
 import { MilestoneTimeline, type MilestoneYear } from "@/components/about/milestone-timeline";
 import { MissionStatements, QuestionsBand } from "@/components/about/mission-statements";
 
@@ -112,6 +114,8 @@ export function AboutPage() {
             <h2 data-gsap="lines" className="text-3xl md:text-5xl font-semibold leading-[1.05] tracking-[-0.04em] text-white">
               Theory, turned into <span className="font-serif italic font-normal text-water">hardware.</span>
             </h2>
+            {/* Loose pieces snap into a structure as you come near: the section's idea, drawn */}
+            <LineFigure figure={Settle} label="Scattered tiles that slide into a tree as the pointer nears" className="mt-10 max-w-[360px]" />
           </div>
           <div className="space-y-6 text-lg leading-relaxed text-slate-400 md:col-span-6 md:col-start-7">
             <p data-gsap="lines">

@@ -78,7 +78,7 @@ export function DepthGauge({ base = 0 }: { base?: number }) {
       aria-hidden="true"
       className="pointer-events-none fixed right-5 top-1/2 z-[60] hidden -translate-y-1/2 select-none flex-col items-end gap-3 font-mono xl:flex"
     >
-      <div className="text-right text-[9px] uppercase tracking-[0.3em] text-tone/50">Depth</div>
+      <div className="text-right text-[11px] uppercase tracking-[0.3em] text-tone/80">Depth</div>
       <div ref={trackRef} className="relative h-[42vh] w-10">
         <div className="absolute right-0 top-0 h-full w-px bg-tone/10" />
         <div
@@ -95,14 +95,14 @@ export function DepthGauge({ base = 0 }: { base?: number }) {
         ))}
         {/* Shifted right by half the diamond (4px) minus half the line (0.5px), so the diamond sits centred on the line */}
         <div ref={markerRef} className="absolute -right-[3.5px] top-0 flex items-center gap-1.5" style={{ transform: "translateY(-50%)" }}>
-          <span className="whitespace-nowrap rounded-sm border border-tone/30 bg-[#020617]/80 px-1.5 py-0.5 text-[10px] tabular-nums text-tone-soft shadow-[0_0_12px_var(--t1)]">
+          <span className="whitespace-nowrap rounded-sm border border-tone/30 bg-[#020617]/80 px-1.5 py-0.5 text-[11px] tabular-nums text-tone-soft shadow-[0_0_12px_var(--t1)]">
             <span ref={readoutRef}>000.0</span>m
           </span>
           <span className="h-2 w-2 rotate-45 border border-tone bg-tone/30 shadow-[0_0_10px_var(--t1)]" />
         </div>
       </div>
-      <div className="text-right text-[9px] uppercase tracking-[0.2em] text-slate-500">
-        <span ref={pressureRef} className="tabular-nums text-tone/70">1.00</span> atm
+      <div className="text-right text-[11px] uppercase tracking-[0.2em] text-slate-500">
+        <span ref={pressureRef} className="tabular-nums text-tone">1.00</span> atm
       </div>
     </div>
   );

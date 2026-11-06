@@ -33,7 +33,7 @@ export function NoPhoto({ name, decorative, className }: { name: string; decorat
       <span aria-hidden="true" className="absolute left-1/2 top-[44%] -translate-x-1/2 -translate-y-1/2 font-serif text-[26cqw] italic leading-none text-white/90">
         {initials(name)}
       </span>
-      <span aria-hidden="true" className="absolute inset-x-0 bottom-[14%] text-center font-mono text-[10px] uppercase tracking-[0.3em] text-tone/70">
+      <span aria-hidden="true" className="absolute inset-x-0 bottom-[14%] text-center font-mono text-[11px] uppercase tracking-[0.3em] text-tone/70">
         Portrait pending
       </span>
     </div>

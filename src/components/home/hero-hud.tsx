@@ -28,7 +28,7 @@ export function HeroHud() {
   }, []);
 
   return (
-    <div aria-hidden="true" className="h-hud pointer-events-none absolute inset-0 z-[7] select-none font-mono text-[10px] uppercase tracking-[0.2em] text-cyan-200/70">
+    <div aria-hidden="true" className="h-hud pointer-events-none absolute inset-0 z-[7] select-none font-mono text-[11px] uppercase tracking-[0.2em] text-cyan-200/70">
       {/* Targeting brackets */}
       <div className="hud-frame absolute inset-4 hidden sm:inset-6 md:block md:inset-10 md:top-24">
         <span className="hud-corner left-0 top-0 border-l border-t" />

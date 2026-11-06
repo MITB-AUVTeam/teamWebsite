@@ -75,6 +75,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onFinished }) => {
 
   return (
     <div
+      data-preloader
       className={`${styles.wrapper} ${isExiting ? styles.exiting : ''}`}
       role="status"
       aria-live="polite"

@@ -11,7 +11,10 @@ interface ParallaxImageProps {
   strength?: number;
 }
 
-/** Rounded image frame whose picture drifts slower than the page as you scroll, then settles from a slight zoom. */
+/**
+ * Rounded image frame whose picture drifts slower than the page as you scroll. On first
+ * sight the frame opens from a narrow band to full size, like a hatch sliding back.
+ */
 export function ParallaxImage({ src, alt, className, imgClassName, strength = 12 }: ParallaxImageProps) {
   const ref = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
@@ -19,7 +22,14 @@ export function ParallaxImage({ src, alt, className, imgClassName, strength = 12
   const y = useTransform(scrollYProgress, [0, 1], [`-${strength / 2}%`, `${strength / 2}%`]);
 
   return (
-    <div ref={ref} className={cn("relative overflow-hidden rounded-3xl bg-white/[0.03]", className)}>
+    <motion.div
+      ref={ref}
+      className={cn("relative overflow-hidden rounded-3xl bg-white/[0.03]", className)}
+      initial={reduced ? false : { clipPath: "inset(18% 10% 18% 10% round 24px)" }}
+      whileInView={{ clipPath: "inset(0% 0% 0% 0% round 0px)" }}
+      viewport={{ once: true, margin: "0px 0px -15% 0px" }}
+      transition={{ duration: 1.3, ease: [0.23, 1, 0.32, 1] }}
+    >
       <motion.img
         src={src}
         alt={alt}
@@ -31,6 +41,6 @@ export function ParallaxImage({ src, alt, className, imgClassName, strength = 12
         transition={{ duration: 1.2 }}
         className={cn("h-full w-full object-cover", imgClassName)}
       />
-    </div>
+    </motion.div>
   );
 }

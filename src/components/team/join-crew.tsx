@@ -1,6 +1,8 @@
 import { ArrowUpRight } from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { PillButton } from "@/components/ui/pill-button";
+import { LineFigure } from "@/components/ui/line-figure";
+import { Hub, Patch, Terminal, Turntable } from "@lucasmarkes/hairline/react";
 
 /**
  * Recruitment status. When applications open, set `open: true`, fill in `window`
@@ -16,10 +18,10 @@ const CONTACT_EMAIL = "auv.mitblr@manipal.edu";
 
 /** What each sub-team works on, drawn from the vehicles, specs and blogs on this site. */
 const SUBTEAMS = [
-  { name: "Mechanical", slug: "mechanical", work: "Hull and frame design in SolidWorks, Ansys simulation, pressure testing and 3D-printed parts like the dropper." },
-  { name: "Electrical", slug: "electrical", work: "Power distribution boards, battery systems, sensor integration and in-house hydrophones." },
-  { name: "Software", slug: "software", work: "ROS2 autonomy, computer vision on the Zed cameras, localisation and path planning." },
-  { name: "Management", slug: "management", work: "Sponsorships, outreach, events, and keeping the team running." },
+  { name: "Mechanical", slug: "mechanical", figure: Turntable, work: "Hull and frame design in SolidWorks, Ansys simulation, pressure testing and 3D-printed parts like the dropper." },
+  { name: "Electrical", slug: "electrical", figure: Patch, work: "Power distribution boards, battery systems, sensor integration and in-house hydrophones." },
+  { name: "Software", slug: "software", figure: Terminal, work: "ROS2 autonomy, computer vision on the Zed cameras, localisation and path planning." },
+  { name: "Management", slug: "management", figure: Hub, work: "Sponsorships, outreach, events, and keeping the team running." },
 ];
 
 /** Recruitment call at the foot of the Team page; `onPick` scrolls to a sub-team's crew. */
@@ -51,11 +53,13 @@ export function JoinCrew({ onPick }: { onPick: (slug: string) => void }) {
                 e.preventDefault();
                 onPick(t.slug);
               }}
-              className="group flex h-full flex-col gap-4 p-6 transition-colors hover:bg-white/[0.03] md:p-8"
+              className="group flex h-full flex-col gap-4 p-6 md:p-8"
             >
+              {/* Each sub-team's work as a schematic that answers the pointer */}
+              <LineFigure figure={t.figure} label={`${t.name} sub-team`} className="mx-auto mb-2 max-w-[240px] sm:-mx-2 sm:w-[calc(100%+1rem)] sm:max-w-none" />
               <span className="flex items-center justify-between font-mono text-xs tabular-nums text-slate-500 transition-colors group-hover:text-tone">
                 {String(i + 1).padStart(2, "0")}
-                <ArrowUpRight aria-hidden="true" className="h-4 w-4 text-slate-500 transition-all duration-300 group-hover:rotate-45 group-hover:text-tone" />
+                <ArrowUpRight aria-hidden="true" className="h-4 w-4 text-slate-500 transition duration-300 group-hover:rotate-45 group-hover:text-tone" />
               </span>
               <span className="text-2xl font-semibold tracking-[-0.03em] text-white">{t.name}</span>
               <span className="text-sm leading-relaxed text-slate-400">{t.work}</span>

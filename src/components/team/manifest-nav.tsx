@@ -48,7 +48,7 @@ export function ManifestNav({ groups, onJump, className }: ManifestNavProps) {
   return (
     <nav aria-label="Team groups" className={cn("sticky top-[84px] z-30 mx-auto w-full max-w-7xl px-3 sm:top-[92px] sm:px-8", className)}>
       <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-[#030a1f]/95 p-1.5 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.8)]">
-        <span className="hidden shrink-0 items-center gap-2 pl-3 pr-2 font-mono text-[10px] uppercase tracking-[0.22em] text-cyan-200/70 lg:flex">
+        <span className="hidden shrink-0 items-center gap-2 pl-3 pr-2 font-mono text-[11px] uppercase tracking-[0.22em] text-cyan-200/70 lg:flex">
           <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-cyan-300 shadow-[0_0_8px_#67e8f9]" />
           Manifest
           <span className="tabular-nums text-slate-500">{activeIndex >= 0 ? String(activeIndex + 1).padStart(2, "0") : "--"}/{String(groups.length).padStart(2, "0")}</span>
@@ -80,7 +80,7 @@ export function ManifestNav({ groups, onJump, className }: ManifestNavProps) {
                   />
                 )}
                 <span className="relative">{g.label}</span>
-                <span className={cn("relative font-mono text-[10px] tabular-nums", isActive ? "text-slate-700" : "text-slate-500")}>
+                <span className={cn("relative font-mono text-[11px] tabular-nums", isActive ? "text-slate-700" : "text-slate-500")}>
                   {String(g.count).padStart(2, "0")}
                 </span>
               </a>

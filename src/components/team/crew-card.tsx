@@ -37,14 +37,14 @@ function CrewPeek({ member, group }: Pick<CrewCardProps, "member" | "group">) {
         <span key={c} className={`absolute h-4 w-4 border-cyan-300/60 ${c}`} />
       ))}
 
-      <p style={slot(i++)} className="cm-peek-line flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.22em] text-cyan-200/70">
+      <p style={slot(i++)} className="cm-peek-line flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-cyan-200/70">
         <span className="h-1 w-1 rounded-full bg-cyan-300 shadow-[0_0_6px_#67e8f9]" />
         Dossier // preview
       </p>
       <p style={slot(i++)} className="cm-peek-line mt-2 text-sm font-medium leading-snug text-white">{member.role}</p>
 
       {rows.length > 0 && (
-        <dl className="mt-2.5 space-y-1.5 border-t border-white/[0.08] pt-2.5 font-mono text-[10px]">
+        <dl className="mt-2.5 space-y-1.5 border-t border-white/[0.08] pt-2.5 font-mono text-[11px]">
           {rows.map((r) => (
             <div key={r.k} style={slot(i++)} className="cm-peek-line flex gap-2">
               <dt className="w-12 shrink-0 uppercase tracking-[0.18em] text-slate-500">{r.k}</dt>
@@ -57,14 +57,14 @@ function CrewPeek({ member, group }: Pick<CrewCardProps, "member" | "group">) {
       {skills.length > 0 && (
         <ul style={slot(i++)} className="cm-peek-line mt-2.5 flex flex-wrap gap-1.5">
           {skills.map((s) => (
-            <li key={s} className="rounded-full border border-cyan-300/20 bg-cyan-300/[0.06] px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.14em] text-cyan-100">
+            <li key={s} className="rounded-full border border-cyan-300/20 bg-cyan-300/[0.06] px-2 py-0.5 font-mono text-[11px] uppercase tracking-[0.14em] text-cyan-100">
               {s}
             </li>
           ))}
         </ul>
       )}
 
-      <p style={slot(i++)} className="cm-peek-line mt-3 font-mono text-[9px] uppercase tracking-[0.22em] text-cyan-300">Open file →</p>
+      <p style={slot(i++)} className="cm-peek-line mt-3 font-mono text-[11px] uppercase tracking-[0.22em] text-cyan-300">Open file →</p>
     </div>
   );
 }
@@ -91,14 +91,14 @@ export function CrewCard({ member, code, onOpen, group }: CrewCardProps) {
         {/* Scan line passes over the photo on hover */}
         <span aria-hidden="true" className="cm-scan pointer-events-none absolute inset-x-0 top-0 h-16 -translate-y-full bg-gradient-to-b from-transparent via-cyan-300/25 to-transparent opacity-0 group-hover:opacity-100" />
         <CrewPeek member={member} group={group} />
-        <span className="absolute left-2.5 top-2.5 rounded-md border border-white/10 bg-[#020617]/85 px-2 py-1 font-mono text-[10px] tracking-[0.12em] text-cyan-100/90">
+        <span className="absolute left-2.5 top-2.5 rounded-md border border-white/10 bg-[#020617]/85 px-2 py-1 font-mono text-[11px] tracking-[0.12em] text-cyan-100/90">
           {code}
         </span>
         <span aria-hidden="true" className="absolute right-3 top-3.5 h-1.5 w-1.5 rounded-full bg-emerald-300 shadow-[0_0_8px_#6ee7b7]" />
       </div>
 
       <div className="flex flex-1 flex-col px-2 pb-2 pt-4">
-        <p className="font-mono text-[10px] uppercase leading-snug tracking-[0.16em] text-cyan-300/80">{member.role}</p>
+        <p className="font-mono text-[11px] uppercase leading-snug tracking-[0.16em] text-cyan-300/80">{member.role}</p>
         <h4 className="mt-1.5 text-base font-semibold leading-tight tracking-[-0.02em] text-white sm:text-lg">
           <button
             type="button"
@@ -115,7 +115,7 @@ export function CrewCard({ member, code, onOpen, group }: CrewCardProps) {
           <span
             aria-hidden="true"
             className={cn(
-              "ml-auto flex h-8 w-8 items-center justify-center rounded-full border border-white/10 text-slate-400 transition-all duration-500",
+              "ml-auto flex h-8 w-8 items-center justify-center rounded-full border border-white/10 text-slate-400 transition duration-300",
               "group-hover:rotate-45 group-hover:border-cyan-300 group-hover:bg-cyan-300 group-hover:text-slate-950",
             )}
           >
@@ -150,7 +150,7 @@ export function CrewSpotlight({ member, code, onOpen }: CrewCardProps) {
           <div className="absolute inset-[22%] rounded-full border border-dashed border-cyan-300/15" />
           <div className="cm-radar absolute inset-0 rounded-full bg-[conic-gradient(from_0deg,rgba(103,232,249,0.25),transparent_70deg)]" />
         </div>
-        <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.2em] text-cyan-200/80">
+        <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.2em] text-cyan-200/80">
           <span className="rounded-full border border-cyan-300/30 bg-cyan-300/[0.06] px-3 py-1 text-cyan-200">Spotlight</span>
           {code}
         </div>
@@ -175,7 +175,7 @@ export function CrewSpotlight({ member, code, onOpen }: CrewCardProps) {
 
         <div className="flex items-center justify-between gap-4">
           <CrewLinks member={member} className="relative z-[2]" />
-          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-slate-500 transition-colors group-hover:text-cyan-200">
+          <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-slate-500 transition-colors group-hover:text-cyan-200">
             Open dossier →
           </span>
         </div>
