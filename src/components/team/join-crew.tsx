@@ -46,7 +46,7 @@ export function JoinCrew({ onPick }: { onPick: (slug: string) => void }) {
 
       <ul data-gsap="batch" className="grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-4">
         {SUBTEAMS.map((t, i) => (
-          <li key={t.slug} className="bg-[#030712]">
+          <li key={t.slug} className="overflow-hidden bg-[#030712]">
             <a
               href={`#${t.slug}`}
               onClick={(e) => {
